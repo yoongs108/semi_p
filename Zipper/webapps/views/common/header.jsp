@@ -7,25 +7,23 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<script src="/SemiProject/resources/js/jquery-3.5.1.min.js"></script>
+<script src="<%= request.getContextPath() %>/resources/js/jquery-3.5.1.min.js"></script>
+<!-- 합쳐지고 최소화된 최신 CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 	<style>
-		body {
-            margin : 0;
-            padding : 0;
-        }
-        
-        /* 헤더  */
-        .loginArea {
-            background : orange;
+		/* 헤더  */
+        header {
             text-align: center;
-            height : 60px;
+            height : 100px;
         }
 		
 		/* 헤더 이미지들 */
-        header img {
-            border : 1px solid black;
-            height : 40px;
-            width : 40px;
+        header #hamburger, #logo, #write {
+            position: absolute;
+            top : 10px;
+            width: 25px;
+            height: 25px;
+            z-index: 5000;
         }
 
         header img:hover {
@@ -33,22 +31,28 @@
         }
 
 		/* 햄버거 위치 */
-        .hamburger_menu {
-            position : absolute;
-            top : 10px;
+        #hamburger {
             left: 10px;
-
         }
 
+        #logo {
+            right: 15px;
+        }
+
+        #write{
+            right: 40px;
+        }
+
+        /* nav */
         header nav {
             position : absolute;
             top : 0;
             left: 0;
             height : 100%;
             width : 0;
-            background : lightgrey;
+            background : white;
             overflow: hidden;
-            transition : width 0.5s;
+            transition : width 0.65s;
         }
         
 		header p {
@@ -56,127 +60,156 @@
             top : 50px;
             right: 10px;
 		}
+
+        header ul {
+            list-style: none;
+        }
+
+        nav div.right {
+            position: absolute;
+            top: 30%;
+            left : 50%;
+            display: inline-block;
+            width : 50%;
+            height : 50%;
+            border-left : 1px solid black;
+        }
+
+        nav div.left {
+            position: absolute;
+            top: 30%;
+            left : 0;
+            display: inline-block;
+            width : 50%;
+            height : 50%;
+            border-right : 1px solid black;
+        }
+        nav img {
+            width: 25px;
+            height: 25px;
+        }
+
+        nav hr {
+            border : none;
+        }
+
+        .nav_hide {
+            width : 100%;
+        }
 	</style>
 </head>
 <body>
 
-	<header class="loginArea" style="clear : both;">
-        
-		<img src="resources/images/logo.png" alt="햄버거" class="hamburger_menu" id="hamburger" onclick="menu()"/>
+	<header>
+
+		<img src="../resources/hamburger.png" id="hamburger" onclick="navToggle()"/>
 		
-		<img src="resources/images/logo.png" alt="로고" onclick="goHome()"/>
+        <img src="../resources/aaaa.png" alt="ZIPPER" id="logo" onclick="goHome()"/>
+        
+        <img src="../resources/pen.png" id="write" />
         
 		<% if(m != null) { %>
 		<p id="admin">
 			'<%= m.getUserName() %>' 님 환영합니다!
 		</p>
 		<% } %>
-		<button type="button" id="write">글쓰기</button>
 		
 		<!-- nav 메뉴 시작 -->
-		<nav id="nav">
-            <img src="resources/images/logo.png" alt="햄버거" class="hamburger_menu" id="hamburger2" onclick="menu2()"/>
+		<nav>
+            <div class="left">
+                <ul>
+                    <li>
+                        <a href="<%= request.getContextPath() %>/views/community/zip.jsp">COMMUNITY</a>
+                        <ul>
+                            <li>
+                                <a href="<%= request.getContextPath() %>/views/community/zip.jsp">ZIP POP</a>
+                            </li>
+                            <li>
+                                <a href="<%= request.getContextPath() %>/views/community/guide.jsp">GUIDE</a>
+                            </li>
+                            <li>
+                                <a href="<%= request.getContextPath() %>/views/community/board.jsp">NOTICE</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="<%= request.getContextPath() %>/views/class/class.jsp">CLASS</a>
+                    </li>
+                    <li>
+                        <a href="<%= request.getContextPath() %>/views/help/helpFAQ.jsp">SERVICE</a>
+                        <ul>
+                            <li>
+                                <a href="<%= request.getContextPath() %>/views/help/helpFAQ.jsp">FAQ</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
             
             <% if(m == null) { %>
             <!-- 비회원 -->
-            <form action="/SemiProject/login.me" method="post" style="margin-top : auto; margin-bottom : auto;">
-            
-                <table align="right">
-                    <tr>
-                        <td colspan="2">
-                            <input type="text" size="20" name="userId" id="userId">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td colspan="2">
-                            <input type="text" size="20" name="userPwd">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <button type="submit" onclick="login()">로그인</button>
-                        </td>
-                        <td>
-                            <button type="button" onclick="">회원가입</button>
-                        </td>
-                    </tr>
-                </table>
-            </form>
+            <div class="right">
+                <form action="<%= request.getContextPath() %>/login.me" method="post">
+                    <table align="center">
+                        <tr>
+                            <td colspan="2">
+                                <div class="input-group">
+                                    <span class="input-group-addon" style="width : 50px;">Id</span>
+                                    <input type="text" size="20" name="userId" id="userId" class="form-control" placeholder="UserId" aria-describedby="basic-addon1">
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <div class="input-group">
+                                    <span class="input-group-addon" style="width : 50px;">Pw</span>
+                                    <input type="password" size="20" name="userPwd" id="userPwd" class="form-control" placeholder="UserPassword">
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                    <hr>
+                    <button type="submit" class="btn btn-default" onclick="login()" style="width : 100px;">로그인</button>
+                    &nbsp;&nbsp;
+                    <button type="button" class="btn btn-default" onclick="" style="width : 100px;">회원가입</button>
+                </form>
+                <hr>
+                <button type="button" class="btn btn-default" onclick="">아이디 / 비밀번호 찾기</button>
+                <hr>
+                <div>
+                    <img src="../resources/pen.png" /> &nbsp; <img src="../resources/pen.png" /> &nbsp; <img src="../resources/pen.png" />
+                </div>
+            </div>
             
             <% } else { %>
             
-            <div style="float : right;">
+            <div class="right">
                 <img src="resources/images/profile.png" alt="프로필" onclick="goMyPage()"/>
                 <br>
                 <button type="button" onclick="logout()">로그아웃</button>
             </div>
             
             <% } %>
-            <br />
-            <br />
-            <br />
-			<div align="left">
-				<ul>
-					<li>
-						<a href="/SemiProject/index.jsp">홈</a>
-					</li>
-					<li>
-						<a href="/SemiProject/views/community/zip.jsp">커뮤니티</a>
-						<ul>
-							<li>
-								<a href="/SemiProject/views/community/zip.jsp">노하우</a>
-							</li>
-							<li>
-								<a href="/SemiProject/views/community/guide.jsp">Zipper 가이드</a>
-							</li>
-							<li>
-								<a href="/SemiProject/views/community/board.jsp">공지사항</a>
-							</li>
-						</ul>
-					</li>
-					<li>
-						<a href="/SemiProject/views/class/class.jsp">클래스</a>
-						<ul>
-							<li>
-								<a href="/SemiProject/views/class/class.jsp">클래스</a>
-							</li>
-						</ul>
-					</li>
-					<li>
-						<a href="/SemiProject/views/help/helpFAQ.jsp">고객센터</a>
-						<ul>
-							<li>
-								<a href="/SemiProject/views/help/helpFAQ.jsp">FAQ</a>
-							</li>
-							<li>
-								<a href="/SemiProject/views/help/helpPTP.jsp">1:1 문의</a>
-							</li>
-						</ul>
-					</li>
-				</ul>
-			</div>
         </nav>
     
     </header>
     <script>
     
-        function menu(){
-            $('nav').css('width', '100%');
-        }
-        function menu2(){
-            $('nav').css('width', '0');
-        }
+	    /* 햄버거 토글 */
+	    function navToggle(){
+	        $('nav').toggleClass('nav_hide');
+	    }
         function login(){
 			$('#loginForm').submit();
 		}
         function logout(){
-			location.href="/SemiProject/logout.me";
+			location.href="<%= request.getContextPath() %>/logout.me";
 		}
 		function goHome() {
-			location.href="/SemiProject/index.jsp";
+			location.href="<%= request.getContextPath() %>/index.jsp";
 		}
 		function goMyPage(){
-			location.href="/SemiProject/views/myPage/myPage.jsp";
+			location.href="<%= request.getContextPath() %>/views/myPage/myPage.jsp";
 		}
 		
 		/* 페이지 로드시 실행 */
@@ -184,7 +217,7 @@
 			/* 관리자일 경우 p 클릭 시 관리자 페이지로 이동 */
 			<% if(m != null && m.getUserId().equals("admin")) {%>
 				$('p#admin').click(function(){
-					location.href="/SemiProject/views/admin/admin.jsp";
+					location.href="<%= request.getContextPath() %>/views/admin/admin.jsp";
 				});				
 			<% } %>
 			<% if(m == null) {%>
