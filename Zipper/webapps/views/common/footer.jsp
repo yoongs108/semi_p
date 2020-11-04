@@ -10,7 +10,10 @@
 		/* background-size: contains; */
 	}
 	footer {
-		background : grey;
+		position : absolute;
+		bottom : 0;
+		width : 100%;
+		/* background : grey; */
 		height : 100px;
 	}
 </style>
