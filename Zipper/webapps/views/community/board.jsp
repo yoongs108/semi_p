@@ -32,6 +32,7 @@
 <body id="body">
  	<%@ include file="/views/common/header.jsp" %>
  	<h1>NOTICE</h1>
+ 	<button> </button>
  	<hr>
  	<br>
  	<div class="tableArea">
