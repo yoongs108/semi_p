@@ -23,5 +23,72 @@ public class MemberService {
 		
 		return result;
 	}
+	
+/*
+	public int insertMember(Member m) throws MemberException {
+
+		con = getConnection();
+		
+		int result = mDAO.insertMember(con, m);
+		
+		if( result > 0 ) { // 회원 가입 성공!
+			commit(con);			
+		} else {		   // 회원 가입 실패...
+			rollback(con);
+		}
+		
+		close(con);
+		
+		return result;
+	}
+
+	public int updateMember(Member m) throws MemberException {
+		int result = 0;
+		
+		con = getConnection();
+		
+		result = mDAO.updateMember(con, m);
+		
+		if(result > 0) {
+			commit(con);
+		} else {
+			rollback(con);
+		}
+		
+		close(con);
+		
+		return result;
+		
+	}
+
+	public int deleteMember(String userId) throws MemberException {
+
+		int result = 0;
+		
+		con = getConnection();
+		
+		result = mDAO.deleteMember(con, userId);
+		
+		if(result > 0) {
+			commit(con);
+		} else {
+			rollback(con);
+		}
+		
+		close(con);
+		
+		return result;
+	}
+*/
+	public int idDupCheck(String id) {
+		
+		con = getConnection();
+		
+		int result = mDAO.idDupCheck(con, id);
+		
+		close(con);
+		
+		return result;
+	}
 
 }
