@@ -250,7 +250,7 @@
 			location.href="<%= request.getContextPath() %>/index.jsp";
 		}
 		function goMyPage(){
-			location.href="<%= request.getContextPath() %>/views/myPage/myPage.jsp";
+			location.href="<%= request.getContextPath() %>/views/myPage/myPageMain.jsp";
 		}
 		
 		/* 페이지 로드시 실행 */
