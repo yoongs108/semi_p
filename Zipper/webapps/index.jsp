@@ -73,8 +73,6 @@
 			<h1>+</h1>
 		</article>
 	</section>
-	
-	<%@ include file="views/common/footer.jsp" %>
 
 	<script>
 		function goZippop() {

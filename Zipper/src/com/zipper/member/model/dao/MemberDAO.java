@@ -140,9 +140,8 @@ public class MemberDAO {
 			pstmt.setString(1, m.getMpwd());
 			pstmt.setString(2, m.getMcontact());
 			pstmt.setString(3, m.getAddress());
-			
-			pstmt.setString(4, m.getMemail());
-			pstmt.setString(5, m.getIntro());
+			pstmt.setString(4, m.getIntro());
+			pstmt.setString(5, m.getMid());
 			
 			result = pstmt.executeUpdate();
 			

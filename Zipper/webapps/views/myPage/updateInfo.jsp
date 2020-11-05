@@ -21,7 +21,7 @@
 					<h4>아이디</h4>
 				</td>
 				<td style="width : 150px;">
-					<h4><%= m.getMid() %></h4>
+					&nbsp;<h4><%= m.getMid() %></h4>
 				</td>
 				<td style="width : 100px;">
 					
@@ -88,15 +88,9 @@
 					<h4>이메일</h4>
 				</td>
 				<td>
-					<input type="text" size="20" name="email" id="email" class="form-control" placeholder="이메일" required="required" onchange="validate(this)">
+					&nbsp;<h4><%= m.getMemail() %></h4>					
 				</td>
 				<td>
-					&nbsp;
-					<select name="domain" id="domain" class="btn btn-default form-control" style="width : 130px; background : none;">
-						<option value="@naver.com" >@naver.com</option>
-						<option value="@daum.net" >@daum.net</option>
-						<option value="@gmail.com" >@gmail.com</option>
-					</select>
 				</td>
 			</tr>
 			<tr>
@@ -126,12 +120,6 @@
 		$('#address1').val(addressArr[1]);
 		$('#address2').val(addressArr[2]);
 		
-		var memailArr = '<%= m.getMemail() %>'.split('@');
-		
-		$('#email').val(memailArr[0]);
-		$('#domain').val('@' + memailArr[1]);
-		
-		
 	});
 	
 	/* 수정취소 */
@@ -141,7 +129,7 @@
 		}
 	}
 	
-	/* 가입 */
+	/* 수정 */
 	function updateMember() {
 		if(confirm("수정하시겠습니까?")){
 			$("#updateForm").submit();
@@ -149,7 +137,7 @@
 	}
 	
 	$("#updateForm").submit(function(event){
-		if($("#userPwd_join").val() == "" || $("#userId_join").val() == "") alert("아이디나 비밀번호는 필수 값입니다.");
+		if($("#userPwd_join").val() == "" ) alert("비밀번호는 필수 값입니다.");
 		else if($('#userPwd_join').val() != $('#userPwd2').val()) alert("비밀번호 확인 값과 다릅니다.");
 		else return;
 		event.preventDefault();
@@ -193,32 +181,6 @@
 				$(obj).focus();
 			}
 	}
-	
-	/* 아이디 중복 체크 */
-	$('#idCheck').on('click',function(){
-		if($('#userId_join').val() == null || $('#userId_join').val() == ""){
-			alert("아이디를 입력해주세요");
-			return false;
-		}
-		$.ajax({
-			url : '<%= request.getContextPath() %>/idDup.me',
-			type : 'post',
-			data : { userId : $('#userId_join').val() },
-			success : function(data){
-				// console.log(data);
-				
-				// 전달된 결과가 0이면 사용자 없음 : 가입 가능!
-				//    ' '   1   ' ' 있음 : 가입 불가!
-				if( data == 0 ) {
-					alert("사용 가능한 아이디입니다.");
-				} else {
-					alert("이미 사용 중인 아이디입니다.");
-				}
-			}, error : function(){
-				console.log("에러 발생~!");
-			}
-		});
-	});
 	
 	/* 비밀번호 확인 */
 	function chkPwd() {

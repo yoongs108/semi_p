@@ -132,15 +132,15 @@
 
 	<header>
 
-		<img src="<%= request.getContextPath() %>/resources/images/hamburger.png" id="hamburger" onclick="navToggle()"/>
+		<img src="<%= request.getContextPath() %>/resources/images/common/menu.png" id="hamburger" onclick="navToggle()"/>
 		
         <img src="<%= request.getContextPath() %>/resources/images/aaaa.png" alt="ZIPPER" id="logo" onclick="goHome()"/>
         
 		<% if(m != null) { %>
         
-        <img src="<%= request.getContextPath() %>/resources/images/profile.png" alt="profile" id="profile" onclick="goMyPage()"/>
+        <img src="<%= request.getContextPath() %>/resources/images/common/profile.png" alt="profile" id="profile" onclick="goMyPage()"/>
         
-        <img src="<%= request.getContextPath() %>/resources/images/pen.png" id="write" />
+        <img src="<%= request.getContextPath() %>/resources/images/common/pen.png" id="write" />
         
 		<p id="admin">
 			'<%= m.getMnick() %>' 님 환영합니다!
