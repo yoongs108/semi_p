@@ -8,7 +8,11 @@
 <script src="<%= request.getContextPath() %>/resources/js/jquery-3.5.1.min.js"></script>
 <title>마이 페이지 메인</title>
 <style type="text/css">
-	
+	section{
+		width: 1024px;
+		margin-right:auto;
+		margin-left:auto;
+	}
 	/*웹 제목 스타일*/
 	#title {
 		text-align: center;
@@ -21,12 +25,10 @@
 		border: black solid; 
 		border-width: 0 0 1px 0;
 	 } 
-	 
 	div>a:visited { 
 		text-decoration: none;
 		color: black; 
 	}
-	
 	div>a:hover{
 		color: black;
 		font-weight : bold;
@@ -35,21 +37,10 @@
 	}
 	/**/
 	#colunm {
-		width: 25%;
+		width: 250px;
 		height: 350px;
-		padding: 30px;
+		padding: 25px;
 		margin : 80px 0 100px 0;
-	}
-	
-	#row:after {
-		content: "";
-		display: table;
-	}
-	
-	section {
-		clear: both;
-		padding: 0 25px 60px 25px;
-		margin : 0 60px;
 	}
 	
 	section>div {
@@ -84,20 +75,13 @@
 			<h3>커뮤니티</h3>
 			<br />
 			<br />
-			<a onclick="goMyZip()">닉네임.ZIP</a>
+			<a onclick="goMyZip()"><%-- <%= m.getMnick() %> --%>.ZIP</a>
 			<br /> <br /> 
 			<a onclick="goScrapZip()">SCRAP.ZIP</a>
 			<br /><br />
-			<a onclick="goClassList()">닉네임.CLASS</a>
+			<a onclick="goClassList()"><%-- <%= m.getMnick() %> --%>.CLASS</a>
 			<br /> <br /> 
 			<a onclick="goClassScrap()">SCRAP.CLASS</a> 
-			
-			<%--
-			<a onclick="goClassList()"><%= m.getUserName() %>.CLASS</a>
-			<br /> <br /> 
-			<a onclick="goMyZip()"><%= m.getUserName() %>.ZIP</a>
-			<br /> <br /> 
-			 --%>
 			
 		</div>
 
@@ -122,28 +106,28 @@
 		</div>
 
 	<script>
-		function goUpdateInfo() { // 정보 수정
-			location.href = '<%= request.getContextPath() %>/views/myPage/UpdateInfo.jsp'; 
+		function goUpdateInfo() { 	// 정보 수정
+			location.href = '<%= request.getContextPath() %>/views/myPage/updateInfo.jsp'; 
 		}
-		function goClassScrap() { // 클래스 스크랩
+		function goClassScrap() { 	// 클래스 스크랩
 			location.href = '<%= request.getContextPath() %>/views/myPage/classScrap.jsp';
 		}
-		function goClassList() { //수강중 클래스 수정 필요
+		function goClassList() { 	//수강중 클래스 수정 필요
 			location.href = '<%= request.getContextPath() %>/#';
 		}
-		function goScrapZip() { //게시글 스크랩 수정 필요
+		function goScrapZip() { 	//게시글 스크랩 수정 필요
 			location.href = '<%= request.getContextPath() %>/#';
 		}
-		function goMyZip() { //내 zip페이지 수정필요
+		function goMyZip() { 		//내 zip페이지
+			location.href = '<%= request.getContextPath() %>/views/myPage/myZippop.jsp';
+		}
+		function goPayment() { 		//결제내역 수정필요
 			location.href = '<%= request.getContextPath() %>/#';
 		}
-		function goPayment() { //결제내역 수정필요
+		function goCanclePay() { 	//취소환불 수정필요
 			location.href = '<%= request.getContextPath() %>/#';
 		}
-		function goCanclePay() { //취소환불 수정필요
-			location.href = '<%= request.getContextPath() %>/#';
-		}
-		function goManToMan() { // 1:1문의
+		function goManToMan() { 	// 1:1문의
 			location.href = '<%= request.getContextPath() %>/views/myPage/ManToMan.jsp';
 		}
 	</script>
