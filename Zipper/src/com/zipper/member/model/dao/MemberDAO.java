@@ -11,6 +11,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Properties;
 
+import com.zipper.common.exception.MemberException;
 import com.zipper.member.model.vo.Member;
 
 public class MemberDAO {
@@ -54,8 +55,8 @@ public class MemberDAO {
 			pstmt = con.prepareStatement(sql);	// DB, sql 연결
 			
 			// sql에 ? 정보 채우기(회원 아이디, 비밀번호)
-			pstmt.setString(1, m.getUserId());
-			pstmt.setString(2, m.getUserPwd());
+			pstmt.setString(1, m.getMid());
+			pstmt.setString(2, m.getMpwd());
 			
 			rset = pstmt.executeQuery();	// sql 실행
 			
@@ -63,14 +64,18 @@ public class MemberDAO {
 				
 				result = new Member();
 				
-				result.setUserId(	m.getUserId());
-				result.setUserPwd(	m.getUserPwd());
-				result.setUserName(	rset.getString("username")); // DB컬럼명 대소문자 상관 X
-				result.setGender(	rset.getString("gender"));
-				result.setAge(		rset.getInt("AGE"));
-				result.setPhone(	rset.getString("phone"));
+				result.setMno(		rset.getInt("mno"));
+				result.setMgrd(		rset.getString("mgrd"));
+				result.setMid(		m.getMid());
+				result.setMpwd(		m.getMpwd());
+				result.setMnick(	rset.getString("mnick"));
+				result.setMcontact(	rset.getString("mcontact"));
+				result.setMemail(	rset.getString("memail"));
+				result.setMendate(	rset.getDate("mendate"));
+				result.setMexdate(	rset.getDate("mexdate"));
+				result.setMstatus(	rset.getString("mstatus"));
 				result.setAddress(	rset.getString("address"));
-				result.setEmail(	rset.getString("email"));
+				result.setIntro(	rset.getString("intro"));
 			}
 			
 			System.out.println("조회 결과 확인 : " + result);
@@ -85,6 +90,103 @@ public class MemberDAO {
 		return result;
 	}
 	
+	// 회원가입
+	public int insertMember(Connection con, Member m) throws MemberException {
+		
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("insertMember");
+		
+		System.out.println(sql);
+		
+		try {
+			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setString(1, m.getMid());
+			pstmt.setString(2, m.getMpwd());
+			pstmt.setString(3, m.getMnick());
+			pstmt.setString(4, m.getMcontact());
+			pstmt.setString(5, m.getMemail());
+			pstmt.setString(6, m.getAddress());
+			pstmt.setString(7, m.getIntro());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new MemberException("[DAO] : " + e.getMessage());
+			
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
+	// 회원 정보 수정
+	public int updateMember(Connection con, Member m) throws MemberException {
+
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("updateMember");
+		
+		System.out.println(sql);
+		
+		try {
+			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setString(1, m.getMpwd());
+			pstmt.setString(2, m.getMcontact());
+			pstmt.setString(3, m.getAddress());
+			
+			pstmt.setString(4, m.getMemail());
+			pstmt.setString(5, m.getIntro());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new MemberException("[DAO] : " + e.getMessage());
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	public int deleteMember(Connection con, String userId) throws MemberException {
+
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("deleteMember");
+		
+		//sql = "DELETE FROM MEMBER WHERE USERID = ?";
+		
+		System.out.println(sql);
+		
+		try {
+			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setString(1, userId);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new MemberException("[DAO] : " + e.getMessage());
+			
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+	
+	// 아이디 중복 체크
 	public int idDupCheck(Connection con, String id) {
 		
 		int result = 0;

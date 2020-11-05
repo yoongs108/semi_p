@@ -5,27 +5,27 @@ import java.sql.Date;
 
 public class Member implements Serializable {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1004L;
 	
 	
 	/*
-	 * USERID, PASSWORD, USERNAME, GENDER
-	 * AGE, EMAIL, PHONE, ADDRESS, HOBBY, ENROLLDATE
+	 * MNO, MGRD, MID, MPWD, MNICK, MCONTACT, MEMAIL, 
+	 * MENDATE, MEXDATE, MSTATUS, ADDRESS, INTRO
 	 */
 	// 1. 필드
-	private String userId;
-	private String userPwd;
-	private String userName;
-	private String gender;
-	private int age;
-	private String email;
-	private String phone;
-	private String address;
-	private String hobby;
-	private Date enrolldate;
+	
+	private int mno;			// 회원번호
+	private String mgrd;		// 등급(A, M)
+	private String mid;			// 아이디
+	private String mpwd;		// 비밀번호
+	private String mnick;		// 닉네임
+	private String mcontact;	// 연락처
+	private String memail;		// 이메일
+	private Date mendate;		// 가입일
+	private Date mexdate;		// 탈퇴일
+	private String mstatus;		// 회원상태
+	private String address;		// 주소
+	private String intro;		// 한줄소개
 	
 	// 2. 생성자
 	public Member() {
@@ -33,104 +33,128 @@ public class Member implements Serializable {
 	}
 	
 	// 모든 정보 조회용
-	public Member(String userId, String userPwd, String userName, String gender, int age, String email, String phone,
-			String address, String hobby, Date enrolldate) {
+	public Member(int mno, String mgrd, String mid, String mpwd, String mnick, String mcontact, String memail,
+			Date mendate, Date mexdate, String mstatus, String address, String intro) {
 		super();
-		this.userId = userId;
-		this.userPwd = userPwd;
-		this.userName = userName;
-		this.gender = gender;
-		this.age = age;
-		this.email = email;
-		this.phone = phone;
+		this.mno = mno;
+		this.mgrd = mgrd;
+		this.mid = mid;
+		this.mpwd = mpwd;
+		this.mnick = mnick;
+		this.mcontact = mcontact;
+		this.memail = memail;
+		this.mendate = mendate;
+		this.mexdate = mexdate;
+		this.mstatus = mstatus;
 		this.address = address;
-		this.hobby = hobby;
-		this.enrolldate = enrolldate;
+		this.intro = intro;
 	}
 	
+	
 	// 로그인용
-	public Member(String userId, String userPwd) {
+	public Member(String mid, String mpwd) {
 		super();
-		this.userId = userId;
-		this.userPwd = userPwd;
+		this.mid = mid;
+		this.mpwd = mpwd;
 	}
 
 	// 회원 가입용
-	public Member(String userId, String userPwd, String userName, String gender, int age, String email, String phone,
-			String address, String hobby) {
+	public Member(String mid, String mpwd, String mnick, String mcontact, String memail, String address, String intro) {
 		super();
-		this.userId = userId;
-		this.userPwd = userPwd;
-		this.userName = userName;
-		this.gender = gender;
-		this.age = age;
-		this.email = email;
-		this.phone = phone;
+		this.mid = mid;
+		this.mpwd = mpwd;
+		this.mnick = mnick;
+		this.mcontact = mcontact;
+		this.memail = memail;
 		this.address = address;
-		this.hobby = hobby;
+		this.intro = intro;
 	}
-
+	
 	@Override
 	public String toString() {
-		return "Member [userId=" + userId + ", userPwd=" + userPwd + ", userName=" + userName + ", gender=" + gender
-				+ ", age=" + age + ", email=" + email + ", phone=" + phone + ", address=" + address + ", hobby=" + hobby
-				+ ", enrolldate=" + enrolldate + "]";
+		return "Member [mno=" + mno + ", mgrd=" + mgrd + ", mid=" + mid + ", mpwd=" + mpwd + ", mnick=" + mnick
+				+ ", mcontact=" + mcontact + ", memail=" + memail + ", mendate=" + mendate + ", mexdate=" + mexdate
+				+ ", mstatus=" + mstatus + ", address=" + address + ", intro=" + intro + "]";
 	}
 
-	public String getUserId() {
-		return userId;
+	public int getMno() {
+		return mno;
 	}
 
-	public void setUserId(String userId) {
-		this.userId = userId;
+	public void setMno(int mno) {
+		this.mno = mno;
 	}
 
-	public String getUserPwd() {
-		return userPwd;
+	public String getMgrd() {
+		return mgrd;
 	}
 
-	public void setUserPwd(String userPwd) {
-		this.userPwd = userPwd;
+	public void setMgrd(String mgrd) {
+		this.mgrd = mgrd;
 	}
 
-	public String getUserName() {
-		return userName;
+	public String getMid() {
+		return mid;
 	}
 
-	public void setUserName(String userName) {
-		this.userName = userName;
+	public void setMid(String mid) {
+		this.mid = mid;
 	}
 
-	public String getGender() {
-		return gender;
+	public String getMpwd() {
+		return mpwd;
 	}
 
-	public void setGender(String gender) {
-		this.gender = gender;
+	public void setMpwd(String mpwd) {
+		this.mpwd = mpwd;
 	}
 
-	public int getAge() {
-		return age;
+	public String getMnick() {
+		return mnick;
 	}
 
-	public void setAge(int age) {
-		this.age = age;
+	public void setMnick(String mnick) {
+		this.mnick = mnick;
 	}
 
-	public String getEmail() {
-		return email;
+	public String getMcontact() {
+		return mcontact;
 	}
 
-	public void setEmail(String email) {
-		this.email = email;
+	public void setMcontact(String mcontact) {
+		this.mcontact = mcontact;
 	}
 
-	public String getPhone() {
-		return phone;
+	public String getMemail() {
+		return memail;
 	}
 
-	public void setPhone(String phone) {
-		this.phone = phone;
+	public void setMemail(String memail) {
+		this.memail = memail;
+	}
+
+	public Date getMendate() {
+		return mendate;
+	}
+
+	public void setMendate(Date mendate) {
+		this.mendate = mendate;
+	}
+
+	public Date getMexdate() {
+		return mexdate;
+	}
+
+	public void setMexdate(Date mexdate) {
+		this.mexdate = mexdate;
+	}
+
+	public String getMstatus() {
+		return mstatus;
+	}
+
+	public void setMstatus(String mstatus) {
+		this.mstatus = mstatus;
 	}
 
 	public String getAddress() {
@@ -141,19 +165,12 @@ public class Member implements Serializable {
 		this.address = address;
 	}
 
-	public String getHobby() {
-		return hobby;
+	public String getIntro() {
+		return intro;
 	}
 
-	public void setHobby(String hobby) {
-		this.hobby = hobby;
+	public void setIntro(String intro) {
+		this.intro = intro;
 	}
 
-	public Date getEnrolldate() {
-		return enrolldate;
-	}
-
-	public void setEnrolldate(Date enrolldate) {
-		this.enrolldate = enrolldate;
-	}
 }

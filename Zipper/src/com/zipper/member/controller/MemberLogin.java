@@ -33,11 +33,11 @@ public class MemberLogin extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// 1. 인코딩 필터
 		// 2. request 데이터 가져오기
-		String userId = request.getParameter("userId");
-		String userPwd = request.getParameter("userPwd");
+		String mid = request.getParameter("userId");
+		String mpwd = request.getParameter("userPwd");
 		
 		// vo에 데이터 담기
-		Member m = new Member(userId, userPwd);
+		Member m = new Member(mid, mpwd);
 		
 		// 실행할 서비스 생성
 		MemberService ms = new MemberService();
