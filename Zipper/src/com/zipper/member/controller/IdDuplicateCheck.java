@@ -30,7 +30,7 @@ public class IdDuplicateCheck extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String id = request.getParameter("userId");
+		String id = request.getParameter("userId_join");
 		
 		MemberService ms = new MemberService();
 		

@@ -4,6 +4,7 @@ import static com.zipper.common.JDBCTemplate.*;
 
 import java.sql.Connection;
 
+import com.zipper.common.exception.MemberException;
 import com.zipper.member.model.dao.MemberDAO;
 import com.zipper.member.model.vo.Member;
 
@@ -24,7 +25,7 @@ public class MemberService {
 		return result;
 	}
 	
-/*
+	// 회원 가입
 	public int insertMember(Member m) throws MemberException {
 
 		con = getConnection();
@@ -41,7 +42,8 @@ public class MemberService {
 		
 		return result;
 	}
-
+	
+	// 사용자 정보 수정
 	public int updateMember(Member m) throws MemberException {
 		int result = 0;
 		
@@ -61,6 +63,7 @@ public class MemberService {
 		
 	}
 
+	// 사용자 정보 삭제
 	public int deleteMember(String userId) throws MemberException {
 
 		int result = 0;
@@ -79,7 +82,7 @@ public class MemberService {
 		
 		return result;
 	}
-*/
+
 	public int idDupCheck(String id) {
 		
 		con = getConnection();

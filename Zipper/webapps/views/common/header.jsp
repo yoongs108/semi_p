@@ -10,6 +10,13 @@
 <script src="<%= request.getContextPath() %>/resources/js/jquery-3.5.1.min.js"></script>
 <!-- 합쳐지고 최소화된 최신 CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+
+<!-- 구글 로그인 api meta-->
+<meta name = "google-signin-client_id"content = "894633026908-nhpt910n7saunji257c36vovru0h3n3t.apps.googleusercontent.com">
+
+<!-- 구글 로그인 api -->
+<script src="https://apis.google.com/js/platform.js" async defer></script>
+
 	<style>
 		/* 헤더  */
         header {
@@ -39,11 +46,13 @@
             right: 15px;
         }
         
-        #write{
+        #profile {
             right: 40px;
+            border : 2px solid black;
+            border-radius: 50%;
         }
 
-        #profile{
+        #write {
             right: 70px;
         }
 
@@ -127,13 +136,14 @@
 		
         <img src="<%= request.getContextPath() %>/resources/images/aaaa.png" alt="ZIPPER" id="logo" onclick="goHome()"/>
         
-        <img src="<%= request.getContextPath() %>/resources/images/pen.png" id="write" />
+		<% if(m != null) { %>
         
         <img src="<%= request.getContextPath() %>/resources/images/profile.png" alt="profile" id="profile" onclick="goMyPage()"/>
         
-		<% if(m != null) { %>
+        <img src="<%= request.getContextPath() %>/resources/images/pen.png" id="write" />
+        
 		<p id="admin">
-			'<%= m.getUserName() %>' 님 환영합니다!
+			'<%= m.getMnick() %>' 님 환영합니다!
 		</p>
 		<% } %>
 		
@@ -211,6 +221,7 @@
                 <br />
                 <br />
                 <div>
+                <div class="g-signin2" data-onsuccess="onSignIn"></div> <!-- 구글 로그인 버튼 -->
                     <img src="<%= request.getContextPath() %>/resources/images/pen.png" /> &nbsp; <img src="<%= request.getContextPath() %>/resources/images/pen.png" /> &nbsp; <img src="<%= request.getContextPath() %>/resources/images/pen.png" />
                 </div>
             </div>
@@ -225,9 +236,19 @@
                 <br><br>
                 <br><br>
                 <button type="button" class="btn btn-default" onclick="logout()">로그아웃</button>
+                
             </div>
             
             <% } %>
+            <a href="#" onclick="signOut();">Sign out</a>
+				<script>
+				  function signOut() {
+				    var auth2 = gapi.auth2.getAuthInstance();
+				    auth2.signOut().then(function () {
+				      console.log('User signed out.');
+				    });
+				  }
+				</script>
         </nav>
     
     </header>
@@ -239,6 +260,28 @@
 	    }
         function login(){
 			$('#loginForm').submit();
+			
+			<%--  $.ajax({
+				url : '<%= request.getContextPath() %>/login.me',
+				type : 'post',
+				data : { userId : $('#userId').val(),
+					     userPwd : $('#userPwd').val()
+						
+						},
+				success : function(data){
+					// console.log(data);
+					
+					// 전달된 결과가 0이면 사용자 없음 : 가입 가능!
+					//    ' '   1   ' ' 있음 : 가입 불가!
+					if( data == 0 ) {
+						alert("");
+					} else {
+						alert("이미 사용 중인 아이디입니다.");
+					}
+				}, error : function(){
+						alert("아이디 혹은 비밀번호를 확인해주세요");
+				}
+			});  --%>
 		}
         function join(){
         	location.href="<%= request.getContextPath() %>/views/join.jsp";
@@ -256,19 +299,21 @@
 		/* 페이지 로드시 실행 */
 		$(function(){
 			/* 관리자일 경우 p 클릭 시 관리자 페이지로 이동 */
-			<% if(m != null && m.getUserId().equals("admin")) { %>
+			<% if(m != null && m.getMid().equals("admin")) { %>
 				$('p#admin').click(function(){
 					location.href="<%= request.getContextPath() %>/views/admin/admin.jsp";
 				});
 			<% } %>
-			<% if(m == null) {%>
-				$('#write').click(function(){
-					alert("로그인 후 이용해 주세요!");
-					$('#hamburger').click();
-					$('#userId').focus();
-				});
-			<% } %>
 		});
+		
+		/* 구글 로그인 정보 */
+		function onSignIn(googleUser) {
+			  var profile = googleUser.getBasicProfile();
+			  console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+			  console.log('Name: ' + profile.getName());
+			  console.log('Image URL: ' + profile.getImageUrl());
+			  console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+			}
     </script>
 </body>
 </html>
