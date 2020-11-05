@@ -10,11 +10,12 @@
 		/* background-size: contains; */
 	}
 	footer {
-		position : absolute;
+		position : relative;
 		bottom : 0;
 		width : 100%;
 		/* background : grey; */
 		height : 100px;
+		background: rgb(240,230,255);
 	}
 </style>
 </head>

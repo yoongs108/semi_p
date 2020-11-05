@@ -81,7 +81,7 @@
 			<br /> <br /> 
 			<a href="#">이름.CLASS</a>
 			<br /> <br /> 
-			<a href="#">이름.zip</a>
+			<a href="myZippop.jsp"><%= m.getUserName() %>.zip</a>
 		</div>
 
 		<div id="colunm">

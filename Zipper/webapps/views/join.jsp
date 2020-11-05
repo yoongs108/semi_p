@@ -6,9 +6,13 @@
 <meta charset="UTF-8">
 <title>회원가입</title>
 <style>
-	section {
-		
+	function idCheck() {
+		$("#idCheck").on('click', function() {
+			console.log($('#userId'));
+		});
 	}
+	
+	
 </style>
 </head>
 <body>
@@ -29,7 +33,7 @@
 					<input type="text" size="20" name="userId" id="userId" class="form-control" placeholder="아이디">
 				</td>
 				<td style="width : 100px;">
-					&nbsp;<button type="button" class="btn btn-default">중복확인</button>
+					&nbsp;<button type="button" class="btn btn-default" onclick="idCheck()">중복확인</button>
 				</td>
 			</tr>
 			<tr>
