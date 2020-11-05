@@ -99,18 +99,43 @@
 		overflow : hidden;
 	}
 	
+	.text-red {
+		color:red;
+	}
+	
 </style>
 <script>
+	document.getElementsByClassName('accordian');
+
+	
 	function fnMove(seq) {
     	var offset = $(".tabcontent" + (seq + 1)).offset();
     	var winH = $(".tabcontent" + (seq+1)).height();
-    	$('html, body').animate({scrollTop : (offset.top - winH*1.8)}, 400);
+    	$('html, body').animate({scrollTop : (offset.top - winH*1.5)}, 400);
 	};
 	
 	function accordion_hide(obj) {
 		console.log(obj);
 		$(obj).parent().find('p').toggleClass('accordion_hide');
+	};
+	
+	/*
+	$('#searchTool').keyup(function() {
+		var search = $('#searchTool').val();
+		$('#selectDetail:contains('"+ search +"')').each(function() {
+			$(this).html( $(this).text().replace(regex, "<span clasc='text-red'>"+"</span>"));
+		});
+	});
+	*/
+	
+	// 코드 구현 필요 / 페이지 내에서 수정이 가능하도록 구현 .html .text 사용
+	function complete(){
+		$("#updateForm").attr("action","<%= request.getContextPath()%>/bUpdate.bo");
 	}
+	
+	function deleteBoard(){
+		$("#updateForm").attr("action","<%= request.getContextPath()%>/bDelete.bo");
+	}	
 </script>
 </head>
 <body>
@@ -120,18 +145,32 @@
  	
  	<!-- 검색 영역  / (CSS 작업 필요, 링크 연결용 코드 필요) -->
  	<div align="center" id="searchDiv">
+ 		<!--  
  		<button id="searchBtn"><img src="../../resources/images/magnifier_icon.png" alt="검색" id="btnImg" /></button>
- 		<input type="text" name="" id="searchTool" placeholder="무엇을 검색하시겠습니까?"/>
+ 		-->
+ 		<input type="search" name="" id="searchTool" placeholder="무엇을 검색하시겠습니까?"/>
  	</div>
  	
  	<!-- 버튼 5개 영역  / (CSS 작업 필요)-->
  	<div class="selectDiv" id="selectDiv" align="center">
  		<button onclick="fnMove(1)">클래스</button>
  		<button onclick="fnMove(2)">결제</button>
- 		<button onclick="fnMove(3)">test3</button>
- 		<button onclick="fnMove(4)">test4</button>
+ 		<button onclick="fnMove(3)">배송</button>
+ 		<button onclick="fnMove(4)">환불</button>
  		<button onclick="fnMove(5)">test5</button>
  	</div>
+ 	
+ 	
+ 	<% if (m.getUserId().contains("admin")) { %>
+	
+		<div align="right" id="adminBtn">
+			<button onclick="complete();">수정하기</button>
+			<button onclick="deleteBoard();">삭제하기</button>
+		</div>
+		
+ 	<% } %>
+ 	
+ 	
  	<hr />
 
  	<!-- 하단 내용영역 (아코디언방식 사용)  / (CSS 작업 필요)-->
@@ -139,23 +178,23 @@
  		<div class='tabcontent1'>
  			<h3>클래스</h3>
 			<div>
- 				<button class="accordion" onclick="accordion_hide(this)">Section 1</button>
+ 				<button class="accordion" onclick="accordion_hide(this)">Q. 클래스는 어떻게 듣나요? </button>
 				<p class="accordion_hide">국무회의는 대통령·국무총리와 15인 이상 30인 이하의 국무위원으로 구성한다. 국회는 국정을 감사하거나 특정한 국정사안에 대하여 조사할 수 있으며, 이에 필요한 서류의 제출 또는 증인의 출석과 증언이나 의견의 진술을 요구할 수 있다. 법원은 최고법원인 대법원과 각급법원으로 조직된다. 국회는 의장 1인과 부의장 2인을 선출한다. 국토와 자원은 국가의 보호를 받으며, 국가는 그 균형있는 개발과 이용을 위하여 필요한 계획을 수립한다. 대법원은 법률에 저촉되지 아니하는 범위안에서 소송에 관한 절차, 법원의 내부규율과 사무처리에 관한 규칙을 제정할 수 있다. 국회가 재적의원 과반수의 찬성으로 계엄의 해제를 요구한 때에는 대통령은 이를 해제하여야 한다.</p>
 			</div>
 			<div>
-				<button class="accordion" onclick="accordion_hide(this)">Section 2</button>
+				<button class="accordion" onclick="accordion_hide(this)">Q. 클래스를 들을 수 있는기간은 언제까지 인가요?</button>
 				<p class="accordion_hide">국무회의는 대통령·국무총리와 15인 이상 30인 이하의 국무위원으로 구성한다. 국회는 국정을 감사하거나 특정한 국정사안에 대하여 조사할 수 있으며, 이에 필요한 서류의 제출 또는 증인의 출석과 증언이나 의견의 진술을 요구할 수 있다. 법원은 최고법원인 대법원과 각급법원으로 조직된다. 국회는 의장 1인과 부의장 2인을 선출한다. 국토와 자원은 국가의 보호를 받으며, 국가는 그 균형있는 개발과 이용을 위하여 필요한 계획을 수립한다. 대법원은 법률에 저촉되지 아니하는 범위안에서 소송에 관한 절차, 법원의 내부규율과 사무처리에 관한 규칙을 제정할 수 있다. 국회가 재적의원 과반수의 찬성으로 계엄의 해제를 요구한 때에는 대통령은 이를 해제하여야 한다.</p>
 			</div>
 			<div>
-				<button class="accordion" onclick="accordion_hide(this)">Section 3</button>
+				<button class="accordion" onclick="accordion_hide(this)">Q. 모바일로는 수강이 안되나요?</button>
 				<p class="accordion_hide">국무회의는 대통령·국무총리와 15인 이상 30인 이하의 국무위원으로 구성한다. 국회는 국정을 감사하거나 특정한 국정사안에 대하여 조사할 수 있으며, 이에 필요한 서류의 제출 또는 증인의 출석과 증언이나 의견의 진술을 요구할 수 있다. 법원은 최고법원인 대법원과 각급법원으로 조직된다. 국회는 의장 1인과 부의장 2인을 선출한다. 국토와 자원은 국가의 보호를 받으며, 국가는 그 균형있는 개발과 이용을 위하여 필요한 계획을 수립한다. 대법원은 법률에 저촉되지 아니하는 범위안에서 소송에 관한 절차, 법원의 내부규율과 사무처리에 관한 규칙을 제정할 수 있다. 국회가 재적의원 과반수의 찬성으로 계엄의 해제를 요구한 때에는 대통령은 이를 해제하여야 한다.</p>
 			</div>
 			<div>
-				<button class="accordion" onclick="accordion_hide(this)">Section 4</button>
+				<button class="accordion" onclick="accordion_hide(this)">Q. 실수로 중복으로 신청을 했는데 기간 연장이 가능한가요?</button>
 				<p class="accordion_hide">국무회의는 대통령·국무총리와 15인 이상 30인 이하의 국무위원으로 구성한다. 국회는 국정을 감사하거나 특정한 국정사안에 대하여 조사할 수 있으며, 이에 필요한 서류의 제출 또는 증인의 출석과 증언이나 의견의 진술을 요구할 수 있다. 법원은 최고법원인 대법원과 각급법원으로 조직된다. 국회는 의장 1인과 부의장 2인을 선출한다. 국토와 자원은 국가의 보호를 받으며, 국가는 그 균형있는 개발과 이용을 위하여 필요한 계획을 수립한다. 대법원은 법률에 저촉되지 아니하는 범위안에서 소송에 관한 절차, 법원의 내부규율과 사무처리에 관한 규칙을 제정할 수 있다. 국회가 재적의원 과반수의 찬성으로 계엄의 해제를 요구한 때에는 대통령은 이를 해제하여야 한다.</p>
 			</div> 
 			<div>
-				<button class="accordion" onclick="accordion_hide(this)">Section 5</button>
+				<button class="accordion" onclick="accordion_hide(this)">Q. 키트만 따로 구매할 수는 없을까요?</button>
 				<p class="accordion_hide">국무회의는 대통령·국무총리와 15인 이상 30인 이하의 국무위원으로 구성한다. 국회는 국정을 감사하거나 특정한 국정사안에 대하여 조사할 수 있으며, 이에 필요한 서류의 제출 또는 증인의 출석과 증언이나 의견의 진술을 요구할 수 있다. 법원은 최고법원인 대법원과 각급법원으로 조직된다. 국회는 의장 1인과 부의장 2인을 선출한다. 국토와 자원은 국가의 보호를 받으며, 국가는 그 균형있는 개발과 이용을 위하여 필요한 계획을 수립한다. 대법원은 법률에 저촉되지 아니하는 범위안에서 소송에 관한 절차, 법원의 내부규율과 사무처리에 관한 규칙을 제정할 수 있다. 국회가 재적의원 과반수의 찬성으로 계엄의 해제를 요구한 때에는 대통령은 이를 해제하여야 한다.</p>
 			</div>
 			<br /><br />
