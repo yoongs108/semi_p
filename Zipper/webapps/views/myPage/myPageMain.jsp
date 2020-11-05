@@ -36,7 +36,7 @@
 	/**/
 	#colunm {
 		width: 25%;
-		height: 300px;
+		height: 350px;
 		padding: 30px;
 		margin : 80px 0 100px 0;
 	}
@@ -79,16 +79,26 @@
 			<a onclick="goUpdateInfo()">수정 하기</a>
 
 		</div>
-
+		
 		<div id="colunm">
 			<h3>커뮤니티</h3>
 			<br />
 			<br />
-			<a onclick="goScrapList()">my_CLASS.zip</a> 
+			<a onclick="goMyZip()">닉네임.ZIP</a>
 			<br /> <br /> 
+			<a onclick="goScrapZip()">SCRAP.ZIP</a>
+			<br /><br />
+			<a onclick="goClassList()">닉네임.CLASS</a>
+			<br /> <br /> 
+			<a onclick="goClassScrap()">SCRAP.CLASS</a> 
+			
+			<%--
 			<a onclick="goClassList()"><%= m.getUserName() %>.CLASS</a>
 			<br /> <br /> 
-			<a onclick="goMyZip()"><%= m.getUserName() %>.zip</a>
+			<a onclick="goMyZip()"><%= m.getUserName() %>.ZIP</a>
+			<br /> <br /> 
+			 --%>
+			
 		</div>
 
 		<div id="colunm">
@@ -111,32 +121,34 @@
 			<a onclick="goManToMan()">1 : 1 문의 내역</a>
 		</div>
 
-
 	<script>
 		function goUpdateInfo() { // 정보 수정
-			location.href = <%= request.getContextPath() %>"views/myPage/UpdateInfo.jsp"; 
+			location.href = '<%= request.getContextPath() %>/views/myPage/UpdateInfo.jsp'; 
 		}
-		function goScrapList() { // 클래스 스크랩
-			location.href = <%= request.getContextPath() %>"/views/myPage/classScrap.jsp";
+		function goClassScrap() { // 클래스 스크랩
+			location.href = '<%= request.getContextPath() %>/views/myPage/classScrap.jsp';
 		}
 		function goClassList() { //수강중 클래스 수정 필요
-			location.href = <%= request.getContextPath() %>"/views/myPage/classScrap.jsp";
+			location.href = '<%= request.getContextPath() %>/#';
+		}
+		function goScrapZip() { //게시글 스크랩 수정 필요
+			location.href = '<%= request.getContextPath() %>/#';
 		}
 		function goMyZip() { //내 zip페이지 수정필요
-			location.href = <%= request.getContextPath() %>"/views/myPage/classScrap.jsp";
+			location.href = '<%= request.getContextPath() %>/#';
 		}
 		function goPayment() { //결제내역 수정필요
-			location.href = <%= request.getContextPath() %>"/views/myPage/payment.jsp";
+			location.href = '<%= request.getContextPath() %>/#';
 		}
 		function goCanclePay() { //취소환불 수정필요
-			location.href = <%= request.getContextPath() %>"/views/myPage/payment.jsp";
+			location.href = '<%= request.getContextPath() %>/#';
 		}
 		function goManToMan() { // 1:1문의
-			location.href = <%= request.getContextPath() %>"/views/myPage/ManToMan.jsp";
+			location.href = '<%= request.getContextPath() %>/views/myPage/ManToMan.jsp';
 		}
 	</script>
 	
 	</section>
 	
 </body>
-</html>
+</html>		

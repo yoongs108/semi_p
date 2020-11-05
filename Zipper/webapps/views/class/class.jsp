@@ -12,7 +12,7 @@
         width: 100%; 
         
     }  
-     
+
     .main{
 		position: absolute;
         display: block;
