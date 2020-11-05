@@ -1,5 +1,11 @@
+<%@page import="org.apache.jasper.tagplugins.jstl.core.Import"%>
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	    <%@ page import="java.util.*, com.zipper.thumb.model.vo.*" %>
+    <%
+    ArrayList<Thumbnail> list = (ArrayList<Thumbnail>)request.getAttribute("list");
+    %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,14 +15,14 @@
 
     .classMain_carouselBox{
         display: block;
-        width: 100%; 
-        
+        width: 1024px;       
+        border-top: 2px solid black;
     }  
 
     .main{
 		position: absolute;
         display: block;
-        width: 100%;
+        width: 1024px;
         
     }   
     
@@ -28,14 +34,14 @@
     
     .cover {
 		position: absolute;
-    	width: 100%;
+    	width: 1024px;
         height: 450px;
         background: black;
         opacity: 0.2;
     }
     
     .carousel_img{
-        width: 100%;
+        width: 1024px;
         height: 450px;
     }
     
@@ -127,31 +133,30 @@
 <body>
 	<%@ include file="/views/common/header.jsp"%>
 	<h1>클래스 page</h1>
-	<hr />
 	<div class="classMain_carouselBox">
         <div class="main">
             <div class="carousel_btn">
                 <button class="btn_left" onclick="plusDivs(-1)">&#10094;</button>
                 <button class="btn_right" onclick="plusDivs(1)">&#10095;</button>
             </div>
-            <div class="carousel_box">
+            <div class="carousel_box"><br />
                 <div class="carousel">
                 	<div class="cover"></div>
-                    <img class="carousel_img" src="../../resources/class/carouselImg/m.jpg" />
+                    <img class="carousel_img" src="../../resources/images/class/carouselImg/m.jpg" />
                     <div class="carousel_txt">
                     	<h2>마크라메, <br />어디까지 해봤니?</h2>
                     </div>
                 </div>
                 <div class="carousel">
                 	<div class="cover"></div>
-                    <img class="carousel_img" src="../../resources/class/carouselImg/t.jpg" />
+                    <img class="carousel_img" src="../../resources/images/class/carouselImg/t.jpg" />
                     <div class="carousel_txt">
                     	<h2>너 시트지 붙여? <br /> 난 타일 붙여!</h2>
                     </div>
                 </div>
                 <div class="carousel">
                 	<div class="cover"></div>
-                    <img class="carousel_img" src="../../resources/class/carouselImg/h.jpg" />
+                    <img class="carousel_img" src="../../resources/images/class/carouselImg/h.jpg" />
                     <div class="carousel_txt">
                     	<h2>드레스룸을 쇼룸처럼! <br />분위기 끝판왕 행거 만들기</h2>
                     </div>
@@ -175,8 +180,8 @@
 		
 			<div class="class_imgBox" >
 				<div>
-					<input type="hidden" name="bno" />
-					<img class="class_img" src="<%=request.getContextPath()%>/resources/class/classUploadFiles/h.jpg"
+					<input type="hidden" name="bno" value=""/>
+					<img class="class_img" src="<%=request.getContextPath()%>/resources/images/class/classUploadFiles/>"
 					width="300px" height="200px"/> <!-- 나중에 바꿔야됨 -->
 				</div>
 				<p>
@@ -197,7 +202,7 @@
 		$(function () {
 			$('.class_imgBox').click(function () {
 				var bno = $(this).find('input').val();
-				location.href ='<%= request.getContextPath()%>/selectOne.cl?bno=' + bno;
+				location.href ='<%= request.getContextPath()%>/selectOne.tn?bno=' + bno;
 			})
 		})
 	
