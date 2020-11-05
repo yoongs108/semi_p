@@ -6,9 +6,13 @@
 <meta charset="UTF-8">
 <title>회원가입</title>
 <style>
-	section {
-		
+	function idCheck() {
+		$("#idCheck").on('click', function() {
+			console.log($('#userId'));
+		});
 	}
+	
+	
 </style>
 </head>
 <body>
