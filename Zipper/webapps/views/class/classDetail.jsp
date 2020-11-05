@@ -40,9 +40,17 @@
           height: 100px;            
         }
         
-	.ccc {
-				 position: fixed;
+	.pay {
+	
 		
+	}
+	
+	button {
+		width: 100px;
+		height: 50px;
+		background-color: black;
+		border: none;
+		color: white;
 	}
 
 </style>
@@ -51,7 +59,7 @@
 	<%@ include file="/views/common/header.jsp"%>
 	<div>
 	<div class="left_page">
-		<div><img src="../../resources/class/carouselImg/h.jpg" alt="" width="450px" height="450px"/></div>
+		<div><img src="../../resources/images/class/carouselImg/h.jpg" alt="" width="650px" height="650px"/></div>
 		<h3>분위기 끝판왕 행거 만들기</h3>
 	</div>
 	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -64,7 +72,7 @@
 			</tr>
 			
 			<tr>
-				<td width="200px">
+				<td width="300px">
 					<div class="ac" id="p1">
 			        	<a href="#p1">재료</a>
 			        	<p>노목 공+8 <br /> 몽키스페너 공+130 <br /> 안전모 방+200</p>
@@ -73,25 +81,31 @@
 				<td style="vertical-align:top"> + 원</td>
 			</tr>
 		</table>
-		<table class="ccc">
+		
+		<div  class="pay">
+			<table>
 			<tr>
-				<td width="200px" height="200px">결제금액 </br> <h2>170000원</h2> </td>
-				<td></td>
+				<td width="200px" height="400px">결제금액 </br> <h1>170000원</h1> </td>
+				<td><br /><button onclick="goPayment();">결제</button><img onclick="" alt="" /> </td>
 			</tr>
 		</table>
+		</div>
+		
 		
 	</div>
 	</div>
 	
-
-	
-	
-	
-	
-	
-	
 	
 	<%@ include file="/views/common/footer.jsp"%>
 
+
+
+	<script>
+		function goPayment() {
+			location.href = "<%= request.getContextPath() %>/views/payment/payment.jsp";
+		};
+		
+	</script>
+	
 </body>
 </html>
