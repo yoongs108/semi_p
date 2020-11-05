@@ -8,6 +8,11 @@
 <title>클래스 스크랩 페이지</title>
 <style type="text/css">
 	/*웹 제목 스타일*/
+	section{
+		width: 1024px;
+		margin-right:auto;
+		margin-left:auto;
+	}
 	* {
  		 box-sizing: border-box;
 	}
@@ -17,33 +22,45 @@
 	#back{
 		position : absolute;
 		top : 100px;
-		right : 100px;
+		left : 950px;
 		height : 80px;
 		width: 80px;
-		float : right;
+	}
+	#back:hover{
+		cursor: pointer;
+		transform: scale(1.2);
 	}
 	
 	/* 리스트 시작*/
 	.card {
-		margin-top :50px;
+		margin-top : 50px;
+		margin-left: 100px;
+		display : inline-block;
 	}
 	
 	#container {
 		border-left : 1px solid black;
 		padding-left : 30px;
-		margin-top : 30px;	
-		width : 900px;
+		width : 600px;
 	}
 	#img  {
 		float : left;
-		height : 330px;
-		width : 330px;
+		height : 250px;
+		width : 250px;
 		border : solid 1px black;
-		margin-right : 50px;
-		margin-left : 15%;
+		margin-right : 30px;
+		margin-left : 10px;
 	}
-	.split{
+	.splitL{
 		float : left;
+	}
+	.splitR{
+		float : right;
+	}
+	.splitL:after {
+		content: "";
+		clear: both;
+		display: table;
 	}
 	.sub {
 		font-size : 16px;
@@ -78,14 +95,14 @@
 			alt="class1" id="back" onclick="goMyPageMain()"> 
 		&nbsp;&nbsp;&nbsp;
 		
-		<hr style="width: 85%; border: solid 0.3px black;">
+		<hr style="width: 90%; border: solid 1px black;">
 
 		<div class="card"> <!-- 클래스 리스트 폼 -->
 			
-			<img src="#" alt="class1" id="img" class="split">
+			<img src="#" alt="class1" id="img" class="splitL">
 			
-			<div id="container" class="split" >
-				<h3>수업제목</h3>
+			<div id="container" class="splitR" >
+				<h4>수업제목</h4>
 				<br />
 				<p class="sub">강사명 : </p>
 				<p class="sub">수강 기간 : 결제 후 1개월</p>
@@ -99,9 +116,29 @@
 				<button class="button" onclick="goClassInfo()">자세히 보기</button>
 				
 			</div>
+		</div>
+		<div class="card"> <!-- 클래스 리스트 폼 -->
 			
+			<img src="#" alt="class1" id="img" class="splitL">
+			
+			<div id="container" class="splitR" >
+				<h4>수업제목</h4>
+				<br />
+				<p class="sub">강사명 : </p>
+				<p class="sub">수강 기간 : 결제 후 1개월</p>
+				<br />
+				<p>
+				Some text that describes me lorem ipsum ipsum lorem.
+				</p>
+				<br />
+				<p id="price" style="font-size:18px; font-weight : bold;">가격 원 </p>
+				
+				<button class="button" onclick="goClassInfo()">자세히 보기</button>
+				
+			</div>
 		</div>
 		
+		<!-- 페이지 버튼 -->
 		<script>
 		function goClassInfo() { // 정보 수정
 			location.href = '<%= request.getContextPath() %>/views/class/classDetail.jsp'; 
@@ -112,5 +149,6 @@
 		</script>
 		
 	</section>
+	
 </body>
 </html>
