@@ -1,11 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <script src="<%= request.getContextPath() %>/resources/js/jquery-3.5.1.min.js"></script>
-<title>클래스 스크랩 페이지</title>
+<title>수강중 클래스 페이지</title>
 <style type="text/css">
 	/*웹 제목 스타일*/
 	section{
@@ -19,7 +19,6 @@
 	#title {
 		text-align: center;
 	}
-	/* 페이지 헤더 css*/
 	#back{
 		position : absolute;
 		top : 100px;
@@ -65,9 +64,6 @@
 		clear: both;
 		display: table;
 	}
-	.sub {
-		font-size : 16px;
-	}
 	.button {
   		border: none;
   		outline: 0;	
@@ -78,11 +74,12 @@
 		cursor: pointer;
 		float : right;
 		width : 100px;
-		margin : 0 20% -60px 0;
+		margin : 70px 10px -60px 0;
 	}
 	.button:hover{
 		background-color: #555;
 	}
+	
 	
 </style>
 </head>
@@ -91,11 +88,29 @@
 	<section>
 		<!-- 페이지 이름 부분 -->
 		<div class="title" style="border-bottom : 1px solid black;">
-		<h2 id="title">SCRAP.CLASS</h2>
+		<h2 id="title"><%-- <%= m.getMnick() %> --%>.CLASS</h2>
+		
 		<!-- 뒤로가기 -->
 		<img src="<%= request.getContextPath() %>/resources/images/common/backButton.png" 
 			alt="class1" id="back" onclick="goMyPageMain()"> 
 
+		</div>
+		
+		
+		<div class="card"> <!-- 클래스 리스트 폼 -->
+			
+			<img src="#" alt="class1" id="img" class="splitL">
+			
+			<div id="container" class="splitR" >
+				<br />
+				<p style="font-size:16px; font-weight : bold;">수강기간 db에서 받기</p>
+				<br />
+				<p style="font-size:17px; font-weight : bold;">수강명 DB에서 받기</p>
+				<p style="font-size:14px;">가격 원 </p>
+				
+				<button class="button" onclick="goClassInfo()">자세히 보기</button>
+				
+			</div>
 		</div>
 		
 		<div class="card"> <!-- 클래스 리스트 폼 -->
@@ -103,38 +118,13 @@
 			<img src="#" alt="class1" id="img" class="splitL">
 			
 			<div id="container" class="splitR" >
-				<h4>수업제목</h4>
 				<br />
-				<p class="sub">강사명 : </p>
-				<p class="sub">수강 기간 : 결제 후 1개월</p>
+				<p style="font-size:16px; font-weight : bold;">수강기간 db에서 받기</p>
 				<br />
-				<p>
-				Some text that describes me lorem ipsum ipsum lorem.
-				</p>
-				<br />
-				<p id="price" style="font-size:18px; font-weight : bold;">가격 원 </p>
+				<p style="font-size:17px; font-weight : bold;">수강명 DB에서 받기</p>
+				<p style="font-size:14px;">가격 원 </p>
 				
-				<button class="button" onclick="goClassInfo()">자세히 보기</button>
-				
-			</div>
-		</div>
-		<div class="card"> <!-- 클래스 리스트 폼 -->
-			
-			<img src="#" alt="class1" id="img" class="splitL">
-			
-			<div id="container" class="splitR" >
-				<h4>수업제목</h4>
-				<br />
-				<p class="sub">강사명 : </p>
-				<p class="sub">수강 기간 : 결제 후 1개월</p>
-				<br />
-				<p>
-				Some text that describes me lorem ipsum ipsum lorem.
-				</p>
-				<br />
-				<p id="price" style="font-size:18px; font-weight : bold;">가격 원 </p>
-				
-				<button class="button" onclick="goClassInfo()">자세히 보기</button>
+				<button class="button" onclick="goClassInfo()">강의 듣기</button>
 				
 			</div>
 		</div>
@@ -150,6 +140,6 @@
 		</script>
 		
 	</section>
-	<%@ include file="/views/common/footer.jsp"%>
+	
 </body>
 </html>
