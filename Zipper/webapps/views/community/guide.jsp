@@ -6,9 +6,12 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Karma">
+
+<script src="<%= request.getContextPath() %>/resources/js/jquery-3.5.1.min.js"></script>
 <title>Zipper Guide</title>
+
 <style>
+
 #navi { 
     list-style-type: none; 
     height: 50px; 
@@ -96,19 +99,100 @@
     -moz-transition : all 0.5s;
 }
 
-<style>
-body,h1,h2,h3,h4,h5,h6 {font-family: "Karma", sans-serif}  <!--폰트 수정해야함 -->
-.w3-bar-block .w3-bar-item {padding:20px}
+#guide1  {
+    padding : 0px 35px 0px 0px;
+}
 
+#guide2  {
+    padding : 0px 35px 0px 0px;
+}
 
+#guide3  {
+    padding : 0px 35px 0px 0px;
+}
+
+#guide4  {
+    padding : 0px 50px 0px 0px;
+}
+
+#guide5  {
+    padding : 0px 35px 0px 0px;
+}
+
+#guide6  {
+    padding : 0px 35px 0px 0px;
+}
+
+#guide7  {
+    padding : 0px 35px 0px 0px;
+}
+
+#guide8  {
+    padding : 0px 50px 0px 0px;
+}
+
+section {
+    
+      width: 1024px;
+      margin-left:auto;
+      margin-right:auto;
+   }
+   
+   .title{
+		height : 30px;
+	}
+		
+	#back{
+		position : absolute;
+		top : 100px;
+		left : 950px;
+		height : 80px;
+		width: 80px;
+		position:relative;
+		top:-210%;
+	}
+	
+	#back:hover{
+		cursor: pointer;
+		transform: scale(1.2);
+	}
+  	
 </style>
-
+<script>
+	function moveMain() {
+		$(this).on('click', function() {
+			location.href = "myPageMain.jsp";
+		});
+	}
+	
+</script>
 </head>
 <body>
+<section>
 	<%@ include file="/views/common/header.jsp" %>
- 	<h1 id="title">ZIPPER GUIDE</h1>
- 	<br />
 		
+	<div style="border-bottom: 1px solid black;">
+	
+		<div class="title">
+		<h2 id="title">ZIPPER GUIDE</h2>
+		
+		<!-- 뒤로가기 -->
+		<img src="<%= request.getContextPath() %>/resources/images/common/backButton.png" 
+			alt="class1" id="back" onclick="goGuideMain()"> 
+
+		</div>
+		
+
+	</div>
+	
+	
+	<!-- !PAGE CONTENT! -->
+	
+	
+    
+ 	<!-- First Photo Grid--> 	
+    	<div id="navi-top">
+	
 	<ul id="navi">
 
         <li>
@@ -128,17 +212,12 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Karma", sans-serif}  <!--폰트 수정해�
 			
 		</li>
 	</ul>
-	
-	<hr>
-	<!-- !PAGE CONTENT! -->
-	<div class="w3-main w3-content w3-padding" style="max-width:1800px;margin-top:50px">
-	
+	</div>
+    <div class="w3-row-padding w3-padding-16 w3-center">
     
- 	<!-- First Photo Grid--> 	
-    <div class="w3-row-padding w3-padding-16 w3-center" id="guide">
-    <div class="w3-quarter">
-      <a href="#">  <!-- 수정 -->
-      <img src="../../resources/guide/main/interior1.jpg" style="width:258px;height:388px;">
+    <div class="w3-quarter" >
+      <a href="#">  <!-- 수정 -->   
+      <img src="<%= request.getContextPath() %>/resources/images/guide/main/interior1.jpg" style="width:258px;height:388px;" id="guide1" >
       </a>
       <div class="bookmark">     
       </div>
@@ -150,7 +229,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Karma", sans-serif}  <!--폰트 수정해�
     
     <div class="w3-quarter">
       <a href="#">  <!-- 수정 -->
-      <img src="../../resources/guide/main/interior2.jpg" style="width:258px;height:388px;">
+      <img src="<%= request.getContextPath() %>/resources/images/guide/main/interior2.jpg" style="width:258px;height:388px;" id="guide2">
       </a>
       <div class="bookmark">     
       </div>
@@ -163,7 +242,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Karma", sans-serif}  <!--폰트 수정해�
     
       <div class="w3-quarter">
       <a href="#">  <!-- 수정 -->
-      <img src="../../resources/guide/main/interior3.jpg" style="width:258px;height:388px;">
+      <img src="<%= request.getContextPath() %>/resources/images/guide/main/interior3.jpg" style="width:258px;height:388px;" id="guide3">
       </a>
       <div class="bookmark">     
       </div>
@@ -175,9 +254,9 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Karma", sans-serif}  <!--폰트 수정해�
     
     <div class="w3-quarter">
       <a href="#">  <!-- 수정 -->
-      <img src="../../resources/guide/main/interior4.jpg" style="width:258px;height:388px;">
+      <img src="<%= request.getContextPath() %>/resources/images/guide/main/interior4.jpg" style="width:258px;height:388px;" id="guide4">
       </a>
-      <div class="bookmark">     
+      <div class="bookmark">
       </div>
       <h3>인테리어 가이드 4</h3>
       <span>[가이드]</span>
@@ -191,7 +270,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Karma", sans-serif}  <!--폰트 수정해�
    <div class="w3-row-padding w3-padding-16 w3-center" id="guide">
    <div class="w3-quarter">
       <a href="#">  <!-- 수정 -->
-      <img src="../../resources/guide/main/interior5.jpg" style="width:258px;height:388px;">
+      <img src="<%= request.getContextPath() %>/resources/images/guide/main/interior5.jpg" style="width:258px;height:388px;" id="guide5">
       </a>
       <div class="bookmark">     
       </div>
@@ -204,7 +283,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Karma", sans-serif}  <!--폰트 수정해�
     
     <div class="w3-quarter">
       <a href="#">  <!-- 수정 -->
-      <img src="../../resources/guide/main/interior6.jpg" style="width:258px;height:388px;">
+      <img src="<%= request.getContextPath() %>/resources/images/guide/main/interior6.jpg" style="width:258px;height:388px;" id="guide6">
       </a>
       <div class="bookmark">     
       </div>
@@ -216,7 +295,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Karma", sans-serif}  <!--폰트 수정해�
     
     <div class="w3-quarter">
       <a href="#">  <!-- 수정 -->
-      <img src="../../resources/guide/main/interior7.jpg" style="width:258px;height:388px;">
+      <img src="<%= request.getContextPath() %>/resources/images/guide/main/interior7.jpg" style="width:258px;height:388px;" id="guide7">
       </a>
       <div class="bookmark">     
       </div>
@@ -228,7 +307,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Karma", sans-serif}  <!--폰트 수정해�
     
     <div class="w3-quarter">
       <a href="#">  <!-- 수정 -->
-      <img src="../../resources/guide/main/interior8.jpg" style="width:258px;height:388px;">
+      <img src="<%= request.getContextPath() %>/resources/images/guide/main/interior8.jpg" style="width:258px;height:388px;" id="guide8">
       </a>
       <div class="bookmark">     
       </div>
@@ -248,13 +327,9 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Karma", sans-serif}  <!--폰트 수정해�
       <a href="#" class="w3-bar-item w3-button w3-hover-black">4</a>
       <a href="#" class="w3-bar-item w3-button w3-hover-black">»</a>
     </div>
-  </div>
-    
-    
-    	
-		
-	
- 	
+  
  	<%@ include file="/views/common/footer.jsp" %>
+ </div>	
+ 	</section>
 </body>
 </html>

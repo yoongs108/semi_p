@@ -55,11 +55,11 @@
 	<%@ include file="/views/common/header.jsp"%>
 
 	<section> <!-- 전체메뉴-->
-		
-	<h1 id="title">MY PAGE</h1>
-	<br /><br />
-	<hr style="width: 85%; border: solid 0.3px black;">
-		
+
+		<h1 id="title">MY PAGE</h1>
+		<br /><br />
+		<hr style="width: 85%; border: solid 0.3px black;">
+	
 		<div id="colunm" style="border-left: none;">
 
 			<h3>내 정보</h3>
@@ -113,7 +113,7 @@
 			location.href = '<%= request.getContextPath() %>/views/myPage/classScrap.jsp';
 		}
 		function goClassList() { 	//수강중 클래스 수정 필요
-			location.href = '<%= request.getContextPath() %>/#';
+			location.href = '<%= request.getContextPath() %>/views/myPage/classIng.jsp';
 		}
 		function goScrapZip() { 	//게시글 스크랩 수정 필요
 			location.href = '<%= request.getContextPath() %>/#';
@@ -128,11 +128,10 @@
 			location.href = '<%= request.getContextPath() %>/#';
 		}
 		function goManToMan() { 	// 1:1문의
-			location.href = '<%= request.getContextPath() %>/views/myPage/ManToMan.jsp';
+			location.href = '<%= request.getContextPath() %>/views/help/helpPTP.jsp';
 		}
 	</script>
 	
 	</section>
-	
 </body>
 </html>

@@ -2,9 +2,9 @@
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-	    <%@ page import="java.util.*, com.zipper.thumb.model.vo.*" %>
+	    <%@ page import="java.util.*, com.zipper.classMain.model.vo.*" %>
     <%
-    ArrayList<Thumbnail> list = (ArrayList<Thumbnail>)request.getAttribute("list");
+    ArrayList<ClassList> list = (ArrayList<ClassList>)request.getAttribute("list");
     %>
 <!DOCTYPE html>
 <html>
@@ -13,6 +13,27 @@
 <title>클래스</title>
 <style>
 
+	section {
+      width: 1024px;
+      margin-left:auto;
+      margin-right:auto;
+   }
+	
+	 #back{
+		position : absolute;
+		top : 100px;
+		left : 950px;
+		height : 80px;
+		width: 80px;
+		position:relative;
+		top:-210%;
+	}
+	
+	#back:hover{
+		cursor: pointer;
+		transform: scale(1.2);
+	}
+	
     .classMain_carouselBox{
         display: block;
         width: 1024px;       
@@ -132,7 +153,13 @@
 </head>
 <body>
 	<%@ include file="/views/common/header.jsp"%>
-	<h1>클래스 page</h1>
+	
+	<section>
+		<div style="border-bottom: 1px solid black;">
+			<h2 id="title">CLASS</h2>
+			<img src="<%= request.getContextPath() %>/resources/images/common/backButton.png" 
+				alt="class1" id="back" onclick="goMain()"> 
+		</div>
 	<div class="classMain_carouselBox">
         <div class="main">
             <div class="carousel_btn">
@@ -177,34 +204,38 @@
 	<div class="classMain_classBox">
 		
 		<div class="class_imgBox_wrap" >
-		
+		<% for(ClassList classList : list) { %>
 			<div class="class_imgBox" >
 				<div>
-					<input type="hidden" name="bno" value=""/>
-					<img class="class_img" src="<%=request.getContextPath()%>/resources/images/class/classUploadFiles/>"
+					<input type="hidden" name="cno" value="<%=  %>"/>
+					<img class="class_img" src="<%=request.getContextPath()%>/resources/images/class/classUploadFiles/"
 					width="300px" height="200px"/> <!-- 나중에 바꿔야됨 -->
 				</div>
 				<p>
-				제목<br />
-				가격
+				제목 <%= classList.getBno() + " " + classList.getCname() %> <br />
+				가격 <%= classList.getPrice() %>
 				</p>
 			</div>
-			
+		<% } %>
 			
 
 			
 		</div>
 	</div>
-
+</section>
 
 
 	<script type="text/javascript">
 		$(function () {
 			$('.class_imgBox').click(function () {
 				var bno = $(this).find('input').val();
-				location.href ='<%= request.getContextPath()%>/selectOne.tn?bno=' + bno;
+				location.href ='<%= request.getContextPath()%>/selectOne.cd?bno=' + bno;
 			})
 		})
+		
+		function goMain() { 
+			location.href = '<%= request.getContextPath() %>/index.jsp'; 
+		}
 	
 	</script>
 	<br />
