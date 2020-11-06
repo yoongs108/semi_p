@@ -140,7 +140,7 @@
 </head>
 <body>
  	<%@ include file="/views/common/header.jsp" %>
- 	
+ 	<section>
  	<h1 align="center">FAQ page</h1>
  	
  	<!-- 검색 영역  / (CSS 작업 필요, 링크 연결용 코드 필요) -->
@@ -161,7 +161,7 @@
  	</div>
  	
  	
- 	<% if (m.getUserId().contains("admin")) { %>
+ 	<% if (m.getMid().contains("admin")) { %>
 	
 		<div align="right" id="adminBtn">
 			<button onclick="complete();">수정하기</button>
@@ -297,6 +297,7 @@
  		</div>
  		<div class="tabcontent6"></div>
  	</div>
+ 	</section>
  	
  	<%@ include file="/views/common/footer.jsp" %>
 </body>
