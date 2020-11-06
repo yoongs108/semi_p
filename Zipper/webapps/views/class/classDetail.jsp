@@ -86,7 +86,7 @@
 			<table>
 			<tr>
 				<td width="200px" height="400px">결제금액 </br> <h1>170000원</h1> </td>
-				<td><br /><button onclick="goPayment();">결제</button><img onclick="" alt="" /> </td>
+				<td><br /><button onclick="goPayment();" style="color:white;">결제</button><img onclick="" alt="" /> </td>
 			</tr>
 		</table>
 		</div>
