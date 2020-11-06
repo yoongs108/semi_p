@@ -83,11 +83,12 @@ public class MemberService {
 		return result;
 	}
 
-	public int idDupCheck(String id) {
-		
+	// 중복 체크
+	public int dupCheck(String type, String dupParam) {
+
 		con = getConnection();
 		
-		int result = mDAO.idDupCheck(con, id);
+		int result = mDAO.dupCheck(con, type, dupParam);
 		
 		close(con);
 		
