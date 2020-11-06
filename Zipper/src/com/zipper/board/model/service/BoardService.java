@@ -1,7 +1,6 @@
 package com.zipper.board.model.service;
 
-import static com.zipper.common.JDBCTemplate.close;
-import static com.zipper.common.JDBCTemplate.getConnection;
+import static com.zipper.common.JDBCTemplate.*;
 
 import java.sql.Connection;
 import java.util.ArrayList;
@@ -13,18 +12,24 @@ public class BoardService {
 	private Connection con;
 	private BoardDAO bDAO = new BoardDAO();
 
-	public int getListCount() {
+	/*
+	 * public int getListCount() { con = getConnection();
+	 * 
+	 * int result = bDAO.getListCount(con); // create method 처리ok (dao에)
+	 * 
+	 * 
+	 * return 0; }
+	 */
+
+	public ArrayList<Board> selectList() {
+		
 		con = getConnection();
 		
-		int result = bDAO.getListCount(con); // create method 처리ok (dao에)
+		ArrayList<Board> result = bDAO.selectList(con);
 		
+		close(con);
 		
-		return 0;
-	}
-
-	public ArrayList<Board> selectList(int currentPage, int limit) {
-		// TODO Auto-generated method stub
-		return null;
+		return result;
 	}
 
 }
