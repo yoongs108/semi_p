@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.zipper.board.model.service.BoardService;
 import com.zipper.board.model.vo.Board;
 import com.zipper.classMain.model.service.ClassService;
+import com.zipper.classMain.model.vo.ClassList;
 
 /**
  * Servlet implementation class ClassDetail
@@ -41,12 +42,10 @@ public class ClassSelectOne extends HttpServlet {
 
 	    String page = "";
 	    
-	    if(classList != null && classList.get("") != null) {
+	    if(classList != null) {
 	         request.setAttribute("classList", classList.get("classList"));
-	         request.setAttribute("classList", classList.get("attachment"));
-	         
-	         
-	         
+	         request.setAttribute("attachList", classList.get("attachment"));
+	     
 	         page = "views/class/classDetail.jsp";
 	      } else {
 	         request.setAttribute("exception", new Exception("게시글 상세 조회 실패"));

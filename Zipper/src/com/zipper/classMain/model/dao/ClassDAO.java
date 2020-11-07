@@ -14,6 +14,7 @@ import java.util.Properties;
 import com.zipper.thumb.model.vo.Attachment;
 import com.zipper.board.model.vo.Board;
 import com.zipper.classMain.model.vo.ClassList;
+import com.zipper.classMain.model.vo.Kit;
 
 import static com.zipper.common.JDBCTemplate.*;
 
@@ -47,7 +48,7 @@ public class ClassDAO {
 		
 		HashMap<String, Object> hmap = new HashMap<>();
 		ArrayList<Attachment> aList = new ArrayList<>();
-//		ArrayList<Kit> kList = new ArrayList<>();
+		ArrayList<Kit> kList = new ArrayList<>();
 		ArrayList<Board> bList = new ArrayList<>();
 		
 		ClassList cl = null;
@@ -90,9 +91,12 @@ public class ClassDAO {
 				
 				aList.add(at);
 				
-//				Kit kit = new Kit();
+				Kit k = new Kit();
+				k.setKno(rset.getInt("kno"));
+				k.setKname(rset.getString("kdetail"));
+				k.setCount(rset.getInt("count"));
 				
-				
+				kList.add(k);
 				
 				
 				Board b = new Board();
@@ -113,7 +117,7 @@ public class ClassDAO {
 			}
 		hmap.put("classList", cl);
 		hmap.put("attachment", aList);
-//		hmap.put("kit", kList);
+		hmap.put("kit", kList);
 		hmap.put("board", bList);
 
 		

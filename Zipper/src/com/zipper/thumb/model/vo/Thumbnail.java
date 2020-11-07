@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.sql.Date;
 import java.util.ArrayList;
 
-import com.zipper.board.model.vo.Attachment;
 import com.zipper.board.model.vo.Board;
 
 public class Thumbnail extends Board implements Serializable{

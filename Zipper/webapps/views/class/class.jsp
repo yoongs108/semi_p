@@ -2,9 +2,10 @@
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-	    <%@ page import="java.util.*, com.zipper.classMain.model.vo.*" %>
+	    <%@ page import="java.util.*, com.zipper.classMain.model.vo.*, com.zipper.thumb.model.vo.* " %>
     <%
-    ArrayList<ClassList> list = (ArrayList<ClassList>)request.getAttribute("list");
+    ArrayList<ClassList> list = (ArrayList<ClassList>)request.getAttribute("classList");
+    ArrayList<Attachment> attList = (ArrayList<Attachment>)request.getAttribute("attachList");
     %>
 <!DOCTYPE html>
 <html>
@@ -199,7 +200,7 @@
         </div>
 		<hr />
 	</div>
-	
+
 	
 	<div class="classMain_classBox">
 		
@@ -207,9 +208,9 @@
 		<% for(ClassList classList : list) { %>
 			<div class="class_imgBox" >
 				<div>
-					<input type="hidden" name="cno" value="<%=  %>"/>
-					<img class="class_img" src="<%=request.getContextPath()%>/resources/images/class/classUploadFiles/"
-					width="300px" height="200px"/> <!-- 나중에 바꿔야됨 -->
+					<input type="hidden" name="bno" value="<%= classList.getBno()  %>"/> 
+					<img class="class_img" src="<%=request.getContextPath()%>/resources/images/class/classUploadFiles/<%= %>"
+					width="300px" height="200px"/>
 				</div>
 				<p>
 				제목 <%= classList.getBno() + " " + classList.getCname() %> <br />
