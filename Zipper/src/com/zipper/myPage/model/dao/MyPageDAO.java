@@ -49,9 +49,16 @@ public class MyPageDAO {
 			while (rset.next()) {
 				Thumbnail tn = new Thumbnail();
 				
-				//
+				tn.setBno(rset.getInt("bno"));
+				tn.setBtitle(rset.getString("btitle"));
+				tn.setBcontent(rset.getString("bcontent"));
+				tn.setBview(rset.getInt("bview"));
+				tn.setBoardfile(rset.getString("boardfile"));
+				tn.setProfile(rset.getString("profile"));
 				
+				list.add(tn);
 			}
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 			

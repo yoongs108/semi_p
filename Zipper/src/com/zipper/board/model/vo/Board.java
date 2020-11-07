@@ -25,6 +25,7 @@ public class Board implements Serializable{
 	private int bview;			// 게시글 조회수
 	private Date bdate;			// 작성일
 	private String bstatus;		// 삭제 여부 ( Y: 삭제 X, N: 삭제됨 )
+	private String profile;
 	
 	private String userId;		// 게시글 작성자 아이디
 	private String bwriter;		// 게시글 작성자(닉네임, 이름)
@@ -36,8 +37,7 @@ public class Board implements Serializable{
 		super();
 	}
 
-
-	public Board(int bno, int btype, int mno, String btitle, String bcontent, int bview, Date bdate, String bstatus) {
+	public Board(int bno, int btype, int mno, String btitle, String bcontent, int bview, Date bdate, String bstatus, String profile) {
 		super();
 		this.bno = bno;
 		this.btype = btype;
@@ -47,11 +47,11 @@ public class Board implements Serializable{
 		this.bview = bview;
 		this.bdate = bdate;
 		this.bstatus = bstatus;
+		this.profile = profile;
 	}
 
-
 	public Board(int bno, int btype, int mno, String btitle, String bcontent, int bview, Date bdate, String bstatus,
-			String userId, String bwriter, String boardfile) {
+			String userId, String bwriter, String boardfile, String profile) {
 		super();
 		this.bno = bno;
 		this.btype = btype;
@@ -64,8 +64,19 @@ public class Board implements Serializable{
 		this.userId = userId;
 		this.bwriter = bwriter;
 		this.boardfile = boardfile;
+		this.profile = profile;
 	}
 
+
+	public Board(int bno, String btitle, String bcontent, int bview, String boardfile, String profile) {
+		super();
+		this.bno = bno;
+		this.btitle = btitle;
+		this.bcontent = bcontent;
+		this.bview = bview;
+		this.boardfile = boardfile;
+		this.profile = profile;
+	}
 
 	@Override
 	public String toString() {
@@ -182,6 +193,14 @@ public class Board implements Serializable{
 
 	public void setBoardfile(String boardfile) {
 		this.boardfile = boardfile;
+	}
+
+	public String getProfile() {
+		return profile;
+	}
+
+	public void setProfile(String profile) {
+		this.profile = profile;
 	}
 	
 }

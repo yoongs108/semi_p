@@ -9,6 +9,7 @@ public class Attachment implements Serializable {
 	
 	private int fno;
 	private int bno;
+	private int cno;
 	private String originname;
 	private String changename;
 	private String filepath;
