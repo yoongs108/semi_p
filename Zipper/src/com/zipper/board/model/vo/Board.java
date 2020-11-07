@@ -18,7 +18,7 @@ public class Board implements Serializable{
 	
 	// 필드
 	private int bno;			// 게시글 번호
-	private int btype;			// 게시글 유형 (1: zippop / 2: 가이드 / 3: 공지사항 / 4: )
+	private int btype;			// 게시글 유형 (1: zippop / 2: 클래스 / 3: 가이드 / 4: 공지사항 / 5: FAQ)
 	private int mno;			// 회원번호
 	private String btitle;		// 게시글 제목
 	private String bcontent;	// 게시글 내용

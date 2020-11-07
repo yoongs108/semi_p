@@ -63,7 +63,7 @@
             left: 0;
             height : 100%;
             width : 0;
-            background : lightgreen;/*  */
+            /* background : lightgreen; *//*  */
             overflow: hidden;
             transition : width 0.65s;
             z-index: 5000;
@@ -221,9 +221,9 @@
                 <br />
                 <br />
                 <div>
-                <div class="g-signin2" data-onsuccess="onSignIn"></div> <!-- 구글 로그인 버튼 -->
+                <%-- <div class="g-signin2" data-onsuccess="onSignIn"></div> <!-- 구글 로그인 버튼 -->
                     <img src="<%= request.getContextPath() %>/resources/images/pen.png" /> &nbsp; <img src="<%= request.getContextPath() %>/resources/images/pen.png" /> &nbsp; <img src="<%= request.getContextPath() %>/resources/images/pen.png" />
-                </div>
+                </div> --%>
             </div>
             
             <% } else { %>
@@ -240,7 +240,7 @@
             </div>
             
             <% } %>
-            <a href="#" onclick="signOut();">Sign out</a>
+           <!--  <a href="#" onclick="signOut();">Sign out</a>
 				<script>
 				  function signOut() {
 				    var auth2 = gapi.auth2.getAuthInstance();
@@ -248,7 +248,7 @@
 				      console.log('User signed out.');
 				    });
 				  }
-				</script>
+				</script> -->
         </nav>
     
     </header>

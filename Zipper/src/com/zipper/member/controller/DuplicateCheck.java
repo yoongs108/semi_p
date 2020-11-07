@@ -14,14 +14,14 @@ import com.zipper.member.model.service.MemberService;
 /**
  * Servlet implementation class IdDuplicateCheck
  */
-@WebServlet("/idDup.me")
-public class IdDuplicateCheck extends HttpServlet {
+@WebServlet("/dupCheck.me")
+public class DuplicateCheck extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public IdDuplicateCheck() {
+    public DuplicateCheck() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,11 +30,25 @@ public class IdDuplicateCheck extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String id = request.getParameter("userId_join");
+		
+		String type = request.getParameter("type");	// 중복 확인할 파라미터 유형
+		String dupParam = ""; // 중복 확인할 파라미터
+		
+		switch(type) {
+		case "mid" :
+			dupParam = request.getParameter("userId_join");
+			break;
+		case "mnick" :
+			dupParam = request.getParameter("mnick");
+			break;
+		case "memail" :
+			dupParam = request.getParameter("memail");
+			 break;
+		}
 		
 		MemberService ms = new MemberService();
 		
-		int result = ms.idDupCheck(id);
+		int result = ms.dupCheck(type, dupParam);
 		
 		new Gson().toJson(result, response.getWriter());
 		

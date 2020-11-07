@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>관리자 페이지</title>
+<title>신고</title>
 <style>
 	section>div {
 		margin-left : 80px;
@@ -19,7 +19,7 @@
 	
 	<section class="templateWidth templateHeight">
 		<div>
-			<h1>관리자 페이지</h1>
+			<h1>신고</h1>
 		</div>
 	</section>
 	
@@ -29,7 +29,5 @@
 		
 		request.getRequestDispatcher("/views/common/errorPage.jsp").forward(request, response);
 	} %>
-	
-	
 </body>
 </html>

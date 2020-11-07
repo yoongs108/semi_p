@@ -5,6 +5,16 @@
 <head>
 <meta charset="UTF-8">
 <title>회원 정보 수정</title>
+
+<!-- 다음주소 api -->
+<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+
+<style>
+	tr>td>h5 {
+		color : red;
+	}
+</style>
+
 </head>
 <body>
 
@@ -23,8 +33,9 @@
 				<td style="width : 150px;">
 					&nbsp;<h4><%= m.getMid() %></h4>
 				</td>
-				<td style="width : 100px;">
-					
+				<td style="width : 90px;">
+				</td>
+				<td style="width : 110px;">
 				</td>
 			</tr>
 			<tr>
@@ -32,7 +43,10 @@
 					<h4>비밀번호</h4>
 				</td>
 				<td>
-					<input type="password" size="20" name="userPwd_join" id="userPwd_join" class="form-control" placeholder="비밀번호" required="required" onchange="validate(this)">
+					<input type="password" size="20" name="userPwd_join" id="userPwd_join" class="form-control" placeholder="비밀번호" required="required" onkeyup="validate(this)">
+				</td>
+				<td colspan="2">
+					<h5></h5>
 				</td>
 			</tr>
 			<tr>
@@ -40,7 +54,10 @@
 					<h4>비밀번호 확인</h4>
 				</td>
 				<td>
-					<input type="password" size="20" name="userPwd2" id="userPwd2" class="form-control" placeholder="비밀번호 확인" onchange="chkPwd()" required="required">
+					<input type="password" size="20" name="userPwd2" id="userPwd2" class="form-control" placeholder="비밀번호 확인" onkeyup="chkPwd()" required="required">
+				</td>
+				<td colspan="2">
+					<h5></h5>
 				</td>
 			</tr>
 			<tr>
@@ -48,16 +65,18 @@
 					<h4>닉네임</h4>
 				</td>
 				<td>
-					<input type="text" size="20" name="userName" id="userName" class="form-control" placeholder="닉네임" required="required" value="<%= m.getMnick() %>">
+					&nbsp;<h4><%= m.getMnick() %></h4>
 				</td>
-				<td></td>
 			</tr>
 			<tr>
-				<td>
+				<td >
 					<h4>연락처</h4>
 				</td>
 				<td>
-					<input type="text" name="tel" id="tel" class="form-control" placeholder="010-0000-0000" onchange="validate(this)" value="<%= m.getMcontact() %>">
+					<input type="text" name="tel" id="tel" class="form-control" placeholder="010-0000-0000" onkeyup="validate(this)" value="<%= m.getMcontact() %>">
+				</td>
+				<td colspan="2">
+					<h5></h5>
 				</td>
 			</tr>
 			<tr>
@@ -90,8 +109,6 @@
 				<td>
 					&nbsp;<h4><%= m.getMemail() %></h4>					
 				</td>
-				<td>
-				</td>
 			</tr>
 			<tr>
 				<td>
@@ -104,8 +121,9 @@
 		</table>
 		<br />
 		<div style="text-align: center;">
-		<button type="button" class="btn btn-default" onclick="updateMember()">수정하기</button>
-		<button type="button" class="btn btn-default" onclick="cancelUpdate()">수정취소</button>
+		<button type="button" class="btn btn-default" onclick="updateMember()">정보수정</button> &nbsp;&nbsp;
+		<button type="button" class="btn btn-default" onclick="cancelUpdate()">수정취소</button> &nbsp;&nbsp;
+		<button type="button" class="btn btn-default" onclick="deleteMember()">회원탈퇴</button>
 		</div>
 	</form>
 		<br />
@@ -113,6 +131,7 @@
 		<br />
 </section>
 <script>
+	/* 주소 넣기 */
 	$(function(){
 		var addressArr = '<%= m.getAddress() %>'.split(', ');
 		
@@ -125,12 +144,24 @@
 	/* 수정취소 */
 	function cancelUpdate() {
 		if(confirm("마이페이지로 돌아가시겠습니까?")){
-			location.href='<%= request.getContextPath() %>/index.jsp';			
+			location.href='<%= request.getContextPath() %>/views/myPage/myPageMain.jsp';			
 		}
 	}
 	
-	/* 수정 */
+	/* 회원탈퇴 */
+	function deleteMember() {
+		alert("탈퇴처리해야함");
+	}
+	
+	/* 정보수정 */
 	function updateMember() {
+		validate('#userPwd_join');
+		validate('#tel');
+		chkPwd();
+		
+		if($('td>h5').text() != ''){
+			return false;
+		}
 		if(confirm("수정하시겠습니까?")){
 			$("#updateForm").submit();
 		}
@@ -146,49 +177,41 @@
 	/* 유효성체크 */
 	function validate(obj){
 	
-		var validate = '';
-		var valiMessage = '';
-		var idChk = /^[a-z][a-z0-9_-]{3,11}$/; // (영문소문자+숫자 4~12자리, 영문소문자로 시작)
-		var pwChk = /^[A-Za-z0-9_-]{4,18}$/; // (영문대소문자+숫자 6~18자리)
-		var telChk = /^\d{2,3}-\d{3,4}-\d{4}$/;
-		var emailChk = /^\w{4,12}$/; // \w = [a-zA-Z0-9_]
+		var validate = ''; // 정규식
+		var valiMessage = ''; // 유효성 체크 메새지
 		
-		var inputValue = $(obj).val(); 
+		var inputValue = $(obj).val(); // 입력 값
+		var valiText = $(obj).parent().parent().find('h5'); // 유효성 메세지 보여줄 태그
 		
 		switch($(obj).attr('id')) {
-		case 'userId_join':
-			validate = /^[a-z][a-z0-9_-]{3,11}$/;
-			valiMessage = '영문소문자+숫자 4~12자리, 영문소문자로 시작';
-			break;
 		case 'userPwd_join':
 			validate = /^[A-Za-z0-9_-]{4,18}$/;
-			valiMessage = '영문대소문자+숫자 6~18자리';
+			valiMessage = '영문대소문자+숫자 4~18자리';
 			break;
 		case 'tel':
 			validate = /^\d{2,3}-\d{3,4}-\d{4}$/;
 			valiMessage = '전화번호 양식을 확인해주세요';
-			break;
-		case 'email':
-			validate = /^\w{4,12}$/;
-			valiMessage = '영문대소문자+숫자 4~12자리';
-			break;
-			
+			break;	
 		}
-			if(validate.test(inputValue)){
-				console.log(11111);
-			} else {
-				console.log(valiMessage);
-				$(obj).focus();
-			}
+		
+		// 유효성 체크
+		if(validate.test(inputValue)){
+			valiText.text('');
+		} else {
+			valiText.text(valiMessage);
+		}
 	}
 	
 	/* 비밀번호 확인 */
 	function chkPwd() {
 		var pwd1 = $('#userPwd_join').val();
 		var pwd2 = $('#userPwd2').val();
+		var pwd2Message = $('#userPwd2').parent().parent().find('h5');
 		
 		if(!(pwd1 == pwd2)) {
-			alert("비번이 다릅니다");
+			pwd2Message.text('비밀번호가 다릅니다.');
+		} else {
+			pwd2Message.text('');
 		}
 	}
 	

@@ -163,8 +163,6 @@ public class MemberDAO {
 		
 		String sql = prop.getProperty("deleteMember");
 		
-		//sql = "DELETE FROM MEMBER WHERE USERID = ?";
-		
 		System.out.println(sql);
 		
 		try {
@@ -185,8 +183,8 @@ public class MemberDAO {
 		return result;
 	}
 	
-	// 아이디 중복 체크
-	public int idDupCheck(Connection con, String id) {
+	// 중복 체크
+	public int dupCheck(Connection con, String type, String dupParam) {
 		
 		int result = 0;
 		
@@ -194,14 +192,26 @@ public class MemberDAO {
 		
 		ResultSet rset = null;
 		
-		String sql = prop.getProperty("idDupCheck");
+		String sql = null;
+		
+		switch(type) {
+		case "mid" :
+			sql = prop.getProperty("idDupCheck");
+			break;
+		case "mnick" :
+			sql = prop.getProperty("nickDupCheck");
+			break;
+		case "memail" :
+			sql = prop.getProperty("emailDupCheck");
+			 break;
+		}
 		
 		System.out.println(sql);
 		
 		try {
 			pstmt = con.prepareStatement(sql);
 			
-			pstmt.setString(1, id);
+			pstmt.setString(1, dupParam);
 			
 			rset = pstmt.executeQuery();
 			
