@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import="com.zipper.classMain.model.vo.*, java.util.*"%>
+    
+    <% 	ArrayList<ClassList> cList = (ArrayList<ClassList>)request.getAttribute("cList");
+		ArrayList<Teacher> tList = (ArrayList<Teacher>)request.getAttribute("kList");
+    %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -112,15 +116,17 @@
 				</div>
 				
 				<div class="classDescription">
+					<% for(ClassList classList : cList) { %>
 					<table>
 						<tr>
 							<td><br />클래스 명</td>
 							<td rowspan="2" style="vertical-align:bottom; text-align:right;"><h4>금액</h4></td>
 						</tr>
 						<tr>
-							<td><span id="cname">분위기 끝판왕 행거 만들기 </span>
+							<td><span id="cname"><%= classList.getCname() %> </span>
 							<br />
 							<br /></td>
+							<% } %>
 							<td></td>
 						</tr>
 						<tr>
@@ -129,14 +135,15 @@
 						</tr>
 						<tr>
 							<td>강사 명</td>
-							<td style="vertical-align:top; text-align:right;"> <h4 id="price"> 원</h4></td>
+							<td style="vertical-align:top; text-align:right;"> <h4 id="price"> <%= classList.getPrice() %>원</h4></td>
 						</tr>
 						<tr>
-							<td>다니엘 유</td>
+							<% for(Teacher teacher : tList) { %>
+							<td><%= teacher.getTname() %></td>
 							<td></td>
 						</tr>
 					</table>
-					
+					<% } %>
 				</div>	
 				
 			</div>

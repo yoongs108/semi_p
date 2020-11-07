@@ -2,7 +2,7 @@ package com.zipper.classMain.model.vo;
 
 import java.io.Serializable;
 
-public class teacher implements Serializable{
+public class Teacher implements Serializable{
 
 	private static final long serialVersionUID = 1404L;
 	/*
@@ -15,12 +15,12 @@ public class teacher implements Serializable{
 	private String history; // 강사 연혁
 	
 	// 2. 생성자
-	public teacher() {
+	public Teacher() {
 		super();
 	}
 	
 	// 모든 정보 조회용
-	public teacher(int tno, String tname, String history) {
+	public Teacher(int tno, String tname, String history) {
 		super();
 		this.tno = tno;
 		this.tname = tname;
@@ -28,7 +28,7 @@ public class teacher implements Serializable{
 	}
 	
 	// 클래스 스크랩페이지에서 강사이름 부르기용
-	public teacher(int tno, String tname) {
+	public Teacher(int tno, String tname) {
 		super();
 		this.tno = tno;
 		this.tname = tname;

@@ -2,7 +2,7 @@ package com.zipper.classMain.model.vo;
 
 import java.io.Serializable;
 
-public class kit implements Serializable{
+public class Kit implements Serializable{
 
 	private static final long serialVersionUID = 1500L;
 	/*
@@ -14,32 +14,38 @@ public class kit implements Serializable{
 	private String kname;	// 키트 이름
 	private String kdetail; // 구성품
 	private int count; 		// 재고
+	private int kprice; // 키트 가격
 	
 	//2. 생성자
-	public kit() {
+	public Kit() {
 		super();
 	}
 	
-	// 모든 정보 조회용
-	public kit(int kno, String kname, String kdetail, int count) {
+	public Kit(int kno, String kname, String kdetail, int count, int kprice) {
 		super();
 		this.kno = kno;
 		this.kname = kname;
 		this.kdetail = kdetail;
 		this.count = count;
+		this.kprice = kprice;
 	}
 
 	// 클래스 디테일에 넣을 키트 구성품
-	public kit(int kno, String kname, String kdetail) {
+
+	public Kit(int kno, String kname, String kdetail, int kprice) {
 		super();
 		this.kno = kno;
 		this.kname = kname;
 		this.kdetail = kdetail;
+		this.kprice = kprice;
 	}
+
+
 
 	@Override
 	public String toString() {
-		return "kit [kno=" + kno + ", kname=" + kname + ", kdetail=" + kdetail + ", count=" + count + "]";
+		return "Kit [kno=" + kno + ", kname=" + kname + ", kdetail=" + kdetail + ", count=" + count + ", kprice="
+				+ kprice + "]";
 	}
 
 	public int getKno() {
@@ -72,6 +78,14 @@ public class kit implements Serializable{
 
 	public void setCount(int count) {
 		this.count = count;
+	}
+
+	public int getKprice() {
+		return kprice;
+	}
+
+	public void setKprice(int kprice) {
+		this.kprice = kprice;
 	}
 	
 	
