@@ -134,4 +134,27 @@ public class ClassDAO {
 		return hmap;
 	}
 
+
+	// 윤진 작성
+
+	public HashMap<String, Object> IngClass(Connection con, int bno) {
+		HashMap<String, Object> hmap = new HashMap<>();
+		ArrayList<Attachment> list = new ArrayList<>();		
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectClass");
+		
+		try {
+			pstmt = con.prepareStatement(sql);
+			
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+
 }

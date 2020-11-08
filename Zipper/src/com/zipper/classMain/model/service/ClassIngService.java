@@ -19,10 +19,11 @@ public class ClassIngService {
 		
 		con = getConnection();
 		
-		ArrayList<Class> list = cDAO.ClassList(con);
+		HashMap<String,Object> hmap = cDAO.IngClass(con, 0);
 		
 		close(con);
 		
-		return list;
+		return null;
+		
 	}
 }

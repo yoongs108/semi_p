@@ -14,38 +14,31 @@ public class Kit implements Serializable{
 	private String kname;	// 키트 이름
 	private String kdetail; // 구성품
 	private int count; 		// 재고
-	private int kprice; // 키트 가격
 	
 	//2. 생성자
 	public Kit() {
 		super();
 	}
 	
-	public Kit(int kno, String kname, String kdetail, int count, int kprice) {
+	public Kit(int kno, String kname, String kdetail, int count) {
 		super();
 		this.kno = kno;
 		this.kname = kname;
 		this.kdetail = kdetail;
 		this.count = count;
-		this.kprice = kprice;
 	}
 
 	// 클래스 디테일에 넣을 키트 구성품
-
-	public Kit(int kno, String kname, String kdetail, int kprice) {
+	public Kit(int kno, String kname, String kdetail) {
 		super();
 		this.kno = kno;
 		this.kname = kname;
 		this.kdetail = kdetail;
-		this.kprice = kprice;
 	}
-
-
 
 	@Override
 	public String toString() {
-		return "Kit [kno=" + kno + ", kname=" + kname + ", kdetail=" + kdetail + ", count=" + count + ", kprice="
-				+ kprice + "]";
+		return "Kit [kno=" + kno + ", kname=" + kname + ", kdetail=" + kdetail + ", count=" + count;
 	}
 
 	public int getKno() {
@@ -79,15 +72,6 @@ public class Kit implements Serializable{
 	public void setCount(int count) {
 		this.count = count;
 	}
-
-	public int getKprice() {
-		return kprice;
-	}
-
-	public void setKprice(int kprice) {
-		this.kprice = kprice;
-	}
-	
 	
 	
 }
