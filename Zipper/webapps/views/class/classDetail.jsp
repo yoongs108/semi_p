@@ -1,9 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="com.zipper.classMain.model.vo.*, java.util.*" %>
+    pageEncoding="UTF-8" import="com.zipper.classMain.model.vo.*, com.zipper.thumb.model.vo.*, com.zipper.board.model.vo.*, java.util.*" %>
     
 <% 	ArrayList<ClassList> cList = (ArrayList<ClassList>)request.getAttribute("cList");
-	ArrayList<VIDEO> vList = (ArrayList<VIDEO>)request.getAttribute("kList");
+	ArrayList<Attachment> aList = (ArrayList<Attachment>)request.getAttribute("aList");
 	ArrayList<Kit> kList = (ArrayList<Kit>)request.getAttribute("kList");
+	ArrayList<Board> bList = (ArrayList<Board>)request.getAttribute("bList");
+
 %>
 <!DOCTYPE html>
 <html>
@@ -119,20 +121,21 @@
 			<img src="<%= request.getContextPath() %>/resources/images/common/backButton.png" 
 				alt="class1" id="back" onclick="goClass()"> 
 		</div>
-		<% for(ClassList classList : cList) { %>
+ 		<% for(ClassList classList : cList) { %>
 		<div class="page_wrap">
 			<div class="left_page">
 			
 				<div><img src="../../resources/images/class/carouselImg/h.jpg" alt="" width="650px" height="500px"/></div>
+				<% for(Board board : bList) { %>
+				<h3><%= board.getBtitle() %></h3>
+				<% } %>
 				
-				<h3><%= classList.getCname() %></h3>
 				<div>
 			 		<button style="color : white;" onclick="fnMove(1)">클래스 소개</button>
 			 		<button style="color : white;" onclick="fnMove(2)">커리큘럼</button>
 			 		<button style="color : white;" onclick="fnMove(3)">키트 소개</button>
 			 		<button style="color : white;" onclick="fnMove(4)">환불 정책</button>
 		 		</div>
-		 		
 		 		
 		 	 	<div class="tabcontent_wrap">
 			 		<div class='tabcontent1'>
@@ -168,10 +171,9 @@
 				<h3><%= classList.getCname() %></h3> <br /><br />
 				<table>
 					<tr>
-						<% for(VIDEO video : vList) { %>
+						
 						<td width="200px">클래스 </td>
-						<td><%= video.getVprice() %> 원</td>
-						<% } %>
+						<td><%= classList.getPrice() %> 원</td>
 					</tr>
 					
 					<tr>
@@ -179,12 +181,12 @@
 							<div class="ac">
 					        	키트
 					        	<img src="../../resources/images/common/downArrow.png" width="15px" height="7.5px" class="accordion" onclick="accordion_hide(this)"/>
-					        	<p class="accordion_hide"></p>
+								<% for(Kit kit : kList) { %>
+					        	<p class="accordion_hide"> <%= kit.getKdetail() %></p>
+								<% } %>
 					    	</div>
 						</td>
-						<% for(Kit kit : kList) { %>
-						<td style="vertical-align:top"><%= kit.getKprice() %> 원</td>
-						<% } %>
+						<td style="vertical-align:top"> 포함</td>
 					</tr>
 				</table>
 				
@@ -214,7 +216,7 @@
 
 	<script>
 		function goPayment() {
-			location.href = "<%= request.getContextPath() %>/payment.pm";
+			location.href = "<%= request.getContextPath() %>/beforePayment.pm?bno=<%= classList.getBno() %>";
 		};
 		
 		function goClass() {

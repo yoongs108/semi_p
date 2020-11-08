@@ -1,6 +1,8 @@
 package com.zipper.payment.controller;
 
 import java.io.IOException;
+import java.util.HashMap;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -8,18 +10,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.zipper.payment.model.service.PaymentService;
+import com.zipper.payment.model.vo.Payment;
 
 /**
  * Servlet implementation class PaymentForm
  */
-@WebServlet("/payment.pm")
-public class Payment extends HttpServlet {
+@WebServlet("/beforePayment.pm")
+public class BeforePayment extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Payment() {
+    public BeforePayment() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -28,23 +31,30 @@ public class Payment extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		int bno = Integer.parseInt(request.getParameter("bno"));
 		
-		PaymentService ps = new PaymentService();
-		
-		int result = ps.selectPayment();
+		HashMap<String, Object> classList
+        = new PaymentService().beforePayment(bno);
 		
 		String page = "";
 		
-		if(result > 0) {
-			// 결제번호 조회 성공
-			request.setAttribute("pay", result);
-			page = "views/payment/payment.jsp";
-		} else {
-			request.setAttribute("error-msg", "sdfasf");
-			page = "views/common/errorPage.jsp";
-			
-		}
-		request.getRequestDispatcher(page).forward(request, response);
+	    if(classList != null) {
+	         request.setAttribute("cList", classList.get("classList"));
+	         request.setAttribute("aList", classList.get("attachment"));
+	         request.setAttribute("kList", classList.get("kit"));
+	         request.setAttribute("bList", classList.get("board"));
+	     
+	         page = "views/payment/payment.jsp";
+	      } else {
+	         request.setAttribute("exception", new Exception("결제 정보 불러오기 실패"));
+	         request.setAttribute("error-msg", "불러오기 실패!!");
+	         
+	         page = "views/common/errorPage.jsp";
+	      }
+	      
+	      request.getRequestDispatcher(page).forward(request, response);
+	   
+	
 		
 	}
 

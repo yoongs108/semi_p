@@ -4,8 +4,8 @@
 	pageEncoding="UTF-8"%>
 	    <%@ page import="java.util.*, com.zipper.classMain.model.vo.*, com.zipper.thumb.model.vo.* " %>
     <%
-    ArrayList<ClassList> list = (ArrayList<ClassList>)request.getAttribute("classList");
-    ArrayList<Attachment> attList = (ArrayList<Attachment>)request.getAttribute("attachList");
+    ArrayList<ClassList> cList = (ArrayList<ClassList>)request.getAttribute("cList");
+    ArrayList<Attachment> aList = (ArrayList<Attachment>)request.getAttribute("aList");
     %>
 <!DOCTYPE html>
 <html>
@@ -205,12 +205,16 @@
 	<div class="classMain_classBox">
 		
 		<div class="class_imgBox_wrap" >
-		<% for(ClassList classList : list) { %>
+		<% for(ClassList classList : cList) { %>
 			<div class="class_imgBox" >
 				<div>
 					<input type="hidden" name="bno" value="<%= classList.getBno()  %>"/> 
-					<img class="class_img" src="<%=request.getContextPath()%>/resources/images/class/classUploadFiles/<%= %>"
+					<% for(Attachment attachment : aList) { %>
+					
+					<img class="class_img" src="<%=request.getContextPath()%>/resources/images/class/classUploadFiles/<%=/*  attachment.get(0).getoroginname */ %>"
 					width="300px" height="200px"/>
+					<% } %>
+					
 				</div>
 				<p>
 				제목 <%= classList.getBno() + " " + classList.getCname() %> <br />
@@ -230,7 +234,7 @@
 		$(function () {
 			$('.class_imgBox').click(function () {
 				var bno = $(this).find('input').val();
-				location.href ='<%= request.getContextPath()%>/selectOne.cd?bno=' + bno;
+				location.href ='<%= request.getContextPath()%>/selectClass.sc?bno=' + bno;
 			})
 		})
 		

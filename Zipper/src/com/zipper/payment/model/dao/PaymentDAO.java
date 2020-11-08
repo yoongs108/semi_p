@@ -1,6 +1,6 @@
 package com.zipper.payment.model.dao;
 
-import static com.zipper.common.JDBCTemplate.close;
+import static com.zipper.common.JDBCTemplate.*;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -10,6 +10,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Properties;
+
+import com.zipper.common.exception.MemberException;
+import com.zipper.common.exception.PaymentException;
+import com.zipper.payment.model.vo.Payment;
 
 public class PaymentDAO {
 
@@ -35,7 +39,7 @@ public class PaymentDAO {
 		}
 	}
 
-	public int selectPayment(Connection con) {
+	public int beforePayment(Connection con) {
 		
 		int result = 0;	// 결과를 담을 변
 		
@@ -43,7 +47,7 @@ public class PaymentDAO {
 		
 		ResultSet rset = null;	// sql 실행 결과를 담을 ResultSet
 		
-		String sql = prop.getProperty("selectPayment");	// "selectPayment" sql 연결
+		String sql = prop.getProperty("beforePayment");	// "selectPayment" sql 연결
 		
 		System.out.println(sql);
 		
@@ -69,5 +73,36 @@ public class PaymentDAO {
 		
 		return result;
 	}
+
+	public int insertPayment(Connection con, Payment pm) throws PaymentException {
+		
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("insertPayment");
+		
+		try {
+			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setString(1, pm.getPno());
+			pstmt.setDate(2, pm.getPdate());
+			pstmt.setInt(3, pm.getTotalPrice());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new PaymentException("[DAO] : " + e.getMessage());
+			
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
+
+
+	
 
 }
