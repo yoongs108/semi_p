@@ -18,7 +18,7 @@ import com.zipper.classMain.model.vo.ClassList;
 /**
  * Servlet implementation class ClassDetail
  */
-@WebServlet("/selectOne.cd")
+@WebServlet("/selectClass.sc")
 public class ClassSelectOne extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -43,8 +43,10 @@ public class ClassSelectOne extends HttpServlet {
 	    String page = "";
 	    
 	    if(classList != null) {
-	         request.setAttribute("classList", classList.get("classList"));
-	         request.setAttribute("attachList", classList.get("attachment"));
+	         request.setAttribute("cList", classList.get("classList"));
+	         request.setAttribute("aList", classList.get("attachment"));
+	         request.setAttribute("kList", classList.get("kit"));
+	         request.setAttribute("bList", classList.get("board"));
 	     
 	         page = "views/class/classDetail.jsp";
 	      } else {

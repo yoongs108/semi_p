@@ -50,7 +50,7 @@
 			<table>
 				<tr>
 					<td>클래스 명</td>
-					<td style="text-align:right;"><%= request.getParameter("cname") %></td>
+					<td style="text-align:right;"><%= request.getParameter("cName") %></td>
 				</tr>
 				<tr>
 					<td>총 결제 금액</td>

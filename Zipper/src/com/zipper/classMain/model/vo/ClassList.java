@@ -10,7 +10,7 @@ public class ClassList implements Serializable {
 	private int cno;
 	private int vno;
 	private int kno;
-	private int bno;
+	private int bno; 
 	private	String cname;
 	private String cintro; // 소개
 	private String course; // 커리큘럼

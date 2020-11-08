@@ -15,6 +15,7 @@ import com.zipper.thumb.model.vo.Attachment;
 import com.zipper.board.model.vo.Board;
 import com.zipper.classMain.model.vo.ClassList;
 import com.zipper.classMain.model.vo.Kit;
+import com.zipper.classMain.model.vo.Video;
 
 import static com.zipper.common.JDBCTemplate.*;
 
@@ -43,15 +44,15 @@ public class ClassDAO {
 	}
 	
 
-
+	// 공주
 	public HashMap<String, Object> selectOne(Connection con, int bno) {
 		
 		HashMap<String, Object> hmap = new HashMap<>();
-		ArrayList<Attachment> aList = new ArrayList<>();
-		ArrayList<Kit> kList = new ArrayList<>();
-		ArrayList<Board> bList = new ArrayList<>();
+		ArrayList<Attachment> attachment = new ArrayList<>();
+		ArrayList<Kit> kit = new ArrayList<>();
+		ArrayList<Board> board = new ArrayList<>();
 		
-		ClassList cl = null;
+		ClassList classList = null;
 		
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
@@ -67,20 +68,19 @@ public class ClassDAO {
 			
 			while (rset.next()) {
 				
-				cl = new ClassList();
+				classList = new ClassList();
 				
-				cl.setCno(bno);
-				cl.setVno(rset.getInt("vno"));
-				cl.setKno(rset.getInt("kno"));
-				cl.setBno(rset.getInt("bno"));
-				cl.setCname(rset.getString("cname"));
-				cl.setCintro(rset.getString("cintro"));
-				cl.setCourse(rset.getString("course"));
-				cl.setPrice(rset.getInt("price"));
+				classList.setCno(bno);
+				classList.setVno(rset.getInt("vno"));
+				classList.setKno(rset.getInt("kno"));
+				classList.setBno(rset.getInt("bno"));
+				classList.setCname(rset.getString("cname"));
+				classList.setCintro(rset.getString("cintro"));
+				classList.setCourse(rset.getString("course"));
+				classList.setPrice(rset.getInt("price"));
 
 				
 				Attachment at = new Attachment();
-				
 				at.setFno( rset.getInt("fno"));
 				at.setBno( bno );
 				at.setOriginname( rset.getString("originname"));
@@ -89,14 +89,14 @@ public class ClassDAO {
 				at.setUploaddate( rset.getDate("uploaddate"));
 				at.setFlevel(     rset.getInt("flevel"));
 				
-				aList.add(at);
+				attachment.add(at);
 				
 				Kit k = new Kit();
 				k.setKno(rset.getInt("kno"));
 				k.setKname(rset.getString("kdetail"));
 				k.setCount(rset.getInt("count"));
 				
-				kList.add(k);
+				kit.add(k);
 				
 				
 				Board b = new Board();
@@ -112,15 +112,13 @@ public class ClassDAO {
 				b.setBwriter(rset.getString("bwriter"));
 				b.setBoardfile(rset.getString("boardfile"));
 
-				bList.add(b);
+				board.add(b);			
 				
 			}
-		hmap.put("classList", cl);
-		hmap.put("attachment", aList);
-		hmap.put("kit", kList);
-		hmap.put("board", bList);
-
-		
+		hmap.put("classList", classList);
+		hmap.put("attachment", attachment);
+		hmap.put("kit", kit);
+		hmap.put("board", board);	
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -128,12 +126,10 @@ public class ClassDAO {
 		} finally {
 			close(rset);
 			close(pstmt);
-		}
-		
+		}	
 
 		return hmap;
 	}
-
 
 	// 윤진 작성
 
