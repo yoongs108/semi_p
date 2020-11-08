@@ -4,11 +4,12 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>zip pop</title>
+<script src="<%= request.getContextPath() %>/resources/js/jquery-3.5.1.min.js"></script>
+<title>Zippop</title>
 </head>
 <body>
 	<%@ include file="/views/common/header.jsp" %>
-	<h1>zip pop page</h1>
+	<h1>Zip pop page</h1>
 	<%@ include file="/views/common/footer.jsp" %>
 </body>
 </html>
