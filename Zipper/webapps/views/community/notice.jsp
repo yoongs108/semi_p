@@ -2,6 +2,9 @@
     pageEncoding="UTF-8" import="com.zipper.board.model.vo.*, java.util.*"%>
 <%
 	ArrayList<Board> list = (ArrayList<Board>) request.getAttribute("list");
+	System.out.println("공지사항페잊왓따:"+list);
+	// 현재 로그인 정보 가져오기 
+	Member mlogin = (Member)session.getAttribute("member");
 %>
 <!DOCTYPE html>
 <html>
@@ -49,6 +52,7 @@
 		color : black;
 		margin-right : 5px;
 	}
+	
 </style>
 </head>
 <body id="body">
@@ -63,47 +67,6 @@
  	<form action>
  		<table id="listArea"">
  		
- 		<tr>
-				<th><a href="views/community/boardDetail.jsp" > > </a></th>
-				<td class="titleName" width="80%">공지사항</td>
-				<td class="date" width="20%"> 공지사항 작성일 </td>
-		</tr>
-		<tr>
-				<th><a href="views/community/boardDetail.jsp" > > </a></th>
-				<td class="titleName" width="80%">공지사항</td>
-				<td class="date" width="20%"> 공지사항 작성일 </td>
-		</tr>
-		<tr>
-				<th><a href="views/community/boardDetail.jsp" > > </a></th>
-				<td class="titleName" width="80%">공지사항</td>
-				<td class="date" width="20%"> 공지사항 작성일 </td>
-		</tr>
-		<tr>
-				<th><a href="views/community/boardDetail.jsp" > > </a></th>
-				<td class="titleName" width="80%">공지사항</td>
-				<td class="date" width="20%"> 공지사항 작성일 </td>
-		</tr>
-		<tr>
-				<th><a href="views/community/boardDetail.jsp" > > </a></th>
-				<td class="titleName" width="80%">공지사항</td>
-				<td class="date" width="20%"> 공지사항 작성일 </td>
-		</tr>
-		<tr>
-				<th><a href="views/community/boardDetail.jsp" > > </a></th>
-				<td class="titleName" width="80%">공지사항</td>
-				<td class="date" width="20%"> 공지사항 작성일 </td>
-		</tr>
-		<tr>
-				<th><a href="views/community/boardDetail.jsp" > > </a></th>
-				<td class="titleName" width="80%">공지사항</td>
-				<td class="date" width="20%"> 공지사항 작성일 </td>
-		</tr>
-		<tr>
-				<th><a href="views/community/boardDetail.jsp" > > </a></th>
-				<td class="titleName" width="80%">공지사항</td>
-				<td class="date" width="20%"> 공지사항 작성일 </td>
-		</tr>
-
 		<!-- 공지사항 리스트  -->
  			<% if(list.size()==0){ %>
  				<tr>
@@ -116,8 +79,10 @@
 				<tr>
 					<input type="hidden" value="<%=b.getBno()%>">
 					<input type="hidden" value="<%=b.getBtype()%>">
-					<th><a href="views/community/boardDetail.jsp" > > </a></th>
-					<td class="titleName" width="80%"><%=b.getBtitle()%></td>
+					<th><a href="<%=request.getContextPath()%>/selectOne.no?bno=<%=b.getBno()%>"> > </a></th>
+					<td class="titleName" width="80%">
+						<a href="<%=request.getContextPath()%>/selectOne.no?bno=<%=b.getBno()%>"> <%=b.getBtitle()%></a>
+					</td>
 					<td name="date" width="20%"><%=b.getBdate()%></td>
 				</tr>
 			<%
@@ -128,8 +93,7 @@
  		</table>
  	</form>
  	</div>
-
- 	<%-- 
+	<%-- 
 			<!-- 작성자 admin으로 로그인할 때만 확인 되도록 조건문 넣어줌 -->
  		<% if(m != null && m.getUserId().equals("admin")){ %> 
 				<button onclick="location.href='views/community/boardInsertForm.jsp'">작성하기</button>

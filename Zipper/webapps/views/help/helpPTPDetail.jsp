@@ -33,7 +33,6 @@
 	  margin-left : 60px;
    }
    
-   
    #date{
    	  float : right;
    	  margin-right : 60px;
