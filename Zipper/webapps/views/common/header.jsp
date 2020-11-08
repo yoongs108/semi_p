@@ -63,7 +63,7 @@
             left: 0;
             height : 100%;
             width : 0;
-            /* background : lightgreen; *//*  */
+            background : white;
             overflow: hidden;
             transition : width 0.65s;
             z-index: 5000;
@@ -162,7 +162,7 @@
 	            		<td colspan="2">
 			                <a href="<%= request.getContextPath() %>/views/community/zippop.jsp"><h4>ZIP POP</h4></a> <br />
 			                <a href="<%= request.getContextPath() %>/views/community/guide.jsp"><h4>GUIDE</h4></a> <br />
-			                <a href="<%= request.getContextPath() %>/views/community/board.jsp"><h4>NOTICE</h4></a>
+			                <a href="<%= request.getContextPath() %>/views/community/selectList.no"><h4>NOTICE</h4></a>
 	            		</td>
 	            	</tr>
 	            	<tr>
