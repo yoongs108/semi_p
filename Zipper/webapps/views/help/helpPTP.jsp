@@ -1,10 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-    <%-- 
+    pageEncoding="UTF-8" import="com.zipper.question.model.vo.*, java.util.*"%>
+    
 <%
 	ArrayList<Question> list = (ArrayList<Question>) request.getAttribute("list");
 %>
---%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -68,76 +68,45 @@
  	<div class="tableArea">
  	<form action>
  		<table id="listArea">
- 		<!-- tr>th>td*8 : DB구축 전에 임시용 -->
- 			<tr>
- 				<th><input type="checkbox" class="check"> </th>
- 					<td class="inquireName" width="80%"> 문의제목 </td>
- 					<td class="date" width="20%"> 문의 작성일 </td>
- 			</tr>
- 			<tr>
- 				<th width="0"><input type="checkbox" class="check"> </th>
- 					<td class="inquireName" > 문의제목 </td>
- 					<td class="date" > 문의 작성일 </td>
- 			</tr>
- 			<tr>
- 				<th width="0"><input type="checkbox" class="check"> </th>
- 					<td class="inquireName" > 문의제목 </td>
- 					<td class="date" > 문의 작성일 </td>
- 			</tr>
- 			<tr>
- 				<th width="0"><input type="checkbox" name="check"> </th>
- 					<td class="inquireName"> 문의제목 </td>
- 					<td class="date" > 문의 작성일 </td>
- 			</tr>
- 			<tr>
- 				<th width="0"><input type="checkbox" name="check"> </th>
- 					<td class="inquireName"> 문의제목 </td>
- 					<td class="date" > 문의 작성일 </td>
- 			</tr>
- 			<tr>
- 				<th width="0"><input type="checkbox" name="check"> </th>
- 					<td class="inquireName"> 문의제목 </td>
- 					<td class="date" > 문의 작성일 </td>
- 			</tr>
- 			<tr>
- 				<th width="0"><input type="checkbox" name="check"> </th>
- 					<td class="inquireName" > 문의제목 </td>
- 					<td class="date" > 문의 작성일 </td>
- 			</tr>
- 			<tr>
- 				<th width="0"><input type="checkbox" name="check"> </th>
- 					<td class="inquireName"> 문의제목 </td>
- 					<td class="date" > 문의 작성일 </td>
- 			</tr>
- <%-- 
+ 		
+ 		<!-- 게시글 無 -->
  			<% if(list.size()==0){ %>
  				<tr>
  					<td colspan="3"> 글이 존재하지 않습니다. </td>
  				</tr>
+ 				
+ 		<!-- 게시글 有 -->
  			<%
  				}else {
-					for (Question c : list) {
+					for (Question c : list) { //** 향상된 for문 -> 배열을 쉽게 조회할 때 쓰는 구문 
 				%>
 				<tr>
-					<input type="hidden" value="<%=b.getQno()%>">
-					<input type="hidden" value="<%=b.getMno()%>">
+					<input type="hidden" value="<%=c.getQno()%>">
+					<input type="hidden" value="<%=c.getMno()%>">
+					
+					<%-- >d=, title 클릭 시 상세페이지로 넘어감 --%>
 					<th><a href="views/community/helpPTPDetail.jsp" > > </a></th>
-					<td class="inquireName" width="80%"><%=b.getQtitle()%></td>
-					<td name="date" width="20%"><%=b.getQdate()%></td>
+					<td class="inquireName" width="80%"> 
+						<a href=""> <%=c.getQtitle()%></a> 
+					</td>
+					
+					<td name="date" width="20%"><%=c.getQdate()%></td>
 				</tr>
 			<%
 					}
 				}
 			%>
---%>
+
  		</table>
  	</form>
  	</div>
  	<div>
+ 	<%-- 
  		<% if(m != null){ %> 
 				<button onclick="location.href='views/community/noticeInsertForm.jsp'">작성하기</button>
 			<% } %>
 			<!-- 작성자 admin으로 로그인할 때만 확인 되도록 조건문 넣어줌 -->
+	--%>
  	</div>
  	 <!-- Pagination -->
   	<div class="w3-center w3-padding-32">
