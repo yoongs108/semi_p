@@ -115,7 +115,7 @@
 	
 	/* 하단부 이미지 출력 CSS */
 	.thumbnailArea {
-		width:760px;
+		width:95%;
 		height:auto;
 		margin-left:auto;
 		margin-right:auto;

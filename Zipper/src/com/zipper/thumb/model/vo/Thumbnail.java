@@ -27,29 +27,34 @@ public class Thumbnail extends Board implements Serializable{
 	
 
 	public Thumbnail(int bno, int btype, int mno, String btitle, String bcontent, int bview, Date bdate, String bstatus,
-			String userId, String bwriter, String boardfile) {
-		super(bno, btype, mno, btitle, bcontent, bview, bdate, bstatus, userId, bwriter, boardfile);
+			String userId, String bwriter, String boardfile, String profile) {
+		super(bno, btype, mno, btitle, bcontent, bview, bdate, bstatus, userId, bwriter, boardfile, profile);
 		// TODO Auto-generated constructor stub
 	}
 
 
 
 	public Thumbnail(int bno, int btype, int mno, String btitle, String bcontent, int bview, Date bdate,
-			String bstatus) {
-		super(bno, btype, mno, btitle, bcontent, bview, bdate, bstatus);
+			String bstatus, String profile) {
+		super(bno, btype, mno, btitle, bcontent, bview, bdate, bstatus, profile);
 		// TODO Auto-generated constructor stub
+	}
+	
+	public Thumbnail(int bno, String btitle, String bcontent, int bview, String boardfile, String profile) {
+		super(bno, btitle, bcontent, bview, boardfile, profile);
+		
 	}
 
 
 
 	@Override
 	public String toString() {
-		return "Thumbnail [attachment=" + attachment + ", getAttachment()=" + getAttachment() + ", toString()="
-				+ super.toString() + ", getBno()=" + getBno() + ", getBtype()=" + getBtype() + ", getBtitle()="
-				+ getBtitle() + ", getBcontent()=" + getBcontent() + ", getBwriter()=" + getBwriter() + ", getUserId()="
-				+ getUserId() + ", getBcount()=" + getBview() + ", getBoardfile()=" + getBoardfile() + ", getBdate()="
-				+ getBdate() + ", getStatus()=" + getBstatus() + ", getClass()=" + getClass() + ", hashCode()="
-				+ hashCode() + "]";
+		return "Thumbnail [attachment=" + attachment + ", toString()=" + super.toString() + ", getBno()=" + getBno()
+				+ ", getBtype()=" + getBtype() + ", getMno()=" + getMno() + ", getBtitle()=" + getBtitle()
+				+ ", getBcontent()=" + getBcontent() + ", getBview()=" + getBview() + ", getBdate()=" + getBdate()
+				+ ", getBstatus()=" + getBstatus() + ", getUserId()=" + getUserId() + ", getBwriter()=" + getBwriter()
+				+ ", getBoardfile()=" + getBoardfile() + ", getClass()=" + getClass()
+				+ ", hashCode()=" + hashCode() + "]";
 	}
 
 	public ArrayList<Attachment> getAttachment() {

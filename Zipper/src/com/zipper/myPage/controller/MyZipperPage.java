@@ -36,7 +36,7 @@ public class MyZipperPage extends HttpServlet {
 		
 		String page ="";
 		
-		/*
+		
 		if (list != null) {
 			request.setAttribute("list", list);
 			page = "views/myPage/myZippop.jsp";
@@ -44,9 +44,9 @@ public class MyZipperPage extends HttpServlet {
 			request.setAttribute("error-msg", "사진게시글 목록 조회 실패");
 			page = "views/common/errorPage.jsp";
 		}
-		*/
 		
-		request.getRequestDispatcher("views/myPage/myZippop.jsp").forward(request, response);
+		
+		request.getRequestDispatcher(page).forward(request, response);
 		
 	}
 

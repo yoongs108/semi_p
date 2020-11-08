@@ -75,11 +75,11 @@
 			<h3>커뮤니티</h3>
 			<br />
 			<br />
-			<a onclick="goMyZip()"><%-- <%= m.getMnick() %> --%>.ZIP</a>
+			<a onclick="goMyZip()"><%= m.getMnick() %>.ZIP</a>
 			<br /> <br /> 
 			<a onclick="goScrapZip()">SCRAP.ZIP</a>
 			<br /><br />
-			<a onclick="goClassList()"><%-- <%= m.getMnick() %> --%>.CLASS</a>
+			<a onclick="goClassList()"><%= m.getMnick() %>.CLASS</a>
 			<br /> <br /> 
 			<a onclick="goClassScrap()">SCRAP.CLASS</a> 
 			
@@ -101,7 +101,7 @@
 			<br />
 			<br />
 			<br />
-			<br /> 
+			<br />
 			<a onclick="goManToMan()">1 : 1 문의 내역</a>
 		</div>
 
@@ -119,7 +119,7 @@
 			location.href = '<%= request.getContextPath() %>/#';
 		}
 		function goMyZip() { 		//내 zip페이지
-			location.href = '<%= request.getContextPath() %>/views/myPage/myZippop.jsp';
+			location.href = '<%= request.getContextPath() %>/selectList.tn';
 		}
 		function goPayment() { 		//결제내역 수정필요
 			location.href = '<%= request.getContextPath() %>/#';
