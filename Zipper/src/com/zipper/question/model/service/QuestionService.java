@@ -25,4 +25,15 @@ public ArrayList<Question> selectList() {
 		
 		return result;
 	}
+
+public Question selectOne(int qno) {
+	con = getConnection();
+	
+	Question qs = qDAO.selectOne(con, qno);
+	
+	close(con);
+	
+	return qs;
+}
+
 }

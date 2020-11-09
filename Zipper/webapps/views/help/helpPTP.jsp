@@ -12,6 +12,10 @@
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <title>1:1 문의</title>
 <style>
+   h1{
+   	  padding-left : 30px;
+   }
+   
 	#back{
       position : absolute;
       top : 100px;
@@ -56,10 +60,10 @@
 <body id="body">
 <section>
  	<%@ include file="/views/common/header.jsp" %>
- 	<h1>1:1문의내역</h1>
+ 	<h1>1:1 문의내역</h1>
  	<!-- 뒤로가기 -->
 		<img src="<%= request.getContextPath() %>/resources/images/common/backButton.png" 
-			alt="notice" id="back" onclick="goMyPageMain()"> 
+			alt="notice" id="back" onclick="history.go(-1)"> 
 		&nbsp;&nbsp;&nbsp;
 
 	<hr style="width: 100%; border: solid 0.3px black;">
@@ -85,11 +89,10 @@
 					<input type="hidden" value="<%=c.getMno()%>">
 					
 					<%-- >d=, title 클릭 시 상세페이지로 넘어감 --%>
-					<th><a href="views/community/helpPTPDetail.jsp" > > </a></th>
-					<td class="inquireName" width="80%"> 
-						<a href=""> <%=c.getQtitle()%></a> 
-					</td>
-					
+					<th>
+						<input type="checkbox" id="check" name="check">
+					</th>
+					<td class="inquireName" width="80%"> <%=c.getQtitle()%></a> </td>
 					<td name="date" width="20%"><%=c.getQdate()%></td>
 				</tr>
 			<%
@@ -99,15 +102,7 @@
 
  		</table>
  	</form>
- 	</div>
- 	<div>
- 	<%-- 
- 		<% if(m != null){ %> 
-				<button onclick="location.href='views/community/noticeInsertForm.jsp'">작성하기</button>
-			<% } %>
-			<!-- 작성자 admin으로 로그인할 때만 확인 되도록 조건문 넣어줌 -->
-	--%>
- 	</div>
+
  	 <!-- Pagination -->
   	<div class="w3-center w3-padding-32">
     <div class="w3-bar">
@@ -118,14 +113,24 @@
       <a href="#" class="w3-bar-item w3-button w3-hover-black">4</a>
       <a href="#" class="w3-bar-item w3-button w3-hover-black">»</a>
     </div>
+    
  	<script>
-	$(function(){
-		$('.inquireName').mouseenter(function(){
-			$(this).parent().css({"background" : "#87CEFA", "opacity" : "1.0"});
-
+ 	$(function(){
+		$('tr').mouseenter(function(){
+			$(this).css({"background" : "#87CEFA", "opacity" : "1.0"});
 		}).mouseout(function(){
-			$(this).parent().css({"background" : "none"});
+			$(this).css({"background" : "none"});
+		}).click(function(){
+			var qno = $(this).find('input').eq(0).val(); // tr안에 있는 input태그의 hidden을 의미
+			console.log("qno"+qno);
+			location.href = "<%= request.getContextPath() %>/selectOne.qo?qno="+qno;
 		});
+		
+	if($("#check").prop("checked")){
+		$("#check").val('Y');
+	}else{
+		$("#check").val('N');
+	}
 	});
  	</script>
  	</section>

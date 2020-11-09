@@ -35,7 +35,9 @@
     #title{
    	  float : left;
    	  margin-left : 60px;
-   	  font-weight : 500;
+   	  font-weight : bold;
+   	  text-decoration: underline;
+   	  
    }
    
     #date{
@@ -49,7 +51,7 @@
 		width : 80%;
 		height : 500px;
 		margin-left : 100px;
-		
+		font-size : 15px;
 	}
 	
    	  
@@ -61,7 +63,7 @@
  	<h1> NOTICE </h1>
  	<!-- 뒤로가기 -->
 		<img src="<%= request.getContextPath() %>/resources/images/common/backButton.png" 
-			alt="notice" id="back" onclick="goMyPageMain()"> 
+			alt="notice" id="back" onclick="location.href = '<%= request.getContextPath() %>/selectList.no?'"> 
 		&nbsp;&nbsp;&nbsp;
 		
 	<hr style="width: 100%; border: solid 0.3px black;">

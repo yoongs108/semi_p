@@ -13,19 +13,8 @@
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <title>공지사항</title>
 <style>
-	#back{
-      position : absolute;
-      top : 100px;
-      left : 950px;
-      height : 80px;
-      width: 80px;
-      position:relative;
-      top:-210%;
-   }
-   
-   #back:hover{
-      cursor: pointer;
-      transform: scale(1.2);
+   h1{
+   	  padding-left : 30px;
    }
    
    section {
@@ -37,29 +26,41 @@
 	#listArea{
 		width : 100%;
 		height : 100%;
-		margin : 30px 30px;
+		margin : 50px 50px;
 	}
 	
 	table tr{
 		height:40px; 
+		font-size : 17px;
 	}
 	
 	.date{
 		text-align : center;
 	}
 
-	th a{
+	th {
 		color : black;
-		margin-right : 5px;
+		padding-right :10px;
+		width: 2%;
 	}
 	
+	#adminwrite{
+		position : relative;
+		float: right;
+		top : -40px;
+	}
 </style>
 </head>
 <body id="body">
 <section> 
  	<%@ include file="/views/common/header.jsp" %>
  	<h1> NOTICE </h1>
-		
+ 	<div>
+			<!-- 회원등급이 admin으로 로그인할 때만 확인 되도록 조건문 넣어줌 -->
+ 		<% if(m != null && m.getMgrd().equals("A")){ %> 
+				<button id="adminwrite" onclick="#"> 작성하기 </button>
+		<% } %>
+ 	</div>
 	<hr style="width: 100%; border: solid 0.3px black;">
  	<br>
  	
@@ -79,10 +80,8 @@
 				<tr>
 					<input type="hidden" value="<%=b.getBno()%>">
 					<input type="hidden" value="<%=b.getBtype()%>">
-					<th><a href="<%=request.getContextPath()%>/selectOne.no?bno=<%=b.getBno()%>"> > </a></th>
-					<td class="titleName" width="80%">
-						<a href="<%=request.getContextPath()%>/selectOne.no?bno=<%=b.getBno()%>"> <%=b.getBtitle()%></a>
-					</td>
+					<th> > </th>
+					<td class="titleName" name="title" width="80%"> <%=b.getBtitle()%></td>
 					<td name="date" width="20%"><%=b.getBdate()%></td>
 				</tr>
 			<%
@@ -92,14 +91,8 @@
 
  		</table>
  	</form>
- 	</div>
-	<%-- 
-			<!-- 작성자 admin으로 로그인할 때만 확인 되도록 조건문 넣어줌 -->
- 		<% if(m != null && m.getUserId().equals("admin")){ %> 
-				<button onclick="location.href='views/community/boardInsertForm.jsp'">작성하기</button>
-		<% } %>
- 	</div>
- 	--%>
+ 	
+ 
  	
  	   <!-- Pagination -->
   	<div class="w3-center w3-padding-32">
@@ -113,12 +106,17 @@
     </div>
     
  	<script>
+ 	// 게시글 선택 시 주는 효과 + 상세 페이지 연결 
  	$(function(){
-		$('.titleName').mouseenter(function(){
-			$(this).parent().css({"background" : "#87CEFA", "opacity" : "1.0"});
+		$('tr').mouseenter(function(){
+			$(this).css({"background" : "#87CEFA", "opacity" : "1.0"});
 
 		}).mouseout(function(){
-			$(this).parent().css({"background" : "none"});
+			$(this).css({"background" : "none"});
+		}).click(function(){
+			var bno = $(this).find('input').eq(0).val(); // tr안에 있는 input태그의 hidden을 의미
+			console.log("bno"+bno);
+			location.href = "<%= request.getContextPath() %>/selectOne.no?bno="+bno;
 		});
 	});
  	</script>
