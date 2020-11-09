@@ -23,7 +23,7 @@ public class ClassList implements Serializable {
 	private int price;
 	private String cintro; // 소개
 	private String course; // 커리큘럼
-	
+	private String tname; // 강사명
 	private String fileNewName; // 클래스 사진
 	private String kdetail; // 키트 디테일
 	
@@ -34,18 +34,10 @@ public class ClassList implements Serializable {
 	}
 
 
-	
-	public ClassList(ArrayList<Attachment> attachment, int cno, String cname, int price, String fileNewName) {
-		super();
-		this.attachment = attachment;
-		this.cno = cno;
-		this.cname = cname;
-		this.price = price;
-		this.fileNewName = fileNewName;
-	}
+
 
 	public ClassList(ArrayList<Attachment> attachment, int cno, int vno, int kno, String cname, int price,
-			String cintro, String course, String fileNewName, String kdetail) {
+			String cintro, String course, String tname, String fileNewName, String kdetail) {
 		super();
 		this.attachment = attachment;
 		this.cno = cno;
@@ -55,8 +47,20 @@ public class ClassList implements Serializable {
 		this.price = price;
 		this.cintro = cintro;
 		this.course = course;
+		this.tname = tname;
 		this.fileNewName = fileNewName;
 		this.kdetail = kdetail;
+	}
+
+
+
+	public ClassList(ArrayList<Attachment> attachment, int cno, String cname, int price, String fileNewName) {
+		super();
+		this.attachment = attachment;
+		this.cno = cno;
+		this.cname = cname;
+		this.price = price;
+		this.fileNewName = fileNewName;
 	}
 
 
@@ -64,7 +68,8 @@ public class ClassList implements Serializable {
 	@Override
 	public String toString() {
 		return "ClassList [attachment=" + attachment + ", cno=" + cno + ", vno=" + vno + ", kno=" + kno + ", cname="
-				+ cname + ", price=" + price + ", cintro=" + cintro + ", course=" + course + ", fileNewName=" + fileNewName + "]";
+				+ cname + ", price=" + price + ", cintro=" + cintro + ", course=" + course + ", tname=" + tname
+				+ ", fileNewName=" + fileNewName + ", kdetail=" + kdetail + "]";
 	}
 
 
@@ -176,5 +181,20 @@ public class ClassList implements Serializable {
 	public void setKdetail(String kdetail) {
 		this.kdetail = kdetail;
 	}
+	
+	
+	public String getTname() {
+		return tname;
+	}
+
+
+
+	public void setTname(String tname) {
+		this.tname = tname;
+	}
+
+
+	
+	
 	
 }

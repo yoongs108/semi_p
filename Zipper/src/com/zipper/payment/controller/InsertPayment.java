@@ -2,13 +2,13 @@ package com.zipper.payment.controller;
 
 import java.io.IOException;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
 import com.zipper.common.exception.PaymentException;
 import com.zipper.payment.model.service.PaymentService;
 import com.zipper.payment.model.vo.Payment;
@@ -32,28 +32,29 @@ public class InsertPayment extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		String pno = request.getParameter("merchant_uid");
-		String cname = request.getParameter("cName");
-		int totalPrice = Integer.parseInt(request.getParameter("price")); 
-		String mnick = request.getParameter("name");
+		String pno = request.getParameter("pno");
+		int mno = Integer.parseInt(request.getParameter("mno"));
+		int cno = Integer.parseInt(request.getParameter("cno"));
+		int total = Integer.parseInt(request.getParameter("price")); 
+		String payinfo = request.getParameter("payinfo");
 		
-		Payment pm = new Payment(pno, cname, totalPrice, mnick);
+		Payment pm = new Payment();
+		
+		pm.setPno(pno);
+		pm.setMno(mno);
+		pm.setCno(cno);
+		pm.setTotal(total);
+		pm.setPayinfo(payinfo);
 		
 		PaymentService ps = new PaymentService();
 		
 		try {
-			ps.insertPayment(pm);
-
+			int result = ps.insertPayment(pm);
+			new Gson().toJson(result, response.getWriter());
+			
 		} catch (PaymentException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			
-			RequestDispatcher view = request.getRequestDispatcher("views/common/errorPage.jsp");
-			
-			request.setAttribute("error-msg", "결제정보 저장 실패");
-			request.setAttribute("exception", e);
-			
-			view.forward(request, response);
 		}
 		
 

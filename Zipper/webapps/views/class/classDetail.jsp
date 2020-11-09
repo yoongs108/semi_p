@@ -206,8 +206,11 @@
 
 	<script>
 		function goPayment() {
-			var cno = $(this).find('input').val();
-			location.href = "<%= request.getContextPath() %>/beforePayment.pm?cno=<%= classList.getCno() %>";
+			<% if( m != null ) { %>
+				location.href = "<%= request.getContextPath() %>/beforePayment.pm?cno=<%= classList.getCno() %>";
+			<% } else { %>
+				alert("로그인후 이용해 주세요");
+			<% } %>
 		};
 		
 		function goClass() {
