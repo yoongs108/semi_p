@@ -154,13 +154,13 @@
 	            <table align="center">
 	            	<tr>
 	            		<td colspan="3">
-	            			<a href="<%= request.getContextPath() %>/views/community/zippop.jsp"><h3>COMMUNITY</h3></a>
+	            			<a href="<%= request.getContextPath() %>/zippop.zp"><h3>COMMUNITY</h3></a>
 	            		</td>
 	            	</tr>
 	            	<tr>
 	            		<td>&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;</td>
 	            		<td colspan="2">
-			                <a href="<%= request.getContextPath() %>/views/community/zippop.jsp"><h4>ZIP POP</h4></a> <br />
+			                <a href="<%= request.getContextPath() %>/zippop.zp"><h4>ZIP POP</h4></a> <br />
 			                <a href="<%= request.getContextPath() %>/selectList.gu"><h4>GUIDE</h4></a> <br />
 			                <a href="<%= request.getContextPath() %>/selectList.no"><h4>NOTICE</h4></a>
 	            		</td>
