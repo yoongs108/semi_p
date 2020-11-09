@@ -17,6 +17,7 @@ import com.zipper.classMain.model.vo.ClassList;
 import com.zipper.classMain.model.vo.Kit;
 import com.zipper.classMain.model.vo.Video;
 import com.zipper.member.model.vo.Member;
+import com.zipper.payment.model.vo.Payment;
 
 import static com.zipper.common.JDBCTemplate.*;
 
@@ -90,56 +91,6 @@ public class ClassDAO {
 		return classList;
 	}
 
-	// 윤진 작성
-	// 수강중 클래스 아직 미완성 포기안함
-	public HashMap<String, Object> IngClass(Connection con, int bno) {
-		HashMap<String, Object> hmap = new HashMap<>();
-		ArrayList<Attachment> list = new ArrayList<>();		
-
-		ClassList classList = null;
-		
-		PreparedStatement pstmt = null;
-		ResultSet rset = null;
-		
-		String sql = prop.getProperty("selectClass");
-		
-		try {
-			pstmt = con.prepareStatement(sql);
-			pstmt.setInt(1, bno);
-			
-			rset = pstmt.executeQuery();
-			
-			while (rset.next()) {
-				
-				classList = new ClassList();
-				
-				classList.setCno(bno);
-				classList.setVno(rset.getInt("vno"));
-				classList.setKno(rset.getInt("kno"));
-				classList.setBno(rset.getInt("bno"));
-				classList.setCname(rset.getString("cname"));
-				classList.setCintro(rset.getString("cintro"));
-				classList.setCourse(rset.getString("course"));
-				classList.setPrice(rset.getInt("price"));
-				
-				Attachment at = new Attachment();
-				at.setFno( rset.getInt("fno"));
-				at.setBno( bno );
-				at.setOriginname( rset.getString("originname"));
-				at.setFilepath(   rset.getString("filepath"));
-				at.setFlevel(     rset.getInt("flevel"));
-				
-				
-			}
-
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return null;
-	}
-	
-
 	// 윤진 작성 
 	// 스크랩기능 도전한다.
 	public HashMap<String, Object> scrapList(Connection con, int cno) {
@@ -164,7 +115,7 @@ public class ClassDAO {
 				
 				ClassList cl = new ClassList();
 				
-				//cl.setCno(rset.getString("cno"));
+				cl.setCno(rset.getInt("cno"));
 				cl.setCname(rset.getString("cname"));
 				cl.setCintro(rset.getString("cintro"));
 				cl.setPrice(rset.getInt("price"));
@@ -221,6 +172,46 @@ public class ClassDAO {
 				cl.setFileNewName(rset.getString("FILE_NEW_NAME")); // 클래스 사진
 				
 				list.add(cl);
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return list;
+	}
+
+	// 수강중 클래스
+	public ArrayList<Payment> classingList(Connection con, int mno) {
+		
+		ArrayList<Payment> list = new ArrayList<>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("classingList");
+		
+		System.out.println(sql);
+		
+		try {
+			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setInt(1, mno);
+			
+			rset = pstmt.executeQuery();
+			
+			
+			while(rset.next()) {
+				Payment pm = new Payment();
+				
+				pm.setFileNewName(rset.getString("FILE_NEW_NAME"));
+				pm.setPdate(rset.getDate("pdate"));
+				pm.setCname(rset.getString("cname"));
+				pm.setTotal(rset.getInt("price"));
+				
+				list.add(pm);
 			}
 			
 		} catch (SQLException e) {

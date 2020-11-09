@@ -8,6 +8,7 @@ import java.util.HashMap;
 
 import com.zipper.classMain.model.dao.ClassDAO;
 import com.zipper.classMain.model.vo.ClassList;
+import com.zipper.payment.model.vo.Payment;
 import com.zipper.thumb.model.vo.Attachment;
 
 public class ClassService {
@@ -38,6 +39,19 @@ public class ClassService {
 		close(con);
 		
 		return cList;
+	}
+
+
+
+	public ArrayList<Payment> classingList(int mno) {
+		
+		con = getConnection();
+		
+		ArrayList<Payment> list = cDAO.classingList(con, mno);
+		
+		close(con);
+		
+		return list;
 	}
 	
 

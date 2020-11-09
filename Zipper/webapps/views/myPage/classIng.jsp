@@ -1,5 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" %>
+<%@ page import="java.util.*, com.zipper.payment.model.vo.*"%>
+<%
+	Payment pm = (Payment)request.getAttribute("list");
+%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -88,7 +93,7 @@
 	<section>
 		<!-- 페이지 이름 부분 -->
 		<div class="title" style="border-bottom : 1px solid black;">
-		<h2 id="title"><%-- <%= m.getMnick() %> --%>.CLASS</h2>
+		<h2 id="title"><%= m.getMnick() %>.CLASS</h2>
 		
 		<!-- 뒤로가기 -->
 		<img src="<%= request.getContextPath() %>/resources/images/common/backButton.png" 
@@ -96,45 +101,32 @@
 
 		</div>
 		
-		
+		<%-- <% for (payment p : list) { %> --%>
 		<div class="card"> <!-- 클래스 리스트 폼 -->
 			
-			<img src="#" alt="class1" id="img" class="splitL">
+			<img src="<%= request.getContextPath() %>/resources/images/fileUpload/<%= pm.getFileNewName() %>" 
+				alt="class1" id="img" class="splitL">
 			
 			<div id="container" class="splitR" >
 				<br />
-				<p style="font-size:16px; font-weight : bold;">수강기간 db에서 받기</p>
+				<p style="font-size:16px; font-weight : bold;"><%= pm.getPdate()%> ~ 1개월</p>
 				<br />
-				<p style="font-size:17px; font-weight : bold;">수강명 DB에서 받기</p>
-				<p style="font-size:14px;">가격 원 </p>
+				<p style="font-size:17px; font-weight : bold;"><%= pm.getCname() %> </p>
+				<p style="font-size:14px;"><%= pm.getTotal() %>  원 </p>
 				
 				<button class="button" onclick="goClassInfo()">자세히 보기</button>
 				
 			</div>
 		</div>
+		<%-- <% } %> --%>
 		
-		<div class="card"> <!-- 클래스 리스트 폼 -->
-			
-			<img src="#" alt="class1" id="img" class="splitL">
-			
-			<div id="container" class="splitR" >
-				<br />
-				<p style="font-size:16px; font-weight : bold;">수강기간 db에서 받기</p>
-				<br />
-				<p style="font-size:17px; font-weight : bold;">수강명 DB에서 받기</p>
-				<p style="font-size:14px;">가격 원 </p>
-				
-				<button class="button" onclick="goClassInfo()">강의 듣기</button>
-				
-			</div>
-		</div>
 		
 		<!-- 페이지 버튼 -->
 		<script>
 		function goClassInfo() { // 정보 수정
-			location.href = '<%= request.getContextPath() %>/views/class/classDetail.jsp'; 
+			location.href = '<%= request.getContextPath() %>'<%= request.getContextPath()%>/selectClass.sc?cno='+<%=pm.getCno()%>;
 		}
-		function goMyPageMain() { // 정보 수정
+		function goMyPageMain() { // 메인페이지로 이동
 			location.href = '<%= request.getContextPath() %>/views/myPage/myPageMain.jsp'; 
 		}
 		</script>
