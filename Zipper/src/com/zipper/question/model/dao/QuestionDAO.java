@@ -51,31 +51,69 @@ public QuestionDAO() {
 			
 			rset = pstmt.executeQuery();
 			
-			Question date = new Question();
-			
-			if(rset.next()) {
-				date.setQdate(rset.getDate(1));
-			}
-			
-			for(int i = 0 ; i < 8 ; i++) {
+			while(rset.next()) {
 				Question q = new Question();
 				
-				q.setQno(i);
-				q.setMno(404+i);
-				q.setQtitle("1:1 문의내역 입니다.");
-				q.setQdate(date.getQdate());
-				
+				q.setQno(rset.getInt(1));
+				q.setMno(rset.getInt(2));
+				q.setQcontent(rset.getString(3));
+				q.setQdate(rset.getDate(4));
+				q.setQtitle(rset.getString(5));
+				q.setQstate(rset.getString(6));
+				q.setQid(rset.getString(7));
+				q.setQcomment(rset.getString(8));
+			
 				list.add(q);
 			}
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
+			
 		} finally {
 			close(rset);
 			close(pstmt);
 		}
 		
 		return list;
+	}
+	public Question selectOne(Connection con, int qno) {
+		Question qs = new Question();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectOne");
+		
+		System.out.println(sql);
+		
+		try {
+			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setInt(1, qno);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				
+				
+				qs.setQno(rset.getInt(1));
+				qs.setMno(rset.getInt(2));
+				qs.setQcontent(rset.getString(3));
+				qs.setQdate(rset.getDate(4));
+				qs.setQtitle(rset.getString(5));
+				qs.setQstate(rset.getString(6));
+				qs.setQid(rset.getString(7));
+				qs.setQcomment(rset.getString(8));
+				
+			}
+			System.out.println("상세 question : "+qs.toString());
+		} catch (SQLException e) {
+			e.printStackTrace();
+			
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return qs;
 	}
 	
 }

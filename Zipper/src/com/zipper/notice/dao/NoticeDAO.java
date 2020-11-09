@@ -47,39 +47,30 @@ public class NoticeDAO {
 
 		System.out.println(sql);
 
-		// pstmt = con.prepareStatement(sql); // try/catch 처리ok
 		try {
 			pstmt = con.prepareStatement(sql); 
 
-			// 1. 마지막 행의 번호
-			// 2. 첫 행의 번호
-			// int startRow = (currentPage - 1) * limit + 1;
-			// int endRow = startRow + limit - 1;
+			rset = pstmt.executeQuery(); // 조회한 결과값을 담겼다. 
 
-			// pstmt.setInt(1, endRow);
-			// pstmt.setInt(2, startRow);
-			rset = pstmt.executeQuery();
-
-			Board date = new Board();
-
-			if (rset.next()) {
-				date.setBdate(rset.getDate(1));
-			}
-
-			// while(rset.next()) {
-			for (int i = 0; i < 8; i++) {
-				Board b = new Board();
-
-				b.setBno(i);
-				b.setBtype(4);
-				b.setBtitle("공지제목" + i);
-				b.setBdate(date.getBdate());
-
-				list.add(b);
+			while(rset.next()) {
+				Board bs = new Board();
+				
+				bs.setBno(rset.getInt(1));
+				bs.setBtype(rset.getInt(2));
+				bs.setMno(rset.getInt(3));
+				bs.setBtitle(rset.getString(4));
+				bs.setBcontent(rset.getString(5));
+				bs.setBview(rset.getInt(6));
+				bs.setBdate(rset.getDate(7));
+				bs.setBstatus(rset.getString(8));
+		
+				list.add(bs);
+				
 			}
 
 		} catch (SQLException e) {
 			e.printStackTrace();
+			
 		} finally {
 			close(rset);
 			close(pstmt);
@@ -87,55 +78,41 @@ public class NoticeDAO {
 
 		return list;
 	}
-	/*
-	 * public int getListCount(Connection con) { ArrayList<Board> list = new
-	 * ArrayList<>(); PreparedStatement pstmt = null; ResultSet rset = null;
-	 * 
-	 * try { Board b = new Board(); b.setBno("Bno"); } catch{
-	 * 
-	 * }
-	 * 
-	 * 
-	 * return 0; }
-	 */
+
 
 	public Board selectOne(Connection con, int bno) { // connection 과 int는 받아오는 타입이다. 
 		Board bs = new Board();
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		String sql = prop.getProperty("selectList");
+		
+		String sql = prop.getProperty("selectOne");
 
 		System.out.println(sql);
 
-		// pstmt = con.prepareStatement(sql); // try/catch 처리ok
+		
 		try {
 			pstmt = con.prepareStatement(sql);
 
-			// 1. 마지막 행의 번호
-			// 2. 첫 행의 번호
-			// int startRow = (currentPage - 1) * limit + 1;
-			// int endRow = startRow + limit - 1;
-
-			// pstmt.setInt(1, endRow);
-			// pstmt.setInt(2, startRow);
+			pstmt.setInt(1, bno);
+			
 			rset = pstmt.executeQuery();
 
-			Board date = new Board();
-
-			if (rset.next()) {
-				date.setBdate(rset.getDate(1));
+			while(rset.next()) {
+				
+				bs.setBno(rset.getInt(1));
+				bs.setBtype(rset.getInt(2));
+				bs.setMno(rset.getInt(3));
+				bs.setBtitle(rset.getString(4));
+				bs.setBcontent(rset.getString(5));
+				bs.setBview(rset.getInt(6));
+				bs.setBdate(rset.getDate(7));
+				bs.setBstatus(rset.getString(8));
+				
 			}
-
-			// while(rset.next()) {
-		
-				bs.setBno(bno);
-				bs.setBtype(4);
-				bs.setBtitle("공지제목" + bno);
-				bs.setBcontent("공지사항입니다." + bno);
-				bs.setBdate(date.getBdate());
 
 		} catch (SQLException e) {
 			e.printStackTrace();
+			
 		} finally {
 			close(rset);
 			close(pstmt);
