@@ -58,7 +58,7 @@
 
 		<h1 id="title">MY PAGE</h1>
 		<br /><br />
-		<hr style="width: 85%; border: solid 0.3px black;">
+		<hr style="width: 95%; border: solid 0.3px black;">
 	
 		<div id="colunm" style="border-left: none;">
 
@@ -110,7 +110,7 @@
 			location.href = '<%= request.getContextPath() %>/views/myPage/updateInfo.jsp'; 
 		}
 		function goClassScrap() { 	// 클래스 스크랩
-			location.href = '<%= request.getContextPath() %>/views/myPage/classScrap.jsp';
+			location.href = '<%= request.getContextPath() %>/scrapCl.sc';
 		}
 		function goClassList() { 	//수강중 클래스 수정 필요
 			location.href = '<%= request.getContextPath() %>/views/myPage/classIng.jsp';
@@ -128,7 +128,7 @@
 			location.href = '<%= request.getContextPath() %>/#';
 		}
 		function goManToMan() { 	// 1:1문의
-			location.href = '<%= request.getContextPath() %>/views/help/helpPTP.jsp';
+			location.href = '<%= request.getContextPath() %>/selecList.qo';
 		}
 	</script>
 	

@@ -11,6 +11,8 @@ public class Member implements Serializable {
 	/*
 	 * MNO, MGRD, MID, MPWD, MNICK, MCONTACT, MEMAIL, 
 	 * MENDATE, MEXDATE, MSTATUS, ADDRESS, INTRO
+	 * SCRAP,PROFILE -- 컬럼 추가 윤진
+	 * 
 	 */
 	// 1. 필드
 	
@@ -26,15 +28,19 @@ public class Member implements Serializable {
 	private String mstatus;		// 회원상태
 	private String address;		// 주소
 	private String intro;		// 한줄소개
+	private String scrap;		// 스크랩 - 강의번호로 받아오기 근데 배열임
+	private String profile;		// 프로필
 	
+
+
 	// 2. 생성자
 	public Member() {
 		super();
 	}
 	
-	// 모든 정보 조회용
+	// 모든 정보 조회용 -- 윤진 수정
 	public Member(int mno, String mgrd, String mid, String mpwd, String mnick, String mcontact, String memail,
-			Date mendate, Date mexdate, String mstatus, String address, String intro) {
+			Date mendate, Date mexdate, String mstatus, String address, String intro, String scrap, String profile) {
 		super();
 		this.mno = mno;
 		this.mgrd = mgrd;
@@ -48,6 +54,8 @@ public class Member implements Serializable {
 		this.mstatus = mstatus;
 		this.address = address;
 		this.intro = intro;
+		this.scrap = scrap;
+		this.profile = profile;
 	}
 	
 	
@@ -70,11 +78,20 @@ public class Member implements Serializable {
 		this.intro = intro;
 	}
 	
+	// 스크랩용 -윤진
+	public Member(int mno, String scrap) {
+		super();
+		this.mno = mno;
+		this.scrap = scrap;
+	}
+	
+	// 여기도 윤진이 다시 고침
 	@Override
 	public String toString() {
 		return "Member [mno=" + mno + ", mgrd=" + mgrd + ", mid=" + mid + ", mpwd=" + mpwd + ", mnick=" + mnick
 				+ ", mcontact=" + mcontact + ", memail=" + memail + ", mendate=" + mendate + ", mexdate=" + mexdate
-				+ ", mstatus=" + mstatus + ", address=" + address + ", intro=" + intro + "]";
+				+ ", mstatus=" + mstatus + ", address=" + address + ", intro=" + intro + ", scrap=" + scrap
+				+ ", profile=" + profile + "]";
 	}
 
 	public int getMno() {
@@ -173,4 +190,21 @@ public class Member implements Serializable {
 		this.intro = intro;
 	}
 
+	public String getScrap() {
+		return scrap;
+	}
+
+	public void setScrap(String scrap) {
+		this.scrap = scrap;
+	}
+
+	public String getProfile() {
+		return profile;
+	}
+
+	public void setProfile(String profile) {
+		this.profile = profile;
+	}
+	
+	
 }

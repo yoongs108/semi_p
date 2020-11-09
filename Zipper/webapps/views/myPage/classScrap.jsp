@@ -1,5 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import="com.zipper.classMain.model.vo.*, java.util.*"%>
+<%
+ 	ClassList cl = (ClassList)request.getAttribute("cl");
+	System.out.println("cl 넘어오나?"+cl);
+	/* PageInfo pi = (PageInfo)request.getAttribute("pi");
+	int listCount = pi.getListCount();
+	int currentPage = pi.getCurrentPage();
+	int maxPage = pi.getMaxPage();
+	int startPage = pi.getStartPage();
+	int endPage = pi.getEndPage(); */
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -103,7 +113,7 @@
 			<img src="#" alt="class1" id="img" class="splitL">
 			
 			<div id="container" class="splitR" >
-				<h4>수업제목</h4>
+				<h4><%= cl.getCname() %></h4> <!-- 이게맞나? -->
 				<br />
 				<p class="sub">강사명 : </p>
 				<p class="sub">수강 기간 : 결제 후 1개월</p>
