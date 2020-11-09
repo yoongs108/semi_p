@@ -78,7 +78,7 @@
         header ul {
             list-style: none;
             display : inline-block;
-            margin-bottom: 30px; /*   */
+            margin-bottom: 30px; /*    */
         }
 
         nav div.right {
