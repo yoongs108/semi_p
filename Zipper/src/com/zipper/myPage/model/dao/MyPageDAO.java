@@ -36,9 +36,9 @@ public class MyPageDAO {
 		}		
 	}
 	
-	public ArrayList<Board> selectList(Connection con) {
+	public ArrayList<Thumbnail> selectList(Connection con) {
 		
-		ArrayList<Board> list = new ArrayList<>();
+		ArrayList<Thumbnail> list = new ArrayList<>();
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		String sql = prop.getProperty("selectList");
@@ -53,7 +53,7 @@ public class MyPageDAO {
 				tn.setBtitle(rset.getString("btitle"));
 				tn.setBcontent(rset.getString("bcontent"));
 				tn.setBview(rset.getInt("bview"));
-				tn.setBoardfile(rset.getString("boardfile"));
+				tn.setBoardfile(rset.getString("file_origin_name"));
 				tn.setProfile(rset.getString("profile"));
 				
 				list.add(tn);
@@ -66,6 +66,7 @@ public class MyPageDAO {
 			close(rset);
 			close(pstmt);
 		}
+		
 		
 		return list;
 	}

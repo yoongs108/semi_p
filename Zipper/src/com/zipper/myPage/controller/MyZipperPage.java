@@ -9,8 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.zipper.board.model.vo.Board;
 import com.zipper.myPage.model.service.MyPageService;
+import com.zipper.thumb.model.vo.Thumbnail;
 
 /**
  * 
@@ -19,7 +19,7 @@ import com.zipper.myPage.model.service.MyPageService;
  *
  */
 
-@WebServlet("/selectList.tn")
+@WebServlet("/myZippop.mp")
 public class MyZipperPage extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -30,7 +30,7 @@ public class MyZipperPage extends HttpServlet {
 
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		ArrayList<Board> list = new ArrayList<>();
+		ArrayList<Thumbnail> list = new ArrayList<>();
 		
 		list = new MyPageService().selectList();
 		
@@ -38,7 +38,7 @@ public class MyZipperPage extends HttpServlet {
 		
 		
 		if (list != null) {
-			request.setAttribute("list", list);
+			request.setAttribute("mpZipList", list);
 			page = "views/myPage/myZippop.jsp";
 		} else {
 			request.setAttribute("error-msg", "사진게시글 목록 조회 실패");

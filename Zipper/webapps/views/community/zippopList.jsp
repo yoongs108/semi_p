@@ -137,11 +137,17 @@
 
 </style>
 <script>
-   function moveMain() {
-      $(this).on('click', function() {
-         location.href = "index.jsp";
-      });
-   }
+	function moveMain() {
+		$(this).on('click', function() {
+			location.href = "index.jsp";
+		});
+	}
+	
+	function zippopWriter() {
+		$(this).on('click', function() {
+			location.href = "<%= request.getContextPath() %>/views/writer/zippopWrite.jsp"
+		});
+	}
 </script>
 </head>
 <body>
@@ -191,11 +197,11 @@
    <br />
    <br />
 
-         <% if(m != null) { %>
-            
-            <button onclick="location.href='views/writer/ZippopWrite.jsp'">작성하기</button>
-            
-         <% } %>   
+	<% if(m != null) { %>
+		
+		<button onclick="zippopWriter()">작성하기</button>
+		
+	<% } %>	
 
    <%@ include file="/views/common/footer.jsp"%>
    

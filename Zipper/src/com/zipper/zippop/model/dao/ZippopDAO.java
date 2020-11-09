@@ -10,8 +10,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Properties;
 
-import com.zipper.board.model.vo.Board;
 import com.zipper.myPage.model.dao.MyPageDAO;
+import com.zipper.thumb.model.vo.Attachment;
 import com.zipper.thumb.model.vo.Thumbnail;
 
 import static com.zipper.common.JDBCTemplate.close;
@@ -69,6 +69,102 @@ public class ZippopDAO {
 		}
 		
 		return list;
+	}
+
+
+	public int getCurrentBno(Connection con) {
+		
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("currentBno");
+		
+		try {
+			pstmt = con.prepareStatement(sql);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				result = rset.getInt(1);
+			}
+			
+			// test comment
+			System.out.println(result);
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		// test comment
+		System.out.println("board current No. :" + result);
+		
+		return result;
+	}
+
+
+	public int insertZippop(Connection con, Thumbnail t) {
+		
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("insertZippop");
+		
+		try {
+			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setString(1, t.getBcontent());
+			
+			result = pstmt.executeUpdate();
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			
+		} finally {
+			close(pstmt);
+		}
+		
+		System.out.println("DAO zippop result : " + result);
+		
+		return result;
+	}
+
+
+	public int insertZipAtt(Connection con, Attachment at) {
+		
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("insertZipAtt");
+		
+		try {
+			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setInt(1, at.getBno());
+			pstmt.setString(2, at.getOriginname());
+			pstmt.setString(3, at.getFilepath());
+
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			
+		} finally {
+			close(pstmt);
+			
+		}
+		
+		System.out.println("DAO zipAtt result : " + result);
+		
+		
+		return result;
 	}
 
 }
