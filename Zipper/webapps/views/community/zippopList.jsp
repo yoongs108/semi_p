@@ -142,6 +142,12 @@
 			location.href = "index.jsp";
 		});
 	}
+	
+	function zippopWriter() {
+		$(this).on('click', function() {
+			location.href = "<%= request.getContextPath() %>/views/writer/zippopWrite.jsp"
+		});
+	}
 </script>
 </head>
 <body>
@@ -193,7 +199,7 @@
 
 			<% if(m != null) { %>
 				
-				<button onclick="location.href='views/writer/ZippopWrite.jsp'">작성하기</button>
+				<button onclick="zippopWriter()">작성하기</button>
 				
 			<% } %>	
 

@@ -68,7 +68,7 @@
 		<h2 id="title">ZIP POP</h2>
 		</div>
 		
-		<form action="<%-- <%= request.getContextPath() %>/insert.tn --%>"
+		<form action="<%= request.getContextPath() %>/zippopInsert.zp"
 			  method="post" enctype="multipart/form-data" style ="margin : 50px">
 			  
 			<table align="center">
@@ -95,23 +95,28 @@
 			</table>
 			
 			<div class="fileArea" id="fileArea">
-				<input type="file" name="thumbnailImg" id="thumbnailImg" onchange="loadImg(this);" />
+				<input type="file" name="zippopImg" id="zippopImg" onchange="loadImg(this);" />
 			</div>
 			
 			<div align="center" style="margin-top:70px; margin-bottom:80px;">
-			<button onclick="summit();" id="btn">작성</button>
+			<button type="submit" id="btn">작성</button>
 			&nbsp;&nbsp;&nbsp;&nbsp;
-			<button onclick="history.go(-1)" id="btn">취소</button>
+			<button onclick="back();" id="btn">취소</button>
 			</div>
         		
        		<script>
-				function summit(){
-					$("#uploadZippop").attr("action","<%= request.getContextPath()%>/ZippopUpdate.bo");
+       			
+
+				function back() {
+					$(this).on('click', function() {
+						location.href = "<%= request.getContextPath() %>/zippop.zp";
+					});
 				}
+				
 				// 사진 미리보기 기능
 				$(function(){
 					$('#titleImgArea').click(function(){
-						$('#thumbnailImg').click();
+						$('#zippopImg').click();
 					});
 					$('#fileArea').hide();
 				});
@@ -127,8 +132,8 @@
 							
 							$('#titleImg').attr('src', e.target.result);
 						}
-						reader.readAsDataURL(img.files[0]);
 					}
+					reader.readAsDataURL(img.files[0]);
 				}
 				
 			</script>

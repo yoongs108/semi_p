@@ -1,22 +1,23 @@
 package com.zipper.myPage.model.service;
 
+import static com.zipper.common.JDBCTemplate.close;
+import static com.zipper.common.JDBCTemplate.getConnection;
+
 import java.sql.Connection;
 import java.util.ArrayList;
 
-import com.zipper.board.model.vo.Board;
 import com.zipper.myPage.model.dao.MyPageDAO;
-
-import static com.zipper.common.JDBCTemplate.*;
+import com.zipper.thumb.model.vo.Thumbnail;
 
 public class MyPageService {
 	
 	private Connection con;
 	private MyPageDAO mpDAO = new MyPageDAO();
 	
-	public ArrayList<Board> selectList() {
+	public ArrayList<Thumbnail> selectList() {
 		
 		con = getConnection();
-		ArrayList<Board> list = mpDAO.selectList(con);
+		ArrayList<Thumbnail> list = mpDAO.selectList(con);
 		close(con);
 		
 		return list;

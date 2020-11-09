@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ page import="java.util.*, com.zipper.board.model.vo.*" %>
+<%@ page import="java.util.*, com.zipper.thumb.model.vo.*" %>
 <%
-	ArrayList<Board> list = (ArrayList<Board>)request.getAttribute("list");
+	ArrayList<Thumbnail> mplist = (ArrayList<Thumbnail>)request.getAttribute("mpZipList");
 %>
 <!DOCTYPE html>
 <html>
@@ -139,7 +139,6 @@
 			location.href = "myPageMain.jsp";
 		});
 	}
-	
 </script>
 </head>
 <body>
@@ -165,11 +164,8 @@
 				<!-- 내가 작성한글 들어오는 자리  -->
 				<div>
 					<p>
-						<% if (m.getIntro().equals("")) { %>
-							<p>아직 내 한줄 소개가 없습니다..</p>
-						<% } else { %>
-							<%= m.getIntro() %>
-						<% } %>
+					
+						
 					</p>
 				</div>
 				<!-- 갯수 카운트 자리 -->
@@ -191,25 +187,37 @@
 		<br /><hr style="border: 1px solid black;">
 		
 		<!-- 하단 게시글 부분 출력  -->
-		<div class="thumbnailArea">
-		 
-			<% for (Board board : list) { %>
+		<div class="thumbnailArea"> 
+		
+		<% if ( true ) { %>
+			<% for (Thumbnail t : mplist) { %>
 			
 				<div class="thumb-list" align="center">
 					<div>
-						<input type="hidden" name="bno" value="<%= board.getBno() %>"/>
-						<img src="<%= request.getContextPath() %>/resources/images/attachment/<%= board.getBoardfile() %>" 
+						<input type="hidden" name="bno" value="<%= t.getBno() %>"/>
+						<img src="<%= request.getContextPath() %>/resources/images/attachment/<%= t.getBoardfile() %>" 
 							width="200px" height="150px"/>
 					</div>
 					
 					<p>
-						No. <%= board.getBno() + " " + board.getBtitle() %>
+						No. <%= t.getBno() + " " + t.getBtitle() %>
 						<br />
-						조회수 : <%= board.getBview() %>
+						조회수 : <%= t.getBview() %>
 					</p>
 				</div>
 			<% } %>
 			<br /><br />
+			
+		<% } else {%>
+		<!-- 
+			<div id="emptyZippop">
+				<p>아직 내가쓴 zippop이 없어요...</p>
+				<button id="writeZippop">글쓰기</button>
+			</div>
+		 -->
+			
+		<% } %>
+		
 		</div>
 		
 		

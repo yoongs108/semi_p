@@ -119,7 +119,7 @@
 			location.href = '<%= request.getContextPath() %>/#';
 		}
 		function goMyZip() { 		//내 zip페이지
-			location.href = '<%= request.getContextPath() %>/selectList.tn';
+			location.href = '<%= request.getContextPath() %>/myZippop.mp';
 		}
 		function goPayment() { 		//결제내역 수정필요
 			location.href = '<%= request.getContextPath() %>/#';

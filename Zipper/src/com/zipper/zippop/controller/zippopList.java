@@ -9,11 +9,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.zipper.myPage.model.service.ZippopService;
+import com.zipper.zippop.model.service.ZippopService;
 import com.zipper.thumb.model.vo.Thumbnail;
 
 
-@WebServlet("/zippop.tn")
+@WebServlet("/zippop.zp")
 public class zippopList extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -29,7 +29,6 @@ public class zippopList extends HttpServlet {
 		
 		list = new ZippopService().selectList();
 		
-		System.out.println(list);
 		String page ="";
 		
 		
