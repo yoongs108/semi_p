@@ -1,5 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ page import="java.util.*, com.zipper.board.model.vo.*" %>
+
+<%
+	ArrayList<Board> list = (ArrayList<Board>)request.getAttribute("list");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -212,111 +217,31 @@ section {
 			
 		</li>
 	</ul>
+	<% if(m != null && m.getMgrd().equals("A")) { %>       
+				
+				<button onclick="alert('작성하기 폼으로 이동')">작성하기</button>
+				
+			<% } %>
 	</div>
+	
+	<!-- 게시글 시작 -->
     <div class="w3-row-padding w3-padding-16 w3-center">
     
-    <div class="w3-quarter" >
-      <a href="#">  <!-- 수정 -->   
-      <img src="<%= request.getContextPath() %>/resources/images/guide/main/interior1.jpg" style="width:258px;height:388px;" id="guide1" >
-      </a>
-      <div class="bookmark">     
-      </div>
-      <h3>인테리어 가이드 1</h3>
-      <span>[가이드]</span>
-      <span>인테리어 가이드 1</span>
-      <p>인테리어</p>
-    </div>
-    
-    <div class="w3-quarter">
-      <a href="#">  <!-- 수정 -->
-      <img src="<%= request.getContextPath() %>/resources/images/guide/main/interior2.jpg" style="width:258px;height:388px;" id="guide2">
-      </a>
-      <div class="bookmark">     
-      </div>
-      <h3>인테리어 가이드 2</h3>
-      <span>[가이드]</span>
-      <span>인테리어 가이드 2</span>
-      <p>인테리어</p>
-    </div>
-    
-    
-      <div class="w3-quarter">
-      <a href="#">  <!-- 수정 -->
-      <img src="<%= request.getContextPath() %>/resources/images/guide/main/interior3.jpg" style="width:258px;height:388px;" id="guide3">
-      </a>
-      <div class="bookmark">     
-      </div>
-      <h3>인테리어 가이드 3</h3>
-      <span>[가이드]</span>
-      <span>인테리어 가이드 3</span>
-      <p>인테리어</p>
-    </div>
-    
-    <div class="w3-quarter">
-      <a href="#">  <!-- 수정 -->
-      <img src="<%= request.getContextPath() %>/resources/images/guide/main/interior4.jpg" style="width:258px;height:388px;" id="guide4">
-      </a>
-      <div class="bookmark">
-      </div>
-      <h3>인테리어 가이드 4</h3>
-      <span>[가이드]</span>
-      <span>인테리어 가이드 4</span>
-      <p>인테리어</p>
-    </div>  
+    <% for(Board board : list) { %>
+	    <div class="w3-quarter" >
+		  <input type="hidden" value="<%= board.getBno() %>"/>
+	      <img src="<%= request.getContextPath() %>/resources/images/uploadFiles/<%= board.getBoardfile() %>" style="width:258px;height:388px;" id="guide1" >
+	      <div class="bookmark">     
+	      </div>
+	      <h3><%= board.getBtitle() %></h3>
+	      <span>[가이드]</span>
+	      <span><%= board.getBcontent().substring(0, 45) %></span>
+	      <p>인테리어</p>
+	    </div>
+	   <% } %>
+
   </div>
   
-  <!-- 아래 문단-->
-  
-   <div class="w3-row-padding w3-padding-16 w3-center" id="guide">
-   <div class="w3-quarter">
-      <a href="#">  <!-- 수정 -->
-      <img src="<%= request.getContextPath() %>/resources/images/guide/main/interior5.jpg" style="width:258px;height:388px;" id="guide5">
-      </a>
-      <div class="bookmark">     
-      </div>
-      <h3>인테리어 가이드 5</h3>
-      <span>[가이드]</span>
-      
-      <p>인테리어</p>
-    </div>  
-    
-    
-    <div class="w3-quarter">
-      <a href="#">  <!-- 수정 -->
-      <img src="<%= request.getContextPath() %>/resources/images/guide/main/interior6.jpg" style="width:258px;height:388px;" id="guide6">
-      </a>
-      <div class="bookmark">     
-      </div>
-      <h3>인테리어 가이드 6</h3>
-      <span>[가이드]</span>
-      <span>인테리어 가이드 6</span>
-      <p>인테리어</p>
-    </div>
-    
-    <div class="w3-quarter">
-      <a href="#">  <!-- 수정 -->
-      <img src="<%= request.getContextPath() %>/resources/images/guide/main/interior7.jpg" style="width:258px;height:388px;" id="guide7">
-      </a>
-      <div class="bookmark">     
-      </div>
-      <h3>인테리어 가이드 7</h3>
-      <span>[가이드]</span>
-      <span>인테리어 가이드 7</span>
-      <p>인테리어</p>
-    </div>
-    
-    <div class="w3-quarter">
-      <a href="#">  <!-- 수정 -->
-      <img src="<%= request.getContextPath() %>/resources/images/guide/main/interior8.jpg" style="width:258px;height:388px;" id="guide8">
-      </a>
-      <div class="bookmark">     
-      </div>
-      <h3>인테리어 가이드 8</h3>
-      <span>[가이드]</span>
-      <span>인테리어 가이드 8</span>
-      <p>인테리어</p>
-    </div>	
-    </div>
       <!-- Pagination -->
   <div class="w3-center w3-padding-32">
     <div class="w3-bar">
@@ -331,5 +256,14 @@ section {
  	<%@ include file="/views/common/footer.jsp" %>
  </div>	
  	</section>
+ 	
+ 	<script>
+ 		$(function(){
+			$('.w3-quarter').click(function(){
+				var bno = $(this).find('input').val();
+				location.href = '<%= request.getContextPath()%>/selectOne.gu?bno=' + bno;
+			});
+		});
+ 	</script>
 </body>
 </html>
