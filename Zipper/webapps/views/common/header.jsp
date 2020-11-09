@@ -161,13 +161,13 @@
 	            		<td>&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;</td>
 	            		<td colspan="2">
 			                <a href="<%= request.getContextPath() %>/views/community/zippop.jsp"><h4>ZIP POP</h4></a> <br />
-			                <a href="<%= request.getContextPath() %>/views/community/guide.jsp"><h4>GUIDE</h4></a> <br />
-			                <a href="<%= request.getContextPath() %>/views/community/selectList.no"><h4>NOTICE</h4></a>
+			                <a href="<%= request.getContextPath() %>/selectList.gu"><h4>GUIDE</h4></a> <br />
+			                <a href="<%= request.getContextPath() %>/selectList.no"><h4>NOTICE</h4></a>
 	            		</td>
 	            	</tr>
 	            	<tr>
 	            		<td colspan="3">
-                			<a href="<%= request.getContextPath() %>/views/class/class.jsp"><h3>CLASS</h3></a><br /><br />
+                			<a href="<%= request.getContextPath() %>/classFromMain.cfm"><h3>CLASS</h3></a><br /><br />
 	            		</td>
 	            	</tr>
 	            	<tr>
@@ -180,7 +180,7 @@
 	            		<td colspan="2">
 		                    <a href="<%= request.getContextPath() %>/views/help/helpFAQ.jsp"><h4>FAQ</h5></a> <br />
 		                 <% if(m != null) { %>
-		                    <a href="<%= request.getContextPath() %>/views/help/helpFAQ.jsp"><h4>1:1문의</h5></a>
+		                    <a href="<%= request.getContextPath() %>/selectList.qo"><h4>1:1문의</h5></a>
 		                 <% } %>
 	            		</td>
 	            	</tr>
@@ -216,6 +216,7 @@
                     &nbsp;&nbsp;
                     <button type="button" class="btn btn-default height50" onclick="join()" style="width : 100px;">회원가입</button>
                 </form>
+                
                 <br />
                 <button type="button" class="btn btn-default height50" onclick="">아이디 / 비밀번호 찾기</button>
                 <br />

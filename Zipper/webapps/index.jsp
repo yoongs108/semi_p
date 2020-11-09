@@ -79,10 +79,10 @@
 			location.href = "<%= request.getContextPath() %>/views/community/zippop.jsp";
 		};
 		function goClass() {
-			location.href = "<%= request.getContextPath() %>/views/class/class.jsp";
+			location.href = "<%= request.getContextPath() %>/classFromMain.cfm";
 		};
 		function goGuide() {
-			location.href = "<%= request.getContextPath() %>/views/community/guide.jsp";
+			location.href = "<%= request.getContextPath() %>/selectList.gu";
 		};
 	</script>
 </body>
