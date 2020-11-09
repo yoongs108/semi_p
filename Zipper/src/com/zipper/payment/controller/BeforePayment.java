@@ -31,18 +31,14 @@ public class BeforePayment extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int bno = Integer.parseInt(request.getParameter("bno"));
+		int cno = Integer.parseInt(request.getParameter("cno"));
 		
-		HashMap<String, Object> classList
-        = new PaymentService().beforePayment(bno);
+		Payment payment = new PaymentService().beforePayment(cno);
 		
 		String page = "";
 		
-	    if(classList != null) {
-	         request.setAttribute("cList", classList.get("classList"));
-	         request.setAttribute("aList", classList.get("attachment"));
-	         request.setAttribute("kList", classList.get("kit"));
-	         request.setAttribute("bList", classList.get("board"));
+	    if(payment != null) {
+	         request.setAttribute("pm", payment);
 	     
 	         page = "views/payment/payment.jsp";
 	      } else {

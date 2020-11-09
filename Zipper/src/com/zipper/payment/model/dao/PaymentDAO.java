@@ -9,8 +9,13 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Properties;
 
+import com.zipper.board.model.vo.Attachment;
+import com.zipper.classMain.model.vo.ClassList;
+import com.zipper.classMain.model.vo.Kit;
 import com.zipper.common.exception.MemberException;
 import com.zipper.common.exception.PaymentException;
 import com.zipper.payment.model.vo.Payment;
@@ -39,31 +44,37 @@ public class PaymentDAO {
 		}
 	}
 
-	public int beforePayment(Connection con) {
+	public Payment beforePayment(Connection con, int cno) {
 		
-		int result = 0;	// 결과를 담을 변
+		Payment pm = null;
 		
-		PreparedStatement pstmt = null;	// 실행할 Statement
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
 		
-		ResultSet rset = null;	// sql 실행 결과를 담을 ResultSet
-		
-		String sql = prop.getProperty("beforePayment");	// "selectPayment" sql 연결
+		String sql = prop.getProperty("beforePayment");
 		
 		System.out.println(sql);
 		
 		try {
-			pstmt = con.prepareStatement(sql);	// DB, sql 연결
+			pstmt = con.prepareStatement(sql);
 			
-			rset = pstmt.executeQuery();	// sql 실행
+			pstmt.setInt(1, cno);
 			
-			if(rset.next()) {	// ResultSet에 헤더 다음 행이 있다면..
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				pm = new Payment();
 				
-				result = rset.getInt("pay");
-
+				pm.setPno(rset.getString("pno"));
+				pm.setMno(rset.getInt("mno"));
+				pm.setCno(rset.getInt("cno"));
+				pm.setPayinfo(rset.getString("payinfo"));
+				pm.setPdate(rset.getDate("pdate"));
+				pm.setPstatus(rset.getString("pstatus"));
+				pm.setTotal(rset.getInt("total"));
+				
 			}
-			
-			System.out.println("조회 결과 확인 : " + result);
-			
+	
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -71,7 +82,7 @@ public class PaymentDAO {
 			close(pstmt);
 		}
 		
-		return result;
+		return pm;
 	}
 
 	public int insertPayment(Connection con, Payment pm) throws PaymentException {
@@ -86,8 +97,12 @@ public class PaymentDAO {
 			pstmt = con.prepareStatement(sql);
 			
 			pstmt.setString(1, pm.getPno());
-			pstmt.setDate(2, pm.getPdate());
-			pstmt.setInt(3, pm.getTotalPrice());
+			pstmt.setInt(2,  pm.getMno());
+			pstmt.setInt(3,  pm.getCno());
+			pstmt.setString(4,  pm.getPayinfo());
+			pstmt.setDate(5, pm.getPdate());
+			pstmt.setString(6,  pm.getPstatus());
+			pstmt.setInt(7, pm.getTotal());
 			
 			result = pstmt.executeUpdate();
 			
@@ -100,9 +115,5 @@ public class PaymentDAO {
 		}
 		return result;
 	}
-
-
-
-	
 
 }

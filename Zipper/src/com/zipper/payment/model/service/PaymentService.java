@@ -14,16 +14,16 @@ public class PaymentService {
 	
 	private Connection con;	// 데이터베이스 연결할 connection 생성
 	private PaymentDAO pDAO = new PaymentDAO(); // 서비스 공통으로 사용 될 DAO 생성
-	private ClassDAO cDAO = new ClassDAO();
-	public HashMap<String, Object> beforePayment(int bno) {
+
+	public Payment beforePayment(int cno) {
 		
 		con = getConnection();
 		
-		HashMap<String, Object> hmap = cDAO.selectOne(con, bno);
+		Payment pm = pDAO.beforePayment(con, cno);
 		
 		close(con);
 		
-		return hmap;
+		return pm;
 	}
 
 	public int insertPayment(Payment pm) throws PaymentException {
