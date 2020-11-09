@@ -45,12 +45,7 @@ public class ClassDAO {
 	
 
 	// 공주
-	public HashMap<String, Object> selectOne(Connection con, int bno) {
-		
-		HashMap<String, Object> hmap = new HashMap<>();
-		ArrayList<Attachment> attachment = new ArrayList<>();
-		ArrayList<Kit> kit = new ArrayList<>();
-		ArrayList<Board> board = new ArrayList<>();
+	public ClassList selectOne(Connection con, int cno) {
 		
 		ClassList classList = null;
 		
@@ -59,66 +54,29 @@ public class ClassDAO {
 		
 		String sql = prop.getProperty("selectOne");
 		
+		System.out.println(sql);
+		
 		try {
 			pstmt = con.prepareStatement(sql);
 			
-			pstmt.setInt(1, bno);
+			pstmt.setInt(1, cno);
 			
 			rset = pstmt.executeQuery();
 			
-			while (rset.next()) {
+			if (rset.next()) {
 				
 				classList = new ClassList();
 				
-				classList.setCno(bno);
+				classList.setCno(cno);
 				classList.setVno(rset.getInt("vno"));
 				classList.setKno(rset.getInt("kno"));
-				classList.setBno(rset.getInt("bno"));
 				classList.setCname(rset.getString("cname"));
+				classList.setPrice(rset.getInt("price"));
 				classList.setCintro(rset.getString("cintro"));
 				classList.setCourse(rset.getString("course"));
-				classList.setPrice(rset.getInt("price"));
-
-				
-				Attachment at = new Attachment();
-				at.setFno( rset.getInt("fno"));
-				at.setBno( bno );
-				at.setOriginname( rset.getString("originname"));
-				at.setChangename( rset.getString("changename"));
-				at.setFilepath(   rset.getString("filepath"));
-				at.setUploaddate( rset.getDate("uploaddate"));
-				at.setFlevel(     rset.getInt("flevel"));
-				
-				attachment.add(at);
-				
-				Kit k = new Kit();
-				k.setKno(rset.getInt("kno"));
-				k.setKname(rset.getString("kdetail"));
-				k.setCount(rset.getInt("count"));
-				
-				kit.add(k);
-				
-				
-				Board b = new Board();
-				b.setBno(bno);
-				b.setBtype(rset.getInt("btype"));
-				b.setMno(rset.getInt("mno"));
-				b.setBtitle(rset.getString("btitle"));
-				b.setBcontent(rset.getString("bcontent"));
-				b.setBview(rset.getInt("bview"));
-				b.setBdate(rset.getDate("bdate"));
-				b.setBstatus(rset.getString("bstatus"));
-				b.setUserId(rset.getString("userId"));
-				b.setBwriter(rset.getString("bwriter"));
-				b.setBoardfile(rset.getString("boardfile"));
-
-				board.add(b);			
-				
+				classList.setFileNewName(rset.getString("FILE_NEW_NAME"));
+				classList.setKdetail(rset.getString("kdetail"));
 			}
-		hmap.put("classList", classList);
-		hmap.put("attachment", attachment);
-		hmap.put("kit", kit);
-		hmap.put("board", board);	
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -128,7 +86,7 @@ public class ClassDAO {
 			close(pstmt);
 		}	
 
-		return hmap;
+		return classList;
 	}
 
 	// 윤진 작성
@@ -151,6 +109,41 @@ public class ClassDAO {
 			e.printStackTrace();
 		}
 		return null;
+	}
+
+	// 클래스 리스트 조회
+	public ArrayList<ClassList> selectList(Connection con) {
+		ArrayList<ClassList> list = new ArrayList<>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectList");
+		
+		System.out.println(sql);
+		
+		try {
+			pstmt = con.prepareStatement(sql);
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				ClassList cl = new ClassList();
+				
+				cl.setCno(rset.getInt("cno"));
+				cl.setCname(rset.getString("cname"));
+				cl.setPrice(rset.getInt("price"));
+				cl.setFileNewName(rset.getString("FILE_NEW_NAME")); // 클래스 사진
+				
+				list.add(cl);
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return list;
 	}
 
 }

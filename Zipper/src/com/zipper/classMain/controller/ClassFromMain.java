@@ -1,7 +1,7 @@
 package com.zipper.classMain.controller;
 
 import java.io.IOException;
-import java.util.HashMap;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,17 +12,18 @@ import javax.servlet.http.HttpServletResponse;
 import com.zipper.classMain.model.service.ClassService;
 import com.zipper.classMain.model.vo.ClassList;
 
+
 /**
- * Servlet implementation class ClassDetail
+ * Servlet implementation class ClassFromMain
  */
-@WebServlet("/selectClass.sc")
-public class ClassSelectOne extends HttpServlet {
+@WebServlet("/classFromMain.cfm")
+public class ClassFromMain extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ClassSelectOne() {
+    public ClassFromMain() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,26 +32,21 @@ public class ClassSelectOne extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int cno = Integer.parseInt(request.getParameter("cno"));
-
-		ClassList classList = new ClassService().selectOne(cno);
-
-
-	    String page = "";
-	    
-	    if(classList != null) {
-	         request.setAttribute("cList", classList);
-	     
-	         page = "views/class/classDetail.jsp";
-	      } else {
-	         request.setAttribute("exception", new Exception("게시글 상세 조회 실패"));
-	         request.setAttribute("error-msg", "게시글 상세 조회 실패!!");
-	         
-	         page = "views/common/errorPage.jsp";
-	      }
-	      
-	      request.getRequestDispatcher(page).forward(request, response);
-
+		ArrayList<ClassList> list = new ArrayList<>();
+		
+		list = new ClassService().selectList();
+		
+		String page = "";
+		
+		if(list != null) {
+			request.setAttribute("cList", list);
+			page = "views/class/class.jsp";
+		}else {
+			request.setAttribute("error-msg", "사진 게시글 목록 조회 실패");
+			page = "views/common/errorPage.jsp";
+		}
+		
+		request.getRequestDispatcher(page).forward(request, response);
 	}
 
 	/**

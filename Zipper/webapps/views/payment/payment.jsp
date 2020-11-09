@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" import="com.zipper.classMain.model.vo.*, java.util.*"%>
     
-    <% 	ArrayList<ClassList> cList = (ArrayList<ClassList>)request.getAttribute("cList");
-		ArrayList<Teacher> tList = (ArrayList<Teacher>)request.getAttribute("tList");
+    <% 	ClassList classList = (ClassList)request.getAttribute("cList");
+		Teacher teacher = (Teacher)request.getAttribute("tList");
     %>
 <!DOCTYPE html>
 <html>
@@ -104,7 +104,6 @@
 			<img src="<%= request.getContextPath() %>/resources/images/common/backButton.png" 
 				alt="class1" id="back" onclick="goClassDetail()"> 
 		</div>
-	<% for(ClassList classList : cList) { %>
 	<div align="center">
 		<div>
 			<div class="boxLine">
@@ -138,10 +137,9 @@
 							<td style="vertical-align:top; text-align:right;"> <h4> <%= classList.getPrice() %>원</h4></td>
 						</tr>
 						<tr>
-							<% for(Teacher teacher : tList) { %>
 							<td><%= teacher.getTname() %></td>
 							<td></td>
-							<% } %>
+							
 						</tr>
 					</table>
 					
@@ -291,7 +289,7 @@
 		<br />
 		<br />
 	</div>
-	<% } %>
+
 	</section>
 	
 	<script>

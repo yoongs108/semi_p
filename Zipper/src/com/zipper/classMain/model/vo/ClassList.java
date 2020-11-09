@@ -1,22 +1,31 @@
 package com.zipper.classMain.model.vo;
 
 import java.io.Serializable;
+import java.sql.Date;
 import java.util.ArrayList;
 
+import com.zipper.board.model.vo.Board;
 import com.zipper.thumb.model.vo.Attachment;
 
 public class ClassList implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 181818L;
+	
+	private ArrayList<Attachment> attachment;
+	
 	private int cno;
 	private int vno;
 	private int kno;
-	private int bno; 
 	private	String cname;
+	private int price;
 	private String cintro; // 소개
 	private String course; // 커리큘럼
-	private int price;
 	
-	private ArrayList<Attachment> attachment;
+	private String fileNewName; // 클래스 사진
+	private String kdetail; // 키트 디테일
 	
 	
 	public ClassList() {
@@ -25,41 +34,51 @@ public class ClassList implements Serializable {
 	}
 
 
-	public ClassList(int cno, int vno, int kno, int bno, String cname, String cintro, String course, int price) {
-		super();
-		this.cno = cno;
-		this.vno = vno;
-		this.kno = kno;
-		this.bno = bno;
-		this.cname = cname;
-		this.cintro = cintro;
-		this.course = course;
-		this.price = price;
-	}
 	
-	
-
-
-	public ClassList(int cno, int vno, int kno, int bno, String cname, String cintro, String course, int price,
-			ArrayList<Attachment> attachment) {
+	public ClassList(ArrayList<Attachment> attachment, int cno, String cname, int price, String fileNewName) {
 		super();
-		this.cno = cno;
-		this.vno = vno;
-		this.kno = kno;
-		this.bno = bno;
-		this.cname = cname;
-		this.cintro = cintro;
-		this.course = course;
-		this.price = price;
 		this.attachment = attachment;
+		this.cno = cno;
+		this.cname = cname;
+		this.price = price;
+		this.fileNewName = fileNewName;
 	}
+
+	public ClassList(ArrayList<Attachment> attachment, int cno, int vno, int kno, String cname, int price,
+			String cintro, String course, String fileNewName, String kdetail) {
+		super();
+		this.attachment = attachment;
+		this.cno = cno;
+		this.vno = vno;
+		this.kno = kno;
+		this.cname = cname;
+		this.price = price;
+		this.cintro = cintro;
+		this.course = course;
+		this.fileNewName = fileNewName;
+		this.kdetail = kdetail;
+	}
+
 
 
 	@Override
 	public String toString() {
-		return "ClassList [cno=" + cno + ", vno=" + vno + ", kno=" + kno + ", bno=" + bno + ", cname=" + cname
-				+ ", cintro=" + cintro + ", course=" + course + ", price=" + price + "]";
+		return "ClassList [attachment=" + attachment + ", cno=" + cno + ", vno=" + vno + ", kno=" + kno + ", cname="
+				+ cname + ", price=" + price + ", cintro=" + cintro + ", course=" + course + ", fileNewName=" + fileNewName + "]";
 	}
+
+
+
+	public ArrayList<Attachment> getAttachment() {
+		return attachment;
+	}
+
+
+
+	public void setAttachment(ArrayList<Attachment> attachment) {
+		this.attachment = attachment;
+	}
+
 
 
 	public int getCno() {
@@ -67,9 +86,11 @@ public class ClassList implements Serializable {
 	}
 
 
+
 	public void setCno(int cno) {
 		this.cno = cno;
 	}
+
 
 
 	public int getVno() {
@@ -77,9 +98,11 @@ public class ClassList implements Serializable {
 	}
 
 
+
 	public void setVno(int vno) {
 		this.vno = vno;
 	}
+
 
 
 	public int getKno() {
@@ -87,19 +110,11 @@ public class ClassList implements Serializable {
 	}
 
 
+
 	public void setKno(int kno) {
 		this.kno = kno;
 	}
 
-
-	public int getBno() {
-		return bno;
-	}
-
-
-	public void setBno(int bno) {
-		this.bno = bno;
-	}
 
 
 	public String getCname() {
@@ -107,9 +122,23 @@ public class ClassList implements Serializable {
 	}
 
 
+
 	public void setCname(String cname) {
 		this.cname = cname;
 	}
+
+
+
+	public int getPrice() {
+		return price;
+	}
+
+
+
+	public void setPrice(int price) {
+		this.price = price;
+	}
+
 
 
 	public String getCintro() {
@@ -117,9 +146,11 @@ public class ClassList implements Serializable {
 	}
 
 
+
 	public void setCintro(String cintro) {
 		this.cintro = cintro;
 	}
+
 
 
 	public String getCourse() {
@@ -130,29 +161,20 @@ public class ClassList implements Serializable {
 	public void setCourse(String course) {
 		this.course = course;
 	}
-
-
-	public int getPrice() {
-		return price;
+	
+	public String getFileNewName() {
+		return fileNewName;
 	}
 
-
-	public void setPrice(int price) {
-		this.price = price;
+	public void setFileNewName(String fileNewName) {
+		this.fileNewName = fileNewName;
 	}
 
-
-	public ArrayList<Attachment> getAttachment() {
-		return attachment;
+	public String getKdetail() {
+		return kdetail;
 	}
-
-
-	public void setAttachment(ArrayList<Attachment> attachment) {
-		this.attachment = attachment;
+	public void setKdetail(String kdetail) {
+		this.kdetail = kdetail;
 	}
-	
-	
-	
-	
 	
 }

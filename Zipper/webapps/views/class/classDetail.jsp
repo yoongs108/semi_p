@@ -1,11 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" import="com.zipper.classMain.model.vo.*, com.zipper.thumb.model.vo.*, com.zipper.board.model.vo.*, java.util.*" %>
     
-<% 	ArrayList<ClassList> cList = (ArrayList<ClassList>)request.getAttribute("cList");
-	ArrayList<Attachment> aList = (ArrayList<Attachment>)request.getAttribute("aList");
-	ArrayList<Kit> kList = (ArrayList<Kit>)request.getAttribute("kList");
-	ArrayList<Board> bList = (ArrayList<Board>)request.getAttribute("bList");
-
+<% 	
+	ClassList classList = (ClassList)request.getAttribute("cList");
 %>
 <!DOCTYPE html>
 <html>
@@ -121,14 +118,12 @@
 			<img src="<%= request.getContextPath() %>/resources/images/common/backButton.png" 
 				alt="class1" id="back" onclick="goClass()"> 
 		</div>
- 		<% for(ClassList classList : cList) { %>
+ 		
 		<div class="page_wrap">
 			<div class="left_page">
 			
-				<div><img src="../../resources/images/class/carouselImg/h.jpg" alt="" width="650px" height="500px"/></div>
-				<% for(Board board : bList) { %>
-				<h3><%= board.getBtitle() %></h3>
-				<% } %>
+				<div><img src="<%= request.getContextPath() %>/resources/images/fileUpload/<%= classList.getFileNewName()%>" alt="" width="650px" height="500px"/></div>
+				<h3><%= classList.getCname() %></h3>
 				
 				<div>
 			 		<button style="color : white;" onclick="fnMove(1)">클래스 소개</button>
@@ -147,12 +142,10 @@
 						<p><%= classList.getCourse() %></p>
 			 		</div>
 			 		
-			 		<% for(Kit kit : kList) { %>
 			 		<div class='tabcontent3'>
 			 			<h3>키트 소개</h3>
-						<p><%= kit.getKdetail() %></p>
-			 		</div> 
-			 		<% } %>
+						<p><%= classList.getKdetail() %></p>
+			 		</div>
 			 		
 			 		<div class='tabcontent4'>
 			 			<h3>환불 정책</h3>
@@ -180,10 +173,9 @@
 						<td width="300px">
 							<div class="ac">
 					        	키트
-					        	<img src="../../resources/images/common/downArrow.png" width="15px" height="7.5px" class="accordion" onclick="accordion_hide(this)"/>
-								<% for(Kit kit : kList) { %>
-					        	<p class="accordion_hide"> <%= kit.getKdetail() %></p>
-								<% } %>
+					        	<img src="<%= request.getContextPath() %>/resources/images/common/downArrow.png" width="15px" height="7.5px" class="accordion" onclick="accordion_hide(this)"/>
+								
+					        	<p class="accordion_hide"> <%= classList.getKdetail() %></p>
 					    	</div>
 						</td>
 						<td style="vertical-align:top"> 포함</td>
@@ -195,8 +187,8 @@
 					<tr>
 						<td width="200px" height="400px">결제금액 </br> <h1><%= classList.getPrice() %>원</h1> </td>
 						<td><br />
-							<button style="color : white;" onclick="goPayment();">결제</button>
-							<img src="../../resources/images/common/bookmark.png" width="50px" height="50px" onclick="" alt="" />
+							<button style="color : white;" value="<%= classList.getCno()%>" onclick="goPayment();">결제</button>
+							<img src="<%= request.getContextPath() %>/resources/images/common/bookmark.png" width="50px" height="50px" onclick="" alt="" />
 						</td>
 					</tr>
 					</table>
@@ -204,7 +196,6 @@
 				
 			</div>
 		</div>
-		<% } %>
 		
 	</section>
 	<br />
@@ -213,14 +204,14 @@
 	<%@ include file="/views/common/footer.jsp"%>
 
 
-
 	<script>
 		function goPayment() {
-			location.href = "<%= request.getContextPath() %>/beforePayment.pm?bno=<%= classList.getBno() %>";
+			var cno = $(this).find('input').val();
+			location.href = "<%= request.getContextPath() %>/beforePayment.pm?cno=<%= classList.getCno() %>";
 		};
 		
 		function goClass() {
-			location.href = "<%= request.getContextPath() %>/views/class/class.jsp";
+			location.href = "<%= request.getContextPath() %>/classFromMain.cfm";
 		};
 		
 		function fnMove(seq) {

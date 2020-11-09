@@ -7,22 +7,40 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import com.zipper.classMain.model.dao.ClassDAO;
+import com.zipper.classMain.model.vo.ClassList;
+import com.zipper.thumb.model.vo.Attachment;
 
 public class ClassService {
 	
 	private Connection con;
 	private ClassDAO cDAO = new ClassDAO();
 	
-	public HashMap<String, Object> selectOne(int bno) {
+	// 클래스 리스트 조회
+	public ArrayList<ClassList> selectList() {
 		
 		con = getConnection();
 		
-		HashMap<String, Object> hmap = cDAO.selectOne(con, bno);
+		ArrayList<ClassList> list = cDAO.selectList(con);
 		
 		close(con);
 		
-		return hmap;
+		return list;
 	}
+
+	
+	
+	public ClassList selectOne(int cno) {
+		
+		con = getConnection();
+
+		ClassList cList = cDAO.selectOne(con, cno);
+		
+		close(con);
+		
+		return cList;
+	}
+	
+
 
 	
 
