@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import = "java.util.*, com.zipper.thumb.model.vo.*" %>
+<%
+	ArrayList<Thumbnail> list = (ArrayList<Thumbnail>)request.getAttribute("list");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -68,7 +72,7 @@
 		margin-top : 50px;
 	}
 	.thumbnailArea {
-		width:760px;
+		width:950px;
 		height:auto;
 		margin-left:auto;
 		margin-right:auto;
@@ -104,39 +108,84 @@
 	.page_wrap {
 		paddig-top: 100px;
 	}
-
+	
+	/* 상단부분 */
+	#pageTop {
+		height:30px;
+	}
+	
+	#reverseImg {
+		width: 80px;
+		height: 80px;
+		border: 0px;
+	}
+	
+	#reverseBtn {
+		background: white;
+		width: 50px;
+		height: 50px;
+		border: 0px;
+		left: 90%;
+		position:relative;
+		top:-210%; 
+	}
+	
+	#reverseBtn:hover{
+		cursor: pointer;
+		transform: scale(1.2);
+	}
 
 </style>
+<script>
+	function moveMain() {
+		$(this).on('click', function() {
+			location.href = "index.jsp";
+		});
+	}
+</script>
 </head>
 <body>
 	<%@ include file="/views/common/header.jsp"%>
 	
 	<section>
-		<div class="top" style=" top: 100; background-color: white; border-bottom: 1px solid black;">
-			<div class="outer">
-			<h2 id="title">ZIP POP</h2>
-			<img src="<%= request.getContextPath() %>/resources/images/common/backButton.png" 
-				alt="class1" id="back" onclick="goMain()"> 
+		<div id="pageTop">
+			<h2 align="center">ZIPPOP</h2>
+			<button id="reverseBtn" onclick="moveMain();">
+				<img id="reverseImg" src="../../resources/images/common/backButton.png" alt="뒤로가기" />
+			</button>
 		</div>
+		<hr style="border:1px solid black;">
 		
 		<div class="thumbnailArea">
-			
+		 
+			<% for (Thumbnail t : list) { %>
 			
 				<div class="thumb-list" align="center">
 					<div>
+						<input type="hidden" name="bno" value="<%= t.getBno() %>"/>
+						<img src="<%= request.getContextPath() %>/resources/images/attachment/<%= t.getBoardfile() %>" 
+							width="200px" height="150px"/>
+					</div>
+					
+					<p>
+						<%= t.getUserId()%>
+						<div>
+							<img src="" alt="스크랩" />
+						</div>
+						<br />
+						<%= t.getBcontent() %>
+					</p>
+				</div>
+			<% } %>
+			<br /><br />
+		</div>
+			
+			
 						
 					
 
 			<br><br>
 			
-			<% if(m != null) { %>
-				
-				<button onclick="location.href='views/thumbnail/thumbnailInsertForm.jsp'">작성하기</button>
-				
-			<% } %>
-		</div>
-	</div>
-
 	</section>
 	<br />
 	<br />
@@ -148,13 +197,7 @@
 				
 			<% } %>	
 
-
-
-	<script>
-	function goMain() { 
-		location.href = '<%= request.getContextPath() %>/index.jsp'; 
-	}		
-	</script>
 	<%@ include file="/views/common/footer.jsp"%>
+	
 </body>
 </html>

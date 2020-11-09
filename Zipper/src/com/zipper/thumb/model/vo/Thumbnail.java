@@ -44,6 +44,10 @@ public class Thumbnail extends Board implements Serializable{
 		super(bno, btitle, bcontent, bview, boardfile, profile);
 		
 	}
+	
+	public Thumbnail(int bno, String userId, String boardfile) {
+		super(bno, userId, boardfile);
+	}
 
 
 

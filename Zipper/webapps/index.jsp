@@ -76,7 +76,7 @@
 
 	<script>
 		function goZippop() {
-			location.href = "<%= request.getContextPath() %>/views/community/zippop.jsp";
+			location.href = "<%= request.getContextPath() %>/zippop.tn";
 		};
 		function goClass() {
 			location.href = "<%= request.getContextPath() %>/classFromMain.cfm";

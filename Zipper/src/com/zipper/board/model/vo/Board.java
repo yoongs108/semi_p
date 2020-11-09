@@ -77,6 +77,14 @@ public class Board implements Serializable{
 		this.boardfile = boardfile;
 		this.profile = profile;
 	}
+	
+	
+	public Board(int bno, String userId, String boardfile) {
+		super();
+		this.bno = bno;
+		this.userId = userId;
+		this.boardfile = boardfile;
+	}
 
 	@Override
 	public String toString() {
