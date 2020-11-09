@@ -50,7 +50,7 @@
 			<table>
 				<tr>
 					<td>클래스 명</td>
-					<td style="text-align:right;"><%= request.getParameter("cName") %></td>
+					<td style="text-align:right;"><%= request.getParameter("cname") %></td>
 				</tr>
 				<tr>
 					<td>총 결제 금액</td>
@@ -79,7 +79,7 @@
 	
 	<script type="text/javascript">
 		function goClass() {
-			location.href = "<%= request.getContextPath() %>/views/class/class.jsp";
+			location.href = "<%= request.getContextPath() %>/classFromMain.cfm";
 		};
 	</script>
 </body>

@@ -1,16 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" import="com.zipper.classMain.model.vo.*, java.util.*"%>
     
-    <% 	ClassList classList = (ClassList)request.getAttribute("cList");
-		Teacher teacher = (Teacher)request.getAttribute("tList");
+    <% 	ClassList classList = (ClassList)request.getAttribute("clist");
     %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>수강신청 및 결제</title>
-<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
+
 <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
+
+<!-- 다음주소 api -->
+<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+
 <style type="text/css">
 
 	section {
@@ -112,7 +115,7 @@
 			
 			<div class="class">
 				<div>
-					<img class="classImg" src="../../resources/images/class/carouselImg/h.jpg" alt=""/>
+					<img class="classImg" src="<%= request.getContextPath() %>/resources/images/fileUpload/<%= classList.getFileNewName()%>" alt=""/>
 				</div>
 				
 				<div class="classDescription">
@@ -137,7 +140,7 @@
 							<td style="vertical-align:top; text-align:right;"> <h4> <%= classList.getPrice() %>원</h4></td>
 						</tr>
 						<tr>
-							<td><%= teacher.getTname() %></td>
+							<td><%= classList.getTname() %></td> 
 							<td></td>
 							
 						</tr>
@@ -160,7 +163,7 @@
 						<h4>닉네임</h4>
 					</td>
 					<td>
-						<input type="text" size="20" name="userNick" id="userNick" class="form-control" value="<%= m.getMnick() %>">
+						<input type="text" size="20" name="userNick" id="userNick" class="form-control" value="<%= m.getMnick() %>" disabled>
 					</td>
 					<td></td>
 				</tr>
@@ -169,7 +172,7 @@
 						<h4>연락처</h4>
 					</td>
 					<td>
-						<input type="text" name="tel" id="tel" class="form-control" value="<%= m.getMcontact() %>">
+						<input type="text" name="tel" id="tel" class="form-control" value="<%= m.getMcontact() %>" disabled>
 					</td>
 				</tr>
 			
@@ -178,15 +181,9 @@
 						<h4>이메일</h4>
 					</td>
 					<td>
-						<input type="text" size="20" name="userEmail" id="userEmail" class="form-control" value="<%= m.getMemail() %>">
+						<input type="text" size="20" name="userEmail" id="userEmail" class="form-control" value="<%= m.getMemail() %>" disabled>
 					</td>
 					<td>
-						&nbsp;
-						<select name="" id="" class="btn btn-default form-control" style="width : 130px; background : none;">
-							<option value="@naver.com" >@naver.com</option>
-							<option value="@daum.net" >@daum.net</option>
-							<option value="@gmail.com" >@gmail.com</option>
-						</select>
 					</td>
 				</tr>
 			</table>
@@ -214,7 +211,7 @@
 						<h4>연락처 </h4>
 					</td>
 					<td>
-						<input type="text" name="tel" id="tel2" class="form-control" placeholder="010-0000-0000">
+						<input type="text" name="tel" id="tel2" class="form-control" placeholder="010-0000-0000" value="<%= m.getMcontact() %>">
 					</td>
 				</tr>
 				<tr>
@@ -225,7 +222,7 @@
 						<input type="text" size="20" name="zipCode" id="zipCode" class="form-control" placeholder="우편번호">
 					</td>
 					<td>
-						&nbsp;<button type="button" class="btn btn-default">주소검색</button>
+						&nbsp;<button type="button" class="btn btn-default" onclick="addrSearch()">주소검색</button>
 					</td>
 				</tr>
 		
@@ -265,7 +262,7 @@
 				</tr>
 				<tr>
 					<td></td>
-					<td align="right"><h2><%= classList.getPrice() + 3000 %>원</h2></td>
+					<td align="right"><h2><%= classList.getPrice() %>원</h2></td>
 				</tr>
 			</table>
 		</div>
@@ -276,10 +273,27 @@
 		<br />
 		<div>
 			<hr />
-			<input type="checkbox">&nbsp;&nbsp;결제 진행 필수사항 동의 <br />
+			<input type="checkbox" id="checkbox">&nbsp;&nbsp;<label for="checkbox">결제 진행 필수사항 동의 </label><br />
 			
 			<!-- 아코디언 -->
-			<p>개인정보 제 3자 제공 및 결제대행 서비스 표준 이용약관</p> <br /><br />
+			<p>개인정보 제 3자 제공 및 결제대행 서비스 표준 이용약관</p> <%--<img src="<%= request.getContextPath() %>/resources/images/common/downArrow.png" width="15px" height="7.5px" class="accordion" onclick="accordion_hide(this)"/> --%>				
+			 <br />
+			<div class="ac">
+				개인정보 제 3자 제공
+				<%--<img src="<%= request.getContextPath() %>/resources/images/common/downArrow.png" width="15px" height="7.5px" class="accordion" onclick="accordion_hide(this)"/> --%>				
+	        	<p class="accordion_hide"> 개인정보 제 3자 제공 내역</p>
+			
+				개인정보 수집 및 이용
+				<%--<img src="<%= request.getContextPath() %>/resources/images/common/downArrow.png" width="15px" height="7.5px" class="accordion" onclick="accordion_hide(this)"/> --%>				
+	        	<p class="accordion_hide"> 개인정보 수집 및 이용 내역</p>
+				
+	        	결제대행 서비스 이용약관
+				<%--<img src="<%= request.getContextPath() %>/resources/images/common/downArrow.png" width="15px" height="7.5px" class="accordion" onclick="accordion_hide(this)"/> --%>				
+	        	<p class="accordion_hide"> 결제대행 서비스 이용약관 내역</p>
+	        	
+	    	</div>
+			
+			
 			
 			<button style=" width : 700px; color : white;" id="payBtn">결제</button>
 		</div>
@@ -297,7 +311,16 @@
 			location.href = "<%= request.getContextPath() %>/views/class/classDetail.jsp";
 		};
 
-		
+		/* 주소 넣기 */
+		$(function(){
+			var addressArr = '<%= m.getAddress() %>'.split(', ');
+			
+			<% if(m.getAddress() != null) { %>
+			$('#zipCode').val(addressArr[0]);
+			$('#address1').val(addressArr[1]+addressArr[2]);
+			<% } %>
+			
+		});
 		
 		
 		var IMP = window.IMP; // 생략가능
@@ -308,37 +331,59 @@
 		
 		$('#payBtn').on('click', function(){
 			// 문서 로딩될 때 바로 호출
-			
+			if(!$('#checkbox').prop('checked')){
+				alert('약관 동의 후 이용해 주세요');
+				return false;
+			}
 				IMP.request_pay({
-				    merchant_uid : 'merchant_' + new Date().getTime(),
+					pg : 'kakaopay', // 결제정보 추가(임시)
+					pay_methide : 'card', // 임시 추가
+				    merchant_uid : new Date().getTime() + '.zip',
 					name : $('#cName').text(), // 클래스 이름
 					amount : parseInt($('#totalPrice').text()), // 결제 금액
-					buyer_email : $('#userEmail').text(),
-					buyer_name : $('#nick').text(), // 회원 닉네임
-					buyer_tel : $('#tel2').text(),  // 주문자 연락처, 회원 연락처랑 별개
-					buyer_addr : $('#address1').text(),
-					buyer_postcode : $('#zipCode').text(),
+					buyer_email : $('#userEmail').val(),
+					buyer_name : $('#name').val(), // 회원 닉네임
+					buyer_tel : $('#tel2').val(),  // 주문자 연락처, 회원 연락처랑 별개
+					buyer_addr : $('#address1').val(),
+					buyer_postcode : $('#zipCode').val(),
 				}, function(rsp) {
 					if (rsp.success) {
 						//[1] 서버단에서 결제정보 조회를 위해 jQuery ajax로 imp_uid 전달하기
 						$.ajax({
-							url : "/Zipper/insertPayment.pm", //cross-domain error가 발생하지 않도록 동일한 도메인으로 전송
+							url : "<%= request.getContextPath() %>/insertPayment.pm", //cross-domain error가 발생하지 않도록 동일한 도메인으로 전송
 							type : 'POST',
 							dataType : 'json',
 							data : {
-								merchant_uid : rsp.merchant_uid,
-								cName : rsp.name,
-								price : rsp.paid_amount,
-								name : rsp.buyer_name
+								pno : rsp.merchant_uid,
+								mno : <%= m.getMno() %>,
+								cno : <%= classList.getCno() %>,
+								payinfo : rsp.buyer_name + ', ' + rsp.buyer_tel + ', ' +  $('#messege').val(),
+								price : rsp.paid_amount
+								
 							//기타 필요한 데이터가 있으면 추가 전달
+							}, success : function(data) {
+								if(data == 1){
+									// 추가 성공
+								location.href="<%= request.getContextPath() %>/views/payment/paymentConfirm.jsp?cname="
+									+$('#cName').text()
+									+"&pay_method="+rsp.pay_method
+									+"&name="+rsp.buyer_name 
+									+"&date="+rsp.paid_at
+									+"&price="+rsp.paid_amount;
+								} else {
+									// 추가 실패
+									alert("결제정보 저장 실패");
+								}
+							
+								
+							}, error : function() {
+								alert("결제정보 저장 실패");
 							}
+						
 						});
-						location.href="/Zipper/views/payment/paymentConfirm.jsp?cname="
-								+$('#cName').text()
-								+"&pay_method="+rsp.pay_method
-								+"&name="+rsp.buyer_name 
-								+"&date="+rsp.paid_at
-								+"&price="+rsp.paid_amount;
+						
+						
+						
 					} else {
 						var msg = '결제에 실패하였습니다.';
 						msg += '\n에러내용 : ' + rsp.error_msg;
@@ -346,6 +391,50 @@
 					}
 				});
 		});
+		
+		// 참조 API : http://postcode.map.daum.net/guide
+		function addrSearch() {
+	        new daum.Postcode({
+	            oncomplete: function(data) {
+	                // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+
+	                // 각 주소의 노출 규칙에 따라 주소를 조합한다.
+	                // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+	                var fullAddr = ''; // 최종 주소 변수
+	                var extraAddr = ''; // 조합형 주소 변수
+
+	                // 사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
+	                if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
+	                    fullAddr = data.roadAddress;
+
+	                } else { // 사용자가 지번 주소를 선택했을 경우(J)
+	                    fullAddr = data.jibunAddress;
+	                }
+
+	                // 사용자가 선택한 주소가 도로명 타입일때 조합한다.
+	                if(data.userSelectedType === 'R'){
+	                    //법정동명이 있을 경우 추가한다.
+	                    if(data.bname !== ''){
+	                        extraAddr += data.bname;
+	                    }
+	                    // 건물명이 있을 경우 추가한다.
+	                    if(data.buildingName !== ''){
+	                        extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+	                    }
+	                    // 조합형주소의 유무에 따라 양쪽에 괄호를 추가하여 최종 주소를 만든다.
+	                    fullAddr += (extraAddr !== '' ? ' ('+ extraAddr +')' : '');
+	                }
+
+	                // 우편번호와 주소 정보를 해당 필드에 넣는다.
+	                $('#zipCode').val(data.zonecode); //5자리 새우편번호 사용
+	                
+	                $('#address1').val(fullAddr);
+
+	                // 커서를 상세주소 필드로 이동한다.
+	                $('#address2').focus();
+	            }
+	        }).open();
+	    };
 	
 	</script>
 	<%@ include file="/views/common/footer.jsp"%>

@@ -44,9 +44,9 @@ public class PaymentDAO {
 		}
 	}
 
-	public Payment beforePayment(Connection con, int cno) {
+	public ClassList beforePayment(Connection con, int cno) {
 		
-		Payment pm = null;
+		ClassList cl = null;
 		
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
@@ -57,22 +57,24 @@ public class PaymentDAO {
 		
 		try {
 			pstmt = con.prepareStatement(sql);
-			
+
 			pstmt.setInt(1, cno);
 			
 			rset = pstmt.executeQuery();
 			
 			if(rset.next()) {
-				pm = new Payment();
+				cl = new ClassList();
 				
-				pm.setPno(rset.getString("pno"));
-				pm.setMno(rset.getInt("mno"));
-				pm.setCno(rset.getInt("cno"));
-				pm.setPayinfo(rset.getString("payinfo"));
-				pm.setPdate(rset.getDate("pdate"));
-				pm.setPstatus(rset.getString("pstatus"));
-				pm.setTotal(rset.getInt("total"));
-				
+				cl.setCno(cno);
+				cl.setCname(rset.getString("cname"));
+				cl.setPrice(rset.getInt("price"));
+				cl.setFileNewName(rset.getString("file_new_name"));
+				// 강사명
+//				cl.setPayinfo(rset.getString("payinfo"));
+//				cl.setPdate(rset.getDate("pdate"));
+//				cl.setPstatus(rset.getString("pstatus"));
+//				cl.setTotal(rset.getInt("total"));
+				System.out.println(cl);
 			}
 	
 		} catch (SQLException e) {
@@ -82,7 +84,7 @@ public class PaymentDAO {
 			close(pstmt);
 		}
 		
-		return pm;
+		return cl;
 	}
 
 	public int insertPayment(Connection con, Payment pm) throws PaymentException {
@@ -100,9 +102,7 @@ public class PaymentDAO {
 			pstmt.setInt(2,  pm.getMno());
 			pstmt.setInt(3,  pm.getCno());
 			pstmt.setString(4,  pm.getPayinfo());
-			pstmt.setDate(5, pm.getPdate());
-			pstmt.setString(6,  pm.getPstatus());
-			pstmt.setInt(7, pm.getTotal());
+			pstmt.setInt(5, pm.getTotal());
 			
 			result = pstmt.executeUpdate();
 			

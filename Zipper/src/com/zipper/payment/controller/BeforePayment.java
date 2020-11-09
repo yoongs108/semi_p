@@ -1,7 +1,6 @@
 package com.zipper.payment.controller;
 
 import java.io.IOException;
-import java.util.HashMap;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,8 +8,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.zipper.classMain.model.vo.ClassList;
 import com.zipper.payment.model.service.PaymentService;
-import com.zipper.payment.model.vo.Payment;
 
 /**
  * Servlet implementation class PaymentForm
@@ -33,12 +32,12 @@ public class BeforePayment extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int cno = Integer.parseInt(request.getParameter("cno"));
 		
-		Payment payment = new PaymentService().beforePayment(cno);
+		ClassList clist = new PaymentService().beforePayment(cno);
 		
 		String page = "";
 		
-	    if(payment != null) {
-	         request.setAttribute("pm", payment);
+	    if(clist != null) {
+	         request.setAttribute("clist", clist);
 	     
 	         page = "views/payment/payment.jsp";
 	      } else {
