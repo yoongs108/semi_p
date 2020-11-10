@@ -2,13 +2,8 @@ package com.zipper.payment.model.vo;
 
 import java.io.Serializable;
 import java.sql.Date;
-import java.util.ArrayList;
-
-import com.zipper.member.model.vo.Member;
-
 
 public class Payment implements Serializable{
-   
    /**
     * 
     */
@@ -21,7 +16,7 @@ public class Payment implements Serializable{
    private String payinfo;
    private Date pdate;
    private String pstatus;
-   private int total;
+   private int total; // 문자열로 받아야 할까요?
    
    private String fileNewName; // 사진
    private String cname; // 수강명
@@ -109,6 +104,5 @@ public class Payment implements Serializable{
    public void setCname(String cname) {
       this.cname = cname;
    }
-   
    
 }
