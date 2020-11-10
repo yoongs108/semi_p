@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.sql.Date;
 import java.util.ArrayList;
 
-import com.zipper.classMain.model.vo.Kit;
 import com.zipper.member.model.vo.Member;
 
 
@@ -24,15 +23,15 @@ public class Payment implements Serializable{
 	private String pstatus;
 	private int total;
 	
-	
+	private String fileNewName; // 사진
+	private String cname; // 수강명
 	
 	public Payment() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-
-
-	public Payment(String pno, int mno, int cno, String payinfo, Date pdate, String pstatus, int total) {
+	
+	public Payment(String pno, int mno, int cno, String payinfo, Date pdate, String pstatus, int total, String fileNewName, String cname) {
 		super();
 		this.pno = pno;
 		this.mno = mno;
@@ -41,13 +40,17 @@ public class Payment implements Serializable{
 		this.pdate = pdate;
 		this.pstatus = pstatus;
 		this.total = total;
+		this.fileNewName = fileNewName;
+		this.cname = cname;
 	}
-	
+
 	@Override
 	public String toString() {
 		return "Payment [pno=" + pno + ", mno=" + mno + ", cno=" + cno + ", payinfo=" + payinfo + ", pdate=" + pdate
-				+ ", pstatus=" + pstatus + ", total=" + total + "]";
+				+ ", pstatus=" + pstatus + ", total=" + total + ", fileNewName=" + fileNewName + ", cname=" + cname
+				+ "]";
 	}
+
 	public String getPno() {
 		return pno;
 	}
@@ -91,7 +94,21 @@ public class Payment implements Serializable{
 		this.total = total;
 	}
 
-	
+	public String getFileNewName() {
+		return fileNewName;
+	}
+
+	public void setFileNewName(String fileNewName) {
+		this.fileNewName = fileNewName;
+	}
+
+	public String getCname() {
+		return cname;
+	}
+
+	public void setCname(String cname) {
+		this.cname = cname;
+	}
 	
 	
 }
