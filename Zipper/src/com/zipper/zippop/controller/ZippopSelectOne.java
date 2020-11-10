@@ -50,7 +50,7 @@ public class ZippopSelectOne extends HttpServlet {
 	      //   - key로 객체를 간접 접근하기 때문에, 실제 객체의 내용이 변경되어도
 	      //     이를 바로 확인하기 어렵다.
 
-		  //     Hashmap 뭐냐고요...
+		  //     Hashmap 뭐냐고요........
 		
 		HashMap<String, Object> thumb 
 		   = new ThumbnailService().selectOne(bno);

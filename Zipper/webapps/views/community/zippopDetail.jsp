@@ -70,6 +70,7 @@
 		margin-top: 100px;
 		text-align: center;
 	}
+	
 	.top {
 		height :170px;
 		position: fixed; 
@@ -114,7 +115,6 @@
 	}
 	
 	
-
 </style>
 
 </head>
