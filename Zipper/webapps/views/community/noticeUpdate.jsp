@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import="com.zipper.board.model.vo.*, java.util.*" %>
+<% Board b = (Board)request.getAttribute("board");
+	System.out.println("b가져옴?"+b);
+%>  
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -25,7 +29,6 @@
 		font-weight: bold;
 		border-bottom: 1px solid black;
 		
-		
 	}
 	.table2 tr,
 	.table2 td {
@@ -34,12 +37,6 @@
 		border-bottom: 1px solid black;
 	}
 	
-	input[name=title]{
-		width : 500px;
-	}
-	input[name=date]{
-		width : 100px;
-	}
 	#btn{
 		width : 80px;
 		height : 30px;
@@ -76,27 +73,27 @@
                			<table class = "table2" style="padding-top:10px; width : 85%;">
                			  
 	                        <tr>
-	                        	<td style="padding-left: 20px;" name="title">제목</td>
+	                        	<td style="padding: 10px;" name="td">제목</td>
 	                        	<td>
-	                        		<input type = text name = title 
+	                        		<input type = text name = title value="<%=b.getBtitle() %>"
 	                        			size=100 placeholder ="  제목을 입력해 주세요.">
 	                        	</td>
 	                        	<td>
-	                        		<td style="padding: 10px;" name="date" >작성일</td>
-									<td><input type="text" readonly="readonly" name="date" id="date" ></td>
+	                        		<td style="padding: 10px;" id="tddate">작성일</td>
+									<td><input type="text" readonly="readonly" name="date" id="date"></td>
 	                        	</td>
 	                        </tr>
 	                        <tr>
 	                        	<td colspan="2">
-	                        		<textarea name = content cols=105 rows=15></textarea>
+	                        		<textarea name = content cols=105 rows=15> <%=b.getBcontent() %></textarea>
 	                        	</td>
 	                        </tr>
                         </table>
 
         	<div align="center" style="margin-top:50px;margin-bottom:80px;">
-			<input type="submit" value="작성" id="btn"> 
+			<input type="submit" value="수정" id="btn"> 
 			&nbsp;&nbsp;&nbsp;&nbsp;
-			<input type="button" onclick="location.href = '<%= request.getContextPath() %>/selectList.no?'" id="btn" value="취소"> 
+			<button onclick="location.href = '<%= request.getContextPath() %>/selectList.no?'" type="reset" id="btn">취소</button>
 			</div>
         		
         		<script>
@@ -106,17 +103,11 @@
 					//let today = new date();
 		         	//document.write(today)
 		         	//date.innerHTML += date + "<br>";
-		           // div3.innerHTML += date1 + "<br>";
 						var st_date = new Date().toISOString().substr(0, 10).replace('T', ' ');
 						// alert(st_date);
 						$('#date').val(st_date);
 					 }
-					 <%--
-					 function cancle(){
-						 alert("실행");
-						 location.href = "<%= request.getContextPath() %>/selectList.no?";
-					 }
-					 --%>
+		           // div3.innerHTML += date1 + "<br>";
 				</script>
         </form>
         
@@ -124,7 +115,7 @@
 		<% } else {
 		request.setAttribute("msg", "관계자 외에 접근이 불가능한 페이지입니다.");
 		request.getRequestDispatcher("view/common/errorPage.jsp").forward(request, response);
-		} %>
+	} %>
 	</section>
 	<%@ include file="/views/common/footer.jsp"%>
 </body>

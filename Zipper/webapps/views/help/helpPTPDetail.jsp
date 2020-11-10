@@ -52,9 +52,18 @@
    #adminupdate{
    	  margin-left : 200px;
    	  position: relative;
-   	  top : -35px;
-   	
+   	  top : -40px;
+   	  width : 80px;
+	  height : 30px;
+	  color : white;
+	  background-color : black;
+	  border : none;	
    }
+   
+   #adminupdate:hover{
+		background-color: #555;
+		cursor: pointer;
+	}
 </style>
 </head>
 <body id="body">

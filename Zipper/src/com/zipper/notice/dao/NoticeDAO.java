@@ -14,6 +14,7 @@ import java.util.Properties;
 
 
 import com.zipper.board.model.vo.Board;
+import com.zipper.common.exception.NoticeException;
 
 public class NoticeDAO {
 
@@ -80,7 +81,7 @@ public class NoticeDAO {
 	}
 
 
-	public Board selectOne(Connection con, int bno) { // connection 과 int는 받아오는 타입이다. 
+	public Board selectOne(Connection con, int bno) throws NoticeException { // connection 과 int는 받아오는 타입이다. 
 		Board bs = new Board();
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
@@ -112,6 +113,7 @@ public class NoticeDAO {
 
 		} catch (SQLException e) {
 			e.printStackTrace();
+			throw new NoticeException("[DAO] : " + e.getMessage()); 
 			
 		} finally {
 			close(rset);
@@ -120,4 +122,57 @@ public class NoticeDAO {
 
 		return bs;
 	}
+
+public int insertNotice(Connection con, Board b) throws NoticeException {
+	int result = 0;
+	PreparedStatement pstmt = null;
+	String sql = prop.getProperty("insertNotice");
+	
+	//pstmt = con.prepareStatement(sql); try/catch 처리ok
+	try {
+		pstmt = con.prepareStatement(sql);
+		
+		pstmt.setString(1, b.getBtitle());
+		pstmt.setString(2, b.getBcontent());
+		pstmt.setDate(3, b.getBdate());
+		
+		result = pstmt.executeUpdate();
+		
+	} catch (SQLException e) {
+		e.printStackTrace();
+		throw new NoticeException("[DAO] : " + e.getMessage()); 
+	} finally { 
+		close(pstmt);
+	}
+	
+	return result;
+
 }
+
+public int deleteNotice(Connection con, int bno) throws NoticeException {
+
+	int result = 0;
+	PreparedStatement pstmt = null;
+	
+	String sql = prop.getProperty("deleteNotice");
+	
+	try {
+		pstmt = con.prepareStatement(sql);
+		
+		pstmt.setInt(1, bno);
+		
+		result = pstmt.executeUpdate();
+		
+	} catch (SQLException e) {
+		
+		e.printStackTrace();
+		throw new NoticeException("[DAO] : " + e.getMessage()); 
+	} finally {
+		close(pstmt);
+	}
+	
+	return result;
+}
+	
+}
+
