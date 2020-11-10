@@ -11,9 +11,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Properties;
 
+
+import com.zipper.board.model.vo.Attachment;
+
 import com.zipper.board.model.vo.Board;
 import com.zipper.classMain.model.vo.ClassList;
-import com.zipper.classMain.model.vo.Kit;
 import com.zipper.classMain.model.vo.Video;
 import com.zipper.member.model.vo.Member;
 import com.zipper.payment.model.vo.Payment;
@@ -45,7 +47,7 @@ public class ClassDAO {
 	}
 	
 
-	// 공주
+	// 공주 클래스 상세보기
 	public ClassList selectOne(Connection con, int cno) {
 		
 		ClassList classList = null;
@@ -147,7 +149,7 @@ public class ClassDAO {
 //	}
 	
 
-	// 클래스 리스트 조회
+	// 공주 클래스 리스트 조회
 	public ArrayList<ClassList> selectList(Connection con) {
 		ArrayList<ClassList> list = new ArrayList<>();
 		PreparedStatement pstmt = null;
@@ -182,6 +184,7 @@ public class ClassDAO {
 		return list;
 	}
 
+	
 	// 수강중 클래스
 	public ArrayList<Payment> classingList(Connection con, int mno) {
 		
@@ -223,4 +226,61 @@ public class ClassDAO {
 		return list;
 	}
 
+
+	// 공주 클래스 소개 작성
+	public int insertWrite(Connection con, ClassList cl) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("insertWrite");
+		
+		try {
+			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setString(1, cl.getCname());
+			pstmt.setInt(2, cl.getPrice());
+			pstmt.setString(3, cl.getCintro());
+			pstmt.setString(4, cl.getCourse());
+			pstmt.setString(5, cl.getKdetail());
+
+			
+			result = pstmt.executeUpdate();
+			
+			System.out.println(result);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	public int insertAttachment(Connection con, Attachment alist) {
+	      
+	      int result = 0;
+	      
+	      PreparedStatement pstmt = null;
+	      
+	      String sql = prop.getProperty("insertAttachment");
+	      
+	      try {
+	         pstmt = con.prepareStatement(sql);
+	         
+	         pstmt.setString(1, alist.getFile_origin_name());
+	         pstmt.setString(2, alist.getFile_new_name());
+
+	         result = pstmt.executeUpdate();
+	         
+	      } catch (SQLException e) {
+	         e.printStackTrace();
+	         
+	      } finally {
+	         close(pstmt);
+	         
+	      }
+	      
+	      return result;
+	}	   
 }

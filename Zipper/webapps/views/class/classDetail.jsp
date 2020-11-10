@@ -13,21 +13,19 @@
 <style type="text/css">
 
 	section {
-		width: 1024px;
-      	margin-left: auto;
-      	margin-right: auto;
-      	position: relative;
-      	top: 30px;
+      width: 1024px;
+      margin-left:auto;
+      margin-right:auto;
+      
    }
    
-   
-	#back {
+	 #back{
 		position : absolute;
+		top : 100px;
 		left : 950px;
 		height : 80px;
 		width: 80px;
-		position:relative;
-		top: -70px;		
+		
 	}
 	
 	#back:hover{
@@ -59,15 +57,7 @@
 		margin-top: 100px;
 		 
 	}
- 	.ac a {
-        display: block;
-        color : black;
-        text-decoration: none;
-        margin: 0;
-		padding: 10px;
-		border-radius: 5px;
-	}
-        
+
 	
     .accordion {
     	cursor: pointer;
@@ -101,10 +91,7 @@
 	.tabcontent_wrap p {
 		margin-bottom : 30px;
 	}
-	.page_wrap {
-		paddig-top: 100px;
-	}
-
+	
 
 </style>
 
@@ -119,7 +106,7 @@
 				alt="class1" id="back" onclick="goClass()"> 
 		</div>
  		
-		<div class="page_wrap">
+		<div>
 			<div class="left_page">
 			
 				<div><img src="<%= request.getContextPath() %>/resources/images/fileUpload/<%= classList.getFileNewName()%>" alt="" width="650px" height="500px"/></div>

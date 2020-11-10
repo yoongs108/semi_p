@@ -19,6 +19,14 @@
 		text-align: center;
 	}
 	
+	/* 제목과 작성일 */
+	.table2 tr {
+		padding: 20px 0 20px 5px ;
+		font-weight: bold;
+		border-bottom: 1px solid black;
+		
+		
+	}
 	.table2 tr,
 	.table2 td {
 		padding: 20px 0 20px 5px ;
@@ -26,6 +34,12 @@
 		border-bottom: 1px solid black;
 	}
 	
+	input[name=title]{
+		width : 500px;
+	}
+	input[name=date]{
+		width : 100px;
+	}
 	#btn{
 		width : 80px;
 		height : 30px;
@@ -38,9 +52,12 @@
 		background-color: #555;
 		cursor: pointer;
 	}
+	
 	textarea { 
 		resize : none;
 	}
+	
+
 </style>
 </head>
 <body>
@@ -54,18 +71,19 @@
 		
 		<div id="textarea" align = "center">
 		
-			<form action="<%= request.getContextPath() %>/nInsert.no" method="post">
+			<form action="<%=request.getContextPath()%>/nInsert.no" method="post">
 			
                			<table class = "table2" style="padding-top:10px; width : 85%;">
-	                        <tr >
-	                        	<td style="padding: 10px;">제목</td>
+               			  
+	                        <tr>
+	                        	<td style="padding-left: 20px;" name="title">제목</td>
 	                        	<td>
 	                        		<input type = text name = title 
 	                        			size=100 placeholder ="  제목을 입력해 주세요.">
 	                        	</td>
 	                        	<td>
-	                        		<td>작성일</td>
-									<td><input type="text" id="date"></td>
+	                        		<td style="padding: 10px;" name="date" >작성일</td>
+									<td><input type="text" readonly="readonly" name="date" id="date" ></td>
 	                        	</td>
 	                        </tr>
 	                        <tr>
@@ -76,28 +94,29 @@
                         </table>
 
         	<div align="center" style="margin-top:50px;margin-bottom:80px;">
-			<button onclick="summit();" id="btn">작성</button>
+			<input type="submit" value="작성" id="btn"> 
 			&nbsp;&nbsp;&nbsp;&nbsp;
-			<button onclick="history.go(-1)" id="btn">취소</button>
+			<input type="button" onclick="location.href = '<%= request.getContextPath() %>/selectList.no?'" id="btn" value="취소"> 
 			</div>
         		
         		<script>
-					function summit(){
-						$("#uploadPTP").attr("action","<%=request.getContextPath()%>/PTPUpdate.bo");
-					}
 					 // 현재시간
 					window.onload = function(){
 					//var date1 = new Date();
 					//let today = new date();
 		         	//document.write(today)
 		         	//date.innerHTML += date + "<br>";
-						var st_date = new Date().toISOString().substr(0, 10).replace('T', ' ');
-						alert(st_date);
-						$('#date').val(st_date);
-					
-					 }
-
 		           // div3.innerHTML += date1 + "<br>";
+						var st_date = new Date().toISOString().substr(0, 10).replace('T', ' ');
+						// alert(st_date);
+						$('#date').val(st_date);
+					 }
+					 <%--
+					 function cancle(){
+						 alert("실행");
+						 location.href = "<%= request.getContextPath() %>/selectList.no?";
+					 }
+					 --%>
 				</script>
         </form>
         
@@ -105,7 +124,7 @@
 		<% } else {
 		request.setAttribute("msg", "관계자 외에 접근이 불가능한 페이지입니다.");
 		request.getRequestDispatcher("view/common/errorPage.jsp").forward(request, response);
-	} %>
+		} %>
 	</section>
 	<%@ include file="/views/common/footer.jsp"%>
 </body>

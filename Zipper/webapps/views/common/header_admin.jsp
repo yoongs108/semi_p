@@ -10,6 +10,8 @@
 <script src="<%= request.getContextPath() %>/resources/js/jquery-3.5.1.min.js"></script>
 <!-- 합쳐지고 최소화된 최신 CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+<!--  -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	<style>
 		body {
             margin : 0;
@@ -18,7 +20,7 @@
         
         header {
 	        height : 40px;
-            background : orange;
+            background : grey;
             clear : both;
         }
         /* 가로 공통 */
@@ -88,9 +90,9 @@
 
 	<header class="templateWidth">
         
-		<img src="<%= request.getContextPath() %>/resources/images/common/aaaa.png" alt="로고" onclick="goHome()" style="float : left;"/>
+		<img src="<%= request.getContextPath() %>/resources/images/common/logo1.png" alt="로고" onclick="goHome()" style="float : left;"/>
 		
-		<img src="<%= request.getContextPath() %>/resources/images/common/profile.png" alt="프로필" onclick="goHome()" style="float : right; border : 2px solid black; border-radius: 50%; width : 35px; height : 35px; background : lightgrey;"/>
+		<img src="<%= request.getContextPath() %>/resources/images/profile/<%= m.getProfile() %>" alt="프로필" onclick="goMyPage()" style="float : right; border : 2px solid black; border-radius: 50%; width : 35px; height : 35px;"/>
 		
 		<p id="admin" style="float : right; display : inline-block;">
 			'<%= m.getMnick() %>' 관리자님 환영합니다!
@@ -98,25 +100,18 @@
 		
 		<nav>
 			<ul class="nav nav-pills nav-stacked">
-				<li><img src="<%= request.getContextPath() %>/resources/images/common/menu.png" onclick="goMain()"/></li>
-				<li><img src="<%= request.getContextPath() %>/resources/images/common/menu.png" onclick="goReport()"/></li>
+				<li><img src="<%= request.getContextPath() %>/resources/images/common/home.png" onclick="goMain()"/></li>
+				<li><img src="<%= request.getContextPath() %>/resources/images/common/warning2.png" onclick="goReport()"/></li>
 				<li>
-					<img src="<%= request.getContextPath() %>/resources/images/common/menu.png" onclick="goBoard()"/>
+					<img src="<%= request.getContextPath() %>/resources/images/common/qna.png" onclick="goBoard()"/>
 					<ul>
 						<li><a href="#">1대1문의 리스트</a></li>
 						<li><a href="#">FAQ 관리</a></li>
 						<li><a href="#">공지사항 관리</a></li>
 					</ul>
 				</li>
-				<li>
-					<img src="<%= request.getContextPath() %>/resources/images/common/menu.png" onclick="goHome()"/>
-					<ul>
-						<li><a href="#">1대1문의 리스트</a></li>
-						<li><a href="#">FAQ 관리</a></li>
-						<li><a href="#">공지사항 관리</a></li>
-					</ul>
-				</li>
-				<li><img src="<%= request.getContextPath() %>/resources/images/common/menu.png" onclick="goHome()"/></li>
+				<li><img src="<%= request.getContextPath() %>/resources/images/common/userInfo.png" onclick="goUserInfo()"/>
+				<li><img src="<%= request.getContextPath() %>/resources/images/common/payment.png" onclick="goPayment()"/></li>
 				<li><img src="<%= request.getContextPath() %>/resources/images/common/menu.png" onclick="goHome()"/></li>
 				<li><img src="<%= request.getContextPath() %>/resources/images/common/menu.png" onclick="goHome()"/></li>
 			</ul>
@@ -129,12 +124,24 @@
 			location.href="<%= request.getContextPath() %>/index.jsp";
 		}
 		
+		function goMyPage() {
+			location.href="<%= request.getContextPath() %>/views/myPage/myPageMain.jsp";
+		}
+		
 		function goMain() {
 			location.href="<%= request.getContextPath() %>/views/admin/admin.jsp";
 		}
 		
 		function goReport() {
 			location.href="<%= request.getContextPath() %>/views/admin/report.jsp";
+		}
+		
+		function goUserInfo() {
+			location.href="<%= request.getContextPath() %>/uSelectList.ad";
+		}
+		
+		function goPayment() {
+			location.href="<%= request.getContextPath() %>/views/admin/payment.jsp";
 		}
 		
 		/* 페이지 로드시 실행 */

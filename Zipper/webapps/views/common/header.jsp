@@ -11,6 +11,9 @@
 <!-- 합쳐지고 최소화된 최신 CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 
+<!-- 부트스트랩 스크립트 -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
 <!-- 구글 로그인 api meta-->
 <meta name = "google-signin-client_id"content = "894633026908-nhpt910n7saunji257c36vovru0h3n3t.apps.googleusercontent.com">
 
@@ -25,7 +28,7 @@
         }
 		
 		/* 헤더 이미지 버튼들 절대 위치 */
-        header #hamburger, #logo, #write, #profile {
+        header #hamburger, #profile {
             position: absolute;
             top : 10px;
             width: 25px;
@@ -33,7 +36,8 @@
             z-index: 5001;
         }
 
-        header img:hover {
+        header img:hover,
+        header #logo:hover {
             cursor: pointer;
         }
 
@@ -43,22 +47,36 @@
         }
 
         #logo {
+         	position: absolute;
+            top : 5px;
             right: 15px;
+            z-index: 5001;
+            font-size: 25px;
         }
         
         #profile {
-            right: 40px;
+            right: 120px;
             border : 2px solid black;
             border-radius: 50%;
         }
 
         #write {
-            right: 70px;
+            width: 25px;
+            height: 25px;
+            
+        }
+        
+        /* 글쓰기 버튼 박스 */
+        #writeBox {
+            position: absolute;
+            top : 10px;
+        	right: 150px;
+        	z-index: 5002;
         }
 
         /* nav */
         header nav {
-            position : absolute;
+            position : fixed;
             top : 0;
             left: 0;
             height : 100%;
@@ -71,14 +89,15 @@
         
 		header p {
 			position : absolute;
-            top : 50px;
+            top : 40px;
             right: 10px;
+            z-index: 5001;
 		}
 
         header ul {
             list-style: none;
             display : inline-block;
-            margin-bottom: 30px; /*    */
+            margin-bottom: 30px; /*  */
         }
 
         nav div.right {
@@ -102,10 +121,6 @@
             border-right : 1px solid grey;
             text-align: left;
         }
-        nav img {
-            width: 25px;
-            height: 25px;
-        }
 
         nav hr {
             border : none;
@@ -119,6 +134,11 @@
         	color : black;
         }
         
+        nav a:hover * {
+        	font-weight : bold;
+        	color : black;
+        }
+        
         nav h3, h4 {
         	display : inline-block;
         }
@@ -126,6 +146,7 @@
         .height50 {
         	height : 50px;
         }
+        
 	</style>
 </head>
 <body>
@@ -134,14 +155,20 @@
 
 		<img src="<%= request.getContextPath() %>/resources/images/common/menu.png" id="hamburger" onclick="navToggle()"/>
 		
-        <img src="<%= request.getContextPath() %>/resources/images/aaaa.png" alt="ZIPPER" id="logo" onclick="goHome()"/>
+		<span id="logo" onclick="goHome()">ZIPPER</span>
         
 		<% if(m != null) { %>
         
-        <img src="<%= request.getContextPath() %>/resources/images/common/profile.png" alt="profile" id="profile" onclick="goMyPage()"/>
-        
-        <img src="<%= request.getContextPath() %>/resources/images/common/pen.png" id="write" />
-        
+        <img src="<%= request.getContextPath() %>/resources/images/profile/<%= m.getProfile() %>" alt="profile" id="profile" onclick="goMyPage()"/>
+        <!-- 글쓰기 버튼 영역 -->
+        <div id="writeBox">
+        	<img src="<%= request.getContextPath() %>/resources/images/common/pen.png" id="write" data-toggle="dropdown"/>
+        	<ul class="dropdown-menu" role="menu" style="top : 25x;">
+			    <li><a href="#">ZIP POP</a></li>
+			    <li><a href="#">1:1 문의</a></li>
+			</ul>
+		</div>
+		
 		<p id="admin">
 			'<%= m.getMnick() %>' 님 환영합니다!
 		</p>
@@ -233,7 +260,7 @@
 	            <br /><br />
 	            <br /><br />
 	            <br /><br />
-                <img src="resources/images/profile.png" alt="logo" onclick="goMyPage()"/>
+	            <span onclick="goHome()" style="font-size : 25px;">ZIPPER</span>
                 <br><br>
                 <br><br>
                 <button type="button" class="btn btn-default" onclick="logout()">로그아웃</button>
@@ -255,42 +282,47 @@
     </header>
     <script>
     
-	    /* 햄버거 토글 */
+    	/* 햄버거 토글 */
 	    function navToggle(){
 	        $('nav').toggleClass('nav_hide');
 	    }
         function login(){
-			$('#loginForm').submit();
+			//$('#loginForm').submit();
 			
-			<%--  $.ajax({
+			$.ajax({
 				url : '<%= request.getContextPath() %>/login.me',
 				type : 'post',
-				data : { userId : $('#userId').val(),
+				data : { 
+						 userId : $('#userId').val(),
 					     userPwd : $('#userPwd').val()
-						
 						},
 				success : function(data){
 					// console.log(data);
-					
-					// 전달된 결과가 0이면 사용자 없음 : 가입 가능!
-					//    ' '   1   ' ' 있음 : 가입 불가!
-					if( data == 0 ) {
-						alert("");
+
+					if( data == 1 ) {
+						alert("로그인 되었습니다.");
+						location.href = "<%= request.getContextPath() %>/index.jsp";
 					} else {
-						alert("이미 사용 중인 아이디입니다.");
+						alert("아이디 혹은 비밀번호를 확인해주세요");
+						location.href = "<%= request.getContextPath() %>/index.jsp";
 					}
 				}, error : function(){
 						alert("아이디 혹은 비밀번호를 확인해주세요");
+						location.href = "<%= request.getContextPath() %>/index.jsp";
 				}
-			});  --%>
+			});
 		}
         function join(){
         	location.href="<%= request.getContextPath() %>/views/join.jsp";
 		}
         function logout(){
+        	if(!confirm("로그아웃 하시겠습니까?")){
+        		return false;
+        	}
+        	
 			location.href="<%= request.getContextPath() %>/logout.me";
 		}
-		function goHome() {
+		function goHome(){
 			location.href="<%= request.getContextPath() %>/index.jsp";
 		}
 		function goMyPage(){

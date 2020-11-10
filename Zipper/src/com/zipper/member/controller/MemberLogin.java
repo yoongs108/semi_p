@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.google.gson.Gson;
 import com.zipper.member.model.service.MemberService;
 import com.zipper.member.model.vo.Member;
 
@@ -48,6 +49,8 @@ public class MemberLogin extends HttpServlet {
 		//로그인 성공 / 실패 시 이동할 페이지
 		String page = "";
 		
+		int result = 0;
+		
 		if(m != null) {
 			// 로그인 성공
 			
@@ -57,19 +60,18 @@ public class MemberLogin extends HttpServlet {
 			// 세션에 회원정보 저장
 			session.setAttribute("member", m);
 
-			// 메인 페이지로 넘어가기
-			page = "index.jsp";
+			result = 1;
 			
 			System.out.println("로그인 성공");
 		} else {
 			// 로그인 실패
-			page = "views/loginFail.jsp";
+
+			result = 0;
 			
 			System.out.println("로그인 실패");
 		}
-		
-		// 다음 페이지로 요청
-		request.getRequestDispatcher(page).forward(request, response);
+
+		new Gson().toJson(result, response.getWriter());
 	}
 
 	/**

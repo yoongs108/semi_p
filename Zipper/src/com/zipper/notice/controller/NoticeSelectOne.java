@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.zipper.board.model.vo.Board;
+import com.zipper.common.exception.NoticeException;
 import com.zipper.notice.service.NoticeService;
 
 /**
@@ -34,29 +35,28 @@ public class NoticeSelectOne extends HttpServlet {
 		
 		int bno = Integer.parseInt(request.getParameter("bno"));
 		System.out.println("bno는 뭘까"+bno);
+
+		String page = null;
 		
-		bs = ns.selectOne(bno); // bno로 조회하는 메소드를 호출하여 bs로 담는다. 
-		System.out.println("bs가 조회될까 ? "+bs);
-		System.out.println("bs가널이냐"+bs!=null);
-
-		String page = "";
-
-		if ( bs != null ) {
-
-			request.setAttribute("bs", bs);
-
+		try {
+			bs = ns.selectOne(bno);
+			request.setAttribute("board", bs);
 			page = "views/community/noticeDetail.jsp";
 			
-		} else {
+			System.out.println("그럼여기?"+bs);
 
-			request.setAttribute("error-msg", "게시글 조회 실패");
-			page = "views/common/errorPage.jsp";
+		} catch (NoticeException e) {
+			request.setAttribute("error-msg", "공지사항 수정 실패");
+			request.setAttribute("exception", e);
+
+			request.getRequestDispatcher("/views/common/errorPage.jsp").forward(request, response);
+
+			e.printStackTrace();
+
+		} finally {
+			request.getRequestDispatcher(page).forward(request, response);
 		}
-
-		request.getRequestDispatcher(page).forward(request, response);
 	}
-
-
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */

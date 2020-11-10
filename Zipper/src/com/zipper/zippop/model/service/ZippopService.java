@@ -32,9 +32,9 @@ public class ZippopService {
 		int result = 0;
 		
 		int result1 = zDAO.insertZippop(con, t);
-		//
-		System.out.println("Service Board Insert : " + result1);
-		//
+		
+		//System.out.println("Service Board Insert : " + result1);
+		
 		if (result1 > 0) {
 			int bno = zDAO.getCurrentBno(con);
 			
@@ -45,9 +45,9 @@ public class ZippopService {
 		
 		result2 = zDAO.insertZipAtt(con, at);
 		
-		//
-		System.out.println("Service Attachment Insert : " + result2);
-		//
+		
+		//System.out.println("Service Attachment Insert : " + result2);
+		
 		
 		if (result1 > 0 && result2 > 0) {
 			commit(con);
@@ -58,9 +58,9 @@ public class ZippopService {
 		
 		
 		close(con);
-		//
-		System.out.println("Service total Insert : " + result);
-		//
+		
+		//System.out.println("Service total Insert : " + result);
+		
 		
 		return result;
 	}

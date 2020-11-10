@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" import="com.zipper.board.model.vo.*, java.util.*"%>
 <%
-	Board bs = (Board)request.getAttribute("bs");
-	System.out.println("bs가 넘어오나?"+bs);
+	Board bs = (Board)request.getAttribute("board");
+	System.out.println("board가 넘어오나?"+bs);
 %>
 <!DOCTYPE html>
 <html>
@@ -54,6 +54,38 @@
 		font-size : 15px;
 	}
 	
+	#adminwrite{
+		position : relative;
+		float: right;
+		top : 23px;
+		margin-right : 100px;
+		width : 80px;
+		height : 30px;
+		color : white;
+		background-color : black;
+		border : none;	
+	}
+	
+	#adminwrite:hover{
+		background-color: #555;
+		cursor: pointer;
+	}
+	
+	#delete{
+		position : relative;
+		float: right;
+		top : 23px;
+		margin-right : 30px;
+		width : 80px;
+		height : 30px;
+		color : white;
+		background-color : black;
+		border : none;	
+	}
+	#delete:hover{
+		background-color: #555;
+		cursor: pointer;
+	}
    	  
 </style>
 </head>
@@ -61,11 +93,18 @@
 <section> 
  	<%@ include file="/views/common/header.jsp" %>
  	<h1> NOTICE </h1>
+ 	<div>
+	<!-- 회원등급이 admin으로 로그인할 때만 확인 되도록 조건문 넣어줌 -->
+ 		<% if(m != null && m.getMgrd().equals("A")){ %> 
+				<button id="adminwrite" onclick="location.href='<%= request.getContextPath() %>/nUpdate.no?bno=<%= bs.getBno()%>'"> 수정 </button>
+				<button id="delete" onclick="location.href='<%= request.getContextPath() %>/nDelete.no?bno=<%= bs.getBno()%>'"> 삭제 </button>
+		<% } %>
+ 	</div>
+ 	
  	<!-- 뒤로가기 -->
 		<img src="<%= request.getContextPath() %>/resources/images/common/backButton.png" 
 			alt="notice" id="back" onclick="location.href = '<%= request.getContextPath() %>/selectList.no?'"> 
 		&nbsp;&nbsp;&nbsp;
-		
 	<hr style="width: 100%; border: solid 0.3px black;">
 	
 

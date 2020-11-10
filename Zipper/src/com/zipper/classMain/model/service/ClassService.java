@@ -9,7 +9,6 @@ import java.util.HashMap;
 import com.zipper.classMain.model.dao.ClassDAO;
 import com.zipper.classMain.model.vo.ClassList;
 import com.zipper.payment.model.vo.Payment;
-import com.zipper.thumb.model.vo.Attachment;
 
 public class ClassService {
 	

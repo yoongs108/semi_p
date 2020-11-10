@@ -2,6 +2,7 @@
     pageEncoding="UTF-8" import="com.zipper.classMain.model.vo.*, java.util.*"%>
     
     <% 	ClassList classList = (ClassList)request.getAttribute("clist");
+    
     %>
 <!DOCTYPE html>
 <html>
@@ -28,7 +29,7 @@
 		height : 80px;
 		width: 80px;
 		position:relative;
-		top:-30px;
+		top:30px;
 	}
 	
 	#back:hover{
@@ -96,6 +97,15 @@
 		margin-left: 20px;
 	}
 	
+	.accordion {
+    	cursor: pointer;
+    }
+    
+    .accordion_hide {
+		height : 0;
+		overflow : hidden;
+	}
+	
 	
 </style>
 </head>
@@ -110,7 +120,7 @@
 	<div align="center">
 		<div>
 			<div class="boxLine">
-				<h2>신청 내역</h2>
+				<h3>신청 내역</h3>
 			</div>
 			
 			<div class="class">
@@ -154,7 +164,7 @@
 		
 		<div>
 			<div class="boxLine">
-				<h2>회원 정보</h2>
+				<h3>회원 정보</h3>
 			</div>
 			
 			<table style="height : 170px;">
@@ -192,7 +202,7 @@
 	
 		<div>
 			<div class="boxLine">
-				<h2>배송지</h2>
+				<h3>배송지</h3>
 			</div>
 			
 			<table style="height : 300px;">
@@ -249,7 +259,7 @@
 		
 		<div>
 			<div class="boxLine">
-				<h2>총 결제 금액</h2>
+				<h3>총 결제 금액</h3>
 			</div>
 			<table style="height : 150px;">
 				<tr>
@@ -262,7 +272,7 @@
 				</tr>
 				<tr>
 					<td></td>
-					<td align="right"><h2><%= classList.getPrice() %>원</h2></td>
+					<td align="right"><h3><%= classList.getPrice() %>원</h3></td>
 				</tr>
 			</table>
 		</div>
@@ -276,23 +286,91 @@
 			<input type="checkbox" id="checkbox">&nbsp;&nbsp;<label for="checkbox">결제 진행 필수사항 동의 </label><br />
 			
 			<!-- 아코디언 -->
-			<p>개인정보 제 3자 제공 및 결제대행 서비스 표준 이용약관</p> <%--<img src="<%= request.getContextPath() %>/resources/images/common/downArrow.png" width="15px" height="7.5px" class="accordion" onclick="accordion_hide(this)"/> --%>				
-			 <br />
-			<div class="ac">
-				개인정보 제 3자 제공
-				<%--<img src="<%= request.getContextPath() %>/resources/images/common/downArrow.png" width="15px" height="7.5px" class="accordion" onclick="accordion_hide(this)"/> --%>				
-	        	<p class="accordion_hide"> 개인정보 제 3자 제공 내역</p>
-			
-				개인정보 수집 및 이용
-				<%--<img src="<%= request.getContextPath() %>/resources/images/common/downArrow.png" width="15px" height="7.5px" class="accordion" onclick="accordion_hide(this)"/> --%>				
-	        	<p class="accordion_hide"> 개인정보 수집 및 이용 내역</p>
-				
-	        	결제대행 서비스 이용약관
-				<%--<img src="<%= request.getContextPath() %>/resources/images/common/downArrow.png" width="15px" height="7.5px" class="accordion" onclick="accordion_hide(this)"/> --%>				
-	        	<p class="accordion_hide"> 결제대행 서비스 이용약관 내역</p>
-	        	
-	    	</div>
-			
+			<div><h6>
+				개인정보 제 3자 제공 및 결제대행 서비스 표준 이용약관
+				<img src="<%= request.getContextPath() %>/resources/images/common/downArrow.png" width="15px" height="7.5px" class="accordion" onclick="accordion_hide(this)"/>				
+				<div class="accordion_hide">
+				<br /><br />
+					개인정보 제 3자 제공
+	        		<table border="1" style="border: 1px solid black;">
+	        			<tr>
+	        				<td>제공 받는자</td>
+	        				<td>제공목적</td>
+	        				<td>항목</td>
+	        				<td>보유 및 이용 기간</td>
+	        			</tr>
+	        			<tr>
+	        				<td><%= classList.getTname() %></td>
+	        				<td>상품 및 경품(서비스) 배송(전송), <br />
+	        					 제품 설치, 반품, 환불, <br />
+	        					고객상담 등 정보통신서비스제공계약 및 <br />
+	        					전자상거래(통신판매)계약의 이행을 위해 <br />
+	        					 필요한 업무의 처리</td>
+	        				<td>1) 구매자정보(닉네임, 성명, 휴대폰번호, 이메일주소) <br />
+								2) 수령인정보(성명, 휴대폰번호, 주소) <br />
+								3) 상품 구매, 취소, 반품, 교환정보 <br />
+								4) 송장정보</td>
+	        				<td>상품 제공 완료 후 3개월</td>
+	        			</tr>
+	        		</table>
+	        		
+					<br /><br />
+					개인정보 수집 및 이용
+					<table border="1" style="border: 1px solid black;">
+						<tr>
+							<td>수집방법</td>
+							<td>수집항목</td>
+							<td>목적</td>
+							<td>보유 및 이용기간</td>
+						</tr>
+						<tr>
+							<td>상품구매</td>
+							<td>1) 구매자 정보(성명, 휴대전화 번호) <br /> 2) 수령인 정보(성명, 휴대전화 번호, 주소)</td>
+							<td>상품 배송 및 서비스 제공을 위한 사용자 정보 확인</td>
+							<td rowspan="5">5년 (계약 및 철회, 결제 및 공급)</td>
+						</tr>
+						<tr>
+							<td>결제</td>
+							<td>신용카드 정보</td>
+							<td>간편 결제 서비스 제공</td>
+							<td></td>
+						</tr>
+						<tr>
+							<td>취소&환불</td>
+							<td>환불 계좌번호, 은행명, 예금주명	</td>
+							<td>결제 서비스 환불</td>
+							<td></td>
+						</tr>
+						<tr>
+							<td>휴대전화 인증</td>
+							<td>휴대전화 번호</td>
+							<td>상품 구매 및 포인트(적립금) 지급 시 본인 인증</td>
+							<td></td>
+						</tr>
+					</table>
+					<br /><br />
+		        	결제대행 서비스 이용약관 <br />
+		        	
+		        	<p style="width : 700px; ">
+		        		제1조 (목적)
+						
+						본 약관은 주식회사 카카오페이(이하 "회사"라 합니다)가 제공하는 카카오페이 서비스의 이용과 관련하여 회사와 회원 사이의 권리, 의무 및 책임사항, 기타 필요한 사항을 규정함을 목적으로 합니다.
+						
+						제2조 (용어의 정의)
+						
+						① 본 약관에서 사용하는 용어의 의미는 다음과 같습니다.
+						1. '카카오페이 서비스'라 함은 회원이 제휴사와 상품 또는 용역(이하 '상품 등'이라고 합니다)을 거래함에 있어서 회사가 제공하는 결제서비스, 송금서비스, 제휴사의 멤버십서비스, 카카오포인트서비스, 쿠폰서비스, 청구서서비스, 인증서비스, 통합조회서비스, 기타 연계서비스 등 회사가 회원에게 제공하는 서비스를 총칭합니다.
+						2. '회원'이라 함은 본 약관에 따라 회사가 제공하는 카카오페이 서비스를 이용하는 자를 말합니다.
+						3. '제휴사'라 함은 회사와 계약을 체결하고 카카오페이 서비스를 이용하여 회원에게 상품 등을 판매하거나 멤버십・카카오포인트・쿠폰 등의 혜택을 제공하는 사업자를 말합니다.
+						4. '결제방법'이라 함은 회원이 결제서비스를 통하여 전자적 방법으로 상품 등을 구입 및 이용시 선택한 지불방법을 말합니다.
+						5. '카카오페이 비밀번호'라 함은 카카오페이 서비스 이용 시 필요로 하는 인증 수단으로서 회원이 본인임을 사전에 확인하고 스스로 설정하여 회사에 등록한 숫자를 말합니다.
+					</p>
+		    	</div>
+			</h6></div>
+			<br />
+			<br />
+			<br />
+			<br />
 			
 			
 			<button style=" width : 700px; color : white;" id="payBtn">결제</button>
@@ -307,6 +385,14 @@
 	</section>
 	
 	<script>
+	
+		document.getElementsByClassName('accordian');
+	
+		function accordion_hide(obj) {
+			$(obj).parent().find('div').toggleClass('accordion_hide');
+		};
+	
+	
 		function goClassDetail() {
 			location.href = "<%= request.getContextPath() %>/views/class/classDetail.jsp";
 		};

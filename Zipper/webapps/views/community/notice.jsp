@@ -5,6 +5,7 @@
 	System.out.println("공지사항페잊왓따:"+list);
 	// 현재 로그인 정보 가져오기 
 	Member mlogin = (Member)session.getAttribute("member");
+	System.out.println("dddddd"+mlogin.toString());
 %>
 <!DOCTYPE html>
 <html>
@@ -48,6 +49,15 @@
 		position : relative;
 		float: right;
 		top : -40px;
+		width : 80px;
+		height : 30px;
+		color : white;
+		background-color : black;
+		border : none;	
+	}
+	#adminwrite:hover{
+		background-color: #555;
+		cursor: pointer;
 	}
 </style>
 </head>
@@ -58,7 +68,7 @@
  	<div>
 			<!-- 회원등급이 admin으로 로그인할 때만 확인 되도록 조건문 넣어줌 -->
  		<% if(m != null && m.getMgrd().equals("A")){ %> 
-				<button id="adminwrite" onclick="#"> 작성하기 </button>
+				<button id="adminwrite" onclick="location.href='views/community/noticeInsertForm.jsp'"> 작성하기 </button>
 		<% } %>
  	</div>
 	<hr style="width: 100%; border: solid 0.3px black;">

@@ -44,7 +44,7 @@ public class NoticeSelectList extends HttpServlet {
 		if (list != null && list.size() > 0) {
 
 			request.setAttribute("list", list);
-
+			System.out.println("HHHHHH");
 			page = "views/community/notice.jsp";
 		} else {
 

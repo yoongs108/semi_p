@@ -25,6 +25,9 @@
 		font-weight: bold;
 		border-bottom: 1px solid black;
 	}
+	.table2 tr>td {
+		width : 300px;
+	}
 	
 	.btn{
 		width : 80px;
@@ -77,7 +80,7 @@
         		
         		<script>
 					function summitPTP(){
-						$("#uploadPTP").attr("action","<%= request.getContextPath()%>/PTPUpdate.bo");
+						$("#uploadPTP").attr("action","<%= request.getContextPath()%>/PTPUpdate.Po");
 					}
 				</script>
         </form>
