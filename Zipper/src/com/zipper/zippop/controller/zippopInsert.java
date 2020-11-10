@@ -13,6 +13,7 @@ import javax.servlet.http.HttpSession;
 import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
 
 import com.oreilly.servlet.MultipartRequest;
+import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 import com.zipper.common.MyRenamePolicy;
 import com.zipper.member.model.vo.Member;
 import com.zipper.thumb.model.vo.Attachment;
@@ -26,7 +27,6 @@ import com.zipper.zippop.model.service.ZippopService;
 public class zippopInsert extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-
     public zippopInsert() {
         super();
     }
@@ -52,12 +52,20 @@ public class zippopInsert extends HttpServlet {
 													, new MyRenamePolicy());
 		
 		String originNames = new String();
+		String changeNames = new String();
 		
 		Enumeration<String> files = mre.getFileNames();
 
-		originNames = mre.getOriginalFileName(files.nextElement());
-	
-		System.out.println("originNames : " + originNames);
+		while(files.hasMoreElements()) {
+			
+			String tagName = files.nextElement();
+
+			originNames = mre.getOriginalFileName(tagName);
+			changeNames = mre.getFilesystemName(tagName);			
+		}
+		//System.out.println("originNames : " + originNames);
+		//System.out.println("changenNames : " + changeNames);
+
 
 		// -------------------------- 여기까진 ㅇㅋ.... --------
 		
@@ -66,14 +74,15 @@ public class zippopInsert extends HttpServlet {
 		t.setBcontent( mre.getParameter("content"));
 		t.setMno(mno);
 		
-		System.out.println("servlet thumbnail chk: " + t.getBcontent() + " / " + t.getMno());
+		//System.out.println("servlet thumbnail chk: " + t.getBcontent() + " / " + t.getMno());
 		
 		Attachment at = new Attachment();
 			
 		at.setFilepath(savePath);
 		at.setOriginname(originNames);
+		at.setChangename(changeNames);
 		
-		System.out.println("servlet Attachment chk: " + at.getFilepath() + " / " + at.getOriginname());
+		//System.out.println("servlet Attachment chk: " + at.getFilepath() + " / " + at.getOriginname() + " / " + at.getChangename());
 		
 		ZippopService zs = new ZippopService();
 		int result = zs.insertZippop(t, at);

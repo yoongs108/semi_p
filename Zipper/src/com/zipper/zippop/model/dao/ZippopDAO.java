@@ -49,17 +49,17 @@ public class ZippopDAO {
 			pstmt = con.prepareStatement(sql);
 			rset = pstmt.executeQuery();
 			while (rset.next()) {
-				System.out.println("...");
+				//System.out.println("...");
 				Thumbnail tn = new Thumbnail();
 				
 				tn.setUserId(rset.getString("mid"));
 				tn.setBno(rset.getInt("bno"));
 				tn.setBcontent(rset.getString("bcontent"));
-				tn.setBoardfile(rset.getString("file_origin_name"));
+				tn.setBoardfile(rset.getString("file_new_name"));
 				
 				list.add(tn);
 			}
-			System.out.println(list);
+			//System.out.println(list);
 		} catch (SQLException e) {
 			e.printStackTrace();
 			
@@ -78,6 +78,8 @@ public class ZippopDAO {
 		
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
+		
+		//System.out.println("getCurrentBno : " + result);
 		
 		String sql = prop.getProperty("currentBno");
 		
@@ -101,8 +103,7 @@ public class ZippopDAO {
 			close(pstmt);
 		}
 		
-		// test comment
-		System.out.println("board current No. :" + result);
+		//System.out.println("board current No. :" + result);
 		
 		return result;
 	}
@@ -118,7 +119,8 @@ public class ZippopDAO {
 		try {
 			pstmt = con.prepareStatement(sql);
 			
-			pstmt.setString(1, t.getBcontent());
+			pstmt.setInt(1, t.getMno());
+			pstmt.setString(2, t.getBcontent());
 			
 			result = pstmt.executeUpdate();
 			
@@ -130,7 +132,7 @@ public class ZippopDAO {
 			close(pstmt);
 		}
 		
-		System.out.println("DAO zippop result : " + result);
+		//System.out.println("DAO zippop result : " + result);
 		
 		return result;
 	}
@@ -149,7 +151,8 @@ public class ZippopDAO {
 			
 			pstmt.setInt(1, at.getBno());
 			pstmt.setString(2, at.getOriginname());
-			pstmt.setString(3, at.getFilepath());
+			pstmt.setString(3, at.getChangename());
+			pstmt.setString(4, at.getFilepath());
 
 			result = pstmt.executeUpdate();
 			
@@ -161,7 +164,7 @@ public class ZippopDAO {
 			
 		}
 		
-		System.out.println("DAO zipAtt result : " + result);
+		//System.out.println("DAO zipAtt result : " + result);
 		
 		
 		return result;

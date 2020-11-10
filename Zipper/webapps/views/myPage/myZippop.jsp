@@ -2,6 +2,7 @@
 <%@ page import="java.util.*, com.zipper.thumb.model.vo.*" %>
 <%
 	ArrayList<Thumbnail> mplist = (ArrayList<Thumbnail>)request.getAttribute("mpZipList");
+	Iterator iter = mplist.iterator();
 %>
 <!DOCTYPE html>
 <html>
@@ -29,6 +30,10 @@
 	#reverseBtn:hover{
 		cursor: pointer;
 		transform: scale(1.2);
+	}
+	
+	#reverseBtn:focus {
+		outline: none;
 	}
 	
 	
@@ -136,8 +141,14 @@
 <script>
 	function moveMain() {
 		$(this).on('click', function() {
-			location.href = "myPageMain.jsp";
+			location.href = "<%= request.getContextPath() %>/views/myPage/myPageMain.jsp";
 		});
+	}
+	
+	function zipWriter() {
+		$(this).on('click', function() {
+			location.href = "<%= request.getContextPath() %>/views/writer/zippopWriter.jsp";
+		})
 	}
 </script>
 </head>
@@ -148,7 +159,7 @@
 		<div id="pageTop">
 			<h2 align="center"><%= m.getMnick() %>.ZIP</h2>
 			<button id="reverseBtn" onclick="moveMain();">
-				<img id="reverseImg" src="../../resources/images/common/backButton.png" alt="뒤로가기" />
+				<img id="reverseImg" src="<%= request.getContextPath() %>/resources/images/common/backButton.png" alt="뒤로가기" />
 			</button>
 		</div>
 		<hr style="border:1px solid black;">
@@ -164,7 +175,15 @@
 				<!-- 내가 작성한글 들어오는 자리  -->
 				<div>
 					<p>
+						<%-- <% if (m.getIntro().equals("")) { --%>
+							<!-- 
+							 <p>아직 내 한줄 소개가 없습니다..</p>
+							 -->
+						<%--<% } else { --%>
+							<%= m.getIntro() %>
+						<%--<% } --%>
 					
+						
 						
 					</p>
 				</div>
@@ -189,7 +208,8 @@
 		<!-- 하단 게시글 부분 출력  -->
 		<div class="thumbnailArea"> 
 		
-		<% if ( true ) { %>
+		<!--  내가 작성한 게시글 조회하기  (조건 :  ) -->
+		<% if (iter.hasNext()) { %>
 			<% for (Thumbnail t : mplist) { %>
 			
 				<div class="thumb-list" align="center">
@@ -208,15 +228,14 @@
 			<% } %>
 			<br /><br />
 			
-		<% } else {%>
-		<!-- 
+		<% } else { %>
+		
 			<div id="emptyZippop">
 				<p>아직 내가쓴 zippop이 없어요...</p>
-				<button id="writeZippop">글쓰기</button>
+				<button onclick="zipWriter();">글쓰기</button>
 			</div>
-		 -->
-			
-		<% } %>
+		 
+		<% } %>	
 		
 		</div>
 		

@@ -55,6 +55,7 @@ public class MyPageDAO {
 				tn.setBview(rset.getInt("bview"));
 				tn.setBoardfile(rset.getString("file_origin_name"));
 				tn.setProfile(rset.getString("profile"));
+				tn.setMno(rset.getInt("mno"));
 				
 				list.add(tn);
 			}
