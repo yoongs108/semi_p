@@ -24,8 +24,14 @@
 	<h1 align="center">회원 정보 수정</h1>
 	<hr />
 	<br /><br />
-	<form action="<%= request.getContextPath() %>/mUpdate.me" id="updateForm" method="post">
+	<form action="<%= request.getContextPath() %>/mUpdate.me" id="updateForm"
+		  method="post" enctype="multipart/form-data">
 		<table align="center">
+			<tr>
+				<td colspan="4" align="center">
+					<img id="profileImgPre" width="200" height="200" src="<%= request.getContextPath() %>/resources/images/profile/<%= m.getProfile() %>"/>
+				</td>
+			</tr>
 			<tr>
 				<td style="width : 150px;">
 					<h4>아이디</h4>
@@ -125,21 +131,47 @@
 		<button type="button" class="btn btn-default" onclick="cancelUpdate()">수정취소</button> &nbsp;&nbsp;
 		<button type="button" class="btn btn-default" onclick="deleteMember()">회원탈퇴</button>
 		</div>
+		<div class="fileArea" id="fileArea">
+      		<input type="file" id="profileImg"
+      				name="profileImg1" onchange="loadImg(this);" />
+      				
+      	</div>
 	</form>
 		<br />
 		<br />
 		<br />
 </section>
 <script>
-	/* 주소 넣기 */
 	$(function(){
+		/* 주소 넣기 */
 		var addressArr = '<%= m.getAddress() %>'.split(', ');
 		
 		$('#zipCode').val(addressArr[0]);
 		$('#address1').val(addressArr[1]);
 		$('#address2').val(addressArr[2]);
 		
+		// 프로필 영역 클릭 시 파일 등록 실행
+		$('#profileImgPre').click(function(){
+			$('#profileImg').click();
+		});
+		
+		$('#profileImg').hide(); // 파일 등록 태그 숨김
 	});
+	
+	/* 사진 파일 등록 시 이미지 로드 */
+	function loadImg(img){
+		if(img.files && img.files[0]) {
+			
+			var reader = new FileReader();
+			
+			reader.onload = function(e){
+				
+				$('#profileImgPre').attr('src', e.target.result);
+			}
+			
+			reader.readAsDataURL(img.files[0]);
+		}
+	}
 	
 	/* 수정취소 */
 	function cancelUpdate() {
@@ -150,7 +182,9 @@
 	
 	/* 회원탈퇴 */
 	function deleteMember() {
-		alert("탈퇴처리해야함");
+		if(confirm("회원탈퇴 하시겠습니까?")){
+			location.href = "<%= request.getContextPath() %>/mDelete.me?mid=<%=m.getMid()%>";
+		}
 	}
 	
 	/* 정보수정 */

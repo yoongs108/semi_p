@@ -4,6 +4,7 @@ import static com.zipper.common.JDBCTemplate.*;
 
 import java.sql.Connection;
 
+import com.zipper.board.model.vo.Attachment;
 import com.zipper.common.exception.MemberException;
 import com.zipper.member.model.dao.MemberDAO;
 import com.zipper.member.model.vo.Member;
@@ -45,11 +46,10 @@ public class MemberService {
 	
 	// 사용자 정보 수정
 	public int updateMember(Member m) throws MemberException {
-		int result = 0;
 		
 		con = getConnection();
 		
-		result = mDAO.updateMember(con, m);
+		int result = mDAO.updateMember(con, m);
 		
 		if(result > 0) {
 			commit(con);
@@ -60,17 +60,16 @@ public class MemberService {
 		close(con);
 		
 		return result;
-		
 	}
 
 	// 사용자 정보 삭제
-	public int deleteMember(String userId) throws MemberException {
+	public int deleteMember(String mid) throws MemberException {
 
 		int result = 0;
 		
 		con = getConnection();
 		
-		result = mDAO.deleteMember(con, userId);
+		result = mDAO.deleteMember(con, mid);
 		
 		if(result > 0) {
 			commit(con);

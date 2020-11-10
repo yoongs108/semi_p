@@ -11,6 +11,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Properties;
 
+import com.zipper.board.model.vo.Attachment;
 import com.zipper.common.exception.MemberException;
 import com.zipper.member.model.vo.Member;
 
@@ -76,6 +77,8 @@ public class MemberDAO {
 				result.setMstatus(	rset.getString("mstatus"));
 				result.setAddress(	rset.getString("address"));
 				result.setIntro(	rset.getString("intro"));
+				result.setScrap(	rset.getString("scrap"));
+				result.setProfile(	rset.getString("profile"));
 			}
 			
 			System.out.println("조회 결과 확인 : " + result);
@@ -141,7 +144,8 @@ public class MemberDAO {
 			pstmt.setString(2, m.getMcontact());
 			pstmt.setString(3, m.getAddress());
 			pstmt.setString(4, m.getIntro());
-			pstmt.setString(5, m.getMid());
+			pstmt.setString(5, m.getProfile());
+			pstmt.setString(6, m.getMid());
 			
 			result = pstmt.executeUpdate();
 			
@@ -155,7 +159,8 @@ public class MemberDAO {
 		return result;
 	}
 
-	public int deleteMember(Connection con, String userId) throws MemberException {
+	// 회원 탈퇴
+	public int deleteMember(Connection con, String mid) throws MemberException {
 
 		int result = 0;
 		
@@ -168,7 +173,7 @@ public class MemberDAO {
 		try {
 			pstmt = con.prepareStatement(sql);
 			
-			pstmt.setString(1, userId);
+			pstmt.setString(1, mid);
 			
 			result = pstmt.executeUpdate();
 			

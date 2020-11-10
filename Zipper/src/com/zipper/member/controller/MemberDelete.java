@@ -2,6 +2,7 @@ package com.zipper.member.controller;
 
 import java.io.IOException;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -9,21 +10,21 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.google.gson.Gson;
+import com.zipper.common.exception.MemberException;
 import com.zipper.member.model.service.MemberService;
 import com.zipper.member.model.vo.Member;
 
 /**
- * Servlet implementation class MemberLogin
+ * Servlet implementation class MemberUpdateServlet
  */
-@WebServlet("/login.me")
-public class MemberLogin extends HttpServlet {
+@WebServlet("/mDelete.me")
+public class MemberDelete extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MemberLogin() {
+    public MemberDelete() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,46 +33,36 @@ public class MemberLogin extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// 1. 인코딩 필터
-		// 2. request 데이터 가져오기
-		String mid = request.getParameter("userId");
-		String mpwd = request.getParameter("userPwd");
+
+		HttpSession session = request.getSession(false);	// 세션이 있을경우 가져옴 없으면 null
 		
-		// vo에 데이터 담기
-		Member m = new Member(mid, mpwd);
+		Member m = (Member)session.getAttribute("member");
 		
-		// 실행할 서비스 생성
+		String mid = m.getMid();
+		
 		MemberService ms = new MemberService();
 		
-		// 사용자 정보 조회 서비스 호출
-		m = ms.selectMember(m); // 로그인정보 담기
-		
-		//로그인 성공 / 실패 시 이동할 페이지
-		String page = "";
-		
-		int result = 0;
-		
-		if(m != null) {
-			// 로그인 성공
+		try {
+			int result = ms.deleteMember(mid);
 			
-			// 세션 생성
-			HttpSession session = request.getSession();
+			System.out.println("회원탈퇴 성공!");
 			
-			// 세션에 회원정보 저장
-			session.setAttribute("member", m);
-
-			result = 1;
+			session.invalidate();
 			
-			System.out.println("로그인 성공");
-		} else {
-			// 로그인 실패
-
-			result = 0;
+			response.sendRedirect("index.jsp");
 			
-			System.out.println("로그인 실패");
+			
+		} catch (MemberException e) {
+			e.printStackTrace();
+			System.out.println("회원탈퇴 실패!");
+			
+			RequestDispatcher view = request.getRequestDispatcher("views/common/errorPage.jsp");
+			
+			request.setAttribute("error-msg", "회원 탈퇴 실패");
+			request.setAttribute("exception", e);
+			
+			view.forward(request, response);
 		}
-
-		new Gson().toJson(result, response.getWriter());
 	}
 
 	/**
