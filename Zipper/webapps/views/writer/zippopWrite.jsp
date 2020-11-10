@@ -29,17 +29,24 @@
 		width:100%;
 		height:100%;
 	}
+	.imgtext{
+		color: white;
+		font-size: 18px;
+		top: 50%;
+		left: 50%;
+		text-align: center;
+		margin-top : -180px;
+		display : none;
+	}
 	#titleImgArea:hover{
 		cursor: pointer;
 		background-color : black;
 		opacity: 60%;
 	}
-	.imgtext{
-		color : white;
-		text-align : center;
-		margin-top : 40%;
-		font-size : 18px;
+	#titleImgArea:hover .imgtext{
+		display : inherit;
 	}
+	
 	/* 글쓰기폼 */
 	#textarea{
 		border-left : 2px solid black;
@@ -47,15 +54,15 @@
 		resize : none;
 	}
 	/* 버튼 스타일 */
-	#btn{
+	.btn{
 		width : 80px;
 		height : 30px;
 		color : white;
 		background-color : black;
 		border : none;	
 	}
-	#btn:hover{
-		background-color: #555;
+	.btn:hover{
+		background-color: grey;
 		cursor: pointer;
 	}
 	
@@ -82,7 +89,7 @@
 							<img id="titleImg" />
 				
 							<div class="imgtext">
-							클릭해서 사진올리기
+								<p>클릭해서 사진올리기</p>
 							</div>
 							
 						</div>
@@ -99,19 +106,12 @@
 			</div>
 			
 			<div align="center" style="margin-top:70px; margin-bottom:80px;">
-			<button type="submit" id="btn">작성</button>
+			<button type="submit" class="btn">작성</button>
 			&nbsp;&nbsp;&nbsp;&nbsp;
-			<button onclick="back();" id="btn">취소</button>
+			<button onclick="history.go(-1)" class="btn">취소</button>
 			</div>
         		
        		<script>
-       			
-
-				function back() {
-					$(this).on('click', function() {
-						location.href = "<%= request.getContextPath() %>/zippop.zp";
-					});
-				}
 				
 				// 사진 미리보기 기능
 				$(function(){

@@ -2,7 +2,7 @@
     pageEncoding="UTF-8" %>
 <%@ page import="java.util.*, com.zipper.payment.model.vo.*"%>
 <%
-	Payment pm = (Payment)request.getAttribute("list");
+	ArrayList<Payment> list = (ArrayList<Payment>)request.getAttribute("cList");
 %>
 
 <!DOCTYPE html>
@@ -101,7 +101,7 @@
 
 		</div>
 		
-		<%-- <% for (payment p : list) { %> --%>
+		<% for (Payment pm : list) { %>
 		<div class="card"> <!-- 클래스 리스트 폼 -->
 			
 			<img src="<%= request.getContextPath() %>/resources/images/fileUpload/<%= pm.getFileNewName() %>" 
@@ -109,22 +109,22 @@
 			
 			<div id="container" class="splitR" >
 				<br />
-				<p style="font-size:16px; font-weight : bold;"><%= pm.getPdate()%> ~ 1개월</p>
+				<p style="font-size:16px; font-weight : bold;">결제일 <%= pm.getPdate()%> 로부터 1개월</p>
 				<br />
 				<p style="font-size:17px; font-weight : bold;"><%= pm.getCname() %> </p>
 				<p style="font-size:14px;"><%= pm.getTotal() %>  원 </p>
 				
-				<button class="button" onclick="goClassInfo()">자세히 보기</button>
+				<button class="button" onclick="goClassInfo(<%=pm.getCno()%>)">자세히 보기</button>
 				
 			</div>
 		</div>
-		<%-- <% } %> --%>
+		<% } %>
 		
 		
 		<!-- 페이지 버튼 -->
 		<script>
-		function goClassInfo() { // 정보 수정
-			location.href = '<%= request.getContextPath() %>'<%= request.getContextPath()%>/selectClass.sc?cno='+<%=pm.getCno()%>;
+		function goClassInfo(cno) { // 정보 수정
+			location.href = '<%= request.getContextPath() %>/selectClass.sc?cno='+cno;
 		}
 		function goMyPageMain() { // 메인페이지로 이동
 			location.href = '<%= request.getContextPath() %>/views/myPage/myPageMain.jsp'; 

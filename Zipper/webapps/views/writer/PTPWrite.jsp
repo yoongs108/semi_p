@@ -26,7 +26,7 @@
 		border-bottom: 1px solid black;
 	}
 	
-	#btn{
+	.btn{
 		width : 80px;
 		height : 30px;
 		color : white;
@@ -34,7 +34,7 @@
 		border : none;	
 	}
 	
-	#btn:hover{
+	.btn:hover{
 		background-color: #555;
 		cursor: pointer;
 	}
@@ -70,9 +70,9 @@
                         </table>
 
         	<div align="center" style="margin-top:50px;margin-bottom:80px;">
-			<button onclick="summitPTP();" id="btn">작성</button>
+			<button onclick="summitPTP();" class="btn">작성</button>
 			&nbsp;&nbsp;&nbsp;&nbsp;
-			<button onclick="history.go(-1)" id="btn">취소</button>
+			<button onclick="history.go(-1)" class="btn">취소</button>
 			</div>
         		
         		<script>

@@ -11,7 +11,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Properties;
 
-import com.zipper.thumb.model.vo.Attachment;
 import com.zipper.board.model.vo.Board;
 import com.zipper.classMain.model.vo.ClassList;
 import com.zipper.classMain.model.vo.Kit;
@@ -93,60 +92,59 @@ public class ClassDAO {
 
 	// 윤진 작성 
 	// 스크랩기능 도전한다.
-	public HashMap<String, Object> scrapList(Connection con, int cno) {
-		HashMap<String, Object> hmap = new HashMap<>();
-		
-		ArrayList<Attachment> aList = new ArrayList<>();		
-		ArrayList<ClassList> cList = new ArrayList<>();
-		
-		PreparedStatement pstmt = null;
-		ResultSet rset = null;
-		
-		String sql = prop.getProperty("#"); 
-		// sql 구문 필요
-		// 해당 mno가 가지고있는 scrap에 저장된 고유번호를 가져오기
-		
-		try {
-			pstmt = con.prepareStatement(sql);
-			
-			rset = pstmt.executeQuery();
-			
-			while(rset.next()) { // 스크랩 내용이 없을때 까지 계속 정보 가져오기
-				
-				ClassList cl = new ClassList();
-				
-				cl.setCno(rset.getInt("cno"));
-				cl.setCname(rset.getString("cname"));
-				cl.setCintro(rset.getString("cintro"));
-				cl.setPrice(rset.getInt("price"));
-				
-				cList.add(cl);
-				
-				// 여기까지 리스트 내용
-				
-				Attachment at = new Attachment();
-				at.setFno( rset.getInt("fno"));
-				// at.setCno( rset.getInt("cno")); // 클래스 번호 가져오기
-				at.setOriginname( rset.getString("originname"));
-				at.setFilepath(   rset.getString("filepath"));
-				 
-				aList.add(at);
-			}
-			
-			hmap.put("classList", cList);
-			hmap.put("attachment", aList);
-		
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} finally {
-			close(rset);
-			close(pstmt);
-		}
-		
-		return hmap;
-		
-	}
+//	public HashMap<String, Object> scrapList(Connection con, int cno) {
+//		HashMap<String, Object> hmap = new HashMap<>();
+//		
+//		ArrayList<ClassList> cList = new ArrayList<>();
+//		
+//		PreparedStatement pstmt = null;
+//		ResultSet rset = null;
+//		
+//		String sql = prop.getProperty("#"); 
+//		// sql 구문 필요
+//		// 해당 mno가 가지고있는 scrap에 저장된 고유번호를 가져오기
+//		
+//		try {
+//			pstmt = con.prepareStatement(sql);
+//			
+//			rset = pstmt.executeQuery();
+//			
+//			while(rset.next()) { // 스크랩 내용이 없을때 까지 계속 정보 가져오기
+//				
+//				ClassList cl = new ClassList();
+//				
+//				cl.setCno(rset.getInt("cno"));
+//				cl.setCname(rset.getString("cname"));
+//				cl.setCintro(rset.getString("cintro"));
+//				cl.setPrice(rset.getInt("price"));
+//				
+//				cList.add(cl);
+//				
+//				// 여기까지 리스트 내용
+//				
+////				Attachment at = new Attachment();
+////				at.setFno( rset.getInt("fno"));
+////				// at.setCno( rset.getInt("cno")); // 클래스 번호 가져오기
+////				at.setOriginname( rset.getString("originname"));
+////				at.setFilepath(   rset.getString("filepath"));
+////				 
+////				aList.add(at);
+//			}
+//			
+////			hmap.put("classList", cList);
+////			hmap.put("attachment", aList);
+//		
+//		} catch (SQLException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		} finally {
+//			close(rset);
+//			close(pstmt);
+//		}
+//		
+//		return hmap;
+//		
+//	}
 	
 
 	// 클래스 리스트 조회
@@ -210,6 +208,7 @@ public class ClassDAO {
 				pm.setPdate(rset.getDate("pdate"));
 				pm.setCname(rset.getString("cname"));
 				pm.setTotal(rset.getInt("price"));
+				pm.setCno(rset.getInt("cno"));
 				
 				list.add(pm);
 			}
