@@ -89,7 +89,7 @@
 					</td>
 					<td id="textarea">
 						<textarea name = content cols=45 rows=16
-								placeholder = " 뭐든 원하는대로 자유롭게 적어주세요 :)"></textarea>
+								placeholder = "뭐든 원하는대로 자유롭게 적어주세요 :)"></textarea>
 					</td>
 				</tr>
 			</table>
@@ -109,7 +109,7 @@
 
 				function back() {
 					$(this).on('click', function() {
-						location.href = "<%= request.getContextPath() %>/zippop.zp";
+						window.go(-1);
 					});
 				}
 				

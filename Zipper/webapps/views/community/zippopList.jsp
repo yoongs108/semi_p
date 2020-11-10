@@ -78,10 +78,10 @@
       margin-right:auto;
    }
    .thumb-list {
-      width:220px;
+      width:300px;
       border:1px solid white;
       display:inline-block;
-      margin:10px;
+      margin:5px;
       align:center;
    }
    .thumb-list:hover {
@@ -145,7 +145,7 @@
 	
 	function zippopWriter() {
 		$(this).on('click', function() {
-			location.href = "<%= request.getContextPath() %>/views/writer/zippopWrite.jsp"
+			location.href = "<%= request.getContextPath() %>/views/writer/zippopWriter.jsp"
 		});
 	}
 </script>
@@ -157,7 +157,7 @@
       <div id="pageTop">
          <h2 align="center">ZIPPOP</h2>
          <button id="reverseBtn" onclick="moveMain();">
-            <img id="reverseImg" src="../../resources/images/common/backButton.png" alt="뒤로가기" />
+            <img id="reverseImg" src="<%= request.getContextPath() %>/resources/images/common/backButton.png" alt="뒤로가기" />
          </button>
       </div>
       <hr style="border:1px solid black;">
@@ -169,8 +169,8 @@
             <div class="thumb-list" align="center">
                <div>
                   <input type="hidden" name="bno" value="<%= t.getBno() %>"/>
-                  <img src="<%= request.getContextPath() %>/resources/images/attachment/<%= t.getBoardfile() %>" 
-                     width="200px" height="150px"/>
+                  <img src="<%= request.getContextPath() %>/resources/images/zippopUploadFiles/<%= t.getBoardfile() %>" 
+                     width="250px" height="250px"/>
                </div>
                
                <p>
