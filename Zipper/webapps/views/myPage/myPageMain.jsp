@@ -113,7 +113,7 @@
 			location.href = '<%= request.getContextPath() %>/scrapCl.sc';
 		}
 		function goClassList() { 	//수강중 클래스 수정 필요
-			location.href = '<%= request.getContextPath() %>/views/myPage/classIng.jsp';
+			location.href = '<%= request.getContextPath() %>/classingList.cl?mno=<%= m.getMno() %>';
 		}
 		function goScrapZip() { 	//게시글 스크랩 수정 필요
 			location.href = '<%= request.getContextPath() %>/#';

@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import com.zipper.classMain.model.dao.ClassDAO;
 import com.zipper.classMain.model.vo.ClassList;
 import com.zipper.board.model.vo.Attachment;
+import com.zipper.payment.model.vo.Payment;
 
 public class ClassService {
 	
@@ -39,8 +40,17 @@ public class ClassService {
 		return cList;
 	}
 
-
-
+	public ArrayList<Payment> classingList(int mno) {
+		
+		con = getConnection();
+		
+		ArrayList<Payment> list = cDAO.classingList(con, mno);
+		
+		close(con);
+		
+		return list;
+	}
+	
 	public int insertWrite(ClassList cl, ArrayList<Attachment> alist) {
 		con = getConnection();
 		int result = 0;
