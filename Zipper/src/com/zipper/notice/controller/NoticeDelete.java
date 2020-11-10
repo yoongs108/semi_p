@@ -7,21 +7,21 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.zipper.board.model.vo.Board;
 import com.zipper.common.exception.NoticeException;
 import com.zipper.notice.service.NoticeService;
 
+
 /**
- * Servlet implementation class NoticeSelectOne
+ * Servlet implementation class NoticeDelete
  */
-@WebServlet("/selectOne.no")
-public class NoticeSelectOne extends HttpServlet {
+@WebServlet("/nDelete.no")
+public class NoticeDelete extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public NoticeSelectOne() {
+    public NoticeDelete() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,31 +30,23 @@ public class NoticeSelectOne extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		NoticeService ns = new NoticeService(); // service를 사용하기 위해서 객체를 생성함 
-		Board bs = new Board(); // Board 객체를 가지고 오려고 객체를 생성함
-		
 		int bno = Integer.parseInt(request.getParameter("bno"));
-		System.out.println("bno는 뭘까"+bno);
-
-		String page = null;
 		
+		NoticeService ns = new NoticeService();
+
 		try {
-			bs = ns.selectOne(bno);
-			request.setAttribute("board", bs);
-			page = "views/community/noticeDetail.jsp";
+			int result = ns.deleteNotice(bno);
 			
-			System.out.println("그럼여기?"+bs);
-
+			response.sendRedirect("selectList.no");
+			
 		} catch (NoticeException e) {
-			request.setAttribute("error-msg", "공지사항 수정 실패");
+			request.setAttribute("error-msg", "공지사항 삭제 실패");
 			request.setAttribute("exception", e);
-
-			request.getRequestDispatcher("/views/common/errorPage.jsp").forward(request, response);
-
+			
+			request.getRequestDispatcher("/views/common/errorPage.jsp")
+				   .forward(request, response);
+			
 			e.printStackTrace();
-
-		} finally {
-			request.getRequestDispatcher(page).forward(request, response);
 		}
 	}
 	/**
