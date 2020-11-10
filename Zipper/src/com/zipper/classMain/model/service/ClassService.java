@@ -4,11 +4,10 @@ import static com.zipper.common.JDBCTemplate.*;
 
 import java.sql.Connection;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import com.zipper.classMain.model.dao.ClassDAO;
 import com.zipper.classMain.model.vo.ClassList;
-import com.zipper.thumb.model.vo.Attachment;
+import com.zipper.board.model.vo.Attachment;
 
 public class ClassService {
 	
@@ -39,9 +38,39 @@ public class ClassService {
 		
 		return cList;
 	}
-	
 
 
-	
+
+	public int insertWrite(ClassList cl, ArrayList<Attachment> alist) {
+		con = getConnection();
+		int result = 0;
+
+		int result1 = 0;
+
+		if(result1 >0) {
+			System.out.println("서비스 정상 작동");
+			commit(con);
+		}else {
+			rollback(con);
+		}
+		close(con);
+		
+		// 첨부파일 저장
+		int result2 = 0;
+		cDAO.insertAttachment(con, alist.get(result));
+		
+		
+		if(result1 >0 && result2 >0) {// 둘다 잘 실행 됐다면
+			System.out.println("서비스 정상 작동");
+			commit(con);
+			result =1;
+			
+		}else {
+			rollback(con);
+		}
+		close(con);
+		return result;
+	}
+
 
 }
