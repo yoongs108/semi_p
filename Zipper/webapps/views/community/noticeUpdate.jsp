@@ -17,6 +17,9 @@
 		margin-right: auto;
 		margin-left: auto;
 	}
+	.table2 {
+		margin-top: 25px;
+	}
 
 	/*웹 제목 스타일*/
 	#title {
@@ -24,17 +27,19 @@
 	}
 	
 	/* 제목과 작성일 */
-	.table2 tr {
-		padding: 20px 0 20px 5px ;
-		font-weight: bold;
-		border-bottom: 1px solid black;
-		
-	}
 	.table2 tr,
 	.table2 td {
-		padding: 20px 0 20px 5px ;
+		padding: 25px 0 20px 5px ;
 		font-weight: bold;
 		border-bottom: 1px solid black;
+	}
+	
+		
+	input[name=title]{
+		width : 500px;
+	}
+	input[name=date]{
+		width : 100px;
 	}
 	
 	#btn{
@@ -68,30 +73,30 @@
 		
 		<div id="textarea" align = "center">
 		
-			<form action="<%=request.getContextPath()%>/nInsert.no" method="post">
-			
+			<form action="nUpView.no" method="post">
+					<input type="hidden" name="bno" value="<%=b.getBno()%>">	
                			<table class = "table2" style="padding-top:10px; width : 85%;">
                			  
 	                        <tr>
-	                        	<td style="padding: 10px;" name="td">제목</td>
+	                        	<td style="padding-left: 20px;" name="title">제목</td>
 	                        	<td>
 	                        		<input type = text name = title value="<%=b.getBtitle() %>"
 	                        			size=100 placeholder ="  제목을 입력해 주세요.">
 	                        	</td>
 	                        	<td>
-	                        		<td style="padding: 10px;" id="tddate">작성일</td>
-									<td><input type="text" readonly="readonly" name="date" id="date"></td>
+	                        		작성일 
+									<input type="text" readonly="readonly" name="date" id="date" >
 	                        	</td>
 	                        </tr>
 	                        <tr>
-	                        	<td colspan="2">
+	                        	<td colspan="3">
 	                        		<textarea name = content cols=105 rows=15> <%=b.getBcontent() %></textarea>
 	                        	</td>
 	                        </tr>
                         </table>
 
         	<div align="center" style="margin-top:50px;margin-bottom:80px;">
-			<input type="submit" value="수정" id="btn"> 
+			<input type="submit" id="btn" value="수정">
 			&nbsp;&nbsp;&nbsp;&nbsp;
 			<button onclick="location.href = '<%= request.getContextPath() %>/selectList.no?'" type="reset" id="btn">취소</button>
 			</div>

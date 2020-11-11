@@ -55,7 +55,7 @@
 		
 		<div id="textarea" align = "center">
 		
-			<form method = "post" action = "">
+			<form method = "post" action = "<%=request.getContextPath()%>/PTPUpdate.po?mno=<%= m.getMno() %>">
 			
                			<table class = "table2" style="padding-top:10px; width : 85%;">
 	                        <tr >
@@ -73,18 +73,11 @@
                         </table>
 
         	<div align="center" style="margin-top:50px;margin-bottom:80px;">
-			<button onclick="summitPTP();" class="btn">작성</button>
+			<input type="submit" value="작성" class="btn" id="btn"> 
 			&nbsp;&nbsp;&nbsp;&nbsp;
-			<button onclick="history.go(-1)" class="btn">취소</button>
+			<button onclick="history.go(-1)" class="btn" >취소</button>
 			</div>
-        		
-        		<script>
-					function summitPTP(){
-						$("#uploadPTP").attr("action","<%= request.getContextPath()%>/PTPUpdate.Po");
-					}
-				</script>
         </form>
-        
 		</div>
 		
 	</section>

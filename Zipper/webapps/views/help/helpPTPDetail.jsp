@@ -10,7 +10,7 @@
 <meta charset="UTF-8">
 <title> 1:1 문의 상세 페이지 </title>
 <style>
-   h1{
+   section h1{
    	  padding-left : 30px;
    }
 
@@ -46,7 +46,7 @@
    	  margin-right : 60px;
    }
    
-   h3{
+   section h3{
    	  margin-left : 60px;
    }
    #adminupdate{
@@ -79,7 +79,7 @@
  	
  	<div>
 	<div id="date"> 
-		<h4> 2020-11-05 </h4>
+		<h4> <%=qs.getQdate() %> </h4>
 	</div>
 	<br>
 	<br>

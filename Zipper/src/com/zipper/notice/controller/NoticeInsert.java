@@ -39,7 +39,7 @@ public class NoticeInsert extends HttpServlet {
 		String bdate = request.getParameter("date");
 		String bcontent = request.getParameter("content");
 		
-	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd"); // 임포트 처리 ok 소문자 mm: 몇 분을 보여줌
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd"); // 임포트 처리 ok 소문자 mm: 몇 분을 보여줌
 		
 		Date ndate = null;
 		// sdf.parse(request.getParameter("date")); try/catch처리ok

@@ -12,7 +12,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Properties;
 
-import com.zipper.board.model.vo.Board;
+import com.zipper.common.exception.QuestionException;
 import com.zipper.question.model.vo.Question;
 
 public class QuestionDAO {
@@ -114,6 +114,29 @@ public QuestionDAO() {
 			close(pstmt);
 		}
 		return qs;
+	}
+	public int insertQuestion(Connection con, Question q) throws QuestionException {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("insertQuestion");
+		System.out.println(sql);
+		try {
+			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setInt(1, q.getMno());
+			pstmt.setString(2, q.getQcontent());
+			pstmt.setString(3, q.getQtitle());
+			
+			result = pstmt.executeUpdate();
+					
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new QuestionException("[DAO] : " + e.getMessage()); 
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
 	}
 	
 }
