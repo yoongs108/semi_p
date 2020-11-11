@@ -16,7 +16,7 @@
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <title>공지사항</title>
 <style>
-   
+
    section h1{
         padding-left : 30px;
    }
@@ -65,7 +65,9 @@
 </style>
 </head>
 <body id="body">
+
     <%@ include file="/views/common/header.jsp" %>
+
 <section> 
     <h1> NOTICE </h1>
     <div>
@@ -74,7 +76,7 @@
             <button id="adminwrite" onclick="location.href='views/community/noticeInsertForm.jsp'"> 작성하기 </button>
       <% } %>
     </div>
-   <hr style="width: 100%; border: solid 0.3px black;">
+   	<hr style="width: 100%; border: solid 0.3px black;">
     <br>
     
     
@@ -161,6 +163,8 @@
     <br>
     <br>
  </section>
+ 
     <%@ include file="/views/common/footer.jsp" %>
+    
 </body>
 </html>
