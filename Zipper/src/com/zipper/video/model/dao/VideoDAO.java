@@ -114,6 +114,10 @@ public class VideoDAO {
 				v.setVname(rset.getString(2));
 				v.setVideo(rset.getString(3));
 				v.setVtext(rset.getString(4));
+				v.setPrice(rset.getInt(5));
+				v.setCname(rset.getString(6));
+				v.setFileNewName(rset.getString(7));
+				v.setTname(rset.getString("tname"));
 				
 				list.add(v);
 			}

@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" import="com.zipper.video.model.vo.*, java.util.*"%>
 <%
-	Video v = (Video)session.getAttribute("video");
+	ArrayList<Video> vlist = (ArrayList<Video>)request.getAttribute("video");
 %>	
 <!DOCTYPE html>
 <html>
@@ -15,6 +15,7 @@
 		width: 1024px;
 		margin-right:auto;
 		margin-left:auto;
+		margin-bottom : 100px;
 	}
 	.title{
 		height : 40px;
@@ -40,7 +41,7 @@
 	/* 리스트 시작*/
 	.card {
 		margin-top : 50px;
-		margin-left: 100px;
+		margin-left: 120px;
 		display : inline-block;
 	}
 	
@@ -51,9 +52,8 @@
 	}
 	#img  {
 		float : left;
-		height : 250px;
-		width : 250px;
-		border : solid 1px black;
+		height : 190px;
+		width : 260px;
 		margin-right : 30px;
 		margin-left : 10px;
 	}
@@ -94,37 +94,37 @@
 	<section>
 		<!-- 페이지 이름 부분 -->
 		<div class="title" style="border-bottom : 1px solid black;">
-		<h2 id="title">SCRAP.CLASS</h2>
+		<h2 id="title">VIDEO.CLASS</h2>
 		<!-- 뒤로가기 -->
 		<img src="<%= request.getContextPath() %>/resources/images/common/backButton.png" 
 			alt="class1" id="back" onclick="history.go(-1)"> 
 
 		</div>
+		<% for(Video v : vlist){ %>
 		<div class="card"> <!-- 클래스 리스트 폼 -->
-			
-			<img src="#" alt="class1" id="img" class="splitL">
-			
+
+			<video src="<%= request.getContextPath() %>/resources/images/fileUpload/video/<%= v.getVideo() %>" id="img" class="splitL"></video>
 			<div id="container" class="splitR" >
 				<h4><%= v.getVname() %></h4>
 				<br />
-				<p class="sub">강사명 : </p>
-				<p class="sub">수강 기간 : 결제 후 1개월</p>
+				<p class="sub">강사명 : <%= v.getTname() %></p>
 				<br />
 				<p>
 				<%= v.getVtext() %>
 				<br />
-				<p id="price" style="font-size:18px; font-weight : bold;">가격 원 </p>
+				<br />
+				<br /><br />
 				
-				<button class="button" onclick="goClassInfo()">자세히 보기</button>
+				<button class="button" onclick="goVideodetail(<%= v.getVno() %>)">강의 보기</button>
 				
 			</div>
 		</div>
-		
+		<% } %>
 		
 		<!-- 페이지 버튼 -->
 		<script>
-		function goClassInfo() { // 정보 수정
-			location.href = '<%= request.getContextPath() %>/views/class/classDetail.jsp'; 
+		function goVideodetail(vno) { // 정보 수정
+			location.href = '<%= request.getContextPath() %>/selectOne.vi?vno='+vno; 
 		}
 		</script>
 		

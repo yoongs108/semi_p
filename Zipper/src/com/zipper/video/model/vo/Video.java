@@ -2,7 +2,9 @@ package com.zipper.video.model.vo;
 
 import java.io.Serializable;
 
-public class Video implements Serializable{
+import com.zipper.classMain.model.vo.ClassList;
+
+public class Video extends ClassList implements Serializable{
 
 	private static final long serialVersionUID = 1234L;
 	/*
@@ -28,7 +30,6 @@ public class Video implements Serializable{
 		this.vtext = vtext;
 	}
 
-	
 	@Override
 	public String toString() {
 		return "Video [vno=" + vno + ", vname=" + vname + ", video=" + video + ", vtext=" + vtext + "]";
@@ -65,8 +66,6 @@ public class Video implements Serializable{
 	public void setVtext(String vtext) {
 		this.vtext = vtext;
 	}
-	
-	
 	
 	
 }

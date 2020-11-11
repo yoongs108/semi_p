@@ -97,7 +97,7 @@
 		
 		<!-- 뒤로가기 -->
 		<img src="<%= request.getContextPath() %>/resources/images/common/backButton.png" 
-			alt="class1" id="back" onclick="goMyPageMain()"> 
+			alt="class1" id="back" onclick="history.go(-1)"> 
 
 		</div>
 		
@@ -114,7 +114,7 @@
 				<p style="font-size:17px; font-weight : bold;"><%= pm.getCname() %> </p>
 				<p style="font-size:14px;"><%= pm.getTotal() %>  원 </p>
 				
-				<button class="button" onclick="goClassInfo(<%=pm.getCno()%>)">자세히 보기</button>
+				<button class="button" onclick="goVideoList(<%=pm.getCno()%>)">수강 하기</button>
 				
 			</div>
 		</div>
@@ -123,11 +123,8 @@
 		
 		<!-- 페이지 버튼 -->
 		<script>
-		function goClassInfo(cno) { // 정보 수정
-			location.href = '<%= request.getContextPath() %>/selectClass.sc?cno='+cno;
-		}
-		function goMyPageMain() { // 메인페이지로 이동
-			location.href = '<%= request.getContextPath() %>/views/myPage/myPageMain.jsp'; 
+		function goVideoList(cno) { 
+			location.href = '<%= request.getContextPath() %>/selectList.vi?cno='+cno;
 		}
 		</script>
 		

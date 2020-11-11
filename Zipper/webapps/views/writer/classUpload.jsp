@@ -76,7 +76,7 @@
 	
 				<!-- 파일 첨부 -->
 				<tr>
-					<td id="imgArea" colspan="2">
+					<td id="imgArea" colspan="3">
 
 						<div id="videoArea">
 
@@ -87,17 +87,24 @@
 						</div>
 					</td>
 				</tr>
-	
+				
 				<!-- 제목 -->
 				<tr>
 					<td class="title">클래스 명</td>
 						<td>
-						<input type=text name=title size=99
+						<input type=text name=title size=75
 						placeholder="  제목을 입력해 주세요.">
+						</td>
+						<td>
+							<foam>
+								클래스 선택 : <select id="subject">
+	    						<option value="" selected="selected">Select class</option>
+	  							</select>
+							</foam>
 						</td>
 				</tr>
 				<!-- 내용 -->
-				<tr>
+				<tr colspan="3">
 					<td class="title">클래스 소개</td>
 					<td>
 						<textarea name = content cols=98 rows=15 placeholder="  클래스 소개를 입력해 주세요."></textarea>

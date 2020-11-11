@@ -43,7 +43,7 @@ public class VideoSelectList extends HttpServlet {
 				try {
 					list = vs.selectList();
 					
-					request.setAttribute("list", list);
+					request.setAttribute("video", list);
 					
 					page = "views/class/videoList.jsp";
 					
