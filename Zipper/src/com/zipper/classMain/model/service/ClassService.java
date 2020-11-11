@@ -2,6 +2,7 @@ package com.zipper.classMain.model.service;
 
 import static com.zipper.common.JDBCTemplate.*;
 
+import java.io.File;
 import java.sql.Connection;
 import java.util.ArrayList;
 
@@ -80,6 +81,23 @@ public class ClassService {
       close(con);
       return result;
    }
+
+
+
+public int deletdClass(int cno, String savePath) {
+	con = getConnection();
+	
+	int result = cDAO.deletdClass(con, cno);
+	
+	if(result >0) {
+		
+		File f = new File(savePath );
+		
+		f.delete();
+	}
+	
+	return result;
+}
 
 }
  

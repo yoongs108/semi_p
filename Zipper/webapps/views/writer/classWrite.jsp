@@ -20,8 +20,8 @@
 	}
 	
 	.imgBox {
-		width:200px;
-		height:200px;
+		width:260px;
+		height:220px;
 		border:1px solid black;
 		display: inline-block;
 	}
@@ -32,6 +32,10 @@
 		
 	}
 	
+	.input {
+		text-align: right;
+	
+	}
 		
 	img{
 		width:100%;
@@ -82,6 +86,8 @@
 					<td>
 						<div class="input">
 							클래스 이름 : <input size="50" name="cname"></input> <br />
+							<br /><br />
+							강사 명 : &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input size="50" name="tname"></input> <br />
 							<br /><br />
 							키트 항목 : &nbsp;&nbsp;&nbsp;<input size="50" name="kdetail"></input> <br />
 							<br /><br />
