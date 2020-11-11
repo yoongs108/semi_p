@@ -1,7 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" import="com.zipper.board.model.vo.*, java.util.*"%>
 <%
-   ArrayList<Board> list = (ArrayList<Board>) request.getAttribute("list");
+	ArrayList<Board> list = (ArrayList<Board>) request.getAttribute("list");
+	PageInfo pi = (PageInfo)request.getAttribute("pi");
+	int listCount = pi.getListCount();
+	int currentPage = pi.getCurrentPage();
+	int maxPage = pi.getMaxPage();
+	int startPage = pi.getStartPage();
+	int endPage = pi.getEndPage();
 %>
 <!DOCTYPE html>
 <html>
@@ -102,14 +108,34 @@
     
        <!-- Pagination -->
      
-       <div class="w3-bar">
-         <a href="#" class="w3-bar-item w3-button w3-hover-black">«</a>
-         <a href="#" class="w3-bar-item w3-black w3-button">1</a>
-         <a href="#" class="w3-bar-item w3-button w3-hover-black">2</a>
-         <a href="#" class="w3-bar-item w3-button w3-hover-black">3</a>
-         <a href="#" class="w3-bar-item w3-button w3-hover-black">4</a>
-         <a href="#" class="w3-bar-item w3-button w3-hover-black">»</a>
-       </div>
+	<div style="text-align : center; border : 1px solid black;">
+		<button class="w3-bar-item w3-button w3-hover-black"
+       			onclick="location.href='<%= request.getContextPath() %>/selectList.no?currentPage=1'"><<</button>
+		<% if(currentPage <= 1){ %>
+			<button class="w3-bar-item w3-button" disabled><</button>
+		<% } else { %>
+		<button class="w3-bar-item w3-button w3-hover-black"
+				onclick="location.href='<%= request.getContextPath() %>/selectList.no?currentPage=<%=currentPage - 1 %>'"><</button>
+		<% } %>
+		<% for(int p = startPage; p <= endPage; p++){
+				if(p == currentPage){	
+		%>
+			<button class="w3-bar-item w3-button" disabled><%= p %></button>
+		<%      }else{ %>
+			<button class="w3-bar-item w3-button w3-hover-black"
+					onclick="location.href='<%= request.getContextPath() %>/selectList.no?currentPage=<%= p %>'"><%= p %></button>
+		<%      } %>
+		<% } %>
+         
+        <%  if(currentPage >= maxPage){  %>
+		<button class="w3-bar-item w3-button" disabled>></button>
+		<%  }else{ %>
+		<button class="w3-bar-item w3-button w3-hover-black" 
+				onclick="location.href='<%= request.getContextPath() %>/selectList.no?currentPage=<%=currentPage + 1 %>'">></button>
+		<%  } %>
+		<button class="w3-bar-item w3-button w3-hover-black"
+				onclick="location.href='<%= request.getContextPath() %>/selectList.no?currentPage=<%= maxPage %>'">>></button>
+	</div>
    
     <script>
     // 게시글 선택 시 주는 효과 + 상세 페이지 연결 

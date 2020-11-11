@@ -56,7 +56,7 @@
         
         #profile {
             right: 120px;
-            border : 2px solid black;
+            border : 1px solid black;
             border-radius: 50%;
         }
 

@@ -1,7 +1,5 @@
 package com.zipper.notice.dao;
 
-import static com.zipper.common.JDBCTemplate.close;
-import static com.kh.jsp.common.JDBCTemplate.close;
 import static com.zipper.common.JDBCTemplate.*;
 
 import java.io.FileNotFoundException;
@@ -179,7 +177,9 @@ public class NoticeDAO {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 
-		String sql = prop.getProperty("SelectList");
+		String sql = prop.getProperty("selectList");
+		
+		System.out.println(sql);
 
 		try {
 			pstmt = con.prepareStatement(sql);
@@ -203,8 +203,8 @@ public class NoticeDAO {
 				b.setMno(rset.getInt("mno"));
 				b.setBtitle(rset.getString("btitle"));
 				b.setBcontent(rset.getString("bcontent"));
+				b.setBdate(rset.getDate("bdate"));
 //				b.setBview(rset.getInt("bview"));
-//				b.setBdate(rset.getDate("bdate"));
 //				b.setBstatus(rset.getString("bstatus"));
 //				b.setCno(rset.getInt("cno"));
 //				b.setFaqtype(rset.getInt("faqtype")); 
