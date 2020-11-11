@@ -12,31 +12,43 @@
 <meta charset="UTF-8">
 <title>Service ERROR</title>
 <style>
-.outer{
-		padding: 20px;
-		width:600px;
-		height:500px;
-		background:black;
-		color:white;
-		margin-left:auto;
-		margin-right:auto;
-		margin-top:50px;
+	section {
+      width: 1024px;
+      margin-left:auto;
+      margin-right:auto;
+      margin-top: 30px;
+      margin-bottom : 100px;
+   }
+	.outer{
+		margin-left : 35%;
+		width : 30%;
 	}
-span {
-	font-size:21pt;
-	background: white;
-	color: navy;
-}
+	img {
+		margin-top : 10px;
+		margin-bottom : 10px;
+	}
+	h2, h3{
+		text-align : center;
+	}
+	.msg{
+		text-align : center;
+	}
+	.msg:hover {
+		color : red;
+		cursor: help;
+	}
 </style>
 </head>
 <body>
 <%@ include file="../common/header.jsp" %>
-	<div class="outer">
-		<h1>서비스 에러 발생!!!</h1>
-		<h3 style="color:hotpink;">ERROR : <%= e.getMessage() %></h3>
-		<h4><span>서</span>비스 수행 중 에러가 발생했습니다. 전송 값을 확인해 보시고,<br>
-		이상이 없을 시 부서 담당자에게 연락하시기 바랍니다.</h4>
-	</div>
+	<section>
+		<h2>ERROR <%-- <%= e.getMessage() %> --%> ;</h2>
+		<br />
+		<div class="outer">
+			<img src="<%= request.getContextPath() %>/resources/images/common/hmm.gif"/>
+		</div>
+		<h3 class="msg">앗...잘못된 전송값을 받았습니다. <br /><br /> 확인 후 담당자에게 연락해 주세요!</h3>
+	</section>
 <%@ include file="../common/footer.jsp" %>
 </body>
 </html>
