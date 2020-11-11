@@ -179,8 +179,7 @@
                
                <p>
                   <%= t.getUserId()%>
-                  <div>
-                     <img src="" alt="스크랩" />
+                  <div>                  
                   </div>
                   <br />
                   <%= t.getBcontent() %>
@@ -208,6 +207,14 @@
 	<% } %>	
 
    <%@ include file="/views/common/footer.jsp"%>
-   
+   <script>
+   $(function () {
+		$('.thumb-list').click(function () {
+			var bno = $(this).find('input').val();
+			location.href ='<%= request.getContextPath()%>/zippopSelectOne.zp?bno=' + bno;
+			
+		});
+	});
+   </script>
 </body>
 </html>

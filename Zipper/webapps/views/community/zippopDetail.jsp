@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" %>
-<%@ page import="java.util.*, com.zipper.board.model.vo.*, com.zipper.boardComment.model.vo.*" %>
+<%@ page import="java.util.*, com.zipper.board.model.vo.*, com.zipper.boardComment.model.vo.*, com.zipper.member.model.vo.*" %>
     
 <% 	
 	Board b = (Board)request.getAttribute("board");
@@ -106,7 +106,7 @@
 	}
 	
 	.tabcontent_wrap {
-		border: 2px solid;
+		
 		width: 650px;
 	}
 	
@@ -135,10 +135,9 @@
 			<div class="left_page">
 			
 				<div><img src="<%= request.getContextPath() %>/resources/images/fileUpload/<%= b.getBoardfile() %>" alt="" width="650px" height="500px"/></div>
-				<h3><%= b.getBtitle() %></h3>
-				
-				
-		 		
+				<!--<h3><%= b.getBtitle() %></h3>  --> 
+										 	<br />
+										 	<br />
 		 	 	<div class="tabcontent_wrap">
 			 		<div class='tabcontent1'>
 						<p><%= b.getBcontent() %></p>
@@ -150,7 +149,12 @@
 		
 			<div class="right_page">
 		
-				<h3><%= b.getBwriter() %></h3> <br /><br />
+				<h3><%= b.getBwriter() %></h3> <br /><br /> &nbsp;&nbsp;&nbsp;
+					
+					<% if(m != null && m.getMid().equals(b.getUserId())){ %>
+					<button>수정하기</button>
+					<button>삭제하기</button>
+					<% } %> 
 				<div class="cmtWrap">
 					<!-- 댓글(cmt) -->
 				<% if (clist != null) { %>
@@ -163,6 +167,8 @@
 					</div>
 					<% } %>
 				<% } %>
+				
+				
 					
 					<!-- 대댓글(recmt)임시 -->
 					<!-- <div class="comment re">
@@ -175,10 +181,15 @@
 					<div class="paging">
 						
 					</div>
+					<br />
+					<br />
 					
 					<div class="cmtForm">
 						<input type="text" name="content" class="cmtForm">
-						<button type="button">답변등록</button>
+						<br />
+						<br />
+						<br />
+						<button type="button">댓글등록</button>
 					</div>
 				
 				</div>				

@@ -235,7 +235,7 @@ section {
 	      </div>
 	      <h3><%= board.getBtitle() %></h3>
 	      <span>[가이드]</span>
-	      <span><%= board.getBcontent().substring(0, 45) %></span>
+	      <span><%= board.getBcontent()%></span>
 	      
 	      <p>인테리어</p>
 	    </div>
