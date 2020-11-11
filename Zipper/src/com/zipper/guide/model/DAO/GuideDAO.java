@@ -54,17 +54,16 @@ private Properties prop;
 			rset = pstmt.executeQuery();
 			
 			while(rset.next()) {
-				for(int i=0 ; i < 8 ; i++) { // 임시 지우기
+				
 				Board bo = new Board();
 				
-				bo.setBno(		rset.getInt("bno")+i);
-				bo.setBtitle(	rset.getString("btitle")+i);
-				bo.setBcontent(	rset.getString("bcontent")+i);
+				bo.setBno(		rset.getInt("bno"));
+				bo.setBtitle(	rset.getString("btitle"));
+				bo.setBcontent(	rset.getString("bcontent"));
 				bo.setBoardfile(rset.getString("boardfile"));
 				
 				list.add(bo);
 				
-				} // 임시 지우기
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
