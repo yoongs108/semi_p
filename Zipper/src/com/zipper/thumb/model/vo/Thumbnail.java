@@ -24,32 +24,11 @@ public class Thumbnail extends Board implements Serializable{
 		// TODO Auto-generated constructor stub
 	}
 
-	
-
 	public Thumbnail(int bno, int btype, int mno, String btitle, String bcontent, int bview, Date bdate, String bstatus,
-			String userId, String bwriter, String boardfile, String profile, int faqType) {
-		super(bno, btype, mno, btitle, bcontent, bview, bdate, bstatus, userId, bwriter, boardfile, profile, faqType);
+			int cno, int faqtype, String profile, String userId, String bwriter, String boardfile) {
+		super(bno, btype, mno, btitle, bcontent, bview, bdate, bstatus, cno, faqtype, profile, userId, bwriter, boardfile);
 		// TODO Auto-generated constructor stub
 	}
-
-
-
-	public Thumbnail(int bno, int btype, int mno, String btitle, String bcontent, int bview, Date bdate,
-			String bstatus, String profile, int faqType) {
-		super(bno, btype, mno, btitle, bcontent, bview, bdate, bstatus, profile, faqType);
-		// TODO Auto-generated constructor stub
-	}
-	
-	public Thumbnail(int bno, String btitle, String bcontent, int bview, String boardfile, String profile, int faqType) {
-		super(bno, btitle, bcontent, bview, boardfile, profile, faqType);
-		
-	}
-	
-	public Thumbnail(int bno, String userId, String boardfile, int faqType) {
-		super(bno, userId, boardfile, faqType);
-	}
-
-
 
 	@Override
 	public String toString() {
@@ -57,7 +36,7 @@ public class Thumbnail extends Board implements Serializable{
 				+ ", getBtype()=" + getBtype() + ", getMno()=" + getMno() + ", getBtitle()=" + getBtitle()
 				+ ", getBcontent()=" + getBcontent() + ", getBview()=" + getBview() + ", getBdate()=" + getBdate()
 				+ ", getBstatus()=" + getBstatus() + ", getUserId()=" + getUserId() + ", getBwriter()=" + getBwriter()
-				+ ", getBoardfile()=" + getBoardfile() + ", getClass()=" + getClass() + ", getFaqType()=" + getFaqType()
+				+ ", getBoardfile()=" + getBoardfile() + ", getClass()=" + getClass() + ", getFaqType()=" + getFaqtype()
 				+ ", hashCode()=" + hashCode() + "]";
 	}
 
@@ -72,7 +51,5 @@ public class Thumbnail extends Board implements Serializable{
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
-
-	
 	
 }

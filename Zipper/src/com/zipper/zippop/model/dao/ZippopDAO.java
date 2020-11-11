@@ -1,6 +1,6 @@
 package com.zipper.zippop.model.dao;
 
-import static com.zipper.common.JDBCTemplate.*;
+import static com.zipper.common.JDBCTemplate.close;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -15,7 +15,8 @@ import java.util.Properties;
 import com.zipper.board.model.vo.Attachment;
 import com.zipper.board.model.vo.Board;
 import com.zipper.myPage.model.dao.MyPageDAO;
-import com.zipper.board.model.vo.Thumbnail;
+import com.zipper.thumb.model.vo.Thumbnail;
+
 
 public class ZippopDAO {
 	

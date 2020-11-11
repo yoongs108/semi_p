@@ -16,7 +16,7 @@ import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 import com.zipper.common.MyRenamePolicy;
 import com.zipper.member.model.vo.Member;
-import com.zipper.thumb.model.vo.Attachment;
+import com.zipper.board.model.vo.Attachment;
 import com.zipper.thumb.model.vo.Thumbnail;
 import com.zipper.zippop.model.service.ZippopService;
 
@@ -79,8 +79,8 @@ public class zippopInsert extends HttpServlet {
 		Attachment at = new Attachment();
 			
 		at.setFilepath(savePath);
-		at.setOriginname(originNames);
-		at.setChangename(changeNames);
+		at.setFile_origin_name(originNames);
+		at.setFile_new_name(changeNames);
 		
 		//System.out.println("servlet Attachment chk: " + at.getFilepath() + " / " + at.getOriginname() + " / " + at.getChangename());
 		
