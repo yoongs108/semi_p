@@ -51,24 +51,21 @@ public class ClassService {
       return list;
    }
    
-   public int insertWrite(ClassList cl, ArrayList<Attachment> alist) {
+   public int insertWrite(ClassList cl, Attachment at) {
       con = getConnection();
       int result = 0;
+      
+      // 클래스 등록
+      int result1 = cDAO.insertWrite(con, cl);
 
-      int result1 = 0;
-
-      if(result1 >0) {
-         System.out.println("서비스 정상 작동");
-         commit(con);
-      }else {
-         rollback(con);
-      }
-      close(con);
+      if(result1 >0) { // 등록이 성공했으면
+    	  // 등록된 클래스 번호 불러옴
+		int cno = cDAO.getCurrentCno(con);
+		at.setCno(cno); // 불러온 번호 at에 추가
+      }   
       
       // 첨부파일 저장
-      int result2 = 0;
-      cDAO.insertAttachment(con, alist.get(result));
-      
+      int result2 = cDAO.insertAttachment(con, at);
       
       if(result1 >0 && result2 >0) {// 둘다 잘 실행 됐다면
          System.out.println("서비스 정상 작동");
@@ -82,5 +79,5 @@ public class ClassService {
       return result;
    }
 
-
 }
+ 

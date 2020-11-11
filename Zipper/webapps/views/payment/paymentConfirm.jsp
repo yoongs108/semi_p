@@ -30,7 +30,7 @@
 	.boxLine {
 		width : 700px;
         border-bottom: 1px solid black;
-		margin: 20px;
+		margin: 50px;
 	}
 	
 	

@@ -28,8 +28,7 @@
 		left : 950px;
 		height : 80px;
 		width: 80px;
-		position:relative;
-		top:30px;
+		top: 90px;
 	}
 	
 	#back:hover{
@@ -39,14 +38,13 @@
 	
 	.top {
 		position : absolute;
-
-		height :170px; 
+		height :150px; 
 		width: 1024px;
-		top: 40px;
+		top: 20px;
 	}
    	#title {
 		text-align: center;
-   		
+   		margin-top: 100px;
    	}
 	table {
 		width : 700px; 
@@ -333,19 +331,16 @@
 							<td>결제</td>
 							<td>신용카드 정보</td>
 							<td>간편 결제 서비스 제공</td>
-							<td></td>
 						</tr>
 						<tr>
 							<td>취소&환불</td>
 							<td>환불 계좌번호, 은행명, 예금주명	</td>
-							<td>결제 서비스 환불</td>
-							<td></td>
+							<td>결제 서비스 환불</td>td>
 						</tr>
 						<tr>
 							<td>휴대전화 인증</td>
 							<td>휴대전화 번호</td>
 							<td>상품 구매 및 포인트(적립금) 지급 시 본인 인증</td>
-							<td></td>
 						</tr>
 					</table>
 					<br /><br />
