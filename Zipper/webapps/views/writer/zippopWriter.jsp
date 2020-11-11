@@ -109,7 +109,7 @@
 
 				function back() {
 					$(this).on('click', function() {
-						window.go(-1);
+						history.go(-1);
 					});
 				}
 				

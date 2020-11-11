@@ -134,6 +134,10 @@
       cursor: pointer;
       transform: scale(1.2);
    }
+   
+   #reverseBtn:focus {
+      outline: none;
+   }
 
 </style>
 <script>

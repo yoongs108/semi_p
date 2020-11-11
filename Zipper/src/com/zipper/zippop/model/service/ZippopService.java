@@ -1,13 +1,16 @@
 package com.zipper.zippop.model.service;
 
-import static com.zipper.common.JDBCTemplate.*;
+import static com.zipper.common.JDBCTemplate.close;
+import static com.zipper.common.JDBCTemplate.commit;
+import static com.zipper.common.JDBCTemplate.getConnection;
+import static com.zipper.common.JDBCTemplate.rollback;
 
 import java.sql.Connection;
 import java.util.ArrayList;
 
 import com.zipper.board.model.vo.Attachment;
 import com.zipper.board.model.vo.Board;
-import com.zipper.board.model.vo.Thumanil;
+import com.zipper.thumb.model.vo.Thumbnail;
 import com.zipper.zippop.model.dao.ZippopDAO;
 
 public class ZippopService {
