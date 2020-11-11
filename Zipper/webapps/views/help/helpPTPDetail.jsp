@@ -3,6 +3,8 @@
 <%
 	Question qs = (Question)request.getAttribute("qs");
 	System.out.println("qs가 넘어오니?" + qs);
+	Member ms = (Member)request.getAttribute("ms");
+	System.out.println("ms가 넘어오니? " + ms);
 %>
 <!DOCTYPE html>
 <html>
@@ -14,7 +16,7 @@
    	  padding-left : 30px;
    }
 
-#back{
+	#back{
       position : absolute;
       top : 100px;
       left : 950px;
@@ -24,32 +26,32 @@
       top:-210%;
    }
    
-   #back:hover{
+   	#back:hover{
       cursor: pointer;
       transform: scale(1.2);
    }
    
-   section {
+   	section {
       width: 1024px;
       margin-left:auto;
       margin-right:auto;
    }
    
-   div .content{
+   	div .content{
       width : 80%;
  	  height : 300px;
 	  margin-left : 60px;
    }
    
-   #date{
+   	#date{
    	  float : right;
    	  margin-right : 60px;
    }
    
-   section h3{
+   	section h3{
    	  margin-left : 60px;
    }
-   #adminupdate{
+   	#adminupdate{
    	  margin-left : 200px;
    	  position: relative;
    	  top : -40px;
@@ -60,16 +62,42 @@
 	  border : none;	
    }
    
-   #adminupdate:hover{
+   	#adminupdate:hover{
 		background-color: #555;
 		cursor: pointer;
+	}
+	
+	#delete{
+		position : relative;
+		float: right;
+		top : 23px;
+		margin-right : 80px;
+		width : 80px;
+		height : 30px;
+		color : white;
+		background-color : black;
+		border : none;	
+	}
+	
+	#delete:hover{
+		background-color: #555;
+		cursor: pointer;
+	}
+	
+	#memberid {
+		padding-left : 25px;
+		padding-top : 5px;
+		border : none;
 	}
 </style>
 </head>
 <body id="body">
+<%@ include file="/views/common/header.jsp" %>
 <section> 
- 	<%@ include file="/views/common/header.jsp" %>
  	<h1> 1:1 문의내역 </h1>
+ 	<% if(m != null && m.getMgrd().equals("A")){ %> 
+ 	<button id="delete" onclick="#"> 삭제 </button>
+ 	<% } %>
  	<!-- 뒤로가기 -->
 		<img src="<%= request.getContextPath() %>/resources/images/common/backButton.png" 
 			alt="notice" id="back" onclick="location.href = '<%= request.getContextPath() %>/selectList.qo?'"> 
@@ -84,7 +112,9 @@
 	<br>
 	<br>
 	<div> 
-		<h3 id="title" > <b>문의 제목 </b> </h3>
+		<h3 id="title" > <b>문의 제목 </b> 
+		<input type="text" readonly="readonly" id="memberid" value="<%= ms.getMid()%>"> 
+		</h3>
 		<br>
 	</div>
  	<div class="content">
@@ -94,7 +124,7 @@
 
  	<div>
  	<div id="date"> 
-		<h4> <%=qs.getQdate() %> </h4>
+		<h4> <%=qs.getQcommentdate() %> </h4>
 	</div>
 	<br>
 	<div> 
@@ -102,15 +132,16 @@
  		<div>
 			<!-- 회원등급이 admin으로 로그인할 때만 확인 되도록 조건문 넣어줌 -->
  			<% if(m != null && m.getMgrd().equals("A")){ %> 
-				<button id="adminupdate" onclick="#"> 수정하기 </button>
+				<button id="adminupdate" onclick="#"> 답변달기 </button>
+				<%-- 삭제에 넣을것 참고 : location.href='<%= request.getContextPath() %>/nDelete.no?bno=<%= bs.getBno()%>' --%> 
 			<% } %>
  		</div>
- 	</div>
+ 		
  	<div class="content">
  		<%= qs.getQcomment() %>
  	</div>
  	</div>
  	</section>
- 	<%@ include file="/views/common/footer.jsp" %>
+<%@ include file="/views/common/footer.jsp" %>
 </body>
 </html>
