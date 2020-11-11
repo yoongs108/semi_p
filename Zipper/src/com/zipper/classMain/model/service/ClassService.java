@@ -84,17 +84,21 @@ public class ClassService {
 
 
 
-public int deletdClass(int cno, String savePath) {
+public int deleteClass(int cno, String savePath) {
 	con = getConnection();
 	
-	int result = cDAO.deletdClass(con, cno);
+	int result = cDAO.deleteClass(con, cno);
+	
 	
 	if(result >0) {
-		
 		File f = new File(savePath );
 		
 		f.delete();
+		commit(con);
+	}else {
+		rollback(con);
 	}
+	close(con);
 	
 	return result;
 }
