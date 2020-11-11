@@ -20,6 +20,7 @@
 		margin-left:auto;
 		margin-right:auto;
 	}
+	
 	#searchDiv {
 		width: 40%;
 		border: 1px solid black;
@@ -74,8 +75,7 @@
 	.active, .accordion:hover {
   		background-color: #ccc;
 	}
-	
-	/* ********* never used ***********
+
 	.panel {
   		padding: 0 18px;
   		background-color: white;
@@ -83,7 +83,6 @@
   		overflow: hidden;
   		transition: max-height 0.2s ease-out;
 	}
-	*/
 	
 	.accordion:after {
   		content: '\02795'; /* Unicode character for "plus" sign (+) */
@@ -130,33 +129,29 @@
     	$('html, body').animate({scrollTop : (offset.top - winH*1.5)}, 400);
 	};
 	
-	
 	function accordion_hide(obj) {
 		console.log(obj);
 		$(obj).parent().find('p').toggleClass('accordion_hide');
 	};
 	
-	
 	/*
 	$('#searchTool').keyup(function() {
 		var search = $('#searchTool').val();
 		$('#selectDetail:contains('"+ search +"')').each(function() {
-			$(this).html( $(this).text().replace(regex, "<span clasc='text-red'>"+"</span>"));
+			$(this).html( $(this).text().replace(regex, "<span class='text-red'>"+"</span>"));
 		});
 	});
 	*/
 	
 	// 코드 구현 필요 / 페이지 내에서 수정이 가능하도록 구현 .html .text 사용
-	function complete(){
-		$(this).on("click", function() {
-			location.href="<%= request.getContextPath()%>/zipUpdate.zp";
-		});
-			
+	function completeFaq(){
+		$("#updateFaq").attr("action","<%= request.getContextPath()%>/zipUpdateComplete.zp");
 	}
 	
-	function deleteBoard(){
-		$("#updateForm").attr("action","<%= request.getContextPath()%>/bDelete.bo");
-	}	
+	function deleteFaq() {
+		$
+	}
+		
 </script>
 </head>
 <body>
@@ -182,26 +177,35 @@
  	</div>
  	
  	
- 	<% if (m.getMid().contains("admin")) { %>
+ 	<%-- if (m.getMid().contains("admin")) { --%>
 	
-		<div align="right" id="adminBtn">
-			<button onclick="complete();">수정하기</button>
-			<button onclick="deleteBoard();">삭제하기</button>
-		</div>
+		<!--div align="right" id="adminBtn">
+			<button onclick="complete();">수정완료</button>
+			<!--button onclick="deleteBoard();">삭제하기</button>
+		</div-->
 		
- 	<% } %>
+ 	<%-- } --%>
  	
  	
  	<hr />
 
  	<!-- 하단 내용영역 (아코디언방식 사용)  / (CSS 작업 필요)-->
+ 	<form id="updateFaq" method="post">
  	<div id="selectDetail">
  		<div class='tabcontent1'>
  			<h3>클래스</h3>
  			<% for (Board b : list1) { %>
 			<div>
- 				<button class="accordion" onclick="accordion_hide(this)">Q. <%= b.getBtitle() %> </button>
-				<p class="accordion_hide"><%= b.getBcontent() %></p>
+				<form id="updateFaq" method="post">
+				<input type="hidden" name="bno" value="<%= b.getBno() %>"/>
+				<input type="hidden" name="faqtype" value="<%= b.getFaqType() %>" />
+ 				<div class="accordion" onclick="accordion_hide(this)">
+ 					Q. <input type="text" name="title"value="<%= b.getBtitle() %> "/>
+ 				</div>
+				<textarea class="accordion_hide" name="content" cols="60" rows="15" style="resize:none; height:200px;"><%= b.getBcontent() %></textarea>
+				<button onclick="completeFaq();">수정</button>
+				<button onclick="deleteFaq();">삭제</button>
+				</form>
 			</div>
 			<% } %>
 			<br /><br />
@@ -211,8 +215,12 @@
  			<h3>결제</h3>
  			<% for (Board b : list2) { %>
 			<div>
- 				<button class="accordion" onclick="accordion_hide(this)">Q. <%= b.getBtitle() %> </button>
-				<p class="accordion_hide"><%= b.getBcontent() %></p>
+				<input type="hidden" name="bno" value="<%= b.getBno() %>"/>
+				<input type="hidden" name="faqtype" value="<%= b.getFaqType() %>" />
+ 				<button class="accordion" onclick="accordion_hide(this)">
+ 					Q. <input type="text" name="title"value="<%= b.getBtitle() %> "/>
+ 				</button>
+				<textarea class="accordion_hide" name="content" cols="60" rows="15" style="resize:none; height:200px;"><%= b.getBcontent() %></textarea>
 			</div>
 			<% } %>
 			<br /><br />
@@ -221,8 +229,12 @@
  			<h3>배송</h3>
  			<% for (Board b : list3) { %>
 			<div>
- 				<button class="accordion" onclick="accordion_hide(this)">Q. <%= b.getBtitle() %> </button>
-				<p class="accordion_hide"><%= b.getBcontent() %></p>
+				<input type="hidden" name="bno" value="<%= b.getBno() %>"/>
+				<input type="hidden" name="faqtype" value="<%= b.getFaqType() %>" />
+ 				<button class="accordion" onclick="accordion_hide(this)">
+ 					Q. <input type="text" name="title"value="<%= b.getBtitle() %> "/>
+ 				</button>
+				<textarea class="accordion_hide" name="content" cols="60" rows="15" style="resize:none; height:200px;"><%= b.getBcontent() %></textarea>
 			</div>
 			<% } %>
 			<br /><br />
@@ -231,8 +243,10 @@
  			<h3>환불</h3>
  			<% for (Board b : list4) { %>
 			<div>
- 				<button class="accordion" onclick="accordion_hide(this)">Q. <%= b.getBtitle() %> </button>
-				<p class="accordion_hide"><%= b.getBcontent() %></p>
+				<input type="hidden" name="bno" value="<%= b.getBno() %>"/>
+				<input type="hidden" name="faqtype" value="<%= b.getFaqType() %>" />
+ 				<button class="accordion" onclick="accordion_hide(this)">Q. <input type="text" name="title"value="<%= b.getBtitle() %> "/></button>
+				<textarea class="accordion_hide" name="content" cols="60" rows="15" style="resize:none; height:200px;"><%= b.getBcontent() %></textarea>
 			</div>
 			<% } %>
 			<br /><br />
@@ -241,14 +255,17 @@
  			<h3>글쓰기</h3>
  			<% for (Board b : list5) { %>
 			<div>
- 				<button class="accordion" onclick="accordion_hide(this)">Q. <%= b.getBtitle() %> </button>
-				<p class="accordion_hide"><%= b.getBcontent() %></p>
+				<input type="hidden" name="bno" value="<%= b.getBno() %>"/>
+				<input type="hidden" name="faqtype" value="<%= b.getFaqType() %>" />
+ 				<button class="accordion" onclick="accordion_hide(this)">Q. <input type="text" name="title"value="<%= b.getBtitle() %> "/></button>
+				<textarea class="accordion_hide" name="content" cols="60" rows="15" style="resize:none; height:200px;"><%= b.getBcontent() %></textarea>
 			</div>
 			<% } %>
 			<br /><br /><br />
  		</div>
  		<div class="tabcontent6"></div>
  	</div>
+ 	</form>
 
  	</section>
  	

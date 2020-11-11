@@ -26,6 +26,7 @@ public class Board implements Serializable{
 	private Date bdate;			// 작성일
 	private String bstatus;		// 삭제 여부 ( Y: 삭제 X, N: 삭제됨 )
 	private String profile;
+	private int faqType;		// FAQ구분
 	
 	private String userId;		// 게시글 작성자 아이디
 	private String bwriter;		// 게시글 작성자(닉네임, 이름)
@@ -37,7 +38,7 @@ public class Board implements Serializable{
 		super();
 	}
 
-	public Board(int bno, int btype, int mno, String btitle, String bcontent, int bview, Date bdate, String bstatus, String profile) {
+	public Board(int bno, int btype, int mno, String btitle, String bcontent, int bview, Date bdate, String bstatus, String profile, int faqType) {
 		super();
 		this.bno = bno;
 		this.btype = btype;
@@ -48,10 +49,11 @@ public class Board implements Serializable{
 		this.bdate = bdate;
 		this.bstatus = bstatus;
 		this.profile = profile;
+		this.faqType = faqType;
 	}
 
 	public Board(int bno, int btype, int mno, String btitle, String bcontent, int bview, Date bdate, String bstatus,
-			String userId, String bwriter, String boardfile, String profile) {
+			String userId, String bwriter, String boardfile, String profile, int faqType) {
 		super();
 		this.bno = bno;
 		this.btype = btype;
@@ -65,10 +67,11 @@ public class Board implements Serializable{
 		this.bwriter = bwriter;
 		this.boardfile = boardfile;
 		this.profile = profile;
+		this.faqType = faqType;
 	}
 
 
-	public Board(int bno, String btitle, String bcontent, int bview, String boardfile, String profile) {
+	public Board(int bno, String btitle, String bcontent, int bview, String boardfile, String profile, int faqType) {
 		super();
 		this.bno = bno;
 		this.btitle = btitle;
@@ -76,21 +79,23 @@ public class Board implements Serializable{
 		this.bview = bview;
 		this.boardfile = boardfile;
 		this.profile = profile;
+		this.faqType = faqType;
 	}
 	
 	
-	public Board(int bno, String userId, String boardfile) {
+	public Board(int bno, String userId, String boardfile, int faqType) {
 		super();
 		this.bno = bno;
 		this.userId = userId;
 		this.boardfile = boardfile;
+		this.faqType = faqType;
 	}
 
 	@Override
 	public String toString() {
 		return "Board [bno=" + bno + ", btype=" + btype + ", mno=" + mno + ", btitle=" + btitle + ", bcontent="
 				+ bcontent + ", bview=" + bview + ", bdate=" + bdate + ", bstatus=" + bstatus + ", userId=" + userId
-				+ ", bwriter=" + bwriter + ", boardfile=" + boardfile + "]";
+				+ ", bwriter=" + bwriter + ", boardfile=" + boardfile + ", faqType=" + faqType + "]";
 	}
 
 
@@ -210,5 +215,15 @@ public class Board implements Serializable{
 	public void setProfile(String profile) {
 		this.profile = profile;
 	}
+
+	public int getFaqType() {
+		return faqType;
+	}
+
+	public void setFaqType(int faqType) {
+		this.faqType = faqType;
+	}
+
+	
 	
 }

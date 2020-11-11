@@ -27,26 +27,26 @@ public class Thumbnail extends Board implements Serializable{
 	
 
 	public Thumbnail(int bno, int btype, int mno, String btitle, String bcontent, int bview, Date bdate, String bstatus,
-			String userId, String bwriter, String boardfile, String profile) {
-		super(bno, btype, mno, btitle, bcontent, bview, bdate, bstatus, userId, bwriter, boardfile, profile);
+			String userId, String bwriter, String boardfile, String profile, int faqType) {
+		super(bno, btype, mno, btitle, bcontent, bview, bdate, bstatus, userId, bwriter, boardfile, profile, faqType);
 		// TODO Auto-generated constructor stub
 	}
 
 
 
 	public Thumbnail(int bno, int btype, int mno, String btitle, String bcontent, int bview, Date bdate,
-			String bstatus, String profile) {
-		super(bno, btype, mno, btitle, bcontent, bview, bdate, bstatus, profile);
+			String bstatus, String profile, int faqType) {
+		super(bno, btype, mno, btitle, bcontent, bview, bdate, bstatus, profile, faqType);
 		// TODO Auto-generated constructor stub
 	}
 	
-	public Thumbnail(int bno, String btitle, String bcontent, int bview, String boardfile, String profile) {
-		super(bno, btitle, bcontent, bview, boardfile, profile);
+	public Thumbnail(int bno, String btitle, String bcontent, int bview, String boardfile, String profile, int faqType) {
+		super(bno, btitle, bcontent, bview, boardfile, profile, faqType);
 		
 	}
 	
-	public Thumbnail(int bno, String userId, String boardfile) {
-		super(bno, userId, boardfile);
+	public Thumbnail(int bno, String userId, String boardfile, int faqType) {
+		super(bno, userId, boardfile, faqType);
 	}
 
 
@@ -57,7 +57,7 @@ public class Thumbnail extends Board implements Serializable{
 				+ ", getBtype()=" + getBtype() + ", getMno()=" + getMno() + ", getBtitle()=" + getBtitle()
 				+ ", getBcontent()=" + getBcontent() + ", getBview()=" + getBview() + ", getBdate()=" + getBdate()
 				+ ", getBstatus()=" + getBstatus() + ", getUserId()=" + getUserId() + ", getBwriter()=" + getBwriter()
-				+ ", getBoardfile()=" + getBoardfile() + ", getClass()=" + getClass()
+				+ ", getBoardfile()=" + getBoardfile() + ", getClass()=" + getClass() + ", getFaqType()=" + getFaqType()
 				+ ", hashCode()=" + hashCode() + "]";
 	}
 

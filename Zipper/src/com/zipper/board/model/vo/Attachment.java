@@ -16,13 +16,14 @@ public class Attachment implements Serializable {
 	private String filepath;
 	private Date upload_date;
 	private int mno;
+	private String status;
 	
 	public Attachment() {
 		super();
 	}
 
 	public Attachment(int fno, int cno, int qno, int bno, String file_origin_name, String file_new_name,
-			String filepath, Date upload_date, int mno) {
+			String filepath, Date upload_date, int mno, String status) {
 		super();
 		this.fno = fno;
 		this.cno = cno;
@@ -33,20 +34,30 @@ public class Attachment implements Serializable {
 		this.filepath = filepath;
 		this.upload_date = upload_date;
 		this.mno = mno;
+		this.status = status;
 	}
 
-	public Attachment(String file_origin_name, String file_new_name, String filepath) {
+	public Attachment(String file_origin_name, String file_new_name, String filepath, String status) {
 		super();
 		this.file_origin_name = file_origin_name;
 		this.file_new_name = file_new_name;
 		this.filepath = filepath;
+		this.status = status;
 	}
 
 	@Override
 	public String toString() {
 		return "Attachment [fno=" + fno + ", cno=" + cno + ", qno=" + qno + ", bno=" + bno + ", file_origin_name="
 				+ file_origin_name + ", file_new_name=" + file_new_name + ", filepath=" + filepath + ", upload_date="
-				+ upload_date + ", mno=" + mno + "]";
+				+ upload_date + ", mno=" + mno + ", status=" + status + "]";
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
 	}
 
 	public int getFno() {
