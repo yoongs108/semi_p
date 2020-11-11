@@ -75,7 +75,7 @@
 	}
 
 	
-	button {
+	section button {
 		width: 100px;
 		height: 50px;
 		background-color: black;
@@ -83,6 +83,8 @@
 		color: white;
 		cursor: pointer;
 	}
+	
+	
 	
 	.tabcontent_wrap {
 		border: 2px solid black;
@@ -170,13 +172,24 @@
 				</table>
 				
 				<div class="pay">
-					<table>
-					<tr>
-						<td width="200px" height="400px">결제금액 </br> <h1><%= classList.getPrice() %>원</h1> </td>
+					<table  height="400px">
+					<tr style="vertical-align: bottom;">
+						<td width="180px" height="250px">결제금액 </br> <h1><%= classList.getPrice() %>원</h1> </td>
 						<td><br />
-							<button style="color : white;" value="<%= classList.getCno()%>" onclick="goPayment();">결제</button>
-							<img src="<%= request.getContextPath() %>/resources/images/common/bookmark.png" width="50px" height="50px" onclick="" alt="" />
+							<button style="color : white; width: 170px;" value="<%= classList.getCno()%>" onclick="goPayment();">결 제</button>
+<%-- 							<img src="<%= request.getContextPath() %>/resources/images/common/bookmark.png" width="50px" height="50px" onclick="" alt="" />
+ --%>						</td>
+					</tr>
+					<% if(m != null && m.getMid().equals("admin")) { %>
+					<tr>
+						<td colspan="2" align="center">
+							<button style="color : white; width: 250px;" value="<%= classList.getCno()%>" onclick="goDelete();">삭 제</button>
 						</td>
+					</tr>
+					<% } %>	
+					<tr>
+						<td></td>
+						<td></td>
 					</tr>
 					</table>
 				</div>
@@ -192,6 +205,8 @@
 
 
 	<script>
+	
+		// 결제페이지
 		function goPayment() {
 			<% if( m != null ) { %>
 				location.href = "<%= request.getContextPath() %>/beforePayment.pm?cno=<%= classList.getCno() %>";
@@ -200,10 +215,19 @@
 			<% } %>
 		};
 		
+		// 클래스메인 페이지
 		function goClass() {
 			location.href = "<%= request.getContextPath() %>/classFromMain.cfm";
 		};
 		
+		
+		// 삭제
+		function goDelete() {
+			location.href = "<%= request.getContextPath() %>/classDelete.cd?cno=" + cno;
+		};
+		
+		
+		// 페이지 이동
 		function fnMove(seq) {
 	    	var offset = $(".tabcontent" + (seq + 1)).offset();
 	    	var winH = $(".tabcontent" + (seq+1)).height();
@@ -212,6 +236,8 @@
 		
 		document.getElementsByClassName('accordian');
 
+		
+		// 아코디언
 		function accordion_hide(obj) {
 			$(obj).parent().find('p').toggleClass('accordion_hide');
 		};

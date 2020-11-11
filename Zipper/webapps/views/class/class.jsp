@@ -61,16 +61,6 @@
      */
    /*  ----------------------------------------*/ 
 
-
-
-
-
-.titleBox>img {
-        width: 1024px;
-      	margin-left:auto;
-     	margin-right:auto;  	
-	}   
-   
     .carouselBox{
         width: 1024px;
       	margin-left:auto;
@@ -100,15 +90,15 @@
     
     
     .carousel_txt {
-  color: white;
-  font-size: 30px;
-  padding: 0 30px;
-  position: absolute;
-  bottom: 350px;
-  width: 1024px;
-  text-align: right;
+	  	color: white;
+	  	font-size: 30px;
+	  	padding: 0 30px;
+	 	position: absolute;
+	 	bottom: 350px;
+	  	width: 1024px;	
+	  	text-align: right;
 	    z-index: 3;
-}
+	}
     
     
     
@@ -121,48 +111,48 @@
         z-index: 2;
     }
     
- .btn_left, .btn_right {
-  cursor: pointer;
-  position: absolute;
-  top: 50%;
-  width: auto;
-  margin-top: -22px;
-  padding: 16px;
-  color: black;
-  font-weight: bold;
-  font-size: 18px;
-  transition: 0.6s ease;
-  border-radius: 0 3px 3px 0;
-  user-select: none;
-}
+	.btn_left, .btn_right {
+		 cursor: pointer;
+		 position: absolute;
+		 top: 50%;
+		 width: auto;
+		 margin-top: -22px;
+		 padding: 16px;
+		 color: black;
+		 font-weight: bold;
+		 font-size: 18px;
+		 transition: 0.6s ease;
+		 border-radius: 0 3px 3px 0;
+		 user-select: none;
+	}
 
-.btn_right {
-  right: 0;
-  border-radius: 3px 0 0 3px;
-}
+	.btn_right {
+		right: 0;
+		border-radius: 3px 0 0 3px;
+	}
 
-.btn_left, .btn_right {
-	text-decoration: none;
-}
+	.btn_left, .btn_right {
+		text-decoration: none;
+	}
 
-.dotBox {
-	margin-top: 30px;
-}
+	.dotBox {
+		margin-top: 30px;
+	}
 
-.dot {
-  cursor: pointer;
-  height: 15px;
-  width: 15px;
-  margin: 0 2px;
-  border: 1px solid black;
-  border-radius: 50%;
-  display: inline-block;
-  transition: background-color 0.6s ease;
-}
+	.dot {
+		cursor: pointer;
+		height: 15px;
+		width: 15px;
+		margin: 0 2px;
+		border: 1px solid black;
+		border-radius: 50%;
+		display: inline-block;
+		transition: background-color 0.6s ease;
+	}
  
-.active, .dot:hover {
-  background-color : black;
-}
+	.active, .dot:hover {
+		background-color : black;
+	}
     
 	section {
 		width: 1024px;
@@ -171,10 +161,17 @@
       
    }
    
+   .titleBox {
+        width: 1024px;
+      	margin-left:auto;
+     	margin-right:auto;  	
+	}   
+
+   
 	 #back{
-		position : absolute;
-		top : 100px;
-		left : 1000px;
+		position : relative;
+		top : 20px;
+		left : 970px;
 		height : 80px;
 		width: 80px;
 		
@@ -232,7 +229,7 @@
 </head>
 <body>
 	<%@ include file="/views/common/header.jsp"%>
-	
+<section>	
 	 	<div class="carouselBox">
 	
 			<div class="titleBox" style="border-bottom: 1px solid black;">
@@ -305,7 +302,7 @@
 	<hr />
 	<br /><br />
 	
-<section>
+
 	
 	
 	<table class="classMain">
@@ -369,7 +366,6 @@
 				location.href ='<%= request.getContextPath()%>/selectClass.sc?cno=' + cno;
 			});
 		});
-		
 		
 		
 		// 메인페이지 

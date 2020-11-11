@@ -77,6 +77,7 @@ public class ClassDAO {
             classList.setCourse(rset.getString("course"));
             classList.setFileNewName(rset.getString("FILE_NEW_NAME"));
             classList.setKdetail(rset.getString("kdetail"));
+            classList.setTname(rset.getString("tname"));
          }
          
       } catch (SQLException e) {
@@ -199,6 +200,7 @@ public class ClassDAO {
          pstmt.setString(3, cl.getCintro());
          pstmt.setString(4, cl.getCourse());
          pstmt.setString(5, cl.getKdetail());
+         pstmt.setString(6, cl.getTname());
 
          
          result = pstmt.executeUpdate();
@@ -320,5 +322,12 @@ public class ClassDAO {
       }
       return list;
    }
+
+
+public int deletdClass(Connection con, int cno) {
+	int result = 0;
+	
+	return result;
+}
 
 }

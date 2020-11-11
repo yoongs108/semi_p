@@ -81,6 +81,7 @@ public class ClassWrite extends HttpServlet {
 			cl.setCintro(mre.getParameter("cintro"));
 			cl.setCourse(mre.getParameter("course"));
 			cl.setKdetail(mre.getParameter("kdetail"));
+			cl.setTname(mre.getParameter("tname"));
 
 			System.out.println(cl);
 			
