@@ -26,22 +26,21 @@ public class Board implements Serializable{
 	private Date bdate;			// 작성일
 	private String bstatus;		// 삭제 여부 ( Y: 삭제 X, N: 삭제됨 )
 	private int cno;			// 클래스 번호
-	private int faqtype;		// 질문 유형(1 ~ 5)
+	private int faqtype;		// 질문 유형(1~5)
+	private int gtype;			// 가이드번호(1~5)
 	
 	private String profile;
 	private String userId;		// 게시글 작성자 아이디
 	private String bwriter;		// 게시글 작성자(닉네임, 이름)
 	private String boardfile;	// 첨부 파일
 	
-	
 	// 생성자
 	public Board() {
 		super();
 	}
 
-
 	public Board(int bno, int btype, int mno, String btitle, String bcontent, int bview, Date bdate, String bstatus,
-			int cno, int faqtype, String profile, String userId, String bwriter, String boardfile) {
+			int cno, int faqtype, int gtype, String profile, String userId, String bwriter, String boardfile) {
 		super();
 		this.bno = bno;
 		this.btype = btype;
@@ -53,6 +52,7 @@ public class Board implements Serializable{
 		this.bstatus = bstatus;
 		this.cno = cno;
 		this.faqtype = faqtype;
+		this.gtype = gtype;
 		this.profile = profile;
 		this.userId = userId;
 		this.bwriter = bwriter;
@@ -63,144 +63,125 @@ public class Board implements Serializable{
 	public String toString() {
 		return "Board [bno=" + bno + ", btype=" + btype + ", mno=" + mno + ", btitle=" + btitle + ", bcontent="
 				+ bcontent + ", bview=" + bview + ", bdate=" + bdate + ", bstatus=" + bstatus + ", cno=" + cno
-				+ ", faqtype=" + faqtype + ", profile=" + profile + ", userId=" + userId + ", bwriter=" + bwriter
-				+ ", boardfile=" + boardfile + "]";
+				+ ", faqtype=" + faqtype + ", gtype=" + gtype + ", profile=" + profile + ", userId=" + userId
+				+ ", bwriter=" + bwriter + ", boardfile=" + boardfile + "]";
 	}
-	
+
 	public int getBno() {
 		return bno;
 	}
-
 
 	public void setBno(int bno) {
 		this.bno = bno;
 	}
 
-
 	public int getBtype() {
 		return btype;
 	}
-
 
 	public void setBtype(int btype) {
 		this.btype = btype;
 	}
 
-
 	public int getMno() {
 		return mno;
 	}
-
 
 	public void setMno(int mno) {
 		this.mno = mno;
 	}
 
-
 	public String getBtitle() {
 		return btitle;
 	}
-
 
 	public void setBtitle(String btitle) {
 		this.btitle = btitle;
 	}
 
-
 	public String getBcontent() {
 		return bcontent;
 	}
-
 
 	public void setBcontent(String bcontent) {
 		this.bcontent = bcontent;
 	}
 
-
 	public int getBview() {
 		return bview;
 	}
-
 
 	public void setBview(int bview) {
 		this.bview = bview;
 	}
 
-
 	public Date getBdate() {
 		return bdate;
 	}
-
 
 	public void setBdate(Date bdate) {
 		this.bdate = bdate;
 	}
 
-
 	public String getBstatus() {
 		return bstatus;
 	}
-
 
 	public void setBstatus(String bstatus) {
 		this.bstatus = bstatus;
 	}
 
-
 	public int getCno() {
 		return cno;
 	}
-
 
 	public void setCno(int cno) {
 		this.cno = cno;
 	}
 
-
 	public int getFaqtype() {
 		return faqtype;
 	}
-
 
 	public void setFaqtype(int faqtype) {
 		this.faqtype = faqtype;
 	}
 
+	public int getGtype() {
+		return gtype;
+	}
+
+	public void setGtype(int gtype) {
+		this.gtype = gtype;
+	}
 
 	public String getProfile() {
 		return profile;
 	}
 
-
 	public void setProfile(String profile) {
 		this.profile = profile;
 	}
-
 
 	public String getUserId() {
 		return userId;
 	}
 
-
 	public void setUserId(String userId) {
 		this.userId = userId;
 	}
-
 
 	public String getBwriter() {
 		return bwriter;
 	}
 
-
 	public void setBwriter(String bwriter) {
 		this.bwriter = bwriter;
 	}
 
-
 	public String getBoardfile() {
 		return boardfile;
 	}
-
 
 	public void setBoardfile(String boardfile) {
 		this.boardfile = boardfile;
