@@ -1,4 +1,4 @@
-package com.zipper.classMain.model.vo;
+package com.zipper.video.model.vo;
 
 import java.io.Serializable;
 
@@ -6,33 +6,32 @@ public class Video implements Serializable{
 
 	private static final long serialVersionUID = 1234L;
 	/*
-	 * VNO,TNO,VNAME,VPRICE, VIDEO
+	 * VNO,VNAME
+		VIDEO,VTEXT
 	 */
 	// 1. 필드
 	private int vno;
-	private int tno;
 	private String vname;	
 	private String video;
+	private String vtext;
 	
-	// 2. 생성자
 	public Video() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	
-	// 3. 모든 정보 조회용
-	public Video(int vno, int tno, String vname, String video) {
+
+	public Video(int vno, String vname, String video, String vtext) {
 		super();
 		this.vno = vno;
-		this.tno = tno;
 		this.vname = vname;
 		this.video = video;
+		this.vtext = vtext;
 	}
 
+	
 	@Override
 	public String toString() {
-		return "Video [vno=" + vno + ", tno=" + tno + ", vname=" + vname + ", video=" + video
-				+ "]";
+		return "Video [vno=" + vno + ", vname=" + vname + ", video=" + video + ", vtext=" + vtext + "]";
 	}
 
 	public int getVno() {
@@ -41,14 +40,6 @@ public class Video implements Serializable{
 
 	public void setVno(int vno) {
 		this.vno = vno;
-	}
-
-	public int getTno() {
-		return tno;
-	}
-
-	public void setTno(int tno) {
-		this.tno = tno;
 	}
 
 	public String getVname() {
@@ -66,6 +57,17 @@ public class Video implements Serializable{
 	public void setVideo(String video) {
 		this.video = video;
 	}
+
+	public String getVtext() {
+		return vtext;
+	}
+
+	public void setVtext(String vtext) {
+		this.vtext = vtext;
+	}
+	
+	
 	
 	
 }
+	

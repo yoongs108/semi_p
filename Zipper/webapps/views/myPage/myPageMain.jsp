@@ -73,22 +73,22 @@
 		
 		<div id="colunm">
 			<h3>커뮤니티</h3>
-			<br />
-			<br />
+			<br /><br />
+			<br /><br />
 			<a onclick="goMyZip()"><%= m.getMnick() %>.ZIP</a>
 			<br /> <br /> 
-			<a onclick="goScrapZip()">SCRAP.ZIP</a>
-			<br /><br />
+			<!-- <a onclick="goScrapZip()">SCRAP.ZIP</a>
+			<br /><br /> -->
 			<a onclick="goClassList()"><%= m.getMnick() %>.CLASS</a>
-			<br /> <br /> 
-			<a onclick="goClassScrap()">SCRAP.CLASS</a> 
+			<!-- <br /> <br /> 
+			<a onclick="goClassScrap()">SCRAP.CLASS</a>  -->
 			
 		</div>
 
 		<div id="colunm">
 			<h3>내 구매내역</h3>
-			<br />
-			<br /> 
+			<br /><br />
+			<br /><br />
 			<a onclick="goPayment()">결제 내역</a>
 			<br /> 
 			<br /> 
@@ -112,7 +112,7 @@
 		function goClassScrap() { 	// 클래스 스크랩
 			location.href = '<%= request.getContextPath() %>/scrapCl.sc';
 		}
-		function goClassList() { 	//수강중 클래스 수정 필요
+		function goClassList() { 	//수강중 클래스
 			location.href = '<%= request.getContextPath() %>/classingList.cl?mno=<%= m.getMno() %>';
 		}
 		function goScrapZip() { 	//게시글 스크랩 수정 필요

@@ -20,52 +20,35 @@
 	}
 
 	
-	/* 사진 올리기 */
-	#imgArea {
-		padding-right: 70px;
-	}
-	
+	/* 동영상 올리기 */
 	#videoArea {
-		width: 80%;
-		height: 50%;
-		border: 1px solid darkgray;
+		width: 820px;
+		height: 500px;
+		border : 1px solid grey;
 	}
-	
 	video {
-		width: 100%;
-		height: 100%;
+		width : 100%;
+		height : 100%;
 	}
-	
-/* 	.imgtext {
-		color: white;
-		font-size: 18px;
-		top: 50%;
-		left: 50%;
-		text-align: center;
-		margin-top: -180px;
-		display: none;
-	} */
-	
 	#videoArea:hover {
 		cursor: pointer;
 		background-color: black;
-		opacity: 60%;
+		opacity: 50%;
 	}
 	
-/* 	#titleImgArea:hover .imgtext {
-		display: inherit;
-	} */
-	
 	/* 글쓰기폼 */
-	#textarea {
-		border-left: 2px solid black;
-		padding-left: 70px;
-		resize: none;
+	.title{
+		padding : 20px;
+		font-size : 15px;
+	}
+	
+	textarea { 
+		resize : none;
 	}
 	/* 버튼 스타일 */
 	.btn {
-		width: 80px;
-		height: 30px;
+		width: 100px;
+		height: 50px;
 		color: white;
 		background-color: black;
 		border: none;
@@ -75,6 +58,7 @@
 		background-color: grey;
 		cursor: pointer;
 	}
+
 </style>
 </head>
 <body>
@@ -85,21 +69,19 @@
 			<h2 id="title">CLASS UPLOAD</h2>
 		</div>
 
-		<form action="<%= request.getContextPath() %>/classInsert.cl"
+		<form action="<%= request.getContextPath() %>/videoInsert.vi"
 			method="post" enctype="multipart/form-data" style="margin: 50px">
 
 			<table align="center">
-
-				<tr id="outer">
-
+	
+				<!-- 파일 첨부 -->
+				<tr>
 					<td id="imgArea" colspan="2">
 
 						<div id="videoArea">
 
-							<img id="titleImg" />
-
+							<video id="titleImg"></video>
 							<div class="imgtext">
-								<p>클릭해서 클래스 올리기</p>
 							</div>
 							
 						</div>
@@ -108,12 +90,18 @@
 	
 				<!-- 제목 -->
 				<tr>
-					<td>
-					<td style="padding: 10px;">클래스 : </td>
+					<td class="title">클래스 명</td>
 						<td>
-						<input type=text name=title size=100
+						<input type=text name=title size=99
 						placeholder="  제목을 입력해 주세요.">
 						</td>
+				</tr>
+				<!-- 내용 -->
+				<tr>
+					<td class="title">클래스 소개</td>
+					<td>
+						<textarea name = content cols=98 rows=15 placeholder="  클래스 소개를 입력해 주세요."></textarea>
+					</td>
 				</tr>
 			</table>
 
@@ -133,7 +121,7 @@
 				// 사진 미리보기 기능
 				$(function(){
 					$('#videoArea').click(function(){
-						$('#zippopImg').click();
+						$('#classImg').click();
 					});
 					$('#fileArea').hide();
 				});
