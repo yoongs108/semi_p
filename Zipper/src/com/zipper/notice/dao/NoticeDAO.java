@@ -207,7 +207,7 @@ public class NoticeDAO {
 //				b.setBdate(rset.getDate("bdate"));
 //				b.setBstatus(rset.getString("bstatus"));
 //				b.setCno(rset.getInt("cno"));
-//				b.setFaqtype(rset.getInt("faqtype"));
+//				b.setFaqtype(rset.getInt("faqtype")); 
 				
 				list.add(b);
 			}
