@@ -1,5 +1,7 @@
 package com.zipper.zippop.model.dao;
 
+import static com.zipper.common.JDBCTemplate.*;
+
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
@@ -10,11 +12,10 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Properties;
 
+import com.zipper.board.model.vo.Attachment;
+import com.zipper.board.model.vo.Board;
 import com.zipper.myPage.model.dao.MyPageDAO;
-import com.zipper.thumb.model.vo.Attachment;
-import com.zipper.thumb.model.vo.Thumbnail;
-
-import static com.zipper.common.JDBCTemplate.close;
+import com.zipper.board.model.vo.Thumbnail;
 
 public class ZippopDAO {
 	
@@ -150,8 +151,8 @@ public class ZippopDAO {
 			pstmt = con.prepareStatement(sql);
 			
 			pstmt.setInt(1, at.getBno());
-			pstmt.setString(2, at.getOriginname());
-			pstmt.setString(3, at.getChangename());
+			pstmt.setString(2, at.getFile_origin_name());
+			pstmt.setString(3, at.getFile_new_name());
 			pstmt.setString(4, at.getFilepath());
 
 			result = pstmt.executeUpdate();
@@ -170,4 +171,47 @@ public class ZippopDAO {
 		return result;
 	}
 
+	// 집팝 상셎도ㅚ
+	public Board selectOne(Connection con, int bno) {
+		
+		Board b = null;
+	     
+	      PreparedStatement pstmt = null;
+	      
+	      ResultSet rset = null;
+	      
+	      String sql = prop.getProperty("selectOne");
+	      
+	      System.out.println(sql);
+	      
+	      try {
+	         pstmt = con.prepareStatement(sql);
+	         
+	         pstmt.setInt(1, bno);
+	         
+	         rset = pstmt.executeQuery();
+			
+			 if(rset.next()) {
+		            
+		            b = new Board();
+		            
+		            b.setBno(bno);
+		            b.setBtitle(rset.getString("btitle"));
+		            b.setBcontent(rset.getString("bcontent"));
+		            b.setBwriter(rset.getString("mnick"));
+		            b.setBdate(rset.getDate("bdate"));
+		            b.setBoardfile(rset.getString("file_new_name"));    								
+			}
+			
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		} finally {
+			
+			close(rset);
+			close(pstmt);
+		}
+				
+		return b;
+	}
 }

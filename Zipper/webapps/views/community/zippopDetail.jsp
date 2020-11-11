@@ -1,8 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="com.zipper.classMain.model.vo.*, com.zipper.thumb.model.vo.*, com.zipper.board.model.vo.*, java.util.*" %>
+    pageEncoding="UTF-8" %>
+<%@ page import="java.util.*, com.zipper.board.model.vo.*, com.zipper.boardComment.model.vo.*" %>
     
 <% 	
-
+	Board b = (Board)request.getAttribute("board");
+	ArrayList<BoardComment> clist
+	= (ArrayList<BoardComment>)request.getAttribute("clist");
 %>
 <!DOCTYPE html>
 <html>
@@ -131,15 +134,14 @@
 		<div class="page_wrap">
 			<div class="left_page">
 			
-				<div><img src="<%= request.getContextPath() %>/resources/images/fileUpload/" alt="" width="650px" height="500px"/></div>
-				<h3>ZIPPOP 제목</h3>
+				<div><img src="<%= request.getContextPath() %>/resources/images/fileUpload/<%= b.getBoardfile() %>" alt="" width="650px" height="500px"/></div>
+				<h3><%= b.getBtitle() %></h3>
 				
 				
 		 		
 		 	 	<div class="tabcontent_wrap">
 			 		<div class='tabcontent1'>
-			 			<h3>ZIPPOP 내용</h3>
-						<p>test</p>
+						<p><%= b.getBcontent() %></p>
 		 			
 	 			</div>	 		
 			</div>
@@ -148,16 +150,21 @@
 		
 			<div class="right_page">
 		
-				<h3>test</h3> <br /><br />
+				<h3><%= b.getBwriter() %></h3> <br /><br />
 				<div class="cmtWrap">
 					<!-- 댓글(cmt) -->
+				<% if (clist != null) { %>
+					<% for(BoardComment bco : clist) { %>
 					<div class="comment">
-						<span class="thum"><img src="<%= request.getContextPath() %>/resources/images/fileUpload/" alt="" width="650px" height="500px"/></span>
-						<span class="nick">test</span>
-						<span class="content">test</span>
+						<span class="thum"><img src="<%= request.getContextPath() %>/resources/images/profile/<%= bco.getProfile() %>" alt="" width="650px" height="500px"/></span>
+						<span class="nick"><%= bco.getMnick() %></span>
+						<span class="content"><%= bco.getComContent() %></span>
 						<span class="ico"><img src="<%= request.getContextPath() %>/resources/images/fileUpload/" alt="" width="650px" height="500px"/></span>
 					</div>
-					<!-- 대댓글(recmt) -->
+					<% } %>
+				<% } %>
+					
+					<!-- 대댓글(recmt)임시 -->
 					<!-- <div class="comment re">
 						<span class="thum">썸네일 이미지</span>
 						<span class="nick">닉네임</span>

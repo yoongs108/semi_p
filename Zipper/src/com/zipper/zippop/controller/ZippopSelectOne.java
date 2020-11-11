@@ -2,7 +2,6 @@ package com.zipper.zippop.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,9 +9,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.kh.jsp.boardComment.model.service.BoardCommentService;
-import com.kh.jsp.thumb.model.service.ThumbnailService;
+import com.zipper.board.model.vo.Board;
 import com.zipper.boardComment.model.vo.BoardComment;
+import com.zipper.boardComment.model.service.BoardCommentService;
+import com.zipper.zippop.model.service.ZippopService;
 
 /**
  * Servlet implementation class ZippopSelectOne
@@ -52,20 +52,19 @@ public class ZippopSelectOne extends HttpServlet {
 
 		  //     Hashmap 뭐냐고요........
 		
-		HashMap<String, Object> thumb 
-		   = new ThumbnailService().selectOne(bno);
+		Board b 
+		   = new ZippopService().selectOne(bno);
 		
 		ArrayList<BoardComment> clist = 
 				new BoardCommentService().selectList(bno);
 		
 		String page = "";
 		
-		if(thumb != null && thumb.get("thumbnail") != null) {
-			request.setAttribute("thumbnail", thumb.get("thumbnail"));
-			request.setAttribute("fileList", thumb.get("attachment"));
+		if(b != null) {
+			request.setAttribute("board", b);
 			request.setAttribute("clist", clist);
 			
-			page = "views/thumbnail/thumbnailDetail.jsp";
+			page = "views/community/zippopDetail.jsp";
 		} else {
 			request.setAttribute("exception", new Exception("게시글 상세 조회 실패"));
 			request.setAttribute("error-msg", "게시글 상세 조회 실패!!");
@@ -75,9 +74,7 @@ public class ZippopSelectOne extends HttpServlet {
 		
 		request.getRequestDispatcher(page).forward(request, response);
 	}
-	      
-		
-	
+	      	
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

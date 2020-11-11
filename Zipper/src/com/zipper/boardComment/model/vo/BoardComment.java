@@ -8,57 +8,49 @@ public class BoardComment implements Serializable {
 	private static final long serialVersionUID = 1001L;
 	
 	// 필드
-	private int cno;
+	private int comNo;
 	private int bno;
-	private String ccontent;
-	private String cwriter;
-	private String userId;
-	private Date cdate;
-	private int refcno;
-	private int clevel;
+	private int mno;
+	private int comLevel;
+	private Date comDate;
+	private String comStatus;
+	private String comContent;
+	
+	private String profile; // 댓글 사용자 프로필
+	private String mnick; // 댓글 사용자 닉네임
 	
 	// 생성자
 	public BoardComment() {
 		super();
 	}
 
-	public BoardComment(int cno, int bno, String ccontent, String cwriter, String userId, Date cdate, int refcno,
-			int clevel) {
+	public BoardComment(int comNo, int bno, int mno, int comLevel, Date comDate, String comStatus, String comContent,
+			String profile, String mnick) {
 		super();
-		this.cno = cno;
+		this.comNo = comNo;
 		this.bno = bno;
-		this.ccontent = ccontent;
-		this.cwriter = cwriter;
-		this.userId = userId;
-		this.cdate = cdate;
-		this.refcno = refcno;
-		this.clevel = clevel;
+		this.mno = mno;
+		this.comLevel = comLevel;
+		this.comDate = comDate;
+		this.comStatus = comStatus;
+		this.comContent = comContent;
+		this.profile = profile;
+		this.mnick = mnick;
 	}
 
-	// insert
-	public BoardComment(int bno, String ccontent, String cwriter, int refcno, int clevel) {
-		super();
-		this.bno = bno;
-		this.ccontent = ccontent;
-		this.cwriter = cwriter;
-		this.refcno = refcno;
-		this.clevel = clevel;
-	}
-
-	// toString
 	@Override
 	public String toString() {
-		return "BoardComment [cno=" + cno + ", bno=" + bno + ", ccontent=" + ccontent + ", cwriter=" + cwriter
-				+ ", userId=" + userId + ", cdate=" + cdate + ", refcno=" + refcno + ", clevel=" + clevel + "]";
+		return "BoardComment [comNo=" + comNo + ", bno=" + bno + ", mno=" + mno + ", comLevel=" + comLevel
+				+ ", comDate=" + comDate + ", comStatus=" + comStatus + ", comContent=" + comContent + ", profile="
+				+ profile + ", mnick=" + mnick + "]";
 	}
 
-	// getter setter
-	public int getCno() {
-		return cno;
+	public int getComNo() {
+		return comNo;
 	}
 
-	public void setCno(int cno) {
-		this.cno = cno;
+	public void setComNo(int comNo) {
+		this.comNo = comNo;
 	}
 
 	public int getBno() {
@@ -69,52 +61,60 @@ public class BoardComment implements Serializable {
 		this.bno = bno;
 	}
 
-	public String getCcontent() {
-		return ccontent;
+	public int getMno() {
+		return mno;
 	}
 
-	public void setCcontent(String ccontent) {
-		this.ccontent = ccontent;
+	public void setMno(int mno) {
+		this.mno = mno;
 	}
 
-	public String getCwriter() {
-		return cwriter;
+	public int getComLevel() {
+		return comLevel;
 	}
 
-	public void setCwriter(String cwriter) {
-		this.cwriter = cwriter;
+	public void setComLevel(int comLevel) {
+		this.comLevel = comLevel;
 	}
 
-	public String getUserId() {
-		return userId;
+	public Date getComDate() {
+		return comDate;
 	}
 
-	public void setUserId(String userId) {
-		this.userId = userId;
+	public void setComDate(Date comDate) {
+		this.comDate = comDate;
 	}
 
-	public Date getCdate() {
-		return cdate;
+	public String getComStatus() {
+		return comStatus;
 	}
 
-	public void setCdate(Date cdate) {
-		this.cdate = cdate;
+	public void setComStatus(String comStatus) {
+		this.comStatus = comStatus;
 	}
 
-	public int getRefcno() {
-		return refcno;
+	public String getComContent() {
+		return comContent;
 	}
 
-	public void setRefcno(int refcno) {
-		this.refcno = refcno;
+	public void setComContent(String comContent) {
+		this.comContent = comContent;
 	}
 
-	public int getClevel() {
-		return clevel;
+	public String getProfile() {
+		return profile;
 	}
 
-	public void setClevel(int clevel) {
-		this.clevel = clevel;
+	public void setProfile(String profile) {
+		this.profile = profile;
+	}
+
+	public String getMnick() {
+		return mnick;
+	}
+
+	public void setMnick(String mnick) {
+		this.mnick = mnick;
 	}
 
 }
