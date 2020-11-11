@@ -1,14 +1,21 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" %>
-<%@ page import="java.util.*, com.zipper.payment.model.vo.*"%>
+<%@ page import="java.util.*, com.zipper.payment.model.vo.*, com.zipper.board.model.vo.*"%>
 <%
 	ArrayList<Payment> list = (ArrayList<Payment>)request.getAttribute("cList");
+	PageInfo pi = (PageInfo)request.getAttribute("pi");
+	int listCount = pi.getListCount();
+	int currentPage = pi.getCurrentPage();
+	int maxPage = pi.getMaxPage();
+	int startPage = pi.getStartPage();
+	int endPage = pi.getEndPage();
 %>
 
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <script src="<%= request.getContextPath() %>/resources/js/jquery-3.5.1.min.js"></script>
 <title>수강중 클래스 페이지</title>
 <style type="text/css">
@@ -122,6 +129,35 @@
 		
 		
 		<!-- 페이지 버튼 -->
+	<div style="text-align : center;">
+		<button class="w3-bar-item w3-button w3-hover-black"
+       			onclick="location.href='<%= request.getContextPath() %>/classingList.cl?mno=<%= m.getMno() %>&currentPage=1'"><<</button>
+		<% if(currentPage <= 1){ %>
+			<button class="w3-bar-item w3-button" disabled><</button>
+		<% } else { %>
+		<button class="w3-bar-item w3-button w3-hover-black"
+				onclick="location.href='<%= request.getContextPath() %>/classingList.cl?mno=<%= m.getMno() %>&currentPage=<%=currentPage - 1 %>'"><</button>
+		<% } %>
+		<% for(int p = startPage; p <= endPage; p++){
+				if(p == currentPage){	
+		%>
+			<button class="w3-bar-item w3-button" disabled><%= p %></button>
+		<%      }else{ %>
+			<button class="w3-bar-item w3-button w3-hover-black"
+					onclick="location.href='<%= request.getContextPath() %>/classingList.cl?mno=<%= m.getMno() %>&currentPage=<%= p %>'"><%= p %></button>
+		<%      } %>
+		<% } %>
+         
+        <%  if(currentPage >= maxPage){  %>
+		<button class="w3-bar-item w3-button" disabled>></button>
+		<%  }else{ %>
+		<button class="w3-bar-item w3-button w3-hover-black" 
+				onclick="location.href='<%= request.getContextPath() %>/classingList.cl?mno=<%= m.getMno() %>&currentPage=<%=currentPage + 1 %>'">></button>
+		<%  } %>
+		<button class="w3-bar-item w3-button w3-hover-black"
+				onclick="location.href='<%= request.getContextPath() %>/classingList.cl?mno=<%= m.getMno() %>&currentPage=<%= maxPage %>'">>></button>
+	</div>
+	
 		<script>
 		function goVideoList(cno) { 
 			location.href = '<%= request.getContextPath() %>/selectList.vi?cno='+cno;

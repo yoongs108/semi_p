@@ -115,8 +115,8 @@ public class NoticeSelectList extends HttpServlet {
 			page = "views/common/errorPage.jsp";
 		}
 			
-			request.getRequestDispatcher(page).forward(request, response);
-		}
+		request.getRequestDispatcher(page).forward(request, response);
+	}
 
 
 

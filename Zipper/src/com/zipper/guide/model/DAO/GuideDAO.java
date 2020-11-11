@@ -41,15 +41,28 @@ private Properties prop;
 	}
 
 	// 가이드 목록 조회
-	public ArrayList<Board> selectList(Connection con) {
+	public ArrayList<Board> selectList(Connection con, int currentPage, int limit) {
+		
 		ArrayList<Board> list = new ArrayList<>();
-		PreparedStatement pstmt = null; //임포트
-		ResultSet rset = null; //임포트
+		
+		PreparedStatement pstmt = null;
+		
+		ResultSet rset = null;
 		
 		String sql = prop.getProperty("selectList");
 		
+		System.out.println(sql);
+		
 		try {
 			pstmt = con.prepareStatement(sql);  //임포트
+			
+			// 1. 마지막 행의 번호
+			// 2. 첫 행의 번호
+			int startRow = (currentPage - 1) * limit + 1;
+			int endRow = startRow + limit - 1;
+
+			pstmt.setInt(1, endRow);
+			pstmt.setInt(2, startRow);
 			
 			rset = pstmt.executeQuery();
 			
@@ -111,6 +124,37 @@ private Properties prop;
 		}		
 		
 		return board;
+	}
+
+	public int getListCount(Connection con) {
+		
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("listCount");
+		
+		System.out.println(sql);
+		
+		try {
+			pstmt = con.prepareStatement(sql);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				
+				result = rset.getInt(1);
+			}			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return result;
 	}
 
 

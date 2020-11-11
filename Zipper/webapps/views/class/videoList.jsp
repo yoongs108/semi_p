@@ -1,13 +1,21 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="com.zipper.video.model.vo.*, java.util.*"%>
+    pageEncoding="UTF-8" import="com.zipper.video.model.vo.*, java.util.*, com.zipper.board.model.vo.*"%>
 <%
 	ArrayList<Video> vlist = (ArrayList<Video>)request.getAttribute("video");
+	PageInfo pi = (PageInfo)request.getAttribute("pi");
+	int listCount = pi.getListCount();
+	int currentPage = pi.getCurrentPage();
+	int maxPage = pi.getMaxPage();
+	int startPage = pi.getStartPage();
+	int endPage = pi.getEndPage();
+	int cno = (Integer)request.getAttribute("cno");
 %>	
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <script src="<%= request.getContextPath() %>/resources/js/jquery-3.5.1.min.js"></script>
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <title>클래스 비디오 페이지</title>
 <style type="text/css">
 	/*웹 제목 스타일*/
@@ -120,7 +128,36 @@
 			</div>
 		</div>
 		<% } %>
-		
+
+	<div style="text-align : center;">
+		<button class="w3-bar-item w3-button w3-hover-black"
+       			onclick="location.href='<%= request.getContextPath() %>/selectList.vi?cno=<%= cno %>&currentPage=1'"><<</button>
+		<% if(currentPage <= 1){ %>
+			<button class="w3-bar-item w3-button" disabled><</button>
+		<% } else { %>
+		<button class="w3-bar-item w3-button w3-hover-black"
+				onclick="location.href='<%= request.getContextPath() %>/selectList.vi?cno=<%= cno %>&currentPage=<%=currentPage - 1 %>'"><</button>
+		<% } %>
+		<% for(int p = startPage; p <= endPage; p++){
+				if(p == currentPage){	
+		%>
+			<button class="w3-bar-item w3-button" disabled><%= p %></button>
+		<%      }else{ %>
+			<button class="w3-bar-item w3-button w3-hover-black"
+					onclick="location.href='<%= request.getContextPath() %>/selectList.vi?cno=<%= cno %>&currentPage=<%= p %>'"><%= p %></button>
+		<%      } %>
+		<% } %>
+         
+        <%  if(currentPage >= maxPage){  %>
+		<button class="w3-bar-item w3-button" disabled>></button>
+		<%  }else{ %>
+		<button class="w3-bar-item w3-button w3-hover-black" 
+				onclick="location.href='<%= request.getContextPath() %>/selectList.vi?cno=<%= cno %>&currentPage=<%=currentPage + 1 %>'">></button>
+		<%  } %>
+		<button class="w3-bar-item w3-button w3-hover-black"
+				onclick="location.href='<%= request.getContextPath() %>/selectList.vi?cno=<%= cno %>&currentPage=<%= maxPage %>'">>></button>
+	</div>
+	
 		<!-- 페이지 버튼 -->
 		<script>
 		function goVideodetail(vno) { // 정보 수정

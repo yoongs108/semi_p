@@ -42,11 +42,11 @@ public class ClassService {
    }
    
    // 수강중인 페이지 조회용
-   public ArrayList<Payment> classingList(int mno) {
+   public ArrayList<Payment> classingList(int mno, int currentPage, int limit) {
       
       con = getConnection();
       
-      ArrayList<Payment> list = cDAO.classingList(con, mno);
+      ArrayList<Payment> list = cDAO.classingList(con, mno, currentPage, limit);
       
       close(con);
       
@@ -82,22 +82,32 @@ public class ClassService {
       return result;
    }
 
-
-
-public int deletdClass(int cno, String savePath) {
-	con = getConnection();
-	
-	int result = cDAO.deletdClass(con, cno);
-	
-	if(result >0) {
+	public int deletdClass(int cno, String savePath) {
+		con = getConnection();
 		
-		File f = new File(savePath );
+		int result = cDAO.deletdClass(con, cno);
 		
-		f.delete();
+		if(result >0) {
+			
+			File f = new File(savePath );
+			
+			f.delete();
+		}
+		
+		return result;
 	}
-	
-	return result;
-}
+
+	// 회원 클래싱 갯수 조회
+	public int getListCount(int mno) {
+		
+		con = getConnection();
+		
+		int result = cDAO.getListCount(con, mno);
+		
+		close(con);
+		
+		return result;
+	}
 
 }
  

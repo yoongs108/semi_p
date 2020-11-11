@@ -95,15 +95,29 @@ public class VideoDAO {
 		return v;
 	}
 
-	public ArrayList<Video> selectList(Connection con) throws VideoException {
-		ArrayList<Video> list = new ArrayList<>(); // 공지사항 목록 담을 공간
+	public ArrayList<Video> selectList(Connection con, int cno, int currentPage, int limit) throws VideoException {
+		
+		ArrayList<Video> list = new ArrayList<>();
+		
 		PreparedStatement pstmt = null;
+		
 		ResultSet rset = null;
 		
 		String sql = prop.getProperty("selectList");
 		
+		System.out.println(sql);
+		
 		try {
 			pstmt = con.prepareStatement(sql);
+			
+			// 1. 마지막 행의 번호
+			// 2. 첫 행의 번호
+			int startRow = (currentPage - 1) * limit + 1;
+			int endRow = startRow + limit - 1;
+
+			pstmt.setInt(1, cno);
+			pstmt.setInt(2, endRow);
+			pstmt.setInt(3, startRow);
 			
 			rset = pstmt.executeQuery();
 			
@@ -130,6 +144,39 @@ public class VideoDAO {
 		}
 		
 		return list;
+	}
+
+	public int getListCount(Connection con, int cno) {
+		
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("listCount");
+		
+		System.out.println(sql);
+		
+		try {
+			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setInt(1, cno);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				
+				result = rset.getInt(1);
+			}			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return result;
 	}
 
 }

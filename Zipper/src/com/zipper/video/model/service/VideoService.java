@@ -42,14 +42,26 @@ public class VideoService {
 		return v;
 	}
 
-	public ArrayList<Video> selectList() throws VideoException {
+	public ArrayList<Video> selectList(int cno, int currentPage, int limit) throws VideoException {
 		con = getConnection();
 		
-		ArrayList<Video> list = vDAO.selectList(con);
+		ArrayList<Video> list = vDAO.selectList(con, cno, currentPage, limit);
 		
 		close(con);
 		
 		return list;
+	}
+
+	// 비디오 수 조회
+	public int getListCount(int cno) {
+		
+		con = getConnection();
+		
+		int result = vDAO.getListCount(con, cno);
+		
+		close(con);
+		
+		return result;
 	}
 
 }

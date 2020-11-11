@@ -16,7 +16,8 @@
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <title>공지사항</title>
 <style>
-   h1{
+   
+   section h1{
         padding-left : 30px;
    }
    
@@ -32,7 +33,7 @@
       margin : 50px 50px;
    }
    
-   table tr{
+   section table tr{
       height:40px; 
       font-size : 17px;
    }
@@ -41,7 +42,7 @@
       text-align : center;
    }
 
-   th {
+   section th {
       color : black;
       padding-right :10px;
       width: 2%;
@@ -64,8 +65,8 @@
 </style>
 </head>
 <body id="body">
-<section> 
     <%@ include file="/views/common/header.jsp" %>
+<section> 
     <h1> NOTICE </h1>
     <div>
          <!-- 회원등급이 admin으로 로그인할 때만 확인 되도록 조건문 넣어줌 -->
@@ -108,7 +109,7 @@
     
        <!-- Pagination -->
      
-	<div style="text-align : center; border : 1px solid black;">
+	<div style="text-align : center;">
 		<button class="w3-bar-item w3-button w3-hover-black"
        			onclick="location.href='<%= request.getContextPath() %>/selectList.no?currentPage=1'"><<</button>
 		<% if(currentPage <= 1){ %>
@@ -140,7 +141,7 @@
     <script>
     // 게시글 선택 시 주는 효과 + 상세 페이지 연결 
     $(function(){
-      $('tr').mouseenter(function(){
+      $('section').find('tr').mouseenter(function(){
          $(this).css({"background" : "#87CEFA", "opacity" : "1.0"});
 
       }).mouseout(function(){
@@ -159,7 +160,7 @@
     <br>
     <br>
     <br>
-    <%@ include file="/views/common/footer.jsp" %>
  </section>
+    <%@ include file="/views/common/footer.jsp" %>
 </body>
 </html>

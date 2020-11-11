@@ -15,11 +15,11 @@ public class GuideService {
 	private GuideDAO gDAO = new GuideDAO();
 
 	// 가이드 목록 조회
-	public ArrayList<Board> selectList() {
+	public ArrayList<Board> selectList(int currentPage, int limit) {
 		
 		con = getConnection();
 		
-		ArrayList<Board> list = gDAO.selectList(con);
+		ArrayList<Board> list = gDAO.selectList(con, currentPage, limit);
 		
 		close(con);
 		
@@ -36,6 +36,18 @@ public class GuideService {
 		close(con);
 		
 		return board;
+	}
+
+	// 게시글 수 조회
+	public int getListCount() {
+		
+		con = getConnection();
+		
+		int result = gDAO.getListCount(con);
+		
+		close(con);
+		
+		return result;
 	}
 
 

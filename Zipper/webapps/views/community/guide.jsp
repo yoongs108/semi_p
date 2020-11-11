@@ -4,6 +4,12 @@
 
 <%
 	ArrayList<Board> list = (ArrayList<Board>)request.getAttribute("list");
+	PageInfo pi = (PageInfo)request.getAttribute("pi");
+	int listCount = pi.getListCount();
+	int currentPage = pi.getCurrentPage();
+	int maxPage = pi.getMaxPage();
+	int startPage = pi.getStartPage();
+	int endPage = pi.getEndPage();
 %>
 <!DOCTYPE html>
 <html>
@@ -244,20 +250,38 @@ section {
   </div>
   
       <!-- Pagination -->
-  <div class="w3-center w3-padding-32">
-    <div class="w3-bar">
-      <a href="#" class="w3-bar-item w3-button w3-hover-black">«</a>
-      <a href="#" class="w3-bar-item w3-black w3-button">1</a>
-      <a href="#" class="w3-bar-item w3-button w3-hover-black">2</a>
-      <a href="#" class="w3-bar-item w3-button w3-hover-black">3</a>
-      <a href="#" class="w3-bar-item w3-button w3-hover-black">4</a>
-      <a href="#" class="w3-bar-item w3-button w3-hover-black">»</a>
-    </div>
-  
- 	<%@ include file="/views/common/footer.jsp" %>
- </div>	
+	<div style="text-align : center;">
+		<button class="w3-bar-item w3-button w3-hover-black"
+       			onclick="location.href='<%= request.getContextPath() %>/selectList.gu?currentPage=1'"><<</button>
+		<% if(currentPage <= 1){ %>
+			<button class="w3-bar-item w3-button" disabled><</button>
+		<% } else { %>
+		<button class="w3-bar-item w3-button w3-hover-black"
+				onclick="location.href='<%= request.getContextPath() %>/selectList.gu?currentPage=<%=currentPage - 1 %>'"><</button>
+		<% } %>
+		<% for(int p = startPage; p <= endPage; p++){
+				if(p == currentPage){	
+		%>
+			<button class="w3-bar-item w3-button" disabled><%= p %></button>
+		<%      }else{ %>
+			<button class="w3-bar-item w3-button w3-hover-black"
+					onclick="location.href='<%= request.getContextPath() %>/selectList.gu?currentPage=<%= p %>'"><%= p %></button>
+		<%      } %>
+		<% } %>
+         
+        <%  if(currentPage >= maxPage){  %>
+		<button class="w3-bar-item w3-button" disabled>></button>
+		<%  }else{ %>
+		<button class="w3-bar-item w3-button w3-hover-black" 
+				onclick="location.href='<%= request.getContextPath() %>/selectList.gu?currentPage=<%=currentPage + 1 %>'">></button>
+		<%  } %>
+		<button class="w3-bar-item w3-button w3-hover-black"
+				onclick="location.href='<%= request.getContextPath() %>/selectList.gu?currentPage=<%= maxPage %>'">>></button>
+	</div>
+	
  	</section>
  	
+ 	<%@ include file="/views/common/footer.jsp" %>
  	<script>
  		$(function(){
 			$('.w3-quarter').click(function(){
