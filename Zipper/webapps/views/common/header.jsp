@@ -205,7 +205,7 @@
 	            	<tr>
 	            		<td>&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;</td>
 	            		<td colspan="2">
-		                    <a href="<%= request.getContextPath() %>/views/help/helpFAQ.jsp"><h4>FAQ</h5></a> <br />
+		                    <a href="<%= request.getContextPath() %>/helpfaq.fq"><h4>FAQ</h5></a> <br />
 		                 <% if(m != null) { %>
 		                    <a href="<%= request.getContextPath() %>/selectList.qo"><h4>1:1문의</h5></a>
 		                 <% } %>

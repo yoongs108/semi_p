@@ -44,7 +44,10 @@
 				<% for(Member user : list) { %>
 				<tr>
 					<td><%= user.getMno() %></td>
-					<td><%= user.getMgrd() %></td>
+					<td>
+					<input type="radio" name="mgrd<%= user.getMno() %>" value="A" <%= user.getMgrd().equals("A") ? "checked='checked'" : "" %>/>A
+					<input type="radio" name="mgrd<%= user.getMno() %>" value="M" <%= user.getMgrd().equals("M") ? "checked='checked'" : "" %>/>M
+					</td>
 					<td><%= user.getMid() %></td>
 					<td><%= user.getMnick() %></td>
 					<td><%= user.getMcontact() %></td>

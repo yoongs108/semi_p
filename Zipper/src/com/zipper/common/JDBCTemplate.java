@@ -14,7 +14,7 @@ public class JDBCTemplate {
 		try {
 			Class.forName("oracle.jdbc.OracleDriver");
 			
-			con = DriverManager.getConnection("jdbc:oracle:thin:@localhost:32777:xe"
+			con = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe"
 											, "SEMI"
 											, "SEMI");
 			con.setAutoCommit(false);

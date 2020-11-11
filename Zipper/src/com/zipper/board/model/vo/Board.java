@@ -25,6 +25,8 @@ public class Board implements Serializable{
 	private int bview;			// 게시글 조회수
 	private Date bdate;			// 작성일
 	private String bstatus;		// 삭제 여부 ( Y: 삭제 X, N: 삭제됨 )
+	private int cno;			// 클래스 번호
+	private int faqtype;		// 질문 유형(1 ~ 5)
 	private String profile;
 	
 	private String userId;		// 게시글 작성자 아이디
@@ -36,22 +38,9 @@ public class Board implements Serializable{
 	public Board() {
 		super();
 	}
-
-	public Board(int bno, int btype, int mno, String btitle, String bcontent, int bview, Date bdate, String bstatus, String profile) {
-		super();
-		this.bno = bno;
-		this.btype = btype;
-		this.mno = mno;
-		this.btitle = btitle;
-		this.bcontent = bcontent;
-		this.bview = bview;
-		this.bdate = bdate;
-		this.bstatus = bstatus;
-		this.profile = profile;
-	}
-
+	
 	public Board(int bno, int btype, int mno, String btitle, String bcontent, int bview, Date bdate, String bstatus,
-			String userId, String bwriter, String boardfile, String profile) {
+			int cno, int faqtype, String profile, String userId, String bwriter, String boardfile) {
 		super();
 		this.bno = bno;
 		this.btype = btype;
@@ -61,146 +50,100 @@ public class Board implements Serializable{
 		this.bview = bview;
 		this.bdate = bdate;
 		this.bstatus = bstatus;
+		this.cno = cno;
+		this.faqtype = faqtype;
+		this.profile = profile;
 		this.userId = userId;
 		this.bwriter = bwriter;
-		this.boardfile = boardfile;
-		this.profile = profile;
-	}
-
-
-	public Board(int bno, String btitle, String bcontent, int bview, String boardfile, String profile) {
-		super();
-		this.bno = bno;
-		this.btitle = btitle;
-		this.bcontent = bcontent;
-		this.bview = bview;
-		this.boardfile = boardfile;
-		this.profile = profile;
-	}
-	
-	
-	public Board(int bno, String userId, String boardfile) {
-		super();
-		this.bno = bno;
-		this.userId = userId;
 		this.boardfile = boardfile;
 	}
 
 	@Override
 	public String toString() {
 		return "Board [bno=" + bno + ", btype=" + btype + ", mno=" + mno + ", btitle=" + btitle + ", bcontent="
-				+ bcontent + ", bview=" + bview + ", bdate=" + bdate + ", bstatus=" + bstatus + ", userId=" + userId
-				+ ", bwriter=" + bwriter + ", boardfile=" + boardfile + "]";
+				+ bcontent + ", bview=" + bview + ", bdate=" + bdate + ", bstatus=" + bstatus + ", cno=" + cno
+				+ ", faqtype=" + faqtype + ", profile=" + profile + ", userId=" + userId + ", bwriter=" + bwriter
+				+ ", boardfile=" + boardfile + "]";
 	}
-
 
 	public int getBno() {
 		return bno;
 	}
 
-
 	public void setBno(int bno) {
 		this.bno = bno;
 	}
-
 
 	public int getBtype() {
 		return btype;
 	}
 
-
 	public void setBtype(int btype) {
 		this.btype = btype;
 	}
-
 
 	public int getMno() {
 		return mno;
 	}
 
-
 	public void setMno(int mno) {
 		this.mno = mno;
 	}
-
 
 	public String getBtitle() {
 		return btitle;
 	}
 
-
 	public void setBtitle(String btitle) {
 		this.btitle = btitle;
 	}
-
 
 	public String getBcontent() {
 		return bcontent;
 	}
 
-
 	public void setBcontent(String bcontent) {
 		this.bcontent = bcontent;
 	}
-
 
 	public int getBview() {
 		return bview;
 	}
 
-
 	public void setBview(int bview) {
 		this.bview = bview;
 	}
-
 
 	public Date getBdate() {
 		return bdate;
 	}
 
-
 	public void setBdate(Date bdate) {
 		this.bdate = bdate;
 	}
-
 
 	public String getBstatus() {
 		return bstatus;
 	}
 
-
 	public void setBstatus(String bstatus) {
 		this.bstatus = bstatus;
 	}
 
-
-	public String getUserId() {
-		return userId;
+	public int getCno() {
+		return cno;
 	}
 
-
-	public void setUserId(String userId) {
-		this.userId = userId;
+	public void setCno(int cno) {
+		this.cno = cno;
 	}
 
-
-	public String getBwriter() {
-		return bwriter;
+	public int getFaqtype() {
+		return faqtype;
 	}
 
-
-	public void setBwriter(String bwriter) {
-		this.bwriter = bwriter;
-	}
-
-
-	public String getBoardfile() {
-		return boardfile;
-	}
-
-
-	public void setBoardfile(String boardfile) {
-		this.boardfile = boardfile;
+	public void setFaqtype(int faqtype) {
+		this.faqtype = faqtype;
 	}
 
 	public String getProfile() {
@@ -209,6 +152,30 @@ public class Board implements Serializable{
 
 	public void setProfile(String profile) {
 		this.profile = profile;
+	}
+
+	public String getUserId() {
+		return userId;
+	}
+
+	public void setUserId(String userId) {
+		this.userId = userId;
+	}
+
+	public String getBwriter() {
+		return bwriter;
+	}
+
+	public void setBwriter(String bwriter) {
+		this.bwriter = bwriter;
+	}
+
+	public String getBoardfile() {
+		return boardfile;
+	}
+
+	public void setBoardfile(String boardfile) {
+		this.boardfile = boardfile;
 	}
 	
 }
