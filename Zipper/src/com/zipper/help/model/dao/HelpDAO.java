@@ -1,6 +1,4 @@
-package com.zipper.myPage.model.dao;
-
-import static com.zipper.common.JDBCTemplate.close;
+package com.zipper.help.model.dao;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -12,51 +10,53 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Properties;
 
-import com.zipper.thumb.model.vo.Thumbnail;
+import com.zipper.board.model.vo.Board;
+import static com.zipper.common.JDBCTemplate.*;
 
-public class MyPageDAO {
+public class HelpDAO {
 
-	private Properties prop = null;
+	private Properties prop;
 	
-	public MyPageDAO() {
+	public HelpDAO() {
 		prop = new Properties();
 		
-		String filePath = MyPageDAO.class.getResource("/config/myPage-sql.properties").getPath();
+		String filePath = HelpDAO.class.getResource("/config/helpFAQ-sql.properties")
+							.getPath();
 		
 		try {
 			prop.load(new FileReader(filePath));
-			
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
-			
 		} catch (IOException e) {
 			e.printStackTrace();
-			
-		}		
+		}
 	}
 	
-	public ArrayList<Thumbnail> selectList(Connection con) {
+	public ArrayList<Board> selectFAQ(Connection con) {
 		
-		ArrayList<Thumbnail> list = new ArrayList<>();
+		//System.out.println("DAO 시작");
+
+		ArrayList<Board> list = new ArrayList<>();
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
+		
 		String sql = prop.getProperty("selectList");
 		
 		try {
-			pstmt = con.prepareStatement(sql);
+			pstmt = con.prepareStatement(sql);			
 			rset = pstmt.executeQuery();
+			//System.out.println("쿼리 실행");
+			
 			while (rset.next()) {
-				Thumbnail tn = new Thumbnail();
+				Board b = new Board();
 				
-				tn.setBno(rset.getInt("bno"));
-				tn.setBtitle(rset.getString("btitle"));
-				tn.setBcontent(rset.getString("bcontent"));
-				tn.setBview(rset.getInt("bview"));
-				tn.setBoardfile(rset.getString("file_origin_name"));
-				tn.setProfile(rset.getString("profile"));
-				tn.setMno(rset.getInt("mno"));
+				b.setBno(rset.getInt("bno"));
+				b.setBtitle(rset.getString("btitle"));
+				b.setBcontent(rset.getString("bcontent"));
+				b.setFaqType(rset.getInt("faqtype"));
 				
-				list.add(tn);
+				//System.out.println(b.getFaqType());
+				list.add(b);
 			}
 			
 		} catch (SQLException e) {
@@ -67,6 +67,7 @@ public class MyPageDAO {
 			close(pstmt);
 		}
 		
+		//System.out.println("DAO 종료 / " + list.size());
 		
 		return list;
 	}

@@ -215,12 +215,15 @@
 				<div class="thumb-list" align="center">
 					<div>
 						<input type="hidden" name="bno" value="<%= t.getBno() %>"/>
-						<img src="<%= request.getContextPath() %>/resources/images/attachment/<%= t.getBoardfile() %>" 
+						<img src="<%= request.getContextPath() %>/resources/images/zippopUploadFiles/<%= t.getBoardfile() %>" 
 							width="200px" height="150px"/>
 					</div>
 					
 					<p>
-						No. <%= t.getBno() + " " + t.getBtitle() %>
+						<!-- NO. --> 
+						<%--= t.getBno() --%>
+						<br />
+						<%= t.getBcontent() %>
 						<br />
 						조회수 : <%= t.getBview() %>
 					</p>
