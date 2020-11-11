@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="com.zipper.classMain.model.vo.*, com.zipper.thumb.model.vo.*, com.zipper.board.model.vo.*, java.util.*" %>
+    pageEncoding="UTF-8" import="com.zipper.classMain.model.vo.*, com.zipper.board.model.vo.*, java.util.*" %>
     
 <% 	
 	ClassList classList = (ClassList)request.getAttribute("cList");
@@ -34,27 +34,33 @@
 	}
 	
 	#title {
-		margin-top: 100px;
+		margin-top: 120px;
 		text-align: center;
 	}
+	
+	.page {
+		margin-top: 50px;
+	}
+	
+	
 	.top {
-		height :170px;
+		height :160px;
+		top:0px;
 		position: fixed; 
 		width: 1024px;
-		top: 30px;
 	}
   
 	.left_page {
 		display: inline-block;
-		margin-top: 100px;
+		margin-top: 70px;
+		
 	
 	}
 	.right_page {
 		position: fixed;
 		display: inline-block;
-		rigth: 30%;
 		margin-left: 20px; 
-		margin-top: 100px;
+		margin-top: 70px;
 		 
 	}
 
@@ -67,12 +73,7 @@
 		height : 0;
 		overflow : hidden;
 	}
-        
-	.pay { /* 왜안먹히고 난리야 */
-		 height: 75px;
-		 position: fixed;
-		
-	}
+
 	
 	button {
 		width: 100px;
@@ -92,7 +93,6 @@
 		margin-bottom : 30px;
 	}
 	
-
 </style>
 
 </head>
@@ -100,13 +100,13 @@
 	<%@ include file="/views/common/header.jsp"%>
 	
 	<section>
-		<div class="top" style=" top: 100; background-color: white; border-bottom: 1px solid black;">
+		<div class="top" style="background-color: white; border-bottom: 1px solid black;">
 			<h2 id="title">CLASS</h2>
 			<img src="<%= request.getContextPath() %>/resources/images/common/backButton.png" 
 				alt="class1" id="back" onclick="goClass()"> 
 		</div>
  		
-		<div>
+		<div class="page">
 			<div class="left_page">
 			
 				<div><img src="<%= request.getContextPath() %>/resources/images/fileUpload/<%= classList.getFileNewName()%>" alt="" width="650px" height="500px"/></div>
@@ -152,12 +152,12 @@
 				<table>
 					<tr>
 						
-						<td width="200px">클래스 </td>
-						<td><%= classList.getPrice() %> 원</td>
+						<td width="250px">클래스 </td>
+						<td width="100px" align="right"><%= classList.getPrice() %> 원</td>
 					</tr>
 					
 					<tr>
-						<td width="300px">
+						<td >
 							<div class="ac">
 					        	키트
 					        	<img src="<%= request.getContextPath() %>/resources/images/common/downArrow.png" width="15px" height="7.5px" class="accordion" onclick="accordion_hide(this)"/>
@@ -165,7 +165,7 @@
 					        	<p class="accordion_hide"> <%= classList.getKdetail() %></p>
 					    	</div>
 						</td>
-						<td style="vertical-align:top"> 포함</td>
+						<td align="right" style="vertical-ailgn: center"> 포함</td>
 					</tr>
 				</table>
 				

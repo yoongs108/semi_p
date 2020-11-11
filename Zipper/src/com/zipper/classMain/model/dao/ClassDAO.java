@@ -71,7 +71,6 @@ public class ClassDAO {
             
             classList.setCno(cno);
             classList.setVno(rset.getInt("vno"));
-            classList.setKno(rset.getInt("kno"));
             classList.setCname(rset.getString("cname"));
             classList.setPrice(rset.getInt("price"));
             classList.setCintro(rset.getString("cintro"));
@@ -190,6 +189,8 @@ public class ClassDAO {
       
       String sql = prop.getProperty("insertWrite");
       
+      System.out.println(sql);
+      
       try {
          pstmt = con.prepareStatement(sql);
          
@@ -213,7 +214,44 @@ public class ClassDAO {
       return result;
    }
 
-   public int insertAttachment(Connection con, Attachment alist) {
+   
+   public int getCurrentCno(Connection con) {
+	   int result = 0;
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		//System.out.println("getCurrentBno : " + result);
+		
+		String sql = prop.getProperty("currentCno");
+		
+		try {
+			pstmt = con.prepareStatement(sql);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				result = rset.getInt(1);
+			}
+			
+			System.out.println(result);
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		System.out.println(result);
+		
+		return result;
+   }
+   
+   
+   
+   public int insertAttachment(Connection con, Attachment at) {
          
          int result = 0;
          
@@ -224,8 +262,10 @@ public class ClassDAO {
          try {
             pstmt = con.prepareStatement(sql);
             
-            pstmt.setString(1, alist.getFile_origin_name());
-            pstmt.setString(2, alist.getFile_new_name());
+            pstmt.setInt(	1, at.getCno());
+            pstmt.setString(2, at.getFile_origin_name());
+            pstmt.setString(3, at.getFile_new_name());
+            pstmt.setString(4, at.getFilepath());
 
             result = pstmt.executeUpdate();
             
@@ -280,4 +320,5 @@ public class ClassDAO {
       }
       return list;
    }
+
 }
