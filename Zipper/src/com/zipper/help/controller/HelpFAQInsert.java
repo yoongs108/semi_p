@@ -12,54 +12,50 @@ import com.zipper.board.model.vo.Board;
 import com.zipper.common.exception.NoticeException;
 import com.zipper.help.model.service.HelpService;
 
-@WebServlet("/faqUpdateComplete.fq")
-public class HelpFAQUpdateSubmit extends HttpServlet {
-	private static final long serialVersionUID = 1234L;
-       
+/**
+ * Servlet implementation class HelpFAQInsert
+ */
+@WebServlet("/insertFaq.fq")
+public class HelpFAQInsert extends HttpServlet {
+	private static final long serialVersionUID = 1L;
 
-    public HelpFAQUpdateSubmit() {
+    public HelpFAQInsert() {
         super();
     }
 
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		HelpService hs = new HelpService();
+	
+		int mno = Integer.parseInt(request.getParameter("mno"));
+		int faqType = Integer.parseInt(request.getParameter("faqtype"));
+		String btitle = request.getParameter("title");
+		String bcontent = request.getParameter("content");
 		
 		Board b = new Board();
 		
-		int bno = Integer.parseInt(request.getParameter("bno"));
-		String btitle = request.getParameter("title");
-		String bcontent = request.getParameter("content");
-		int faqType = Integer.parseInt(request.getParameter("faqtype"));
-		
-		//System.out.println(bno + " / " + btitle + " / " + bcontent + " / " + faqType);
-		
-		b.setBno(bno);
+		b.setMno(mno);
+		b.setFaqtype(faqType);
 		b.setBtitle(btitle);
 		b.setBcontent(bcontent);
-		b.setFaqtype(faqType);
+		
+		HelpService hs = new HelpService();
 		
 		try {
-			int result = hs.updateFAQ(b);
-			
+			hs.insertFaq(b);
 			response.sendRedirect("helpfaq.fq");
 			
 		} catch (NoticeException e) {
-			request.setAttribute("error-msg", "FAQ 수정 실패");
+			e.printStackTrace();
 			request.setAttribute("exception", e);
-			
-			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
+			request.setAttribute("error-msg", "공지사항 등록 실패!");
+			request.getRequestDispatcher("/views/common/errorPage.jsp")
+					.forward(request, response);
+
 			
 		}
 		
-		//System.out.println(b.getBno() + " / " + b.getBtitle() + " / " + b.getBcontent() + " / " + b.getFaqtype());
-
-		
-		
-		
-		//request.getRequestDispatcher("views/help/helpFAQ.jsp").forward(request, response);
-		
+		//System.out.println(mno + " / " + faqType);
+	
 	}
 
 

@@ -48,8 +48,8 @@
 	}
 	/* 버튼 스타일 */
 	#btn{
-		width : 80px;
-		height : 30px;
+		width : 100px;
+		height : 50px;
 		color : white;
 		background-color : black;
 		border : none;	
