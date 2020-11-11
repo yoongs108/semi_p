@@ -58,8 +58,8 @@
 </style>
 </head>
 <body id="body">
+<%@ include file="/views/common/header.jsp" %>
 <section>
- 	<%@ include file="/views/common/header.jsp" %>
  	<h1>1:1 문의내역</h1>
  	<!-- 뒤로가기 -->
 		<img src="<%= request.getContextPath() %>/resources/images/common/backButton.png" 
@@ -88,7 +88,7 @@
 					<input type="hidden" value="<%=c.getQno()%>">
 					<input type="hidden" value="<%=c.getMno()%>">
 					
-					<%-- >d=, title 클릭 시 상세페이지로 넘어감 --%>
+					<%-- title 클릭 시 상세페이지로 넘어감 --%>
 					<th>
 						<input type="checkbox" id="check" name="check" 
 													<%= c.getQstate().equals("Y") ? "checked='checked'" : "" %>>
@@ -123,12 +123,13 @@
 			$(this).css({"background" : "none"});
 		}).click(function(){
 			var qno = $(this).find('input').eq(0).val(); // tr안에 있는 input태그의 hidden을 의미
-			console.log("qno"+qno);
-			location.href = "<%= request.getContextPath() %>/selectOne.qo?qno="+qno;
+			var mno = $(this).find('input').eq(1).val(); // input의 mno 데리고 가기 
+			// alert("qno"+qno + "mno" + mno);
+			location.href = "<%= request.getContextPath() %>/selectOne.qo?qno="+qno+"&mno="+mno;
 		});
 	});
  	</script>
  	</section>
- 	<%@ include file="/views/common/footer.jsp" %>
 </body>
+<%@ include file="/views/common/footer.jsp" %>
 </html>

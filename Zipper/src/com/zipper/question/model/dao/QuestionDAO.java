@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.Properties;
 
 import com.zipper.common.exception.QuestionException;
+import com.zipper.member.model.vo.Member;
 import com.zipper.question.model.vo.Question;
 
 public class QuestionDAO {
@@ -36,6 +37,8 @@ public QuestionDAO() {
 		e.printStackTrace();
 	}
 }
+
+	// 1:1 문의내역 리스트
 	public ArrayList<Question> selectList(Connection con) {
 		ArrayList<Question> list = new ArrayList<>();
 		PreparedStatement pstmt = null;
@@ -62,7 +65,7 @@ public QuestionDAO() {
 				q.setQstate(rset.getString(6));
 				q.setQid(rset.getString(7));
 				q.setQcomment(rset.getString(8));
-			
+				q.setQcommentdate(rset.getDate(9));
 				list.add(q);
 			}
 			
@@ -76,6 +79,8 @@ public QuestionDAO() {
 		
 		return list;
 	}
+	
+	// 1:1 문의 상세페이지
 	public Question selectOne(Connection con, int qno) {
 		Question qs = new Question();
 		PreparedStatement pstmt = null;
@@ -103,6 +108,7 @@ public QuestionDAO() {
 				qs.setQstate(rset.getString(6));
 				qs.setQid(rset.getString(7));
 				qs.setQcomment(rset.getString(8));
+				qs.setQcommentdate(rset.getDate(9));
 				
 			}
 			System.out.println("상세 question : "+qs.toString());
@@ -115,6 +121,8 @@ public QuestionDAO() {
 		}
 		return qs;
 	}
+	
+	// 1:1 문의 작성
 	public int insertQuestion(Connection con, Question q) throws QuestionException {
 		int result = 0;
 		PreparedStatement pstmt = null;
@@ -132,6 +140,40 @@ public QuestionDAO() {
 		} catch (SQLException e) {
 			e.printStackTrace();
 			throw new QuestionException("[DAO] : " + e.getMessage()); 
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+	
+	// 회원 아이디를 가지고 오기 위한 조회방법 
+	public Member selectMember(Connection con, int mno) {
+		Member result = null;
+		ResultSet rset = null;
+
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("selectMember"); // properties만들러 가야함 
+		System.out.println(sql);
+		
+		try {
+			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setInt(1, mno);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+			result = new Member(
+				   rset.getInt(1), rset.getString(2), rset.getString(3), rset.getString(4), 
+				   rset.getString(5), rset.getString(6), rset.getString(7), rset.getDate(8), 
+				   rset.getDate(9), rset.getString(10), rset.getString(11), rset.getString(12), 
+				   rset.getString(13), rset.getString(14));
+			}
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+			
 		} finally {
 			close(pstmt);
 		}

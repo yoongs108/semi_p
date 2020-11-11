@@ -6,6 +6,7 @@ import java.sql.Connection;
 import java.util.ArrayList;
 
 import com.zipper.common.exception.QuestionException;
+import com.zipper.member.model.vo.Member;
 import com.zipper.question.model.dao.QuestionDAO;
 import com.zipper.question.model.vo.Question;
 
@@ -41,6 +42,16 @@ public int insertQuestion(Question q) throws QuestionException {
 	
 	if(result > 0) commit(con);
 	else rollback(con);
+	
+	close(con);
+	
+	return result;
+}
+// 멤버 조회 
+public Member selectMember(int mno) {
+	con = getConnection();
+	
+	Member result = qDAO.selectMember(con, mno);
 	
 	close(con);
 	

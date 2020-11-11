@@ -54,7 +54,7 @@
 		font-size : 15px;
 	}
 	
-	#adminwrite{
+#adminwrite{
 		position : relative;
 		float: right;
 		top : 23px;
@@ -82,6 +82,7 @@
 		background-color : black;
 		border : none;	
 	}
+	
 	#delete:hover{
 		background-color: #555;
 		cursor: pointer;
