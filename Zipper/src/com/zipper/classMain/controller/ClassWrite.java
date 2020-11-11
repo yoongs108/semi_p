@@ -68,9 +68,9 @@ public class ClassWrite extends HttpServlet {
 			originNames = mre.getOriginalFileName(tagName);
 			changeNames = mre.getFilesystemName(tagName);
 			
-//			System.out.println(tagName);
-//			System.out.println(originNames);
-//			System.out.println(changeNames);
+			System.out.println(tagName);
+			System.out.println(originNames);
+			System.out.println(changeNames);
 		}
 			
 			// 썸네일 게시글 저장하기
@@ -91,6 +91,8 @@ public class ClassWrite extends HttpServlet {
 			at.setFilepath(savePath); // 파일경로
 			at.setFile_origin_name(originNames);
 			at.setFile_new_name(changeNames);
+			
+			System.out.println(at);
 			
 			
 			ClassService cs = new ClassService();

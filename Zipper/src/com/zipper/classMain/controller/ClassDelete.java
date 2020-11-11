@@ -35,7 +35,7 @@ public class ClassDelete extends HttpServlet {
 		String root = request.getServletContext().getRealPath("/resources");
 		String savePath = root + "/images/fileUpload/";
 		
-		int result = cs.deletdClass(cno, savePath);
+		int result = cs.deleteClass(cno, savePath);
 		
 		if(result > 0) {
 			response.sendRedirect("classFromMain.cfm");

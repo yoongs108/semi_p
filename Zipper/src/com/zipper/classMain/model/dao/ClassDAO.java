@@ -361,5 +361,24 @@ public class ClassDAO {
 		}
 		return result;
 	}
-
+	
+	// rrrrrrrrrrrrrrrrrrrr 
+	public int deleteClass(Connection con, int cno) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("deleteClass");
+		try {
+			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setInt(1, cno);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
 }

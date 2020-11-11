@@ -82,21 +82,6 @@ public class ClassService {
       return result;
    }
 
-	public int deletdClass(int cno, String savePath) {
-		con = getConnection();
-		
-		int result = cDAO.deletdClass(con, cno);
-		
-		if(result >0) {
-			
-			File f = new File(savePath );
-			
-			f.delete();
-		}
-		
-		return result;
-	}
-
 	// 회원 클래싱 갯수 조회
 	public int getListCount(int mno) {
 		
@@ -104,6 +89,26 @@ public class ClassService {
 		
 		int result = cDAO.getListCount(con, mno);
 		
+		close(con);
+		
+		return result;
+	}
+	
+	public int deleteClass(int cno, String savePath) {
+		con = getConnection();
+		
+		int result = cDAO.deleteClass(con, cno);
+		
+		
+		if(result >0) {
+			File f = new File(savePath );
+
+			f.delete();
+			commit(con);
+		}else {
+			rollback(con);
+		}
+	
 		close(con);
 		
 		return result;
