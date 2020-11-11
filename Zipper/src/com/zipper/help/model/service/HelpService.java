@@ -1,11 +1,15 @@
 package com.zipper.help.model.service;
 
-import static com.zipper.common.JDBCTemplate.*;
+import static com.zipper.common.JDBCTemplate.close;
+import static com.zipper.common.JDBCTemplate.commit;
+import static com.zipper.common.JDBCTemplate.getConnection;
+import static com.zipper.common.JDBCTemplate.rollback;
 
 import java.sql.Connection;
 import java.util.ArrayList;
 
 import com.zipper.board.model.vo.Board;
+import com.zipper.common.exception.FaqException;
 import com.zipper.common.exception.NoticeException;
 import com.zipper.help.model.dao.HelpDAO;
 
@@ -28,7 +32,7 @@ public class HelpService {
 		return result;
 	}
 
-	public int updateFAQ(Board b) throws NoticeException {
+	public int updateFAQ(Board b) throws FaqException {
 		
 		con = getConnection();
 		
@@ -42,7 +46,7 @@ public class HelpService {
 		return result;
 	}
 
-	public int deleteFAQ(int bno) throws NoticeException {
+	public int deleteFAQ(int bno) throws FaqException {
 		
 		con = getConnection();
 		
@@ -56,7 +60,7 @@ public class HelpService {
 		return result;
 	}
 
-	public void insertFaq(Board b) throws NoticeException {
+	public void insertFaq(Board b) throws FaqException {
 		
 		con = getConnection();
 		
@@ -66,5 +70,15 @@ public class HelpService {
 		else { rollback(con); }
 		
 		close(con);
+	}
+
+	public ArrayList<Board> searchFAQ(String keyword) throws FaqException {
+		con = getConnection();
+		
+		ArrayList<Board> bList = hDAO.searchFAQ(con, keyword);
+		
+		close(con);
+		
+		return bList;
 	}
 }

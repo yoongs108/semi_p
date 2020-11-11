@@ -20,6 +20,7 @@
 		margin-left:auto;
 		margin-right:auto;
 	}
+	
 	#searchDiv {
 		width: 40%;
 		border: 1px solid black;
@@ -75,22 +76,16 @@
   		background-color: #ccc;
 	}
 	
-	/* ********* never used ***********
-	.panel {
-  		padding: 0 18px;
-  		background-color: white;
-  		max-height: 0;
-  		overflow: hidden;
-  		transition: max-height 0.2s ease-out;
-	}
-	*/
-	
 	.accordion:after {
-  		content: '\02795'; /* Unicode character for "plus" sign (+) */
+  		content: '\02795'; 
   		font-size: 13px;
   		color: #777;
   		float: right;
   		margin-left: 5px;
+	}
+	
+	#searchDiv>button:hover {
+		
 	}
 	
 	#selectDetail>div{
@@ -115,8 +110,8 @@
 		overflow : hidden;
 	}
 	
-	.text-red {
-		color:red;
+	section>h1:hover {
+		cursor:pointer;
 	}
 	
 </style>
@@ -130,40 +125,40 @@
     	$('html, body').animate({scrollTop : (offset.top - winH*1.5)}, 400);
 	};
 	
-	
 	function accordion_hide(obj) {
 		console.log(obj);
 		$(obj).parent().find('p').toggleClass('accordion_hide');
 	};
 	
-	
-	/*
-	$('#searchTool').keyup(function() {
-		var search = $('#searchTool').val();
-		$('#selectDetail:contains('"+ search +"')').each(function() {
-			$(this).html( $(this).text().replace(regex, "<span clasc='text-red'>"+"</span>"));
-		});
-	});
-	*/
-	
 	function complete(){
 		$(this).on("click", function() {
 			location.href="<%= request.getContextPath()%>/zipUpdate.zp";
-		});	
+		});
 	}
+	
+	function search(){
+		location.href="<%=request.getContextPath()%>/searchFaq.fq?keyword="+$('#searchTool').val();
+	}
+	
+	function enterKey() {
+		if (event.keyCode==13){
+			location.href="<%=request.getContextPath()%>/searchFaq.fq?keyword="+$('#searchTool').val();
+		}
+	}
+	
 </script>
 </head>
 <body>
  	<%@ include file="/views/common/header.jsp" %>
  	<section>
- 	<h1 align="center">FAQ page</h1>
- 	
+ 	<h1 align="center" onclick="location.href='<%=request.getContextPath()%>/helpfaq.fq'">FAQ page</h1>
+
  	<!-- 검색 영역  / (CSS 작업 필요, 링크 연결용 코드 필요) -->
  	<div align="center" id="searchDiv">
- 		<!--  
- 		<button id="searchBtn"><img src="../../resources/images/magnifier_icon.png" alt="검색" id="btnImg" /></button>
- 		-->
- 		<input type="search" name="" id="searchTool" placeholder="무엇을 검색하시겠습니까?"/>
+ 		<button type="button" id="searchBtn" style="background:white" onclick="search()">
+ 			<img src="<%= request.getContextPath() %>/resources/images/magnifier_icon.png" alt="검색" id="btnImg"/>
+ 		</button>
+ 		<input type="search" id="searchTool" placeholder="무엇을 검색하시겠습니까?" onKeyDown="enterKey();"/>
  	</div>
  	
  	<!-- 버튼 5개 영역  / (CSS 작업 필요)-->
@@ -177,11 +172,9 @@
  	
  	
  	<% if (m.getMgrd().contains("A")) { %>
-	
 		<div align="right" id="adminBtn">
 			<button onclick="complete();">수정하기</button>
 		</div>
-		
  	<% } %>
  	
  	

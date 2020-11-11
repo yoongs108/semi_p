@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.Properties;
 
 import com.zipper.board.model.vo.Board;
+import com.zipper.common.exception.FaqException;
 import com.zipper.common.exception.NoticeException;
 
 public class HelpDAO {
@@ -74,7 +75,7 @@ public class HelpDAO {
 		return list;
 	}
 
-	public int updateFAQ(Connection con, Board b) throws NoticeException {
+	public int updateFAQ(Connection con, Board b) throws FaqException {
 		
 		int result = 0;
 		PreparedStatement pstmt = null;
@@ -94,7 +95,7 @@ public class HelpDAO {
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
-			throw new NoticeException("[DAO] : " + e.getMessage());
+			throw new FaqException("[DAO] : " + e.getMessage());
 
 		} finally {
 			close(pstmt);
@@ -104,7 +105,7 @@ public class HelpDAO {
 		return result;
 	}
 
-	public int deleteFAQ(Connection con, int bno) throws NoticeException {
+	public int deleteFAQ(Connection con, int bno) throws FaqException {
 		
 		int result = 0;
 		PreparedStatement pstmt = null;
@@ -117,7 +118,7 @@ public class HelpDAO {
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
-			throw new NoticeException("[DAO] : " + e.getMessage());
+			throw new FaqException("[DAO] : " + e.getMessage());
 
 		} finally {
 			close(pstmt);
@@ -127,7 +128,7 @@ public class HelpDAO {
 		return result;
 	}
 
-	public int insertFAQ(Connection con, Board b) throws NoticeException {
+	public int insertFAQ(Connection con, Board b) throws FaqException {
 		
 		int result = 0;
 		PreparedStatement pstmt = null;
@@ -145,7 +146,7 @@ public class HelpDAO {
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
-			throw new NoticeException("[DAO] : " + e.getMessage());
+			throw new FaqException("[DAO] : " + e.getMessage());
 	
 		} finally {
 			close(pstmt);
@@ -153,6 +154,46 @@ public class HelpDAO {
 		}
 		
 		return result;
+	}
+
+	public ArrayList<Board> searchFAQ(Connection con, String keyword) throws FaqException {
+		
+		ArrayList<Board> bList = new ArrayList<>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("searchFAQ");
+		
+		try {
+			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setString(1, keyword);
+			pstmt.setString(2, keyword);
+			
+			rset = pstmt.executeQuery();
+			
+			while (rset.next()) {
+				Board b = new Board();
+				
+				b.setBno(rset.getInt("bno"));
+				b.setBtitle(rset.getString("btitle"));
+				b.setBcontent(rset.getString("bcontent"));
+				b.setFaqtype(rset.getInt("faqtype"));
+				
+				bList.add(b);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new FaqException("[DAO] :" + e.getMessage());
+
+			
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return bList;
 	}
 
 }
