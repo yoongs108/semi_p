@@ -38,7 +38,7 @@
 	
 	/* 글쓰기폼 */
 	.title{
-		padding : 20px;
+		padding : 20px 20px 20px 10px;
 		font-size : 15px;
 	}
 	
@@ -76,7 +76,7 @@
 	
 				<!-- 파일 첨부 -->
 				<tr>
-					<td id="imgArea" colspan="3">
+					<td id="imgArea" colspan="4">
 
 						<div id="videoArea">
 
@@ -90,24 +90,26 @@
 				
 				<!-- 제목 -->
 				<tr>
-					<td class="title">클래스 명</td>
-						<td>
-						<input type=text name=title size=75
+					<td class="title" >클래스 명</td>
+					<td>
+						<input type=text name=title size=65
 						placeholder="  제목을 입력해 주세요.">
-						</td>
-						<td>
-							<foam>
-								클래스 선택 : <select id="subject">
-	    						<option value="" selected="selected">Select class</option>
+					</td>
+					
+					<td class="title">클래스 선택</td>
+					<td>
+							<foam >
+								<select id="subject">
+	    						<option value="" selected="selected">Select CNO</option>
 	  							</select>
 							</foam>
-						</td>
+					</td>
 				</tr>
 				<!-- 내용 -->
-				<tr colspan="3">
+				<tr>
 					<td class="title">클래스 소개</td>
-					<td>
-						<textarea name = content cols=98 rows=15 placeholder="  클래스 소개를 입력해 주세요."></textarea>
+					<td colspan="3">
+						<textarea name = content cols=99 rows=7 placeholder="  클래스 소개를 입력해 주세요."></textarea>
 					</td>
 				</tr>
 			</table>
