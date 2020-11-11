@@ -128,7 +128,7 @@
 			location.href = '<%= request.getContextPath() %>/#';
 		}
 		function goManToMan() { 	// 1:1문의
-			location.href = '<%= request.getContextPath() %>/selecList.qo';
+			location.href = '<%= request.getContextPath() %>/selectList.qo';
 		}
 	</script>
 	

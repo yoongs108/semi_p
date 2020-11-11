@@ -105,29 +105,35 @@
 		
 	<hr style="width: 100%; border: solid 0.3px black;">
  	
+ 	<!-- 문의 내용 -->
  	<div>
 	<div id="date"> 
 		<h4> <%=qs.getQdate() %> </h4>
 	</div>
 	<br>
 	<br>
-	<div> 
 		<h3 id="title" > <b>문의 제목 </b> 
+		<% if(m != null && m.getMgrd().equals("A")){ %> 
 		<input type="text" readonly="readonly" id="memberid" value="<%= ms.getMid()%>"> 
+		<% } %>
 		</h3>
 		<br>
-	</div>
  	<div class="content">
  	<%=qs.getQcontent() %>
 	</div>
  	</div>
 
- 	<div>
+
+	<!-- 답변 작성 -->
+ 	<div class="answer">
+ 	<form action="<%=request.getContextPath()%>/insertComment.co" method="post">
+					<!-- 댓글 작성자 받아옴 -->
+					<input type="hidden" name="writer" value="<%=m.getMid()%>">
+					<input type="hidden" name="bno" value="<%=qs.getQno()%>"> 
  	<div id="date"> 
 		<h4> <%=qs.getQcommentdate() %> </h4>
 	</div>
 	<br>
-	<div> 
  		<h3 id="commenttitle" > <b>문의 답변 </b> </h3>
  		<div>
 			<!-- 회원등급이 admin으로 로그인할 때만 확인 되도록 조건문 넣어줌 -->
@@ -136,7 +142,6 @@
 				<%-- 삭제에 넣을것 참고 : location.href='<%= request.getContextPath() %>/nDelete.no?bno=<%= bs.getBno()%>' --%> 
 			<% } %>
  		</div>
- 		
  	<div class="content">
  		<%= qs.getQcomment() %>
  	</div>
