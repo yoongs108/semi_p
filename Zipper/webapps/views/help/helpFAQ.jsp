@@ -146,17 +146,11 @@
 	});
 	*/
 	
-	// 코드 구현 필요 / 페이지 내에서 수정이 가능하도록 구현 .html .text 사용
 	function complete(){
 		$(this).on("click", function() {
 			location.href="<%= request.getContextPath()%>/zipUpdate.zp";
-		});
-			
+		});	
 	}
-	
-	function deleteBoard(){
-		$("#updateForm").attr("action","<%= request.getContextPath()%>/bDelete.bo");
-	}	
 </script>
 </head>
 <body>
@@ -182,11 +176,10 @@
  	</div>
  	
  	
- 	<% if (m.getMid().contains("admin")) { %>
+ 	<% if (m.getMgrd().contains("A")) { %>
 	
 		<div align="right" id="adminBtn">
 			<button onclick="complete();">수정하기</button>
-			<button onclick="deleteBoard();">삭제하기</button>
 		</div>
 		
  	<% } %>

@@ -1,5 +1,7 @@
 package com.zipper.help.model.dao;
 
+import static com.zipper.common.JDBCTemplate.close;
+
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
@@ -11,7 +13,7 @@ import java.util.ArrayList;
 import java.util.Properties;
 
 import com.zipper.board.model.vo.Board;
-import static com.zipper.common.JDBCTemplate.*;
+import com.zipper.common.exception.NoticeException;
 
 public class HelpDAO {
 
@@ -53,7 +55,7 @@ public class HelpDAO {
 				b.setBno(rset.getInt("bno"));
 				b.setBtitle(rset.getString("btitle"));
 				b.setBcontent(rset.getString("bcontent"));
-				b.setFaqType(rset.getInt("faqtype"));
+				b.setFaqtype(rset.getInt("faqtype"));
 				
 				//System.out.println(b.getFaqType());
 				list.add(b);
@@ -70,6 +72,87 @@ public class HelpDAO {
 		//System.out.println("DAO 종료 / " + list.size());
 		
 		return list;
+	}
+
+	public int updateFAQ(Connection con, Board b) throws NoticeException {
+		
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("updateFaq");
+		
+		System.out.println(b.getBno());
+		
+		try {
+			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setString(1, b.getBtitle());
+			pstmt.setString(2, b.getBcontent());
+			pstmt.setInt(3, b.getBno());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new NoticeException("[DAO] : " + e.getMessage());
+
+		} finally {
+			close(pstmt);
+			
+		}
+		
+		return result;
+	}
+
+	public int deleteFAQ(Connection con, int bno) throws NoticeException {
+		
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("deleteFaq");
+		
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, bno);
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new NoticeException("[DAO] : " + e.getMessage());
+
+		} finally {
+			close(pstmt);
+			
+		}
+		
+		return result;
+	}
+
+	public int insertFAQ(Connection con, Board b) throws NoticeException {
+		
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("insertFaq");
+		
+		try {
+			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setInt(1, b.getMno());
+			pstmt.setString(2, b.getBtitle());
+			pstmt.setString(3, b.getBcontent());
+			pstmt.setInt(4, b.getFaqtype());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new NoticeException("[DAO] : " + e.getMessage());
+	
+		} finally {
+			close(pstmt);
+			
+		}
+		
+		return result;
 	}
 
 }

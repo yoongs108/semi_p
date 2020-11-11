@@ -40,13 +40,13 @@ public class HelpFAQ extends HttpServlet {
 		ArrayList<Board> list5 = new ArrayList<Board>();
 		
 		for ( Board b : list) {
-			if (b.getFaqType() == 1) {
+			if (b.getFaqtype() == 1) {
 				list1.add(b);
-			} else if (b.getFaqType() == 2) {
+			} else if (b.getFaqtype() == 2) {
 				list2.add(b);
-			} else if (b.getFaqType() == 3) {
+			} else if (b.getFaqtype() == 3) {
 				list3.add(b);
-			} else if (b.getFaqType() == 4) {
+			} else if (b.getFaqtype() == 4) {
 				list4.add(b);
 			} else {
 				list5.add(b);
