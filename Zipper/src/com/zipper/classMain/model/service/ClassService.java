@@ -39,7 +39,8 @@ public class ClassService {
       
       return cList;
    }
-
+   
+   // 수강중인 페이지 조회용
    public ArrayList<Payment> classingList(int mno) {
       
       con = getConnection();
@@ -50,6 +51,7 @@ public class ClassService {
       
       return list;
    }
+   
    
    public int insertWrite(ClassList cl, Attachment at) {
       con = getConnection();

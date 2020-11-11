@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ page import="java.util.*, com.zipper.video.model.vo.*"%>
 <%
-	Video v = (Video)session.getAttribute("video");
+	Video v = (Video)request.getAttribute("video");
 %>
 <!DOCTYPE html>
 <html>
@@ -70,7 +70,7 @@
 
 		<div>
 			<div class="videoArea">
-				<video src="<%= request.getContextPath() %>/resources/images/fileUpload/video/<%= v.getVideo() %> controls type="video/mp4" >저희 사이트는 크롬에 최적화 되어있습니다\^ㅇ^/</video>
+				<video src="<%= request.getContextPath() %>/resources/images/fileUpload/video/<%= v.getVideo() %>" controls type="video/mp4" >저희 사이트는 크롬에 최적화 되어있습니다\^ㅇ^/</video>
 			</div>
 			<div class="textArea">
 				<p style="font-size:18px; font-weight : bold;"><%= v.getVname() %></p>

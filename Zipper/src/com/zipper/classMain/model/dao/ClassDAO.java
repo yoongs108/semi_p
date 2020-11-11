@@ -15,7 +15,7 @@ import com.zipper.board.model.vo.Attachment;
 
 import com.zipper.board.model.vo.Board;
 import com.zipper.classMain.model.vo.ClassList;
-import com.zipper.classMain.model.vo.Video;
+import com.zipper.video.model.vo.Video;
 import com.zipper.member.model.vo.Member;
 import com.zipper.payment.model.vo.Payment;
 

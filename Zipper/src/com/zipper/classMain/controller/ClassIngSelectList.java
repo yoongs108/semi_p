@@ -41,7 +41,7 @@ public class ClassIngSelectList extends HttpServlet {
 		
 		if(list != null) {
 			request.setAttribute("cList", list);
-			page = "views/myPage/classIng.jsp";
+			page = "views/myPage/classIngList.jsp";
 		}else {
 			request.setAttribute("error-msg", "수강중 클래스 조회 실패");
 			page = "views/common/errorPage.jsp";
