@@ -1,6 +1,7 @@
 package com.zipper.notice.dao;
 
 import static com.zipper.common.JDBCTemplate.close;
+import static com.kh.jsp.common.JDBCTemplate.close;
 import static com.zipper.common.JDBCTemplate.*;
 
 import java.io.FileNotFoundException;
@@ -172,13 +173,14 @@ public class NoticeDAO {
 	}
 
 	public ArrayList<Board> selectList(Connection con, int currentPage, int limit) {
+		
 		ArrayList<Board> list = new ArrayList<>();
+		
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 
 		String sql = prop.getProperty("SelectList");
 
-		// pstmt = con.prepareStatement(sql); // try/catch 처리ok
 		try {
 			pstmt = con.prepareStatement(sql);
 
@@ -196,16 +198,16 @@ public class NoticeDAO {
 
 				Board b = new Board();
 
-				b.setBno(rset.getInt("BNO"));
+				b.setBno(rset.getInt("bno"));
 				b.setBtype(rset.getInt("btype"));
-				b.setMno(rset.getInt("MNO"));
-				b.setBtitle(rset.getString(4));
+				b.setMno(rset.getInt("mno"));
+				b.setBtitle(rset.getString("btitle"));
 				b.setBcontent(rset.getString("bcontent"));
-				b.setBview(rset.getInt("bview"));
-				b.setBdate(rset.getDate("bdate"));
-				b.setBstatus(rset.getString("bstatus"));
-				b.setCno(rset.getInt("cno"));
-				b.setFaqtype(rset.getInt("faqtype"));
+//				b.setBview(rset.getInt("bview"));
+//				b.setBdate(rset.getDate("bdate"));
+//				b.setBstatus(rset.getString("bstatus"));
+//				b.setCno(rset.getInt("cno"));
+//				b.setFaqtype(rset.getInt("faqtype"));
 				
 				list.add(b);
 			}
@@ -248,6 +250,37 @@ public class NoticeDAO {
 			close(pstmt);
 		}
 
+		return result;
+	}
+
+	public int getListCount(Connection con) {
+		
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("listCount");
+		
+		System.out.println(sql);
+		
+		try {
+			pstmt = con.prepareStatement(sql);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				
+				result = rset.getInt(1);
+			}			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
 		return result;
 	}
 		
