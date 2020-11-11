@@ -12,7 +12,7 @@
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <title>1:1 문의</title>
 <style>
-   h1{
+   section h1{
    	  padding-left : 30px;
    }
    
@@ -44,7 +44,7 @@
 	  margin : 30px 30px;
 	}
 	
-	table tr{
+	section table tr{
 	  height:40px; 
 	}
 	
@@ -90,9 +90,10 @@
 					
 					<%-- >d=, title 클릭 시 상세페이지로 넘어감 --%>
 					<th>
-						<input type="checkbox" id="check" name="check">
+						<input type="checkbox" id="check" name="check" 
+													<%= c.getQstate().equals("Y") ? "checked='checked'" : "" %>>
 					</th>
-					<td class="inquireName" width="80%"> <%=c.getQtitle()%></a> </td>
+					<td class="inquireName" width="80%"> <%=c.getQtitle()%> </td>
 					<td name="date" width="20%"><%=c.getQdate()%></td>
 				</tr>
 			<%
@@ -116,7 +117,7 @@
     
  	<script>
  	$(function(){
-		$('tr').mouseenter(function(){
+		$('section').find('tr').mouseenter(function(){
 			$(this).css({"background" : "#87CEFA", "opacity" : "1.0"});
 		}).mouseout(function(){
 			$(this).css({"background" : "none"});
@@ -125,12 +126,6 @@
 			console.log("qno"+qno);
 			location.href = "<%= request.getContextPath() %>/selectOne.qo?qno="+qno;
 		});
-		
-	if($("#check").prop("checked")){
-		$("#check").val('Y');
-	}else{
-		$("#check").val('N');
-	}
 	});
  	</script>
  	</section>

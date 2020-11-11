@@ -5,11 +5,9 @@ import static com.zipper.common.JDBCTemplate.*;
 import java.sql.Connection;
 import java.util.ArrayList;
 
-import com.zipper.board.model.vo.Board;
+import com.zipper.common.exception.QuestionException;
 import com.zipper.question.model.dao.QuestionDAO;
 import com.zipper.question.model.vo.Question;
-
-import java.sql.Connection;
 
 public class QuestionService {
 	private Connection con;
@@ -34,6 +32,19 @@ public Question selectOne(int qno) {
 	close(con);
 	
 	return qs;
+}
+
+public int insertQuestion(Question q) throws QuestionException {
+	con = getConnection();
+	
+	int result = qDAO.insertQuestion(con, q);
+	
+	if(result > 0) commit(con);
+	else rollback(con);
+	
+	close(con);
+	
+	return result;
 }
 
 }

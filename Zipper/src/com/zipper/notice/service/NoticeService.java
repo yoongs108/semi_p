@@ -7,7 +7,6 @@ import static com.zipper.common.JDBCTemplate.rollback;
 import static com.zipper.common.JDBCTemplate.close;
 import static com.zipper.common.JDBCTemplate.close;
 import static com.zipper.common.JDBCTemplate.getConnection;
-
 import static com.zipper.common.JDBCTemplate.*;
 
 import java.sql.Connection;
@@ -90,7 +89,33 @@ public int deleteNotice(int bno) throws NoticeException {
 	close(con);
 	return result;
 }
+
+public ArrayList<Board> selectList(int currentPage, int limit) {
+	con = getConnection();
 	
+	ArrayList<Board> list = nDAO.selectList(con, currentPage, limit); // create method처리ok
+	
+	close(con);
+	
+	return list;
+
+}
+
+
+public int updateView(int bno, String btitle, String bcontent) throws NoticeException {
+	con = getConnection();
+	
+	int result = nDAO.updateView(con, bno, btitle, bcontent);
+	
+	if(result > 0) {
+		commit(con);
+	} else {
+		rollback(con);
+	}
+	
+	close(con);
+	return result;
+}
 }
 
 

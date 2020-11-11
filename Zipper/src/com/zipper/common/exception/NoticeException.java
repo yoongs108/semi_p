@@ -6,8 +6,8 @@ public class NoticeException extends Exception {
 		super();
 	}
 
-	public NoticeException(String arg0) {
-		super(arg0);
+	public NoticeException(String msg) {
+		super(msg);
 	}
 
 }

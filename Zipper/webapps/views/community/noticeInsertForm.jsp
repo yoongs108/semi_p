@@ -13,23 +13,19 @@
 		margin-right: auto;
 		margin-left: auto;
 	}
-
+	.table2 {
+		margin-top: 25px;
+	}
 	/*웹 제목 스타일*/
 	#title {
 		text-align: center;
 	}
 	
 	/* 제목과 작성일 */
-	.table2 tr {
-		padding: 20px 0 20px 5px ;
-		font-weight: bold;
-		border-bottom: 1px solid black;
-		
-		
-	}
 	.table2 tr,
 	.table2 td {
-		padding: 20px 0 20px 5px ;
+	
+		padding: 25px 0 20px 5px ;
 		font-weight: bold;
 		border-bottom: 1px solid black;
 	}
@@ -41,8 +37,8 @@
 		width : 100px;
 	}
 	#btn{
-		width : 80px;
-		height : 30px;
+		width : 100px;
+		height : 50px;
 		color : white;
 		background-color : black;
 		border : none;	
@@ -72,8 +68,8 @@
 		<div id="textarea" align = "center">
 		
 			<form action="<%=request.getContextPath()%>/nInsert.no" method="post">
-			
-               			<table class = "table2" style="padding-top:10px; width : 85%;">
+					<div class = "table2" >
+               			<table style="padding-top:10px; width : 85%;">
                			  
 	                        <tr>
 	                        	<td style="padding-left: 20px;" name="title">제목</td>
@@ -82,17 +78,17 @@
 	                        			size=100 placeholder ="  제목을 입력해 주세요.">
 	                        	</td>
 	                        	<td>
-	                        		<td style="padding: 10px;" name="date" >작성일</td>
-									<td><input type="text" readonly="readonly" name="date" id="date" ></td>
+	                        		작성일 
+									<input type="text" readonly="readonly" name="date" id="date">
 	                        	</td>
 	                        </tr>
 	                        <tr>
-	                        	<td colspan="2">
+	                        	<td colspan="3">
 	                        		<textarea name = content cols=105 rows=15></textarea>
 	                        	</td>
 	                        </tr>
                         </table>
-
+					</div>
         	<div align="center" style="margin-top:50px;margin-bottom:80px;">
 			<input type="submit" value="작성" id="btn"> 
 			&nbsp;&nbsp;&nbsp;&nbsp;
@@ -107,16 +103,22 @@
 		         	//document.write(today)
 		         	//date.innerHTML += date + "<br>";
 		           // div3.innerHTML += date1 + "<br>";
-						var st_date = new Date().toISOString().substr(0, 10).replace('T', ' ');
-						// alert(st_date);
-						$('#date').val(st_date);
+		           //.toISOString().substr(0, 10).replace('T', ' ');
+						//var st_date = new Date().toISOString().substr(0, 10).replace('T', ' ');
+						//alert(st_date);
+						var today = new Date();
+						var dd = today.getDate();
+						var mm = today.getMonth()+1; //January is 0!
+						var yyyy = today.getFullYear();
+						if(dd<10) {
+  						   dd='0'+dd
+						} 
+						if(mm<10) {
+						   mm='0'+mm
+						} 
+						today = yyyy+'-' + mm+'-'+dd;
+						$('#date').val(today);
 					 }
-					 <%--
-					 function cancle(){
-						 alert("실행");
-						 location.href = "<%= request.getContextPath() %>/selectList.no?";
-					 }
-					 --%>
 				</script>
         </form>
         

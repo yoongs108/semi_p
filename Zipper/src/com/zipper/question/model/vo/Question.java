@@ -1,6 +1,6 @@
 package com.zipper.question.model.vo;
 
-import java.util.Date;
+import java.sql.Date;
 
 public class Question {
 
