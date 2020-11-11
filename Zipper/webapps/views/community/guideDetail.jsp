@@ -17,7 +17,6 @@
 }
 
 
-
 /* Content */
 .content {
   background-color: white;
