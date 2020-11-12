@@ -68,7 +68,7 @@ public class ClassDAO {
 				classList.setPrice(rset.getInt("price"));
 				classList.setCintro(rset.getString("cintro"));
 				classList.setCourse(rset.getString("course"));
-				classList.setFileNewName(rset.getString("FILE_NEW_NAME"));
+				classList.setFileNewName(rset.getString("file_new_name"));
 				classList.setKdetail(rset.getString("kdetail"));
 				classList.setTname(rset.getString("tname"));
 			}
@@ -160,7 +160,7 @@ public class ClassDAO {
 				cl.setCno(rset.getInt("cno"));
 				cl.setCname(rset.getString("cname"));
 				cl.setPrice(rset.getInt("price"));
-				cl.setFileNewName(rset.getString("FILE_NEW_NAME")); // 클래스 사진
+				cl.setFileNewName(rset.getString("file_new_name")); // 클래스 사진
 
 				list.add(cl);
 			}
@@ -303,7 +303,7 @@ public class ClassDAO {
 			while (rset.next()) {
 				Payment pm = new Payment();
 
-				pm.setFileNewName(rset.getString("FILE_NEW_NAME"));
+				pm.setFileNewName(rset.getString("file_new_name"));
 				pm.setPdate(rset.getDate("pdate"));
 				pm.setCname(rset.getString("cname"));
 				pm.setTotal(rset.getInt("price"));

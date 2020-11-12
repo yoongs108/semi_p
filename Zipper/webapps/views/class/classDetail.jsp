@@ -222,7 +222,7 @@
 		
 		// 클래스메인 페이지
 		function goClass() {
-			location.href = "<%= request.getContextPath() %>/classFromMain.cfm";
+			location.href = "<%= request.getContextPath() %>/selectList.cl";
 		};
 		
 		

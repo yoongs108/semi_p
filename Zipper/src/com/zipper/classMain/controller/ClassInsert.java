@@ -23,14 +23,14 @@ import com.zipper.common.MyRenamePolicy;
 /**
  * Servlet implementation class ClassWrite
  */
-@WebServlet("/classWrite.cw")
-public class ClassWrite extends HttpServlet {
+@WebServlet("/classInsert.cl")
+public class ClassInsert extends HttpServlet {
 	private static final long serialVersionUID = 11111111111111111L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ClassWrite() {
+    public ClassInsert() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -99,7 +99,7 @@ public class ClassWrite extends HttpServlet {
 			
 			int result = cs.insertWrite(cl, at);
 			if(result > 0) { // 저장이 잘 됐다면
-				response.sendRedirect("classFromMain.cfm");
+				response.sendRedirect("selectList.cl");
 			} else {
 				request.setAttribute("exception", new Exception("사진 추가 에러"));
 				request.setAttribute("error-msg", "사진 추가에 실패하였습니다 관지라에게 문의");

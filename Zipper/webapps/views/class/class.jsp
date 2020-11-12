@@ -206,26 +206,26 @@
 	            	<div class="carousel_warp">
 		                <div class="carousel">
 		               		<div class="cover"></div>
-		                    <img class="carousel_img" src="<%=request.getContextPath()%>/resources/images/fileUpload/m.jpg" />
-		                    <div class="carousel_txt"><h2>마크라메, <br />어디까지 해봤니?</h2></div>
+		                    <img class="carousel_img" src="<%=request.getContextPath()%>/resources/images/fileUpload/1.jpg" />
+		                    <div class="carousel_txt"><h2>산뜻한 침실<br />여기가 집안이야? 정원이야?</h2></div>
 		                </div>
 	                
 	                
 		                <div class="carousel">
 		                	<div class="cover"></div>
-		                    <img class="carousel_img" src="<%=request.getContextPath()%>/resources/images/fileUpload/t.jpg" />
-		                    <div class="carousel_txt"><h2>너 시트지 붙여? <br /> 난 타일 붙여!</h2></div>
+		                    <img class="carousel_img" src="<%=request.getContextPath()%>/resources/images/fileUpload/3.jpg" />
+		                    <div class="carousel_txt"><h2>혼자만의 시간 <br />실내외 어디서나 편안하게</h2></div>
 		                </div>
 	                
 		                <div class="carousel">
 		                	<div class="cover"></div>
-		                    <img class="carousel_img" src="<%=request.getContextPath()%>/resources/images/fileUpload/h.jpg" />
-		                    <div class="carousel_txt"><h2>드레스룸을 쇼룸처럼! <br />분위기 끝판왕 행거 만들기</h2> </div>
+		                    <img class="carousel_img" src="<%=request.getContextPath()%>/resources/images/fileUpload/5.jpg" />
+		                    <div class="carousel_txt"><h2>재미있는 DIY <br />벽 수납공간 만들기</h2> </div>
 		                </div>
 	                	<div class="carousel">
 		               		<div class="cover"></div>
-		                    <img class="carousel_img" src="<%=request.getContextPath()%>/resources/images/fileUpload/m.jpg" />
-		                    <div class="carousel_txt"><h2>마크라메, <br />어디까지 해봤니?</h2></div>
+		                    <img class="carousel_img" src="<%=request.getContextPath()%>/resources/images/fileUpload/4.jpg" />
+		                    <div class="carousel_txt"><h2>손 쉽게 연출하는 <br />가을 분위기</h2></div>
 		                </div>
 	                
 		                <div class="carousel">
@@ -274,7 +274,7 @@
 		<td>
 			<% if(m != null && m.getMid().equals("admin")) { %>
 				
-				<button class="write" style="color : black;" onclick="classWriter()">작성하기</button>
+				<button class="write" style="color : black;" onclick="classInsert()">작성하기</button>
 				
 			<% } %>	
 			
@@ -311,8 +311,8 @@
 	<script>
 	
 		// 글쓰기페이지
-		function classWriter() {
-			location.href = "<%= request.getContextPath() %>/views/writer/classWrite.jsp";
+		function classInsert() {
+			location.href = "<%= request.getContextPath() %>/views/writer/classInsert.jsp";
 		}
 	
 	
