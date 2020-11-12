@@ -148,20 +148,25 @@ section {
       margin-left:auto;
       margin-right:auto;
    }
-   
-   .title{
-		height : 30px;
+   .top {
+        height :50px;
+		top:0px;
+		width: 1024px; 	
+	}   
+   .title {
+		text-align: center;
 	}
 		
 	#back{
-		position : absolute;
-		top : 100px;
-		left : 950px;
-		height : 80px;
-		width: 80px;
-		position:relative;
-		top:-210%;
+	position : absolute;
+	top : 100px;
+	left : 950px;
+	height : 80px;
+	width: 80px;
+	position:relative;
+	top:-110%;
 	}
+	
 	
 	#back:hover{
 		cursor: pointer;
@@ -169,33 +174,20 @@ section {
 	}
   	
 </style>
-<script>
-	function moveMain() {
-		$(this).on('click', function() {
-			location.href = "myPageMain.jsp";
-		});
-	}
-	
-</script>
+
 </head>
 <body>
+<%@ include file="/views/common/header.jsp" %>
 <section>
-	<%@ include file="/views/common/header.jsp" %>
-		
-	<div style="border-bottom: 1px solid black;">
 	
-		<div class="title">
-		<h2 id="title">ZIPPER GUIDE</h2>
 		
+	<div class="top" style="border-bottom: 1px solid black;">
+			
+		<h2 class="title" align="center">ZIPPER GUIDE</h2>				
 		<!-- 뒤로가기 -->
 		<img src="<%= request.getContextPath() %>/resources/images/common/backButton.png" 
 			alt="class1" id="back" onclick="goGuideMain()"> 
-
-		</div>
-		
-
 	</div>
-	
 	
 	<!-- !PAGE CONTENT! -->
 	
@@ -283,6 +275,10 @@ section {
  	
  	<%@ include file="/views/common/footer.jsp" %>
  	<script>
+ 		function goGuideMain() { 
+		location.href = '<%= request.getContextPath() %>/index.jsp'; 
+		}
+ 		
  		$(function(){
 			$('.w3-quarter').click(function(){
 				var bno = $(this).find('input').val();
