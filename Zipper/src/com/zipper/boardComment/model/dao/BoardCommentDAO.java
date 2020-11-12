@@ -48,6 +48,7 @@ public class BoardCommentDAO {
 		
 		String sql = prop.getProperty("selectList");
 		
+		System.out.println(sql);
 		try {
 			pstmt = con.prepareStatement(sql);
 			
@@ -59,6 +60,7 @@ public class BoardCommentDAO {
 				BoardComment bco = new BoardComment();
 				
 				bco.setComNo( 	  	rset.getInt("COM_NO") );
+				bco.setMno(			rset.getInt("mno"));
 				bco.setBno(			bno);
 				bco.setMnick(		rset.getString("MNICK"));
 				bco.setProfile(		rset.getString("PROFILE"));
@@ -98,6 +100,31 @@ public class BoardCommentDAO {
 			pstmt.setString(4, "Y");
 						
 			pstmt.setString(5, comment.getComContent());
+			
+			result = pstmt.executeUpdate();			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	public int deleteComment(Connection con, int comNo) {
+
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("deleteComment");
+		
+		System.out.println(sql);
+		
+		try {
+			pstmt = con.prepareStatement(sql);
+		
+			pstmt.setInt(1, comNo);
 			
 			result = pstmt.executeUpdate();			
 			

@@ -1,4 +1,4 @@
-package com.kh.jsp.boardComment.controller;
+package com.zipper.boardComment.controller;
 
 import java.io.IOException;
 
@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.kh.jsp.boardComment.model.service.BoardCommentService;
+import com.zipper.boardComment.model.service.BoardCommentService;
 
 /**
  * Servlet implementation class CommentDelete
@@ -29,15 +29,16 @@ public class CommentDelete extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int cno = Integer.parseInt(request.getParameter("cno"));
 		int bno = Integer.parseInt(request.getParameter("bno"));
+		int comNo = Integer.parseInt(request.getParameter("comNo"));
 		
-		int result = new BoardCommentService().deleteComment(cno);  //임포트. cno의 번호를 넘겨줌
-		
+		int result = new BoardCommentService().deleteComment(comNo);  //�엫�룷�듃. cno�쓽 踰덊샇瑜� �꽆寃⑥쨲
+		System.out.println(bno+comNo);
 		if ( result > 0) {
-			response.sendRedirect("selectOne.bo?bno=" + bno);
+			response.sendRedirect("zippopSelectOne.zp?bno=" + bno);
 		} else {
-			// 에러 메시지
+			// �뿉�윭 硫붿떆吏�
+			
 		}
 		
 	}

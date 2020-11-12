@@ -5,7 +5,10 @@ import static com.zipper.common.JDBCTemplate.*;
 import java.sql.Connection;
 import java.util.ArrayList;
 
+import com.zipper.board.model.vo.Attachment;
 import com.zipper.board.model.vo.Board;
+import com.zipper.common.exception.BoardException;
+import com.zipper.common.exception.GuideException;
 import com.zipper.guide.model.DAO.GuideDAO;
 
 public class GuideService {
@@ -44,6 +47,37 @@ public class GuideService {
 		con = getConnection();
 		
 		int result = gDAO.getListCount(con);
+		
+		close(con);
+		
+		return result;
+	}
+
+	// 가이드 글 작성
+	public int insertGuide(Board b, Attachment at) throws GuideException {
+		con = getConnection();
+		
+		int result = 0;
+		
+		int result1 = gDAO.insertGuide(con, b);
+		
+		System.out.println(result1);
+		
+		if(result1 > 0) {
+			int bno = gDAO.getCurrentBno(con);
+			at.setBno(bno);
+		}
+		
+		int result2 = gDAO.insertAttachment(con, at);
+		
+		System.out.println(result2);
+		
+		if(result1 > 0 && result2 > 0) {
+			commit(con);
+			result = 1;
+		} else {
+			rollback(con);
+		}
 		
 		close(con);
 		

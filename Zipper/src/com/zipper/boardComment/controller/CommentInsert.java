@@ -32,8 +32,8 @@ public class CommentInsert extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("aaa");
-		// 작성자, 게시글 번호, 댓글 내용, 참조하는 댓글 번호, 댓글레벨
+		// System.out.println("aaa");
+		// �옉�꽦�옄, 寃뚯떆湲� 踰덊샇, �뙎湲� �궡�슜, 李몄“�븯�뒗 �뙎湲� 踰덊샇, �뙎湲��젅踰�
 		HttpSession session = request.getSession();
 	    Member m = (Member)session.getAttribute("member");
 	    
@@ -48,7 +48,7 @@ public class CommentInsert extends HttpServlet {
 		if( result > 0 ) {
 			response.sendRedirect("zippopSelectOne.zp?bno="+ bno);
 		} else {
-			// 에러 페이지 작성 . . . 생략
+			// �뿉�윭 �럹�씠吏� �옉�꽦 . . . �깮�왂
 		}
 		
 	}

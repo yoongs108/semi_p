@@ -134,7 +134,7 @@
 		<div class="page_wrap">
 			<div class="left_page">
 			
-				<div><img src="<%= request.getContextPath() %>/resources/images/fileUpload/<%= b.getBoardfile() %>" alt="" width="650px" height="500px"/></div>
+				<div><img src="<%= request.getContextPath() %>/resources/images/zippopUploadFiles/<%= b.getBoardfile() %>" alt="" width="650px" height="500px"/></div>
 				<!--<h3><%= b.getBtitle() %></h3>  --> 
 										 	<br />
 										 	<br />
@@ -161,10 +161,16 @@
 				<% if (clist != null) { %>
 					<% for(BoardComment bco : clist) { %>
 					<div class="comment">
+						
 						<span class="thum"><img src="<%= request.getContextPath() %>/resources/images/profile/<%= bco.getProfile() %>" alt="" width="650px" height="500px"/></span>
 						<span class="nick"><%= bco.getMnick() %></span>
 						<span class="content"><%= bco.getComContent() %></span>
 						<span class="ico"><img src="<%= request.getContextPath() %>/resources/images/fileUpload/" alt="" width="650px" height="500px"/></span>
+						<% if( m.getMno() == bco.getMno() ) { %>
+						<button type="button" onclick="location.href='<%= request.getContextPath() %>/deleteComment.co?bno=<%=b.getBno()%>&comNo=<%=bco.getComNo()%>'">댓글삭제</button>
+						<% } else { %>
+						<button type="button" disabled>댓글삭제</button>
+						<% } %>
 					</div>
 					<% } %>
 				<% } %>
@@ -194,6 +200,7 @@
 					<input type="text" name="comContent" class="cmtForm">
 					<input type="hidden" name="bno" value="<%=b.getBno() %>" />				
 					<button type="submit">댓글등록</button>
+					
 					</form>
 						
 					</div>
@@ -213,7 +220,7 @@
 
 	<script>
 	function goZippopMain() {
-		location.href = "<%= request.getContextPath() %>/zippopList.zp";
+		location.href = "<%= request.getContextPath() %>/zippop.zp";
 	};
 	</script>	
 	

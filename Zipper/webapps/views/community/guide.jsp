@@ -223,9 +223,9 @@ section {
 			
 		</li>
 	</ul>
-	<% if(m != null && m.getMgrd().equals("A")) { %>       
+	<% if(m != null && m.getMgrd().equals("A")) { %>   <!-- 회원등급이 'A'(관리자) 일 때, -->       
 				
-				<button onclick="alert('작성하기 폼으로 이동')">작성하기</button>
+				<button onclick="location.href='<%= request.getContextPath() %>/views/writer/guideWriter.jsp'">작성하기</button>
 				
 			<% } %>
 	</div>
@@ -236,7 +236,7 @@ section {
     <% for(Board board : list) { %>
 	    <div class="w3-quarter" >
 		  <input type="hidden" value="<%= board.getBno() %>"/>
-	      <img src="<%= request.getContextPath() %>/resources/images/uploadFiles/<%= board.getBoardfile() %>" style="width:258px;height:388px;" id="guide1" >
+	      <img src="<%= request.getContextPath() %>/resources/images/fileUpload/<%= board.getBoardfile() %>" style="width:258px;height:388px;" id="guide1" >
 	      <div class="bookmark">     
 	      </div>
 	      <h3><%= board.getBtitle() %></h3>
