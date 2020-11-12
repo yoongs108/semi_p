@@ -52,7 +52,7 @@
 					<td><%= user.getMno() %></td>
 					<td>
 					<input type="radio" name="<%= user.getMno() %>" value="A" <%= user.getMgrd().equals("A") ? "checked='checked'" : "" %> onclick="updateGrd(this)"/>A
-					<input type="radio" name="<%= user.getMno() %>" value="M" <%= user.getMgrd().equals("M") ? "checked='checked'" : "" %> onclick="updateGrd(this)"/>M
+		 			<input type="radio" name="<%= user.getMno() %>" value="M" <%= user.getMgrd().equals("M") ? "checked='checked'" : "" %> onclick="updateGrd(this)"/>M
 					</td>
 					<td><%= user.getMid() %></td>
 					<td><%= user.getMnick() %></td>
