@@ -166,7 +166,7 @@
 </head>
 <body>
  	<%@ include file="/views/common/header.jsp" %>
- 	<%-- if (m.getMno() > 0 || m.getMid() == "") { --%>
+ 
  	<section>
  	<div  style="border-bottom:1px solid black">
  		<h1 align="center" onclick="location.href='<%=request.getContextPath()%>/helpfaq.fq'">FAQ page</h1>
@@ -189,15 +189,11 @@
  		<button onclick="fnMove(5)">글쓰기</button>
  	</div>
  	
-
  		<% if (m != null && m.getMgrd().equals("A")) { %>
 			<div align="right" id="adminBtn">
 				<button onclick="complete();">수정하기</button>
 			</div>
 		<% } %>
- 	
- 	
- 	
  	<hr />
 
  	<!-- 하단 내용영역 (아코디언방식 사용)  / (CSS 작업 필요)-->
