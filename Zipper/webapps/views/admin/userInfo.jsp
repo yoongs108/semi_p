@@ -45,8 +45,8 @@
 				<tr>
 					<td><%= user.getMno() %></td>
 					<td>
-					<input type="radio" name="mgrd<%= user.getMno() %>" value="A" <%= user.getMgrd().equals("A") ? "checked='checked'" : "" %>/>A
-					<input type="radio" name="mgrd<%= user.getMno() %>" value="M" <%= user.getMgrd().equals("M") ? "checked='checked'" : "" %>/>M
+					<input type="radio" name="<%= user.getMno() %>" value="A" <%= user.getMgrd().equals("A") ? "checked='checked'" : "" %> onclick="updateGrd(this)"/>A
+					<input type="radio" name="<%= user.getMno() %>" value="M" <%= user.getMgrd().equals("M") ? "checked='checked'" : "" %> onclick="updateGrd(this)"/>M
 					</td>
 					<td><%= user.getMid() %></td>
 					<td><%= user.getMnick() %></td>
@@ -67,5 +67,29 @@
 		
 		request.getRequestDispatcher("/views/common/errorPage.jsp").forward(request, response);
 	} %>
+	
+	<script>
+		// 회원 등급 변경
+		function updateGrd(obj) {
+			$.ajax({
+				url : '<%= request.getContextPath() %>/updateGrd.ad',
+				type : 'post',
+				data : { 
+						 mno : $(obj).prop('name'),
+					     mgrd : $(obj).val()
+						},
+				success : function(data){
+					// console.log(data);
+
+					alert("수정되었습니다.");
+					location.href = "<%= request.getContextPath() %>/uSelectList.ad";
+
+				}, error : function(){
+					alert("수정 실패!");
+					location.href = "<%= request.getContextPath() %>/uSelectList.ad";
+				}
+			});
+		}
+	</script>
 </body>
 </html>

@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.admin.userInfo.model.service.UsetInfoService;
+import com.admin.userInfo.model.service.UserInfoService;
 import com.zipper.member.model.vo.Member;
 
 /**
@@ -34,7 +34,7 @@ public class UserInfoSelectList extends HttpServlet {
 		
 		ArrayList<Member> list = new ArrayList<>();
 		
-		list = new UsetInfoService().selectList();
+		list = new UserInfoService().selectList();
 		
 		String page ="";
 		

@@ -12,6 +12,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Properties;
 
+import com.zipper.common.exception.MemberException;
 import com.zipper.member.model.vo.Member;
 
 public class UserInfoDAO {
@@ -82,6 +83,34 @@ public class UserInfoDAO {
 		}
 		
 		return list;
+	}
+
+	public int updateUserInfo(Connection con, Member m) throws MemberException {
+
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("updateUserInfo");
+		
+		System.out.println(sql);
+		
+		try {
+			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setString(1, m.getMgrd());
+			pstmt.setInt(2, m.getMno());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new MemberException("[DAO] : " + e.getMessage());
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
 	}
 
 }
