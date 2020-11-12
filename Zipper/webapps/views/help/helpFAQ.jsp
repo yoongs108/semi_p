@@ -114,21 +114,27 @@
 		cursor:pointer;
 	}
 	
-	#selectDiv>button {
+	#selectDiv>button, #adminBtn>button {
 		color : white;
 		background-color : black;
 		border : none;
 	}
 	
-	#selectDiv>button:hover {
+	#selectDiv>button:hover, #adminBtn>button:hover {
 		background-color: #555;
 		cursor: pointer;
 	}
+	
+	#adminBtn>button{
+		width:80px;
+		height: 50px;
+		margin-left:auto;
+	}
+	
 </style>
 <script>
 	document.getElementsByClassName('accordian');
 
-	
 	function fnMove(seq) {
     	var offset = $(".tabcontent" + (seq + 1)).offset();
     	var winH = $(".tabcontent" + (seq+1)).height();
@@ -160,8 +166,11 @@
 </head>
 <body>
  	<%@ include file="/views/common/header.jsp" %>
+ 	<%-- if (m.getMno() > 0 || m.getMid() == "") { --%>
  	<section>
- 	<h1 align="center" onclick="location.href='<%=request.getContextPath()%>/helpfaq.fq'">FAQ page</h1>
+ 	<div  style="border-bottom:1px solid black">
+ 		<h1 align="center" onclick="location.href='<%=request.getContextPath()%>/helpfaq.fq'">FAQ page</h1>
+ 	</div>
 
  	<!-- 검색 영역  / (CSS 작업 필요, 링크 연결용 코드 필요) -->
  	<div align="center" id="searchDiv">
@@ -180,12 +189,13 @@
  		<button onclick="fnMove(5)">글쓰기</button>
  	</div>
  	
+
+ 		<% if (m != null && m.getMgrd().equals("A")) { %>
+			<div align="right" id="adminBtn">
+				<button onclick="complete();">수정하기</button>
+			</div>
+		<% } %>
  	
- 	<% if (m.getMgrd().contains("A")) { %>
-		<div align="right" id="adminBtn">
-			<button onclick="complete();">수정하기</button>
-		</div>
- 	<% } %>
  	
  	
  	<hr />
@@ -246,6 +256,7 @@
  		<div class="tabcontent6"></div>
  	</div>
 
+	
  	</section>
  	
  	<%@ include file="/views/common/footer.jsp" %>

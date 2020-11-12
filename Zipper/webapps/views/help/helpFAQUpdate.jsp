@@ -118,6 +118,22 @@
 		color:red;
 	}
 	
+	#selectDiv>button, #adminBtn>button {
+		color : white;
+		background-color : black;
+		border : none;
+	}
+	
+	#selectDiv>button:hover, #adminBtn>button:hover {
+		background-color: #555;
+		cursor: pointer;
+	}
+	
+	#adminBtn>button{
+		width:80px;
+		height: 50px;
+		margin-left:auto;
+	}
 </style>
 <script>
 	document.getElementsByClassName('accordian');

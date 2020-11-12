@@ -94,14 +94,15 @@
 				</tr>
 			</table>
 			
+			
 			<div class="fileArea" id="fileArea">
 				<input type="file" name="zippopImg" id="zippopImg" onchange="loadImg(this);" />
 			</div>
-			
+			</form>
 			<div align="center" style="margin-top:70px; margin-bottom:80px;">
 			<button type="submit" id="btn">작성</button>
 			&nbsp;&nbsp;&nbsp;&nbsp;
-			<button onclick="back();" id="btn">취소</button>
+			<button onclick="history.go(-1)" id="btn">취소</button>
 			</div>
         		
        		<script>
@@ -135,7 +136,7 @@
 				}
 				
 			</script>
-		</form>
+		
 	</section>
 
 </body>
