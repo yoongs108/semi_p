@@ -108,9 +108,7 @@
        			
 
 				function back() {
-					$(this).on('click', function() {
 						history.go(-1);
-					});
 				}
 				
 				// 사진 미리보기 기능

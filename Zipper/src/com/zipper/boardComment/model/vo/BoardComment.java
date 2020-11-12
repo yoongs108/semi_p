@@ -37,6 +37,18 @@ public class BoardComment implements Serializable {
 		this.profile = profile;
 		this.mnick = mnick;
 	}
+	
+	
+	
+
+	public BoardComment(int bno, int mno, String comContent, String profile, String mnick) {
+		super();
+		this.bno = bno;
+		this.mno = mno;
+		this.comContent = comContent;
+		this.profile = profile;
+		this.mnick = mnick;
+	}
 
 	@Override
 	public String toString() {
@@ -117,4 +129,4 @@ public class BoardComment implements Serializable {
 		this.mnick = mnick;
 	}
 
-}
+} 

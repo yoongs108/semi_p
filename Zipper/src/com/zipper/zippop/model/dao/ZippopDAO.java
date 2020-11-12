@@ -2,6 +2,7 @@ package com.zipper.zippop.model.dao;
 
 import static com.zipper.common.JDBCTemplate.close;
 
+
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
@@ -201,7 +202,8 @@ public class ZippopDAO {
 		            b.setBcontent(rset.getString("bcontent"));
 		            b.setBwriter(rset.getString("mnick"));
 		            b.setBdate(rset.getDate("bdate"));
-		            b.setBoardfile(rset.getString("file_new_name"));    								
+		            b.setBoardfile(rset.getString("file_new_name"));
+		            b.setMno(rset.getInt("mno"));
 			}
 			
 		} catch (SQLException e) {
@@ -215,4 +217,53 @@ public class ZippopDAO {
 				
 		return b;
 	}
+
+
+	public int deleteZipAtt(Connection con, int bno) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("deleteZipAtt");
+		
+		try {
+			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setInt(1, bno);
+			result = pstmt.executeUpdate();
+			System.out.println("------------------" + result);
+			
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		
+		}
+				
+		return result;
+	}
+	
+	public int deleteZippop(Connection con, int bno) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("deleteZippop");
+		
+		try {
+			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setInt(1, bno);
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		
+		}
+				
+		return result;
+	}
+	
 }

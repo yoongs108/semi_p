@@ -128,7 +128,7 @@
 		<div class="top" style=" top: 100; background-color: white; border-bottom: 1px solid black;">
 			<h2 id="title">ZIPPOP</h2>
 			<img src="<%= request.getContextPath() %>/resources/images/common/backButton.png" 
-				 id="back" onclick="goZippopMain()"> 
+				alt="class1" id="back" onclick="goClass()"> 
 		</div>
  		
 		<div class="page_wrap">
@@ -151,10 +151,9 @@
 		
 				<h3><%= b.getBwriter() %></h3> <br /><br /> &nbsp;&nbsp;&nbsp;
 					
-					<% if(m != null && m.getMno() == b.getMno()){ %>
+					<% if(m != null && m.getMid().equals(b.getUserId())){ %>
 					<button>수정하기</button>
-					<button onclick="location.href='<%= request.getContextPath() %>/delete.tn?bno='+<%=b.getBno()%>">삭제하기</button>
-					
+					<button>삭제하기</button>
 					<% } %> 
 				<div class="cmtWrap">
 					<!-- 댓글(cmt) -->
@@ -186,16 +185,11 @@
 					<br />
 					
 					<div class="cmtForm">
-					
+						<input type="text" name="content" class="cmtForm">
 						<br />
 						<br />
 						<br />
-					<form action="<%= request.getContextPath() %>/insertComment.co" method="post">
-					<input type="text" name="comContent" class="cmtForm">
-					<input type="hidden" name="bno" value="<%=b.getBno() %>" />				
-					<button type="submit">댓글등록</button>
-					</form>
-						
+						<button type="button">댓글등록</button>
 					</div>
 				
 				</div>				
@@ -208,7 +202,6 @@
 	<br />
 	<br />
 	<%@ include file="/views/common/footer.jsp"%>
-
 
 
 	<script>
