@@ -19,13 +19,27 @@
       
    }
    
-	 #back{
-		position : absolute;
-		top : 100px;
-		left : 950px;
-		height : 80px;
-		width: 80px;
-		
+
+	.top {
+		height :160px;
+		top:0px;
+		position: fixed; 
+		width: 1024px;
+	}
+	
+	.title {
+		margin-top: 120px;
+		text-align: center;
+	}
+	/*ㅂㅓ튼 스타일*/
+	#back{
+	position : absolute;
+	top : 100px;
+	left : 950px;
+	height : 80px;
+	width: 80px;
+	position:relative;
+	top:-40%;
 	}
 	
 	#back:hover{
@@ -33,22 +47,11 @@
 		transform: scale(1.2);
 	}
 	
-	#title {
-		margin-top: 120px;
-		text-align: center;
-	}
-	
 	.page {
 		margin-top: 50px;
 	}
 	
 	
-	.top {
-		height :160px;
-		top:0px;
-		position: fixed; 
-		width: 1024px;
-	}
   
 	.left_page {
 		display: inline-block;
@@ -103,7 +106,7 @@
 	
 	<section>
 		<div class="top" style="background-color: white; border-bottom: 1px solid black;">
-			<h2 id="title">CLASS</h2>
+			<h2 class="title">CLASS</h2>
 			<img src="<%= request.getContextPath() %>/resources/images/common/backButton.png" 
 				alt="class1" id="back" onclick="goClass()"> 
 		</div>
@@ -183,7 +186,9 @@
 					<% if(m != null && m.getMid().equals("admin")) { %>
 					<tr>
 						<td colspan="2" align="center">
-							<button style="color : white; width: 250px;" value="<%= classList.getCno()%>" onclick="goDelete();">삭 제</button>
+							<button style="color : white; width: 170px;" value="<%= classList.getCno()%>" onclick="goDelete();">삭 제</button>&nbsp;&nbsp;
+							<button style="color : white; width: 170px;" value="<%= classList.getCno()%>" onclick="goUpdate();">수 정</button>
+						
 						</td>
 					</tr>
 					<% } %>	
@@ -223,7 +228,12 @@
 		
 		// 삭제
 		function goDelete() {
-			location.href = "<%= request.getContextPath() %>/classDelete.cd?cno=" + cno;
+			location.href = "<%= request.getContextPath() %>/classDelete.cd?cno=<%= classList.getCno() %>";
+		};
+		
+		// 수정
+		function goUpdate() {
+			location.href = "<%= request.getContextPath() %>/classUpdate.cu?cno=<%= classList.getCno() %>";
 		};
 		
 		

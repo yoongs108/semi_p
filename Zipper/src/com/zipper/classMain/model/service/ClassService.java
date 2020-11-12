@@ -94,16 +94,24 @@ public class ClassService {
 		return result;
 	}
 	
-	public int deleteClass(int cno, String savePath) {
+	public int deleteClass(int cno, String savePath)   {
 		con = getConnection();
 		
-		int result = cDAO.deleteClass(con, cno);
+		String filename = cDAO.searchFileName(con, cno); // 파일이름 조회
+		int result = 0;
+		
+		int result2 = cDAO.deleteAtt(con, cno);
+		
+		int result1 = cDAO.deleteClass(con, cno); // 클래스 게시글 삭제
 		
 		
-		if(result >0) {
-			File f = new File(savePath );
+		
+		if(result1 >0 && result2>0) {
+			File f = new File(savePath + filename); // 물리 경로
 
-			f.delete();
+			f.delete(); // 물리경로 삭제
+			
+			result = 1;
 			commit(con);
 		}else {
 			rollback(con);

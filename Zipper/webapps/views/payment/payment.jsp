@@ -23,14 +23,15 @@
       margin-right:auto;      
    }
    
-   #back{
-		position : absolute;
-		left : 950px;
-		height : 80px;
-		width: 80px;
-		top: 90px;
+	#back{
+	position : absolute;
+	top : 100px;
+	left : 950px;
+	height : 80px;
+	width: 80px;
+	position:relative;
+	top:-40%;
 	}
-	
 	#back:hover{
 		cursor: pointer;
 		transform: scale(1.2);
@@ -46,17 +47,16 @@
 		text-align: center;
    		margin-top: 100px;
    	}
+   	
 	table {
 		width : 700px; 
    }
    
-   
-	button {
+	section button {
 		width: 100px;
 		height: 50px;
 		background-color: black;
 		border: none;
-		color: white;
 	}
 	
 	.boxLine {
@@ -230,7 +230,7 @@
 						<input type="text" size="20" name="zipCode" id="zipCode" class="form-control" placeholder="우편번호">
 					</td>
 					<td>
-						&nbsp;<button type="button" class="btn btn-default" onclick="addrSearch()">주소검색</button>
+						&nbsp;<button style="background-color: black; color: white; " type="button" class="btn btn-default" onclick="addrSearch()">주소검색</button>
 					</td>
 				</tr>
 		
@@ -288,7 +288,7 @@
 				개인정보 제 3자 제공 및 결제대행 서비스 표준 이용약관
 				<img src="<%= request.getContextPath() %>/resources/images/common/downArrow.png" width="15px" height="7.5px" class="accordion" onclick="accordion_hide(this)"/>				
 				<div class="accordion_hide">
-				<br /><br />
+					<br /><br />
 					개인정보 제 3자 제공
 	        		<table border="1" style="border: 1px solid black;">
 	        			<tr>
@@ -360,7 +360,7 @@
 						4. '결제방법'이라 함은 회원이 결제서비스를 통하여 전자적 방법으로 상품 등을 구입 및 이용시 선택한 지불방법을 말합니다.
 						5. '카카오페이 비밀번호'라 함은 카카오페이 서비스 이용 시 필요로 하는 인증 수단으로서 회원이 본인임을 사전에 확인하고 스스로 설정하여 회사에 등록한 숫자를 말합니다.
 					</p>
-		    	</div>
+			    </div>
 			</h6></div>
 			<br />
 			<br />
@@ -368,7 +368,7 @@
 			<br />
 			
 			
-			<button style=" width : 700px; color : white;" id="payBtn">결제</button>
+			<button style=" width : 700px; color : white;" id="payBtn">결 제</button>
 		</div>
 		<br />
 		<br />

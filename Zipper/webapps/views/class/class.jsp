@@ -13,53 +13,8 @@
 <title>클래스</title>
 <style>
 
-/*  * {
-		width: 1024px;
-      	margin-left:auto;
-      	margin-right:auto;
-		box-sizing:border-box;
-	}
 
-	.carouselBox {
-		max-width: 1024px;
-		max-height: 450px;
-		position: relative;
-		margin: auto;
-	}
-	.carouselBox .carousel img {
-		height: 450px;
-	}
-
-.carousel {
-  display: none;
-}
-
-
-
-.text {
-  color: black;
-  font-size: 30px;
-  padding: 8px 40px;
-  position: absolute;
-  bottom: 350px;
-  width: 1024px;
-  text-align: right;
-}
-
-.numbertext {
-  color: #f2f2f2;
-  font-size: 12px;
-  padding: 8px 12px;
-  position: absolute;
-  top: 0;
-}
-
-
-
-
-
-     */
-   /*  ----------------------------------------*/ 
+/* 캐러셀 css */
 
     .carouselBox{
         width: 1024px;
@@ -88,7 +43,6 @@
         height: 450px;
     }
     
-    
     .carousel_txt {
 	  	color: white;
 	  	font-size: 30px;
@@ -100,8 +54,6 @@
 	    z-index: 3;
 	}
     
-    
-    
     .carousel_btn{
     	position: absolute;
         width: 1024px;
@@ -112,27 +64,25 @@
     }
     
 	.btn_left, .btn_right {
-		 cursor: pointer;
-		 position: absolute;
-		 top: 50%;
-		 width: auto;
-		 margin-top: -22px;
-		 padding: 16px;
-		 color: black;
-		 font-weight: bold;
-		 font-size: 18px;
-		 transition: 0.6s ease;
-		 border-radius: 0 3px 3px 0;
-		 user-select: none;
+		cursor: pointer;
+		position: absolute;
+		top: 50%;
+		width: auto;
+		/* margin-top: -22px; */
+		padding: 16px;
+		color: black;
+		font-weight: bold;
+		font-size: 18px;
+		transition: 0.6s ease;
+		border-radius: 0 3px 3px 0;
+		user-select: none;
+		text-decoration: none;
+
 	}
 
 	.btn_right {
 		right: 0;
 		border-radius: 3px 0 0 3px;
-	}
-
-	.btn_left, .btn_right {
-		text-decoration: none;
 	}
 
 	.dotBox {
@@ -154,6 +104,8 @@
 		background-color : black;
 	}
     
+   /* ---------------------------- */ 
+    
 	section {
 		width: 1024px;
       	margin-left:auto;
@@ -161,28 +113,34 @@
       
    }
    
-   .titleBox {
-        width: 1024px;
-      	margin-left:auto;
-     	margin-right:auto;  	
+	.page {
+		margin-top: 50px;
+	}
+	
+   .top {
+        height :50px;
+		top:0px;
+		width: 1024px; 	
 	}   
 
-   
-	 #back{
-		position : relative;
-		top : 20px;
-		left : 970px;
-		height : 80px;
-		width: 80px;
-		
+	.title {
+		text-align: center;
+	}
+
+	#back{
+	position : absolute;
+	top : 100px;
+	left : 950px;
+	height : 80px;
+	width: 80px;
+	position:relative;
+	top:-110%;
 	}
 	
 	#back:hover{
 		cursor: pointer;
 		transform: scale(1.2);
 	}
-	
-
 	
    	.classMain { 
 		width: 1024px;
@@ -221,7 +179,6 @@
 		height: 50px;
 		background-color: white;
 		border: none;
-		color: white;
 		cursor: pointer;
 	}
 	
@@ -229,62 +186,63 @@
 </head>
 <body>
 	<%@ include file="/views/common/header.jsp"%>
-<section>	
+	<section>	
 	 	<div class="carouselBox">
 	
-			<div class="titleBox" style="border-bottom: 1px solid black;">
-				<h2 id="title" align="center">CLASS</h2>
+			<div class="top" style="border-bottom: 1px solid black;">
+				<h2 class="title" align="center">CLASS</h2>
 				<img src="<%= request.getContextPath() %>/resources/images/common/backButton.png" 
 					alt="class1" id="back" onclick="goMain()"> 
 			</div>
 		
-		
-			<div class="main">
-            	<div class="carousel_btn">
-					<a style="text-decoration: none;" class="btn_left" onclick="moveSlides(-1)">&#10094;</a>
-					<a style="text-decoration: none;" class="btn_right" onclick="moveSlides(1)">&#10095;</a>
-	            </div>
+			<div class="page">
+				<div class="carouselBox">
+	            	<div class="carousel_btn">
+						<a style="text-decoration: none;" class="btn_left" onclick="moveSlides(-1)">&#10094;</a>
+						<a style="text-decoration: none;" class="btn_right" onclick="moveSlides(1)">&#10095;</a>
+		            </div>
+		            
 	            
-            
-            	<div class="carousel_warp">
-	                <div class="carousel">
-	               		<div class="cover"></div>
-	                    <img class="carousel_img" src="<%=request.getContextPath()%>/resources/images/fileUpload/m.jpg" />
-	                    <div class="carousel_txt"><h2>마크라메, <br />어디까지 해봤니?</h2></div>
-	                </div>
-                
-                
-	                <div class="carousel">
-	                	<div class="cover"></div>
-	                    <img class="carousel_img" src="<%=request.getContextPath()%>/resources/images/fileUpload/t.jpg" />
-	                    <div class="carousel_txt"><h2>너 시트지 붙여? <br /> 난 타일 붙여!</h2></div>
-	                </div>
-                
-	                <div class="carousel">
-	                	<div class="cover"></div>
-	                    <img class="carousel_img" src="<%=request.getContextPath()%>/resources/images/fileUpload/h.jpg" />
-	                    <div class="carousel_txt"><h2>드레스룸을 쇼룸처럼! <br />분위기 끝판왕 행거 만들기</h2> </div>
-	                </div>
-                <div class="carousel">
-	               		<div class="cover"></div>
-	                    <img class="carousel_img" src="<%=request.getContextPath()%>/resources/images/fileUpload/m.jpg" />
-	                    <div class="carousel_txt"><h2>마크라메, <br />어디까지 해봤니?</h2></div>
-	                </div>
-                
-	                <div class="carousel">
-	                	<div class="cover"></div>
-	                    <img class="carousel_img" src="<%=request.getContextPath()%>/resources/images/fileUpload/t.jpg" />
-	                    <div class="carousel_txt"><h2>너 시트지 붙여? <br /> 난 타일 붙여!</h2></div>
-	                </div>
-                
-	                <div class="carousel">
-	                	<div class="cover"></div>
-	                    <img class="carousel_img" src="<%=request.getContextPath()%>/resources/images/fileUpload/h.jpg" />
-	                    <div class="carousel_txt"><h2>드레스룸을 쇼룸처럼! <br />분위기 끝판왕 행거 만들기</h2> </div>
-	                </div>
-            	</div>
-    
-       		</div>
+	            	<div class="carousel_warp">
+		                <div class="carousel">
+		               		<div class="cover"></div>
+		                    <img class="carousel_img" src="<%=request.getContextPath()%>/resources/images/fileUpload/m.jpg" />
+		                    <div class="carousel_txt"><h2>마크라메, <br />어디까지 해봤니?</h2></div>
+		                </div>
+	                
+	                
+		                <div class="carousel">
+		                	<div class="cover"></div>
+		                    <img class="carousel_img" src="<%=request.getContextPath()%>/resources/images/fileUpload/t.jpg" />
+		                    <div class="carousel_txt"><h2>너 시트지 붙여? <br /> 난 타일 붙여!</h2></div>
+		                </div>
+	                
+		                <div class="carousel">
+		                	<div class="cover"></div>
+		                    <img class="carousel_img" src="<%=request.getContextPath()%>/resources/images/fileUpload/h.jpg" />
+		                    <div class="carousel_txt"><h2>드레스룸을 쇼룸처럼! <br />분위기 끝판왕 행거 만들기</h2> </div>
+		                </div>
+	                	<div class="carousel">
+		               		<div class="cover"></div>
+		                    <img class="carousel_img" src="<%=request.getContextPath()%>/resources/images/fileUpload/m.jpg" />
+		                    <div class="carousel_txt"><h2>마크라메, <br />어디까지 해봤니?</h2></div>
+		                </div>
+	                
+		                <div class="carousel">
+		                	<div class="cover"></div>
+		                    <img class="carousel_img" src="<%=request.getContextPath()%>/resources/images/fileUpload/t.jpg" />
+		                    <div class="carousel_txt"><h2>너 시트지 붙여? <br /> 난 타일 붙여!</h2></div>
+		                </div>
+	                
+		                <div class="carousel">
+		                	<div class="cover"></div>
+		                    <img class="carousel_img" src="<%=request.getContextPath()%>/resources/images/fileUpload/h.jpg" />
+		                    <div class="carousel_txt"><h2>드레스룸을 쇼룸처럼! <br />분위기 끝판왕 행거 만들기</h2> </div>
+		                </div>
+	            	</div>
+	    
+	       		</div>
+	       	</div>
 		</div>
 	
 		<div class="dotBox" style="text-align:center">
@@ -299,7 +257,7 @@
 	
 <!-- 캐러셀 끝 -->
 	<br />
-	<hr />
+	<hr width="100%" />
 	<br /><br />
 	
 
