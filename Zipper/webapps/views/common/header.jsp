@@ -21,6 +21,16 @@
 <script src="https://apis.google.com/js/platform.js" async defer></script>
 
 	<style>
+		@font-face {
+	    font-family: 'NEXON Lv1 Gothic OTF';
+	    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/NEXON Lv1 Gothic OTF.woff') format('woff');
+	    font-weight: normal;
+	    font-style: normal;
+		}
+		
+		body{
+			font-family: '넥슨 LV.1 고딕', 'NEXON Lv1 Gothic', NEXON Lv1 Gothic OTF
+		}
 		/* 헤더  */
         header {
             height : 100px;
@@ -58,6 +68,7 @@
             right: 120px;
             border : 1px solid black;
             border-radius: 50%;
+            margin-right : 10px;
         }
 
         #write {
@@ -72,6 +83,7 @@
             top : 10px;
         	right: 150px;
         	z-index: 5002;
+        	margin-right : 10px;
         }
 
         /* nav */
@@ -139,7 +151,7 @@
         	color : black;
         }
         
-        nav h3, h4 {
+        nav h3, nav h4 {
         	display : inline-block;
         }
         
@@ -155,7 +167,7 @@
 
 		<img src="<%= request.getContextPath() %>/resources/images/common/menu.png" id="hamburger" onclick="navToggle()"/>
 		
-		<span id="logo" onclick="goHome()">ZIPPER</span>
+		<span id="logo" onclick="goHome()" style="font-weight: bold; font-size: 30px;">ZIPPER</span>
         
 		<% if(m != null) { %>
         
@@ -164,8 +176,12 @@
         <div id="writeBox">
         	<img src="<%= request.getContextPath() %>/resources/images/common/pen.png" id="write" data-toggle="dropdown"/>
         	<ul class="dropdown-menu" role="menu" style="top : 25x;">
-			    <li><a href="<%= request.getContextPath() %>/views/writer/zippopWriter.jsp"">ZIP POP</a></li>
+			    <li><a href="<%= request.getContextPath() %>/views/writer/zippopWriter.jsp">ZIP POP</a></li>
 			    <li><a href="<%= request.getContextPath() %>/views/writer/PTPWrite.jsp">1:1 문의</a></li>
+			    
+			    <!-- 관리자일때만 보이는 글쓰기 메뉴 -->
+			    <li><a href="<%= request.getContextPath() %>/views/writer/classInsert.jsp">CLASS 등록</a></li>
+			    <li><a href="<%= request.getContextPath() %>/views/writer/classUpload.jsp">VIDEO 등록</a></li>
 			</ul>
 		</div>
 		

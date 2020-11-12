@@ -75,7 +75,9 @@
 	article>h1:nth-of-type(1) {
 		margin-top : 50vh;
 	}
-	
+	.title {
+		font-weight: bold;
+	}
 </style>
 </head>
 <body>

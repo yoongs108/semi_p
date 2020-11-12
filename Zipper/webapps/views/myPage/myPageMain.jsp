@@ -56,7 +56,7 @@
 	<section> <!-- 전체메뉴-->
 
 		<h1 id="title">MY PAGE</h1>
-		<br /><br />
+	
 		<hr style="width: 95%; border: solid 0.3px black;">
 	
 		<div id="colunm" style="border-left: none;">
@@ -103,7 +103,7 @@
 			<br />
 			<a onclick="goManToMan()">1 : 1 문의 내역</a>
 		</div>
-
+		
 	<script>
 		function goUpdateInfo() { 	// 정보 수정
 			location.href = '<%= request.getContextPath() %>/views/myPage/updateInfo.jsp'; 
@@ -130,7 +130,6 @@
 			location.href = '<%= request.getContextPath() %>/selectList.qo';
 		}
 	</script>
-	
 	</section>
 </body>
 </html>
