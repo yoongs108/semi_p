@@ -439,4 +439,60 @@ public class ClassDAO {
 		}
 		return result;
 	}
+
+	public int updateClassList(Connection con, ClassList cl) {
+		
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("updateClassList");
+		
+		try {
+			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setString(1, cl.getCname());
+			pstmt.setString(2, cl.getTname());
+			pstmt.setString(3,  cl.getKdetail());
+			pstmt.setInt(4, cl.getPrice());
+			pstmt.setString(5,  cl.getCintro());
+			pstmt.setString(6, cl.getCourse());
+			pstmt.setInt(7, cl.getCno());
+
+			
+			result = pstmt.executeUpdate();
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(con);
+		}
+		
+		
+		return result;
+	}
+
+	public int updateAttachment(Connection con, Attachment at) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("updateAttachment");
+		
+		try {
+			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setString(1, at.getFile_origin_name());
+			pstmt.setString(2,  at.getFile_new_name());
+			pstmt.setInt(3, at.getFno());
+			
+			result = pstmt.executeUpdate();
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(con);
+		}
+		
+		
+		return result;
+	}
 }

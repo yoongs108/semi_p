@@ -81,13 +81,13 @@
 				<tr>
 					<td>
 						<div class="imgBox">
-							<img class="titleImg" value="<%= at.get()%>"/>
+							<img class="titleImg" value="<%= at.getFile_new_name()%>"/>
 						</div>
 					</td>
 					
 					<td>
 						<div class="input">
-							클래스 이름 : <input size="50" name="cname" value="<%= cl.getCno()%>"></input> <br />
+							클래스 이름 : <input size="50" name="cname" value="<%= cl.getCname()%>"></input> <br />
 							<br /><br />
 							강사 명 : &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input size="50" name="tname" value="<%= cl.getTname()%>"></input> <br />
 							<br /><br />

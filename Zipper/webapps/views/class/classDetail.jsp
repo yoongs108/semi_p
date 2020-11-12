@@ -233,7 +233,7 @@
 		
 		// 수정
 		function goUpdate() {
-			location.href = "<%= request.getContextPath() %>/classUpdate.cu?cno=<%= classList.getCno() %>";
+			location.href = "<%= request.getContextPath() %>/updateView.cl?cno=<%= classList.getCno() %>";
 		};
 		
 		

@@ -126,8 +126,22 @@ public class ClassService {
 	public int updateClassList(ClassList cl, Attachment at) {
 		con = getConnection();
 		
-		
-		return 0;
+		 int result = 0;
+		 
+		 int result1 = cDAO.updateClassList(con, cl);
+		 
+		 if( result1 > 0) {
+			 int result2 = cDAO.updateAttachment(con, at);
+			 
+			 if(result2 > 0)  {
+				 commit(con);
+				 result = 1;	 
+			 }
+		 }
+		 close(con);
+		return result; 
+		 
+			 
 	}
 
 }
