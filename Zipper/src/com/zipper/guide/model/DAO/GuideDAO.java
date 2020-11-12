@@ -12,7 +12,10 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Properties;
 
+import com.zipper.board.model.vo.Attachment;
 import com.zipper.board.model.vo.Board;
+import com.zipper.common.exception.GuideException;
+import com.zipper.common.exception.QuestionException;
 
 public class GuideDAO {
 	
@@ -157,5 +160,99 @@ private Properties prop;
 		return result;
 	}
 
+	// 가이드 작성
+	public int insertGuide(Connection con, Board b) {
+		
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("insertGuide");
+		
+		System.out.println(sql); // 확인용
+		
+		try {
+			
+			pstmt = con.prepareStatement(sql);
+			
+			//pstmt.setInt(1, b.getBtype());
+			pstmt.setInt(1, b.getMno());
+			pstmt.setString(2, b.getBtitle());
+			pstmt.setString(3, b.getBcontent());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			//throw new GuideException("[DAO] : " + e.getMessage()); 
+		} finally {
+			close(pstmt);
+		}
+		
+		System.out.println(result);
+		return result;
+	}
+
+	// 추가된 가이드 게시글번호 조회
+	public int getCurrentBno(Connection con) {
+
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("getCurrentBno");
+		
+		System.out.println(sql);
+		
+		try {
+			pstmt = con.prepareStatement(sql);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				
+				result = rset.getInt(1);
+			}			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return result;
+	}
+
+	public int insertAttachment(Connection con, Attachment at) {
+		
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("insertAttachment");
+		
+		System.out.println(sql); // 확인용
+		
+		try {
+			
+			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setInt(1, at.getBno());
+			pstmt.setString(2, at.getFile_origin_name());
+			pstmt.setString(3, at.getFile_new_name());
+			pstmt.setString(4, at.getFilepath());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
 
 }

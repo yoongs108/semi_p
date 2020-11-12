@@ -54,9 +54,10 @@ public class zippopInsert extends HttpServlet {
 		String originNames = new String();
 		String changeNames = new String();
 		
+		// 화면에서 전달한 파일 이름 가져오기
 		Enumeration<String> files = mre.getFileNames();
 
-		while(files.hasMoreElements()) {
+		while(files.hasMoreElements()) {  // 없을때까지 반복하기
 			
 			String tagName = files.nextElement();
 
@@ -87,8 +88,10 @@ public class zippopInsert extends HttpServlet {
 		ZippopService zs = new ZippopService();
 		int result = zs.insertZippop(t, at);
 		
-		if (result > 0) {
+		if (result > 0) {  //저장이 됐다면...
+			
 			response.sendRedirect("zippop.zp");
+			
 		} else {
 			request.setAttribute("exception", new Exception("사진 추가 에러!"));
 			request.setAttribute("error-msg", "사진게시글 저장 실패, 관리자에게 문의바랍니다");

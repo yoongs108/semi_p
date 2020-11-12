@@ -78,7 +78,7 @@
 		
 		
 		<div class="content">
-  <img src="<%= request.getContextPath() %>/resources/images/uploadFiles/<%= board.getBoardfile() %>" alt="detail1" style="width:100%;height:50%">
+  <img src="<%= request.getContextPath() %>/resources/images/fileUpload/<%= board.getBoardfile() %>" alt="detail1" style="width:50%;height:50%">
   <h3><%= board.getBtitle() %></h3>
   <p>
   <%= board.getBcontent() %>
