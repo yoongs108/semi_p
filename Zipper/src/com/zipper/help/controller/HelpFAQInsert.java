@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.zipper.board.model.vo.Board;
-import com.zipper.common.exception.NoticeException;
+import com.zipper.common.exception.FaqException;
 import com.zipper.help.model.service.HelpService;
 
 /**
@@ -44,7 +44,7 @@ public class HelpFAQInsert extends HttpServlet {
 			hs.insertFaq(b);
 			response.sendRedirect("helpfaq.fq");
 			
-		} catch (NoticeException e) {
+		} catch (FaqException e) {
 			e.printStackTrace();
 			request.setAttribute("exception", e);
 			request.setAttribute("error-msg", "공지사항 등록 실패!");

@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.zipper.board.model.vo.Board;
-import com.zipper.common.exception.NoticeException;
+import com.zipper.common.exception.FaqException;
 import com.zipper.help.model.service.HelpService;
 
 @WebServlet("/faqUpdateComplete.fq")
@@ -45,7 +45,7 @@ public class HelpFAQUpdateSubmit extends HttpServlet {
 			
 			response.sendRedirect("helpfaq.fq");
 			
-		} catch (NoticeException e) {
+		} catch (FaqException e) {
 			request.setAttribute("error-msg", "FAQ 수정 실패");
 			request.setAttribute("exception", e);
 			
