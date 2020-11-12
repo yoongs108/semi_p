@@ -36,24 +36,14 @@ public class NoticeInsert extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// 공지사항의 제목, 작성일, 내용 
 		String btitle = request.getParameter("title");
-		String bdate = request.getParameter("date");
+	
 		String bcontent = request.getParameter("content");
-		
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd"); // 임포트 처리 ok 소문자 mm: 몇 분을 보여줌
-		
-		Date ndate = null;
-		// sdf.parse(request.getParameter("date")); try/catch처리ok
-		try {
-			ndate = new Date(sdf.parse(bdate).getTime());
-		} catch (ParseException e) {
-			
-			e.printStackTrace();
-		}
+		System.out.println("sass");
 		
 		Board b = new Board();
 		
 		b.setBtitle(btitle);
-		b.setBdate(ndate);
+		
 		b.setBcontent(bcontent);
 		
 		NoticeService ns = new NoticeService(); // 임포트처리ok

@@ -37,7 +37,7 @@
       margin-right:auto;
    }
    
-   	div .content{
+   	div.content{
       width : 80%;
  	  height : 300px;
 	  margin-left : 60px;
@@ -51,7 +51,7 @@
    	section h3{
    	  margin-left : 60px;
    }
-   	#adminupdate{
+   	#adminwrite{
    	  margin-left : 200px;
    	  position: relative;
    	  top : -40px;
@@ -62,7 +62,7 @@
 	  border : none;	
    }
    
-   	#adminupdate:hover{
+   	#adminwrite:hover{
 		background-color: #555;
 		cursor: pointer;
 	}
@@ -89,15 +89,54 @@
 		padding-top : 5px;
 		border : none;
 	}
+	
+	#comment{
+		border : none;
+		resize : none;
+		width : 85%;
+		height : auto; 
+		min-height : 200px; 
+		min-width: 500px; 
+	}
+	
+	div#comdate{
+   	    float : right;
+   	    margin-right : -60px;
+   	    width : 20%;
+   	   
+   	}
+   	input[name=qcomdate]{
+   		border : none;
+   	}
+   	
+   	#check{
+		position : relative;
+		float: right;
+		top : -40px;
+		margin-right : 630px;
+		width : 80px;
+		height : 31px;
+		color : white;
+		background-color : black;
+		border : none;	
+	}
+	
+	#check:hover{
+		background-color: #555;
+		cursor: pointer;
+	}
+   
 </style>
 </head>
 <body id="body">
 <%@ include file="/views/common/header.jsp" %>
 <section> 
  	<h1> 1:1 문의내역 </h1>
+ 	<!-- 관리자 권한 : 삭제 -->
  	<% if(m != null && m.getMgrd().equals("A")){ %> 
- 	<button id="delete" onclick="#"> 삭제 </button>
+ 	<button id="delete" onclick="location.href='<%= request.getContextPath() %>/qDelete.qo?qno=<%= qs.getQno()%>'"> 삭제 </button>
  	<% } %>
+ 	
  	<!-- 뒤로가기 -->
 		<img src="<%= request.getContextPath() %>/resources/images/common/backButton.png" 
 			alt="notice" id="back" onclick="location.href = '<%= request.getContextPath() %>/selectList.qo?'"> 
@@ -119,32 +158,47 @@
 		</h3>
 		<br>
  	<div class="content">
- 	<%=qs.getQcontent() %>
+ 		<%=qs.getQcontent() %>
 	</div>
  	</div>
 
 
 	<!-- 답변 작성 -->
- 	<div class="answer">
- 	<form action="<%=request.getContextPath()%>/insertComment.co" method="post">
-					<!-- 댓글 작성자 받아옴 -->
-					<input type="hidden" name="writer" value="<%=m.getMid()%>">
-					<input type="hidden" name="bno" value="<%=qs.getQno()%>"> 
- 	<div id="date"> 
-		<h4> <%=qs.getQcommentdate() %> </h4>
+ 	<div>
+ 	<form class="answer" action="<%=request.getContextPath()%>/insertComment.co?" method="post">
+	<input type="hidden" name="mno" value="<%=m.getMno()%>"/>
+	<input type="hidden" name="qno" value="<%=qs.getQno()%>"/>
+	
+ 	<div id="comdate"> 
+		<h4> <input type="text" name="qcomdate" value="<%=qs.getQcomdate() %>" /> </h4>
 	</div>
 	<br>
  		<h3 id="commenttitle" > <b>문의 답변 </b> </h3>
  		<div>
 			<!-- 회원등급이 admin으로 로그인할 때만 확인 되도록 조건문 넣어줌 -->
  			<% if(m != null && m.getMgrd().equals("A")){ %> 
-				<button id="adminupdate" onclick="#"> 답변달기 </button>
-				<%-- 삭제에 넣을것 참고 : location.href='<%= request.getContextPath() %>/nDelete.no?bno=<%= bs.getBno()%>' --%> 
+ 			<button type="button" id="adminwrite" onclick="update()"> 수정 </button> 
+ 		
+ 			<input type="submit" value="수정완료" id="check" style="display : none;"/>
+ 		
 			<% } %>
  		</div>
- 	<div class="content">
- 		<%= qs.getQcomment() %>
+ 	<div class="content" >
+ 		<textarea id="comment" name="qcomment" readonly="readonly"> <%= qs.getQcomment() %> </textarea>
  	</div>
+ 	
+ 	<script>
+ 		function update(){
+ 			if($('#comment').prop('readonly')){
+ 				$('#comment').attr('readonly', false);
+ 				$('#check').css("display","inline-block");
+ 			} else {
+ 				$('#comment').attr('readonly', true);
+ 				$('#check').css("display","none");
+ 			}
+ 		}
+ 	</script>
+ 	</form>
  	</div>
  	</section>
 <%@ include file="/views/common/footer.jsp" %>

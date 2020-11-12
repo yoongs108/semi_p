@@ -65,7 +65,7 @@ public QuestionDAO() {
 				q.setQstate(rset.getString(6));
 				q.setQid(rset.getString(7));
 				q.setQcomment(rset.getString(8));
-				q.setQcommentdate(rset.getDate(9));
+				q.setQcomdate(rset.getDate(9));
 				list.add(q);
 			}
 			
@@ -108,7 +108,7 @@ public QuestionDAO() {
 				qs.setQstate(rset.getString(6));
 				qs.setQid(rset.getString(7));
 				qs.setQcomment(rset.getString(8));
-				qs.setQcommentdate(rset.getDate(9));
+				qs.setQcomdate(rset.getDate(9));
 				
 			}
 			System.out.println("상세 question : "+qs.toString());
@@ -180,5 +180,51 @@ public QuestionDAO() {
 		
 		return result;
 	}
+
+	public int insertComment(Connection con, int qno, String qcomdate, String qcomment) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("insertComment");
+		System.out.println(sql);
+		
+		try {
+			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setString(1, qcomment);
+			pstmt.setInt(2, qno);
+			System.out.println("query 준비"+sql);
+			result = pstmt.executeUpdate();
+			System.out.println("query실행");
+			
+		} catch (SQLException e) {
+		
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+			
+		return result;
 	
+	}
+
+	public int deleteQuestion(Connection con, int qno) throws QuestionException {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("deleteQuestion");
+		System.out.println(sql);
+		
+		try {
+			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setInt(1, qno);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new QuestionException("[DAO] : " + e.getMessage()); 
+		}
+		
+		return 0;
+	}
 }
