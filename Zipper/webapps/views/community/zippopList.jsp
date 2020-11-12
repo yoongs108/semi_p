@@ -88,9 +88,7 @@
       opacity:0.8;
       cursor:pointer;
    }    
-   
-   }
-   
+         
    button {
       width: 100px;
       height: 50px;
@@ -176,12 +174,10 @@
                   <img src="<%= request.getContextPath() %>/resources/images/zippopUploadFiles/<%= t.getBoardfile() %>" 
                      width="250px" height="250px"/>
                </div>
-               
-               <p>
+               <br />
+               <p style="overflow : hidden; height : 100px;">
                   <%= t.getUserId()%>
-                  <div>                  
-                  </div>
-                  <br />
+                  <br /><br />
                   <%= t.getBcontent() %>
                </p>
             </div>
@@ -202,7 +198,9 @@
 
 	<% if(m != null) { %>
 		
-		<button onclick="zippopWriter()">작성하기</button>
+		<div align="center" style="margin: 50px;">	
+		<button style="color: white;" onclick="zippopWriter()">작성하기</button>		
+		</div>		
 		
 	<% } %>	
 
