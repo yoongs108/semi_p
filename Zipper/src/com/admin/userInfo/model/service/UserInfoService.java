@@ -14,17 +14,19 @@ public class UserInfoService {
 	private Connection con;
 	private UserInfoDAO uDAO = new UserInfoDAO();
 	
-	public ArrayList<Member> selectList() {
+	// 회원 정보 조회
+	public ArrayList<Member> selectList(int currentPage, int limit) {
 		
 		con = getConnection();
 		
-		ArrayList<Member> list = uDAO.selectList(con);
+		ArrayList<Member> list = uDAO.selectList(con, currentPage, limit);
 		
 		close(con);
 		
 		return list;
 	}
 
+	// 회원 등급 수정
 	public int updateUserInfo(Member m) throws MemberException {
 		
 		con = getConnection();
@@ -36,6 +38,18 @@ public class UserInfoService {
 		} else {
 			rollback(con);
 		}
+		
+		close(con);
+		
+		return result;
+	}
+	
+	// 회원 수 조회
+	public int getListCount() {
+		
+		con = getConnection();
+		
+		int result = uDAO.getListCount(con);
 		
 		close(con);
 		

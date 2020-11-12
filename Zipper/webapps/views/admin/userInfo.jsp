@@ -1,8 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="java.util.*, com.zipper.member.model.vo.*" %>
+<%@ page import="java.util.*, com.zipper.member.model.vo.*, com.zipper.board.model.vo.*" %>
 <%
 	ArrayList<Member> list = (ArrayList<Member>)request.getAttribute("list");
+	PageInfo pi = (PageInfo)request.getAttribute("pi");
+	int listCount = pi.getListCount();
+	int currentPage = pi.getCurrentPage();
+	int maxPage = pi.getMaxPage();
+	int startPage = pi.getStartPage();
+	int endPage = pi.getEndPage();
 %>
 <!DOCTYPE html>
 <html>
@@ -38,8 +44,8 @@
 					<th>연락처</th>
 					<th>이메일</th>
 					<th>가입일</th>
-					<th>탈퇴일</th>
 					<th>상태</th>
+					<th>탈퇴일</th>
 				</tr>
 				<% for(Member user : list) { %>
 				<tr>
@@ -53,11 +59,44 @@
 					<td><%= user.getMcontact() %></td>
 					<td><%= user.getMemail() %></td>
 					<td><%= user.getMendate() %></td>
-					<td><%= user.getMexdate() %></td>
-					<td><%= user.getMstatus() %></td>
+					<td><%= user.getMstatus().equals("Y") ? "정상" : "탈퇴" %></td>
+					<td><%= user.getMexdate() != null ? user.getMexdate() : " - "%></td>
+				</tr>
+				<% } %>
+				<% if(list.size() == 0) { %>
+				<tr>
+					<td colspan="9"> 조회된 정보가 없습니다.</td>
 				</tr>
 				<% } %>
 			</table>
+			<div style="text-align : center;">
+				<button class="w3-bar-item w3-button w3-hover-black"
+		       			onclick="location.href='<%= request.getContextPath() %>/uSelectList.ad?currentPage=1'"><<</button>
+				<% if(currentPage <= 1){ %>
+					<button class="w3-bar-item w3-button" disabled><</button>
+				<% } else { %>
+				<button class="w3-bar-item w3-button w3-hover-black"
+						onclick="location.href='<%= request.getContextPath() %>/uSelectList.ad?currentPage=<%=currentPage - 1 %>'"><</button>
+				<% } %>
+				<% for(int p = startPage; p <= endPage; p++){
+						if(p == currentPage){	
+				%>
+					<button class="w3-bar-item w3-button" disabled><%= p %></button>
+				<%      }else{ %>
+					<button class="w3-bar-item w3-button w3-hover-black"
+							onclick="location.href='<%= request.getContextPath() %>/uSelectList.ad?currentPage=<%= p %>'"><%= p %></button>
+				<%      } %>
+				<% } %>
+		         
+		        <%  if(currentPage >= maxPage){  %>
+				<button class="w3-bar-item w3-button" disabled>></button>
+				<%  }else{ %>
+				<button class="w3-bar-item w3-button w3-hover-black" 
+						onclick="location.href='<%= request.getContextPath() %>/uSelectList.ad?currentPage=<%=currentPage + 1 %>'">></button>
+				<%  } %>
+				<button class="w3-bar-item w3-button w3-hover-black"
+						onclick="location.href='<%= request.getContextPath() %>/uSelectList.ad?currentPage=<%= maxPage %>'">>></button>
+			</div>
 		</div>
 	</section>
 	

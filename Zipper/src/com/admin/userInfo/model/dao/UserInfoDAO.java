@@ -36,7 +36,8 @@ public class UserInfoDAO {
 		}
 	}
 	
-	public ArrayList<Member> selectList(Connection con) {
+	// 회원 정보 조회
+	public ArrayList<Member> selectList(Connection con, int currentPage, int limit) {
 		
 		ArrayList<Member> list = new ArrayList<>();
 		
@@ -50,6 +51,14 @@ public class UserInfoDAO {
 		
 		try {
 			pstmt = con.prepareStatement(sql);
+			
+			// 1. 마지막 행의 번호
+			// 2. 첫 행의 번호
+			int startRow = (currentPage - 1) * limit + 1;
+			int endRow = startRow + limit - 1;
+
+			pstmt.setInt(1, endRow);
+			pstmt.setInt(2, startRow);
 			
 			rset = pstmt.executeQuery();
 			
@@ -85,6 +94,7 @@ public class UserInfoDAO {
 		return list;
 	}
 
+	// 회원 등급 변경
 	public int updateUserInfo(Connection con, Member m) throws MemberException {
 
 		int result = 0;
@@ -110,6 +120,38 @@ public class UserInfoDAO {
 			close(pstmt);
 		}
 		
+		return result;
+	}
+
+	// 회원 수 조회
+	public int getListCount(Connection con) {
+		
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("listCount");
+		
+		System.out.println(sql);
+		
+		try {
+			pstmt = con.prepareStatement(sql);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				
+				result = rset.getInt(1);
+			}			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
 		return result;
 	}
 

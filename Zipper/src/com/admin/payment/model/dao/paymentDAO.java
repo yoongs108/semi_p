@@ -22,7 +22,7 @@ public class paymentDAO {
 		prop = new Properties();
 		
 		String filePath = paymentDAO.class
-							.getResource("/config/userInfo-sql.properties")
+							.getResource("/config/paymentInfo-sql.properties")
 							.getPath();
 		
 		try {
@@ -35,7 +35,8 @@ public class paymentDAO {
 		}
 	}
 	
-	public ArrayList<Payment> selectList(Connection con) {
+	// 결제 목록 조회
+	public ArrayList<Payment> selectList(Connection con, int currentPage, int limit) {
 		
 		ArrayList<Payment> list = new ArrayList<>();
 		
@@ -50,19 +51,27 @@ public class paymentDAO {
 		try {
 			pstmt = con.prepareStatement(sql);
 			
+			// 1. 마지막 행의 번호
+			// 2. 첫 행의 번호
+			int startRow = (currentPage - 1) * limit + 1;
+			int endRow = startRow + limit - 1;
+
+			pstmt.setInt(1, endRow);
+			pstmt.setInt(2, startRow);
+						
 			rset = pstmt.executeQuery();
 			
 			while(rset.next()) {
 				
 				Payment p = new Payment();
 				
+				p.setPno(		rset.getString("pno"));
 				p.setMno(		rset.getInt("mno"));
-//				p.setMgrd(		rset.getString("mgrd"));
-//				p.setMid(		rset.getString("mid"));
-//				p.setMpwd(		rset.getString("mpwd"));
-//				p.setMnick(		rset.getString("mnick"));
-//				p.setMcontact(	rset.getString("mcontact"));
-//				p.setMemail(	rset.getString("memail"));
+				p.setCno(		rset.getInt("cno"));
+				p.setPayinfo(	rset.getString("payinfo"));
+				p.setPdate(		rset.getDate("pdate"));
+				p.setPstatus(	rset.getString("pstatus"));
+				p.setTotal(		rset.getInt("total"));
 				
 				list.add(p);
 			}
@@ -75,6 +84,38 @@ public class paymentDAO {
 		}
 		
 		return list;
+	}
+
+	// 결제 수 조회
+	public int getListCount(Connection con) {
+		
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("listCount");
+		
+		System.out.println(sql);
+		
+		try {
+			pstmt = con.prepareStatement(sql);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				
+				result = rset.getInt(1);
+			}			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return result;
 	}
 
 }
