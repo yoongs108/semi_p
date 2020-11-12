@@ -116,7 +116,7 @@
 			
 			<div id="container" class="splitR" >
 				<br />
-				<p style="font-size:16px; font-weight : bold;">결제일 <%= pm.getPdate()%> 로부터 1개월</p>
+				<p style="font-size:16px; font-weight : bold;">수강 기간 [ <%= pm.getPdate()%> ] 로부터 1개월</p>
 				<br />
 				<p style="font-size:17px; font-weight : bold;"><%= pm.getCname() %> </p>
 				<p style="font-size:14px;"><%= pm.getTotal() %>  원 </p>

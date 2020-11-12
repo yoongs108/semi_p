@@ -35,9 +35,8 @@
 		text-decoration: none;
 		cursor : pointer;
 	}
-	/**/
 	#colunm {
-		width: 250px;
+		width: 333px;
 		height: 350px;
 		padding: 25px;
 		margin : 80px 0 100px 0;
@@ -85,7 +84,7 @@
 			
 		</div>
 
-		<div id="colunm">
+		<!-- <div id="colunm">
 			<h3>내 구매내역</h3>
 			<br /><br />
 			<br /><br />
@@ -93,7 +92,7 @@
 			<br /> 
 			<br /> 
 			<a onclick="goCanclePay()">취소 / 환불</a>
-		</div>
+		</div> -->
 
 
 		<div id="colunm">
