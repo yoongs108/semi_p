@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.zipper.common.exception.FaqException;
 import com.zipper.common.exception.NoticeException;
 import com.zipper.help.model.service.HelpService;
 
@@ -32,7 +33,7 @@ public class HelpFAQDelete extends HttpServlet {
 			
 			response.sendRedirect("helpfaq.fq");
 			
-		} catch (NoticeException e) {
+		} catch (FaqException e) {
 			request.setAttribute("error-msg", "FAQ삭제중 오류 발생");
 			request.setAttribute("exception", e);
 			

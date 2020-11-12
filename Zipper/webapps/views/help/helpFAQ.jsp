@@ -114,6 +114,16 @@
 		cursor:pointer;
 	}
 	
+	#selectDiv>button {
+		color : white;
+		background-color : black;
+		border : none;
+	}
+	
+	#selectDiv>button:hover {
+		background-color: #555;
+		cursor: pointer;
+	}
 </style>
 <script>
 	document.getElementsByClassName('accordian');
@@ -187,7 +197,7 @@
  			<% for (Board b : list1) { %>
 			<div>
  				<button class="accordion" onclick="accordion_hide(this)">Q. <%= b.getBtitle() %> </button>
-				<p class="accordion_hide"><%= b.getBcontent() %></p>
+				<p class="accordion_hide" style="margin-left:50px;"><%= b.getBcontent() %></p>
 			</div>
 			<% } %>
 			<br /><br />
