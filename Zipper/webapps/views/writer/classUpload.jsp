@@ -19,7 +19,6 @@
 		text-align: center;
 	}
 
-	
 	/* 동영상 올리기 */
 	#videoArea {
 		width: 820px;
@@ -62,7 +61,7 @@
 </style>
 </head>
 <body>
-<!-- 이거 아직 미완성이니까 기다려~어허 기다려~ -->
+
 	<%@ include file="/views/common/header.jsp"%>
 	<section>
 		<div style="border-bottom: 1px solid black;">
@@ -98,11 +97,9 @@
 					
 					<td class="title">클래스 선택</td>
 					<td>
-							<foam >
-								<select id="subject">
-	    						<option value="" selected="selected">Select CNO</option>
-	  							</select>
-							</foam>
+						<select id="subject">
+	    				<option value="" selected="selected">Select CNO</option>
+	  					</select>
 					</td>
 				</tr>
 				<!-- 내용 -->

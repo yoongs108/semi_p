@@ -55,7 +55,7 @@ public class VideoSelectList extends HttpServlet {
 		int currentPage;
 		
 		// 한 페이지 당 보여줄 게시글 수 
-		int limit = 10;
+		int limit = 2;
 		
 		// 만약 사용자가 처음 목록을 조회했다면 
 		// 페이지는 1페이지가 되어야 함 
@@ -99,7 +99,7 @@ public class VideoSelectList extends HttpServlet {
 		String page = null; // 이동할 페이지 정보
 		
 		try {
-			list = vs.selectList(cno, currentPage,limit);
+			list = vs.selectList(cno, currentPage, limit);
 
 			PageInfo pi = new PageInfo(currentPage, listCount, limit, 
 									   maxPage, startPage, endPage); // create method 만듦 

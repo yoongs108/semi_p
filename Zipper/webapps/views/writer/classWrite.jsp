@@ -58,11 +58,7 @@
 		cursor: pointer;
 	}
 	
-	.btn {
-		position: absolute;
-		margin-top: 600px;
-		
-	}
+	
 	
 	
 </style>
