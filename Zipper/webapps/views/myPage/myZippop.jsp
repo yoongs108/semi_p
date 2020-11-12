@@ -63,16 +63,6 @@
 		/*border: 1px solid red;*/
 	}
 	
-	#userCommentArea {
-		height:100%;
-		width:60%;
-		/*background: blue;*/
-		position: relative;
-		left: 40%;
-		top:-100%;
-		/*border: 1px solid green;*/
-	}
-	
 	#profileImg {
 		width : 120px;
 		height: 140px;
@@ -91,27 +81,40 @@
 		top: 25%;
 	}
 	
-	#userCommentArea > div > p {
-		height: 120px;
-		margin-left:18%;
-		margin-right:18%;
-		margin-top: 50px;
-		/*border: 1px solid blue;*/
-		font-size: 16px;
+	#userCommentArea {
+		height:100%;
+		width:60%;
+		/*background: blue;*/
+		position: relative;
+		left: 40%;
+		top:-100%;
+		/*border: 1px solid green;*/
 	}
 	
-	#userCommentArea > div > p > table > tr {
-		height: 40px;
-		border: 1px solid pink;
+	#userCommentArea > div{
+		position: relative;
+		width:60%;
+		top: 70px;
 	}
+	
+	#userCommentArea > div > p {
+		height: 120px;
+		margin-left:auto;
+		margin-right:auto;
+		margin-top: auto;
+		/*border: 1px solid blue;*/
+		font-size: 16px;
+		width: 300px;
+	}
+
 	
 	#myZippopCount {
 		position: relative;
 		width: 240px;
 		height: 25px;
-		left: 380px;
+		left: 70px;
 		font-size: 13px;
-		top : 30px;
+		top : 15px;
 	}
 	
 	#myZippopCount>img {
@@ -154,9 +157,28 @@
 	}
 	
 	#zipWrite {
+		position: relative;
 		width: 100px;
 		height: 50px;
 		margin-left:900px;
+	}
+	
+	#qutationLeft, #qutationRight {
+		height : 50px;
+		height: 50px;
+		
+	}
+	
+	#qutationLeft {
+		position: relative;
+		right:220px;
+		top:40px;
+	}
+	
+	#qutationRight {
+		position: relative;
+		left:220px;
+		bottom: 140px;
 	}
 	
 	
@@ -177,7 +199,6 @@
 	$('.thumb-list').click(function () {
 		var bno = $(this).find('input').val();
 		location.href ='<%= request.getContextPath()%>/zippopSelectOne.zp?bno=' + bno;
-		
 	});
 </script>
 </head>
@@ -200,11 +221,11 @@
 				</div>
 			</div>
 			<!-- 내 소개  들어오는 자리  -->
-			<div id="userCommentArea">
+			<div id="userCommentArea" align="center">
 				<!-- 내가 작성한글 들어오는 자리  -->
+				<img src="<%= request.getContextPath() %>/resources/images/common/qutation_img.png" alt="쉼표" id="qutationLeft"/>
 				<div>
-					<p>
-					
+					<p align="center">
 						<% if (m.getIntro() == null) { %>
 							 아직 내 한줄 소개가 없습니다..
 						<% } else { %>
@@ -212,6 +233,7 @@
 						<% } %>
 					</p>
 				</div>
+				<img src="<%= request.getContextPath() %>/resources/images/common/quatation_right_img.png" alt="쉼표" id="qutationRight" />
 				<!-- 갯수 카운트 자리 -->
 				<div>
 					<!-- 작성글 갯수 부분 들어오는 자리 -->
