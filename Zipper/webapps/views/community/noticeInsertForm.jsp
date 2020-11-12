@@ -98,14 +98,6 @@
         		<script>
 					 // 현재시간
 					window.onload = function(){
-					//var date1 = new Date();
-					//let today = new date();
-		         	//document.write(today)
-		         	//date.innerHTML += date + "<br>";
-		           // div3.innerHTML += date1 + "<br>";
-		           //.toISOString().substr(0, 10).replace('T', ' ');
-						//var st_date = new Date().toISOString().substr(0, 10).replace('T', ' ');
-						//alert(st_date);
 						var today = new Date();
 						var dd = today.getDate();
 						var mm = today.getMonth()+1; //January is 0!

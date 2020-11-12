@@ -37,6 +37,7 @@ public class NoticeDAO {
 		}
 	}
 
+	// 공지사항 리스트 
 	public ArrayList<Board> selectList(Connection con) {
 		ArrayList<Board> list = new ArrayList<>();
 		PreparedStatement pstmt = null;
@@ -78,6 +79,7 @@ public class NoticeDAO {
 		return list;
 	}
 
+	// 공지사항 상세페이지 
 	public Board selectOne(Connection con, int bno) throws NoticeException { // connection 과 int는 받아오는 타입이다.
 		Board bs = new Board();
 		PreparedStatement pstmt = null;
@@ -118,7 +120,8 @@ public class NoticeDAO {
 
 		return bs;
 	}
-
+	
+	// 공지사항 작성
 	public int insertNotice(Connection con, Board b) throws NoticeException {
 		int result = 0;
 		PreparedStatement pstmt = null;
@@ -144,6 +147,7 @@ public class NoticeDAO {
 
 	}
 
+	// 공지사항 삭제 
 	public int deleteNotice(Connection con, int bno) throws NoticeException {
 
 		int result = 0;
@@ -169,6 +173,7 @@ public class NoticeDAO {
 		return result;
 	}
 
+	// 페이징 처리를 위한 리스트 
 	public ArrayList<Board> selectList(Connection con, int currentPage, int limit) {
 		
 		ArrayList<Board> list = new ArrayList<>();
@@ -225,7 +230,7 @@ public class NoticeDAO {
 
 	}
 
-
+	// 공지사항 수정
 	public int updateView(Connection con, int bno, String btitle, String bcontent) throws NoticeException {
 		int result = 0;
 		PreparedStatement pstmt = null;

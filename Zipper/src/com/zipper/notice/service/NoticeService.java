@@ -38,6 +38,7 @@ public class NoticeService {
 		return bs; // bno로 조회한 게시글을 bs로 return 
 	}
 
+	// 공지사항 작성 
 	public int insertNotice(Board b) throws NoticeException {
 		con = getConnection();
 		System.out.println("sass");
@@ -51,6 +52,7 @@ public class NoticeService {
 		return result;
 	}
 	
+	// 공지사항 수정 
 	public Board updateNotice(int bno) throws NoticeException {
 		con = getConnection();
 		
@@ -61,6 +63,7 @@ public class NoticeService {
 		return bs;
 	}
 	
+	// 공지사항 삭제
 	public int deleteNotice(int bno) throws NoticeException {
 		con = getConnection();
 		
@@ -76,18 +79,8 @@ public class NoticeService {
 		return result;
 	}
 
-	public ArrayList<Board> selectList(int currentPage, int limit) {
-		con = getConnection();
-		
-		ArrayList<Board> list = nDAO.selectList(con, currentPage, limit); // create method처리ok
-		
-		close(con);
-		
-		return list;
 	
-	}
-	
-	
+	// 게시글 수정
 	public int updateView(int bno, String btitle, String bcontent) throws NoticeException {
 		con = getConnection();
 		
@@ -103,6 +96,18 @@ public class NoticeService {
 		return result;
 	}
 	
+	// 게시글 리스트 
+	public ArrayList<Board> selectList(int currentPage, int limit) {
+		con = getConnection();
+		
+		ArrayList<Board> list = nDAO.selectList(con, currentPage, limit); // create method처리ok
+		
+		close(con);
+		
+		return list;
+		
+	}
+
 	// 게시글 수 조회
 	public int getListCount() {
 		

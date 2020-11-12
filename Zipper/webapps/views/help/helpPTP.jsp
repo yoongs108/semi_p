@@ -1,8 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="com.zipper.question.model.vo.*, java.util.*"%>
+    pageEncoding="UTF-8" import="com.zipper.question.model.vo.*, com.zipper.board.model.vo.*, java.util.*"%>
     
 <%
 	ArrayList<Question> list = (ArrayList<Question>) request.getAttribute("list");
+	PageInfo pi = (PageInfo)request.getAttribute("pi");	
+	int listCount = pi.getListCount();
+	int currentPage = pi.getCurrentPage();
+	int maxPage = pi.getMaxPage();
+	int startPage = pi.getStartPage();
+	int endPage = pi.getEndPage();
 %>
 
 <!DOCTYPE html>
@@ -90,7 +96,7 @@
 					
 					<%-- title 클릭 시 상세페이지로 넘어감 --%>
 					<th>
-						<input type="checkbox" id="check" name="check" 
+						<input type="checkbox" id="check" name="check" disabled
 													<%= c.getQstate().equals("Y") ? "checked='checked'" : "" %>>
 					</th>
 					<td class="inquireName" width="80%"> <%=c.getQtitle()%> </td>
@@ -103,22 +109,42 @@
 
  		</table>
  	</form>
-
- 	 <!-- Pagination -->
-  	<div class="w3-center w3-padding-32">
-    <div class="w3-bar">
-      <a href="#" class="w3-bar-item w3-button w3-hover-black">«</a>
-      <a href="#" class="w3-bar-item w3-black w3-button">1</a>
-      <a href="#" class="w3-bar-item w3-button w3-hover-black">2</a>
-      <a href="#" class="w3-bar-item w3-button w3-hover-black">3</a>
-      <a href="#" class="w3-bar-item w3-button w3-hover-black">4</a>
-      <a href="#" class="w3-bar-item w3-button w3-hover-black">»</a>
-    </div>
     
+    <!-- Pagination -->
+     
+	<div style="text-align : center;">
+		<button class="w3-bar-item w3-button w3-hover-black"
+       			onclick="location.href='<%= request.getContextPath() %>/selectList.qo?currentPage=1'"><<</button>
+		<% if(currentPage <= 1){ %>
+			<button class="w3-bar-item w3-button" disabled><</button>
+		<% } else { %>
+		<button class="w3-bar-item w3-button w3-hover-black"
+				onclick="location.href='<%= request.getContextPath() %>/selectList.qo?currentPage=<%=currentPage - 1 %>'"><</button>
+		<% } %>
+		<% for(int p = startPage; p <= endPage; p++){
+				if(p == currentPage){	
+		%>
+			<button class="w3-bar-item w3-button" disabled><%= p %></button>
+		<%      }else{ %>
+			<button class="w3-bar-item w3-button w3-hover-black"
+					onclick="location.href='<%= request.getContextPath() %>/selectList.qo?currentPage=<%= p %>'"><%= p %></button>
+		<%      } %>
+		<% } %>
+         
+        <%  if(currentPage >= maxPage){  %>
+		<button class="w3-bar-item w3-button" disabled>></button>
+		<%  }else{ %>
+		<button class="w3-bar-item w3-button w3-hover-black" 
+				onclick="location.href='<%= request.getContextPath() %>/selectList.qo?currentPage=<%=currentPage + 1 %>'">></button>
+		<%  } %>
+		<button class="w3-bar-item w3-button w3-hover-black"
+				onclick="location.href='<%= request.getContextPath() %>/selectList.qo?currentPage=<%= maxPage %>'">>></button>
+	</div>
+	
  	<script>
  	$(function(){
 		$('section').find('tr').mouseenter(function(){
-			$(this).css({"background" : "#87CEFA", "opacity" : "1.0"});
+			$(this).css({"background" : "#CCC", "opacity" : "1.0", "transition" : "0.4s"});
 		}).mouseout(function(){
 			$(this).css({"background" : "none"});
 		}).click(function(){

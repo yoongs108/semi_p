@@ -14,8 +14,8 @@
 <style>
    section h1{
    	  padding-left : 30px;
-   }
-
+ 
+	}
 	#back{
       position : absolute;
       top : 100px;
@@ -50,6 +50,7 @@
    
    	section h3{
    	  margin-left : 60px;
+
    }
    	#adminwrite{
    	  margin-left : 200px;
@@ -145,13 +146,13 @@
 	<hr style="width: 100%; border: solid 0.3px black;">
  	
  	<!-- 문의 내용 -->
- 	<div>
+ 	<div id="bigtitle">
 	<div id="date"> 
 		<h4> <%=qs.getQdate() %> </h4>
 	</div>
 	<br>
 	<br>
-		<h3 id="title" > <b>문의 제목 </b> 
+		<h3 id="title" > <b>문의 제목 </b>
 		<% if(m != null && m.getMgrd().equals("A")){ %> 
 		<input type="text" readonly="readonly" id="memberid" value="<%= ms.getMid()%>"> 
 		<% } %>
@@ -160,17 +161,18 @@
  	<div class="content">
  		<%=qs.getQcontent() %>
 	</div>
- 	</div>
+	</div>
+	<hr />
 
 
 	<!-- 답변 작성 -->
  	<div>
- 	<form class="answer" action="<%=request.getContextPath()%>/insertComment.co?" method="post">
+ 	<form class="answer" action="<%=request.getContextPath()%>/insertComment.qo?" method="post">
 	<input type="hidden" name="mno" value="<%=m.getMno()%>"/>
 	<input type="hidden" name="qno" value="<%=qs.getQno()%>"/>
 	
  	<div id="comdate"> 
-		<h4> <input type="text" name="qcomdate" value="<%=qs.getQcomdate() %>" /> </h4>
+		<h4> <input type="text" name="qcomdate" value="<%=qs.getQcomdate() != null ? qs.getQcomdate(): ' ' %>" /> </h4>
 	</div>
 	<br>
  		<h3 id="commenttitle" > <b>문의 답변 </b> </h3>
@@ -184,7 +186,8 @@
 			<% } %>
  		</div>
  	<div class="content" >
- 		<textarea id="comment" name="qcomment" readonly="readonly"> <%= qs.getQcomment() %> </textarea>
+ 		<textarea id="comment" name="qcomment" readonly="readonly"> <%= qs.getQcomment() != null ? qs.getQcomment(): ' ' %> </textarea>
+ 		
  	</div>
  	
  	<script>
