@@ -91,7 +91,7 @@
 				<tr>
 					<td class="title" >클래스 명</td>
 					<td>
-						<input type=text name=title size=65
+						<input type=text name=title size=40
 						placeholder="  제목을 입력해 주세요.">
 					</td>
 					
@@ -106,7 +106,7 @@
 				<tr>
 					<td class="title">클래스 소개</td>
 					<td colspan="3">
-						<textarea name = content cols=99 rows=7 placeholder="  클래스 소개를 입력해 주세요."></textarea>
+						<textarea name = content cols=85 rows=7 placeholder="  클래스 소개를 입력해 주세요."></textarea>
 					</td>
 				</tr>
 			</table>
@@ -119,11 +119,10 @@
 			<div align="center" style="margin-top: 70px; margin-bottom: 80px;">
 				<button type="submit" class="btn">작성</button>
 				&nbsp;&nbsp;&nbsp;&nbsp;
-				<button onclick="history.go(-1)" class="btn">취소</button>
+				<button onclick="history.go(-2)" class="btn">취소</button>
 			</div>
 
 			<script>
-				
 				// 사진 미리보기 기능
 				$(function(){
 					$('#videoArea').click(function(){
@@ -132,7 +131,6 @@
 					$('#fileArea').hide();
 				});
 			
-				
 				// 사진 db로 보내기
 				function loadImg(img){
 					if(img.files && img.files[0]) {
@@ -145,8 +143,8 @@
 						}
 					}
 					reader.readAsDataURL(img.files[0]);
-				}
-				
+				};
+
 			</script>
 		</form>
 	</section>
