@@ -5,7 +5,10 @@
 <head>
 <meta charset="UTF-8">
 <title>메인페이지</title>
-
+<!--Chrome, Safari, IE -->
+<link rel="shortcut icon" href="<%= request.getContextPath() %>/resources/images/common/logo2.ico" type="image/x-icon">
+<!-- Firefox, Opera  -->
+<link rel="icon" href="<%= request.getContextPath() %>/resources/images/common/logo2.ico" type="image/x-icon">
 <style>
 	
 	section {
