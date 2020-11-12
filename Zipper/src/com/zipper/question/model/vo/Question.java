@@ -14,33 +14,19 @@ public class Question {
 	private String qstate;  	// 문의글 처리상태
 	private String qid;   		// 문의글 작성자
 	private String qcomment;  	// 문의 답변 
-	private Date qcommentdate; 	// 답변 작성일 
+	private Date qcomdate; 		// 답변 작성일 
 	
 	// 부모 생성자
 	public Question() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-		
-	public Question(int qno, int mno, String qcontent, Date qdate, String qtitle, String qstate, String qid,
-			String qcomment, Date qcommentdate) {
-		super();
-		this.qno = qno;
-		this.mno = mno;
-		this.qcontent = qcontent;
-		this.qdate = qdate;
-		this.qtitle = qtitle;
-		this.qstate = qstate;
-		this.qid = qid;
-		this.qcomment = qcomment;
-		this.qcommentdate = qcommentdate;
-	}
 
 	@Override
 	public String toString() {
 		return "Question [qno=" + qno + ", mno=" + mno + ", qcontent=" + qcontent + ", qdate=" + qdate + ", qtitle="
-				+ qtitle + ", qstate=" + qstate + ", qid=" + qid + ", qcomment=" + qcomment + ", qcommentdate="
-				+ qcommentdate + "]";
+				+ qtitle + ", qstate=" + qstate + ", qid=" + qid + ", qcomment=" + qcomment + ", qcomdate=" + qcomdate
+				+ "]";
 	}
 
 	public int getQno() {
@@ -107,12 +93,13 @@ public class Question {
 		this.qcomment = qcomment;
 	}
 
-	public Date getQcommentdate() {
-		return qcommentdate;
+	public Date getQcomdate() {
+		return qcomdate;
 	}
 
-	public void setQcommentdate(Date qcommentdate) {
-		this.qcommentdate = qcommentdate;
+	public void setQcomdate(Date qcomdate) {
+		this.qcomdate = qcomdate;
 	}
+
 
 }

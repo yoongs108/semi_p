@@ -123,14 +123,13 @@ public class NoticeDAO {
 		int result = 0;
 		PreparedStatement pstmt = null;
 		String sql = prop.getProperty("insertNotice");
-
+		System.out.println(sql);
 		// pstmt = con.prepareStatement(sql); try/catch 처리ok
 		try {
 			pstmt = con.prepareStatement(sql);
 
 			pstmt.setString(1, b.getBtitle());
 			pstmt.setString(2, b.getBcontent());
-			pstmt.setDate(3, b.getBdate());
 
 			result = pstmt.executeUpdate();
 

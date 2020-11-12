@@ -40,7 +40,7 @@ public class NoticeService {
 
 	public int insertNotice(Board b) throws NoticeException {
 		con = getConnection();
-		
+		System.out.println("sass");
 		int result = nDAO.insertNotice(con, b);
 		
 		if(result > 0) {commit(con);

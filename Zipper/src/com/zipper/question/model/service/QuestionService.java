@@ -58,4 +58,24 @@ public Member selectMember(int mno) {
 	return result;
 }
 
+public int insertComment(int qno, String qcomdate, String qcomment) {
+	con = getConnection();
+	
+	int result = qDAO.insertComment(con, qno, qcomdate, qcomment);
+	
+	close(con);
+	
+	return result;
+}
+
+public int deleteQuestion(int qno) throws QuestionException {
+	con = getConnection();
+	
+	int result = qDAO.deleteQuestion(con, qno);
+	
+	close(con);
+	
+	return result;
+}
+
 }
