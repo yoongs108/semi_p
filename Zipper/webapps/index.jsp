@@ -14,40 +14,63 @@
 	section {
 		position : absolute;
 		top : 0;
-		/* height : 100vh; */
+		height : 100vh;
 		width : 100%;
 		clear : both;
+		overflow: hidden;
 	}
 	
 	section>article {
-		/* border : 1px solid black; */
 		float : left;
 		height : 100vh;
-		width : 33%;
+		width : 33.3%;
 		text-align : center;
+		overflow : hidden;
 	}
 	
-	section>article.class {
-		width : 34%;
-		background : lightgrey;
+	.zippop{
+		background-image : url('<%= request.getContextPath() %>/resources/images/common/3.jpg');
+		background-size: cover;
+		overflow: hidden; 
+		transform: scale(1.0);        
+		transition: transform .8s; 
 	}
 	
-	section>article.zippop{
-		background : lightblue;
+	.class {
+		background-image : url('<%= request.getContextPath() %>/resources/images/common/sofa.jpeg');
+		background-size: cover;
+   		overflow: hidden;   
+   		transform: scale(1.0);        
+		transition: transform .8s;
 	}
 	
-	section>article.guide{
-		background : lightgreen;	
+	.guide{
+		background-image :url('<%= request.getContextPath() %>/resources/images/common/1.jpeg');
+		background-size: cover;
+		overflow: hidden; 
+		transform: scale(1.0);        
+		transition: transform .8s; 
 	}
 	
 	section>article>a.selectMenu {
 		display : inline-block;
-		
 	}
 	/* 배경 호버시 투명도 */
 	section>article:hover{
-		opacity: 0.5;
 		cursor: pointer;
+		transform:scale(1.1);
+		transition: transform .9s;
+	}
+	
+	section>article:hover .title{
+		color : black;
+		transform:scale(1.3);
+		transition: transform .9s;
+	}
+	section>article:hover .sub{
+		color : black;
+		transform:scale(1.8);
+		transition: transform .9s;
 	}
 	article>h1:nth-of-type(1) {
 		margin-top : 50vh;
@@ -61,19 +84,19 @@
 	
 	<section>
 		<article class="zippop" onclick="goZippop();">
-			<h1>ZIP POP</h1>
+			<h1 class="title">ZIP POP</h1>
 			<br><br><br>
-			<h1>+</h1>
+			<h1 class="sub">+</h1>
 		</article>
 		<article class="class" onclick="goClass();">
-			<h1>CLASS</h1>
+			<h1 class="title">CLASS</h1>
 			<br><br><br>
-			<h1>+</h1>
+			<h1 class="sub">+</h1>
 		</article>
 		<article class="guide" onclick="goGuide();">
-			<h1>GUIDE</h1>
+			<h1 class="title">GUIDE</h1>
 			<br><br><br>
-			<h1>+</h1>
+			<h1 class="sub">+</h1>
 		</article>
 	</section>
 
@@ -82,7 +105,7 @@
 			location.href = "<%= request.getContextPath() %>/zippop.zp";
 		};
 		function goClass() {
-			location.href = "<%= request.getContextPath() %>/classFromMain.cfm";
+			location.href = "<%= request.getContextPath() %>/selectList.cl";
 		};
 		function goGuide() {
 			location.href = "<%= request.getContextPath() %>/selectList.gu";

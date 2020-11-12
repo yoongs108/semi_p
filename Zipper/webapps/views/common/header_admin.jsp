@@ -124,7 +124,7 @@
 				</li>
 				<li><img src="<%= request.getContextPath() %>/resources/images/common/userInfo.png" onclick="goUserInfo()"/>
 				<li><img src="<%= request.getContextPath() %>/resources/images/common/bill.png" onclick="goPayment()"/></li>
-				<li><img src="<%= request.getContextPath() %>/resources/images/common/menu.png" onclick="goHome()"/></li>
+				<li><img src="<%= request.getContextPath() %>/resources/images/common/menu.png" onclick="goVideoInfo()"/></li>
 				<li><img src="<%= request.getContextPath() %>/resources/images/common/menu.png" onclick="goHome()"/></li>
 			</ul>
 		</nav>
@@ -154,6 +154,10 @@
 		
 		function goPayment() {
 			location.href="<%= request.getContextPath() %>/views/admin/payment.jsp";
+		}
+		
+		function goVideoInfo() {
+			location.href="<%= request.getContextPath() %>/views/admin/classStatus.jsp";
 		}
 		
 		/* 페이지 로드시 실행 */
