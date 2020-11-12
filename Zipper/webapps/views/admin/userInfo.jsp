@@ -12,7 +12,7 @@
 <style>
 	section>div {
 		margin-left : 80px;
-		height : 100%
+		height : 100%;
 	}
 	
 	section table {
