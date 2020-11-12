@@ -213,13 +213,13 @@
 	                
 		                <div class="carousel">
 		                	<div class="cover"></div>
-		                    <img class="carousel_img" src="<%=request.getContextPath()%>/resources/images/fileUpload/3.jpg" />
+		                    <img class="carousel_img" src="<%=request.getContextPath()%>/resources/images/fileUpload/2.jpg" />
 		                    <div class="carousel_txt"><h2>혼자만의 시간 <br />실내외 어디서나 편안하게</h2></div>
 		                </div>
 	                
 		                <div class="carousel">
 		                	<div class="cover"></div>
-		                    <img class="carousel_img" src="<%=request.getContextPath()%>/resources/images/fileUpload/5.jpg" />
+		                    <img class="carousel_img" src="<%=request.getContextPath()%>/resources/images/fileUpload/3.jpg" />
 		                    <div class="carousel_txt"><h2>재미있는 DIY <br />벽 수납공간 만들기</h2> </div>
 		                </div>
 	                	<div class="carousel">
@@ -230,13 +230,13 @@
 	                
 		                <div class="carousel">
 		                	<div class="cover"></div>
-		                    <img class="carousel_img" src="<%=request.getContextPath()%>/resources/images/fileUpload/t.jpg" />
+		                    <img class="carousel_img" src="<%=request.getContextPath()%>/resources/images/fileUpload/5.jpg" />
 		                    <div class="carousel_txt"><h2>너 시트지 붙여? <br /> 난 타일 붙여!</h2></div>
 		                </div>
 	                
 		                <div class="carousel">
 		                	<div class="cover"></div>
-		                    <img class="carousel_img" src="<%=request.getContextPath()%>/resources/images/fileUpload/h.jpg" />
+		                    <img class="carousel_img" src="<%=request.getContextPath()%>/resources/images/fileUpload/6.jpg" />
 		                    <div class="carousel_txt"><h2>드레스룸을 쇼룸처럼! <br />분위기 끝판왕 행거 만들기</h2> </div>
 		                </div>
 	            	</div>
