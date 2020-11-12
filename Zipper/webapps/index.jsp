@@ -10,7 +10,7 @@
 <!-- Firefox, Opera  -->
 <link rel="icon" href="<%= request.getContextPath() %>/resources/images/common/logo2.ico" type="image/x-icon">
 <style>
-	
+
 	section {
 		position : absolute;
 		top : 0;
