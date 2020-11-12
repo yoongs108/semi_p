@@ -144,7 +144,7 @@
     // 게시글 선택 시 주는 효과 + 상세 페이지 연결 
     $(function(){
       $('section').find('tr').mouseenter(function(){
-         $(this).css({"background" : "#87CEFA", "opacity" : "1.0"});
+         $(this).css({"background" : "#CCC", "opacity" : "1.0", "transition" : "0.4s"});
 
       }).mouseout(function(){
          $(this).css({"background" : "none"});

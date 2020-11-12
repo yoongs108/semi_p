@@ -34,7 +34,6 @@
 		border-bottom: 1px solid black;
 	}
 	
-		
 	input[name=title]{
 		width : 500px;
 	}
@@ -104,15 +103,10 @@
         		<script>
 					 // 현재시간
 					window.onload = function(){
-					//var date1 = new Date();
-					//let today = new date();
-		         	//document.write(today)
-		         	//date.innerHTML += date + "<br>";
 						var st_date = new Date().toISOString().substr(0, 10).replace('T', ' ');
-						// alert(st_date);
 						$('#date').val(st_date);
 					 }
-		           // div3.innerHTML += date1 + "<br>";
+		          
 				</script>
         </form>
         

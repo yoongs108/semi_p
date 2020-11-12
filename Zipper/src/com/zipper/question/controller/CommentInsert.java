@@ -14,7 +14,7 @@ import com.zipper.question.model.vo.Question;
 /**
  * Servlet implementation class CommentInsert
  */
-@WebServlet("/insertComment.co")
+@WebServlet("/insertComment.qo")
 public class CommentInsert extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

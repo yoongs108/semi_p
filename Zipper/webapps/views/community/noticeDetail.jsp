@@ -10,7 +10,7 @@
 <meta charset="UTF-8">
 <title> 공지사항 상세 페이지 </title>
 <style>
-#back{
+	#back{
       position : absolute;
       top : 100px;
       left : 950px;
@@ -30,6 +30,11 @@
       width: 1024px;
       margin-left:auto;
       margin-right:auto;
+      
+   }
+   
+   .titledate{
+   	margin-top : 50px;
    }
    
     #title{
@@ -52,9 +57,12 @@
 		height : 500px;
 		margin-left : 100px;
 		font-size : 15px;
+		border : none;
+		text-align : center;
+		padding-top : 150px;
 	}
 	
-#adminwrite{
+	#adminwrite{
 		position : relative;
 		float: right;
 		top : 23px;
@@ -91,8 +99,8 @@
 </style>
 </head>
 <body id="body">
-<section> 
  	<%@ include file="/views/common/header.jsp" %>
+<section> 
  	<h1> NOTICE </h1>
  	<div>
 	<!-- 회원등급이 admin으로 로그인할 때만 확인 되도록 조건문 넣어줌 -->
@@ -107,9 +115,10 @@
 			alt="notice" id="back" onclick="location.href = '<%= request.getContextPath() %>/selectList.no?'"> 
 		&nbsp;&nbsp;&nbsp;
 	<hr style="width: 100%; border: solid 0.3px black;">
-	
 
-	<div>
+	
+	<!-- 공지사항 제목 + 공지사항 작성일 -->
+	<div name="titledate">
 		<h3 id="title"> <%= bs.getBtitle() %></h3>
 		<h4 id="date"> <%= bs.getBdate() %></h4>
 	</div>
@@ -119,29 +128,10 @@
  	<br>
  	<br>
  	<br>
+ 	<!-- 공지사항 내용 -->
  	<div id="content">
 		<%= bs.getBcontent() %>
  	</div>
- 	<!-- DB구축 시 가지고 와야할 구문  -->
- 	
- 	<%-- <div><%=b.getBcontent()</div>--%>
- 	
- 	<%--
- 	<div>
- 	<%
-		if (m != null && m.getUserName().equals(b.getBwriter())) {
-		// 게시글 작성자와 가입한 아이디가 같으면 수정하기가 보이게 하는 코드구현
-		%>
-		<button
-			onclick="location.href='<%=request.getContextPath()%>/bUpView.bo?bno='+<%=b.getBno()%>">
-			<!--  수정하는 화면으로 넘어가는 url mappings -->
-				수정하기
-		</button>
-			<%
-				}
-			%>
- 	</div>
- 	 --%>
  	 
  </section>
 	 <%@ include file="/views/common/footer.jsp" %>

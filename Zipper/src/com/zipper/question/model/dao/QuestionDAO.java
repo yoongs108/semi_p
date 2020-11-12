@@ -12,6 +12,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Properties;
 
+import com.zipper.board.model.vo.Board;
 import com.zipper.common.exception.QuestionException;
 import com.zipper.member.model.vo.Member;
 import com.zipper.question.model.vo.Question;
@@ -180,7 +181,8 @@ public QuestionDAO() {
 		
 		return result;
 	}
-
+	
+	// 답변 작성 
 	public int insertComment(Connection con, int qno, String qcomdate, String qcomment) {
 		int result = 0;
 		PreparedStatement pstmt = null;
@@ -206,7 +208,8 @@ public QuestionDAO() {
 		return result;
 	
 	}
-
+	
+	// 질문 삭제 
 	public int deleteQuestion(Connection con, int qno) throws QuestionException {
 		int result = 0;
 		PreparedStatement pstmt = null;
@@ -225,6 +228,91 @@ public QuestionDAO() {
 			throw new QuestionException("[DAO] : " + e.getMessage()); 
 		}
 		
-		return 0;
+		return result;
 	}
+	
+	// 게시글 수 조회  
+	public int getListCount(Connection con) {
+		
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("listCount");
+		
+		System.out.println(sql);
+		
+		try {
+			pstmt = con.prepareStatement(sql);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				
+				result = rset.getInt(1);
+			}			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return result;
+	}
+
+	public ArrayList<Question> selectList(Connection con, int currentPage, int limit) {
+
+		ArrayList<Question> list = new ArrayList<>();
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+
+		String sql = prop.getProperty("selectList");
+		
+		System.out.println(sql);
+		
+		try {
+			pstmt = con.prepareStatement(sql);
+
+			// 1. 마지막 행의 번호
+			// 2. 첫 행의 번호
+			int startRow = (currentPage - 1) * limit + 1;
+			int endRow = startRow + limit - 1;
+
+			pstmt.setInt(1, endRow);
+			pstmt.setInt(2, startRow);
+
+			rset = pstmt.executeQuery();
+
+			while (rset.next()) {
+
+				Question q = new Question();
+
+				q.setQno(rset.getInt("qno"));
+				q.setMno(rset.getInt("mno"));
+				q.setQcontent(rset.getString("qcontent"));
+				q.setQdate(rset.getDate("qdate"));
+				q.setQtitle(rset.getString("qtitle"));
+				q.setQstate(rset.getString("qstate"));
+				q.setQid(rset.getString("qid"));
+				q.setQcomment(rset.getString("qcomment"));
+				q.setQcomdate(rset.getDate("qcomdate"));
+				
+				list.add(q);
+				
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+
+			return list;
+}
+
 }
