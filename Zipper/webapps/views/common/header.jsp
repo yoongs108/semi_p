@@ -164,8 +164,8 @@
         <div id="writeBox">
         	<img src="<%= request.getContextPath() %>/resources/images/common/pen.png" id="write" data-toggle="dropdown"/>
         	<ul class="dropdown-menu" role="menu" style="top : 25x;">
-			    <li><a href="#">ZIP POP</a></li>
-			    <li><a href="#">1:1 문의</a></li>
+			    <li><a href="<%= request.getContextPath() %>/views/writer/zippopWriter.jsp"">ZIP POP</a></li>
+			    <li><a href="<%= request.getContextPath() %>/views/writer/PTPWrite.jsp">1:1 문의</a></li>
 			</ul>
 		</div>
 		
@@ -217,7 +217,7 @@
             <% if(m == null) { %>
             <!-- 비회원 -->
             <div class="right">
-                <form action="<%= request.getContextPath() %>/login.me" method="post">
+                <form action="" method="post">
                 <br /> <br />
                     <table align="center">
                         <tr>
@@ -233,13 +233,13 @@
                             <td colspan="2">
                                 <div class="input-group">
                                     <span class="input-group-addon" style="width : 50px;">Pw</span>
-                                    <input type="password" size="20" name="userPwd" id="userPwd" class="form-control height50" placeholder="UserPassword">
+                                    <input type="password" size="20" name="userPwd" id="userPwd" class="form-control height50" placeholder="UserPassword" onKeyDown="enterKey()">
                                 </div>
                             </td>
                         </tr>
                     </table>
                     <br />
-                    <button type="submit" class="btn btn-default height50" onclick="login()" style="width : 100px;">로그인</button>
+                    <button type="button" class="btn btn-default height50" onclick="login()" style="width : 100px;">로그인</button>
                     &nbsp;&nbsp;
                     <button type="button" class="btn btn-default height50" onclick="join()" style="width : 100px;">회원가입</button>
                 </form>
@@ -286,6 +286,11 @@
 	    function navToggle(){
 	        $('nav').toggleClass('nav_hide');
 	    }
+	    function enterKey() {
+	        if (event.keyCode==13){
+	        	login();
+	        }
+	     }
         function login(){
 			//$('#loginForm').submit();
 			
