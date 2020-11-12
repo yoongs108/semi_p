@@ -8,20 +8,19 @@
 <title>수강신청 및 결제 완료</title>
 
 <style type="text/css">
+
+
 	section {
       width: 1024px;
       margin-left:auto;
       margin-right:auto;
+
    }
-   
-   table {
-		width : 700px; 
-   }
-   
-   
-   button {
+  
+	section button {
 		width: 100px;
 		height: 50px;
+		margin-bottom: 100px;
 		background-color: black;
 		border: none;
 		color: white;
@@ -41,13 +40,13 @@
 
 	<section>
 		<div style="border-bottom: 1px solid black;">
-			<h2 id="title">수강신청 및 결제 완료</h2>
+			<h2 align="center">수강신청 및 결제 완료</h2>
 		</div>
 		<div align="center">
 			<div class="boxLine">
 				<h2>신청 및 결제 내역</h2>
 			</div>
-			<table>
+			<table style="width: 700px;">
 				<tr>
 					<td>클래스 명</td>
 					<td style="text-align:right;"><%= request.getParameter("cname") %></td>
@@ -67,7 +66,7 @@
 			
 			
 			<div>
-			<button style=" width : 700px; color : white;" onclick="goClass()">확인</button>
+			<button style=" width : 700px; color : white;" onclick="goClass()">확 인</button>
 			</div>
 		</div>
 

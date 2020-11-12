@@ -1,6 +1,7 @@
 package com.zipper.classMain.controller;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -28,8 +29,11 @@ public class ClassDelete extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
 		int cno = Integer.parseInt(request.getParameter("cno"));
 		
+		System.out.println("servlet arrive : " +cno);
+
 		ClassService cs = new ClassService();
 		
 		String root = request.getServletContext().getRealPath("/resources");
@@ -37,17 +41,16 @@ public class ClassDelete extends HttpServlet {
 		
 		int result = cs.deleteClass(cno, savePath);
 		
-		if(result > 0) {
+		if (result > 0) {
 			response.sendRedirect("classFromMain.cfm");
-			
-		}else {
+		}  else {
+		
 			request.setAttribute("exception", new Exception("클래스 삭제오류"));
 			request.setAttribute("error-msg", "클래스 삭제 오류 발생");
 			
 			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
-			
 		}
-		
+			
 		
 	}
 

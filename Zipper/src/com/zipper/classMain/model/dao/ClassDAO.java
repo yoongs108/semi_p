@@ -1,6 +1,6 @@
 package com.zipper.classMain.model.dao;
 
-import static com.zipper.common.JDBCTemplate.close;
+import static com.zipper.common.JDBCTemplate.*;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -362,7 +362,7 @@ public class ClassDAO {
 		return result;
 	}
 	
-	// rrrrrrrrrrrrrrrrrrrr 
+	// 클래스 삭제
 	public int deleteClass(Connection con, int cno) {
 		int result = 0;
 		PreparedStatement pstmt = null;
@@ -372,6 +372,64 @@ public class ClassDAO {
 			pstmt = con.prepareStatement(sql);
 			
 			pstmt.setInt(1, cno);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
+	
+	// 파일이름 조회
+	public String searchFileName(Connection con, int cno) {
+		
+		String filename = "";
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("searchFileName");
+		
+		try {
+			pstmt = con.prepareStatement(sql);	
+			
+			pstmt.setInt(1, cno);
+			
+			rset = pstmt.executeQuery();
+			
+			if (rset.next()) {
+				
+				filename = rset.getString(1);
+				System.out.println("dao" + filename);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		
+		
+		return filename;
+	}
+
+	public int deleteAtt(Connection con, int cno) {
+		
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("deleteAtt");
+		try {
+			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setInt(1, cno);
+			
+			
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
