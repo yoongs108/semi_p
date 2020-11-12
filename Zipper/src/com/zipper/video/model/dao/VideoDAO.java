@@ -124,13 +124,13 @@ public class VideoDAO {
 			while (rset.next()) {
 				Video v = new Video();
 				
-				v.setVno(rset.getInt(1));
-				v.setVname(rset.getString(2));
-				v.setVideo(rset.getString(3));
-				v.setVtext(rset.getString(4));
-				v.setPrice(rset.getInt(5));
-				v.setCname(rset.getString(6));
-				v.setFileNewName(rset.getString(7));
+				v.setVno(rset.getInt("vno"));
+				v.setVname(rset.getString("vname"));
+				v.setVideo(rset.getString("video"));
+				v.setVtext(rset.getString("vtext"));
+				v.setPrice(rset.getInt("price"));
+				v.setCname(rset.getString("cname"));
+				v.setFileNewName(rset.getString("file_new_name"));
 				v.setTname(rset.getString("tname"));
 				
 				list.add(v);

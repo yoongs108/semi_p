@@ -107,7 +107,7 @@
 			alt="class1" id="back" onclick="history.go(-1)"> 
 
 		</div>
-		
+
 		<% for (Payment pm : list) { %>
 		<div class="card"> <!-- 클래스 리스트 폼 -->
 			
@@ -125,8 +125,7 @@
 				
 			</div>
 		</div>
-		<% } %>
-		
+		<%} %>
 		
 		<!-- 페이지 버튼 -->
 	<div style="text-align : center;">
@@ -160,8 +159,8 @@
 	
 		<script>
 		function goVideoList(cno) { 
-			location.href = '<%= request.getContextPath() %>/selectList.vi?cno='+cno;
-		}
+			location.href=' <%= request.getContextPath() %>/selectList.vi?cno='+cno;
+		};
 		</script>
 		
 	</section>

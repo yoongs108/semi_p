@@ -19,7 +19,7 @@
         }
         
         header {
-	        height : 40px;
+	        height : 60px;
             background : grey;
             clear : both;
         }
@@ -35,9 +35,13 @@
 		}
 
         header img {
-            height : 40px;
-            width : 40px;
-            margin : 0 10px 0 10px;
+            height : 38px;
+            width : 38px;
+            margin : 10px 0 10px 20px;
+        }
+        .logo {    
+        	margin: 5px 10px 5px 20px;
+        	float : left;
         }
 
         header img:hover {
@@ -49,9 +53,26 @@
          width : 80px;
          height : 600px;
          position : absolute;
-         top : 40px;
+         top : 60px;
         }
-        
+        li {
+        	list-style : none;
+        	display : inline-block;
+        }
+        nav>ul>li>ul {
+        	display : none;
+        }
+        .sub>a {
+        	margin-top : 15px;
+        	text-decoration: none;
+        	color : black;
+        	margin-top: 20px;	
+        }
+        .sub>a:hover {
+        	cursor: pointer;
+        	font-weight :bold;
+        	font-size : 16px;
+        }
         nav ul>li:hover {
         	background : grey;
         }
@@ -61,57 +82,48 @@
         	display : inline-block;
         	position : absolute;
         	background : grey;
-        	padding : 0;
-        	width : 100px;
-        	margin-left : 10px; 
-        	
-        	
+        	padding : 10px;
+        	width : 130px;
+        	height : 200px;
+        	margin-left : 22px; 
         }
         
-        li {
-        	padding-left : 10px;
-        	margin-bottom : 10px;
-        	list-style : none;
-        	display : inline-block;
-        }
-        
-        nav>ul>li>ul {
-        	display : none;
-        }
-        
-        li a {
-        	background : lightgrey;
-        	/* text-decoration: none; */
-        }
-
 	</style>
 </head>
 <body>
 
 	<header class="templateWidth">
         
-		<img src="<%= request.getContextPath() %>/resources/images/common/logo1.png" alt="로고" onclick="goHome()" style="float : left;"/>
+		<img src="<%= request.getContextPath() %>/resources/images/common/logo1.png" alt="로고" class="logo" 
+			style=" margin-top : 10px;" onclick="goHome()"/>
 		
-		<img src="<%= request.getContextPath() %>/resources/images/profile/<%= m.getProfile() %>" alt="프로필" onclick="goMyPage()" style="float : right; border : 2px solid black; border-radius: 50%; width : 35px; height : 35px;"/>
+		<img src="<%= request.getContextPath() %>/resources/images/profile/setting.png<%-- <%= m.getProfile() %> --%>" onclick="goMyPage()" 
+			style="float : right; width : 40px; height : 40px; margin-right: 20px; margin-bottom:5px;"/>
 		
-		<p id="admin" style="float : right; display : inline-block;">
+		<p id="admin" style="float : right; display : inline-block; margin-top: 25px; font-size : 15px;">
 			'<%= m.getMnick() %>' 관리자님 환영합니다!
 		</p>
 		
 		<nav>
 			<ul class="nav nav-pills nav-stacked">
-				<li><img src="<%= request.getContextPath() %>/resources/images/common/home.png" onclick="goMain()"/></li>
-				<li><img src="<%= request.getContextPath() %>/resources/images/common/warning2.png" onclick="goReport()"/></li>
+				<li><img src="<%= request.getContextPath() %>/resources/images/common/homeBnt.png" onclick="goMain()"/></li>
+				<li><img src="<%= request.getContextPath() %>/resources/images/common/attention.png" onclick="goReport()"/></li>
 				<li>
 					<img src="<%= request.getContextPath() %>/resources/images/common/qna.png" onclick="goBoard()"/>
 					<ul>
-						<li><a href="#">1대1문의 리스트</a></li>
-						<li><a href="#">FAQ 관리</a></li>
-						<li><a href="#">공지사항 관리</a></li>
+						<li class="sub">
+							<br /><a href="#">1대1문의 리스트</a><br />
+						</li>
+						<li class="sub">
+							<br /><a href="#">FAQ 관리</a><br />
+						</li>
+						<li class="sub">
+							<br /><a href="#">공지사항 관리</a><br />
+						</li>
 					</ul>
 				</li>
 				<li><img src="<%= request.getContextPath() %>/resources/images/common/userInfo.png" onclick="goUserInfo()"/>
-				<li><img src="<%= request.getContextPath() %>/resources/images/common/payment.png" onclick="goPayment()"/></li>
+				<li><img src="<%= request.getContextPath() %>/resources/images/common/bill.png" onclick="goPayment()"/></li>
 				<li><img src="<%= request.getContextPath() %>/resources/images/common/menu.png" onclick="goHome()"/></li>
 				<li><img src="<%= request.getContextPath() %>/resources/images/common/menu.png" onclick="goHome()"/></li>
 			</ul>
