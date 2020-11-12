@@ -78,7 +78,7 @@
 	
 	<script type="text/javascript">
 		function goClass() {
-			location.href = "<%= request.getContextPath() %>/classFromMain.cfm";
+			location.href = "<%= request.getContextPath() %>/selectList.cl";
 		};
 	</script>
 </body>

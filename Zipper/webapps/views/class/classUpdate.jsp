@@ -1,11 +1,17 @@
+<%@page import="com.zipper.board.model.vo.Attachment"%>
+<%@page import="com.zipper.classMain.model.vo.ClassList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import="com.zipper.classMain.model.vo.*" %>
+    <%
+    ClassList cl = (ClassList)request.getAttribute("cl");
+    Attachment at = (Attachment)request.getAttribute("at");
+    %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <script src="<%= request.getContextPath() %>/resources/js/jquery-3.5.1.min.js"></script>
-<title>CLASS UPLOAD</title>
+<title>CLASS UPDATE</title>
 <style>
 	
 	section {
@@ -70,24 +76,24 @@
 			<h2 id="title" align="center">CLASS</h2>
 		</div>
 		
-		<form action="<%= request.getContextPath() %>/classWrite.cw" method="post" enctype="multipart/form-data">
+		<form action="<%= request.getContextPath() %>/Update.cl" method="post" enctype="multipart/form-data">
 			 <table class="writeBox" align="center"> 
 				<tr>
 					<td>
 						<div class="imgBox">
-							<img class="titleImg" />
+							<img class="titleImg" value="<%= at.get()%>"/>
 						</div>
 					</td>
 					
 					<td>
 						<div class="input">
-							클래스 이름 : <input size="50" name="cname"></input> <br />
+							클래스 이름 : <input size="50" name="cname" value="<%= cl.getCno()%>"></input> <br />
 							<br /><br />
-							강사 명 : &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input size="50" name="tname"></input> <br />
+							강사 명 : &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input size="50" name="tname" value="<%= cl.getTname()%>"></input> <br />
 							<br /><br />
-							키트 항목 : &nbsp;&nbsp;&nbsp;<input size="50" name="kdetail"></input> <br />
+							키트 항목 : &nbsp;&nbsp;&nbsp;<input size="50" name="kdetail" value="<%= cl.getKdetail()%>"></input> <br />
 							<br /><br />
-							가 격 : &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input size="50" name="price" placeholder="단위 제외하고 숫자만 표기"></input> <br />
+							가 격 : &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input size="50" name="price" value="<%= cl.getPrice()%>"placeholder="단위 제외하고 숫자만 표기"></input> <br />
 						</div>
 					</td>
 				</tr>
@@ -95,7 +101,7 @@
 					<td colspan="2">
 						<br /><br />
 						클래스 소개 : <br />
-						<textarea name = cintro cols=100 rows=5></textarea>
+						<textarea name = cintro cols=100 rows=5 value="<%= cl.getCintro()%>"></textarea>
 				 	</td>
 				 	<td></td>
 				</tr>
@@ -104,7 +110,7 @@
 					<td colspan="2">
 						<br />
 						커리큘럼 : <br />
-						<textarea name = course cols=100 rows=5></textarea>
+						<textarea name = course cols=100 rows=5 value="<%= cl.getCourse()%>"></textarea>
 					</td>
 					<td></td>
 				</tr>

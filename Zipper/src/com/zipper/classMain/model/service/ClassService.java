@@ -122,5 +122,13 @@ public class ClassService {
 		return result;
 	}
 
+
+	public int updateClassList(ClassList cl, Attachment at) {
+		con = getConnection();
+		
+		
+		return 0;
+	}
+
 }
  

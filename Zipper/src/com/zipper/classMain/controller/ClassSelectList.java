@@ -14,16 +14,16 @@ import com.zipper.classMain.model.vo.ClassList;
 
 
 /**
- * Servlet implementation class ClassFromMain
+ * Servlet implementation class ClassSelectList
  */
-@WebServlet("/classFromMain.cfm")
-public class ClassFromMain extends HttpServlet {
-	private static final long serialVersionUID = 1L;
+@WebServlet("/selectList.cl")
+public class ClassSelectList extends HttpServlet {
+	private static final long serialVersionUID = 1231231231243432L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ClassFromMain() {
+    public ClassSelectList() {
         super();
         // TODO Auto-generated constructor stub
     }

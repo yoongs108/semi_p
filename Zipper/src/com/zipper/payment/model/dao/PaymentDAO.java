@@ -69,7 +69,7 @@ public class PaymentDAO {
 				cl.setCname(rset.getString("cname"));
 				cl.setPrice(rset.getInt("price"));
 				cl.setFileNewName(rset.getString("file_new_name"));
-				// 강사명
+				cl.setTname(rset.getString("tname"));
 //				cl.setPayinfo(rset.getString("payinfo"));
 //				cl.setPdate(rset.getDate("pdate"));
 //				cl.setPstatus(rset.getString("pstatus"));

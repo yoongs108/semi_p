@@ -42,7 +42,7 @@ public class ClassDelete extends HttpServlet {
 		int result = cs.deleteClass(cno, savePath);
 		
 		if (result > 0) {
-			response.sendRedirect("classFromMain.cfm");
+			response.sendRedirect("selectList.cl");
 		}  else {
 		
 			request.setAttribute("exception", new Exception("클래스 삭제오류"));
