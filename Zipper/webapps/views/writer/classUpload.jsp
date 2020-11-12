@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-<head>
+<head> 
 <meta charset="UTF-8">
 <script
 	src="<%= request.getContextPath() %>/resources/js/jquery-3.5.1.min.js"></script>

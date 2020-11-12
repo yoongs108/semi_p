@@ -4,9 +4,15 @@ import static com.zipper.common.JDBCTemplate.close;
 import static com.zipper.common.JDBCTemplate.commit;
 import static com.zipper.common.JDBCTemplate.getConnection;
 import static com.zipper.common.JDBCTemplate.rollback;
+import static com.zipper.common.JDBCTemplate.close;
+import static com.zipper.common.JDBCTemplate.commit;
+import static com.zipper.common.JDBCTemplate.getConnection;
+import static com.zipper.common.JDBCTemplate.rollback;
 
+import java.io.File;
 import java.sql.Connection;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import com.zipper.board.model.vo.Attachment;
 import com.zipper.board.model.vo.Board;
@@ -76,6 +82,48 @@ public class ZippopService {
 		close(con);
 		
 		return b;
+	}
+
+	//집팝 삭제
+	
+	public int deleteZippop(int bno) {
+		con = getConnection();
+		
+		
+		int result = zDAO.deleteZippop(con, bno);
+		
+		if(result > 0) {
+			//게시글 삭제가 완료되었다면, 첨부파일도 삭제한다.					
+			
+
+			commit(con);
+		} else {
+			rollback(con);
+		}
+		
+		close(con);
+		
+		return result;
+	}
+	
+	public int deleteZipAtt(int bno) {
+		con = getConnection();
+		
+		
+		int result = zDAO.deleteZipAtt(con, bno);
+		
+		if(result > 0) {
+			//게시글 삭제가 완료되었다면, 첨부파일도 삭제한다.					
+			
+
+			commit(con);
+		} else {
+			rollback(con);
+		}
+		
+		close(con);
+		
+		return result;
 	}
 	
 }
