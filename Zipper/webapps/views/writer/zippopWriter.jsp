@@ -46,16 +46,16 @@
 		padding-left : 70px;
 		resize : none;
 	}
-	/* 버튼 스타일 */
-	#btn{
-		width : 100px;
-		height : 50px;
-		color : white;
-		background-color : black;
-		border : none;	
-	}
-	#btn:hover{
-		background-color: #555;
+
+	
+	button {
+		position: relative;
+		margin-top: 600px;
+		width: 100px;
+		height: 50px;
+		background-color: black;
+		border: none;
+		color: white;
 		cursor: pointer;
 	}
 	
@@ -98,10 +98,10 @@
 				<input type="file" name="zippopImg" id="zippopImg" onchange="loadImg(this);" />
 			</div>
 			
-			<div align="center" style="margin-top:70px; margin-bottom:80px;">
-			<button type="submit" id="btn">작성</button>
+			<div align="center" style="margin: 50px;">			
+			<button style="color: white;" type="submit" id="btn">작성</button>
 			&nbsp;&nbsp;&nbsp;&nbsp;
-			<button onclick="back();" id="btn1">취소</button>
+			<button style="color: white;" onclick="back();" id="btn1">취소</button>
 			</div>
         		
        		<script>

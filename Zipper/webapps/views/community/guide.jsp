@@ -181,7 +181,7 @@ section {
       color: white;
       cursor: pointer;
    }
-
+     
 </style>
 
 </head>
@@ -226,8 +226,8 @@ section {
    </ul>
    
    </div>
-   
-   <!-- 게시글 시작 -->
+	
+	<!-- 게시글 시작 -->
     <div class="w3-row-padding w3-padding-16 w3-center">
     
     <% for(Board board : list) { %>
@@ -244,15 +244,12 @@ section {
       <% } %>
 
   </div>
-              
             <div align="center" style="margin: 10px;">               
             <% if(m != null && m.getMgrd().equals("A")) { %>   <!-- 회원등급이 'A'(관리자) 일 때, -->                   
             <button class="writeBtn" onclick="location.href='<%= request.getContextPath() %>/views/writer/guideWriter.jsp'">작성하기</button>            
             <% } %>            
             </div>
-  
-  
-
+ 
       <!-- Pagination -->
    <div style="text-align : center;">
       <button class="w3-bar-item w3-button w3-hover-black"
