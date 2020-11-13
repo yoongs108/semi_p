@@ -1,15 +1,21 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import = "java.util.*, com.zipper.thumb.model.vo.*" %>
+<%@ page import = "java.util.*, com.zipper.thumb.model.vo.*, com.zipper.board.model.vo.*" %>
 <%
-   ArrayList<Thumbnail> list = (ArrayList<Thumbnail>)request.getAttribute("list");
+	ArrayList<Thumbnail> list = (ArrayList<Thumbnail>)request.getAttribute("list");
+	PageInfo pi = (PageInfo)request.getAttribute("pi");
+	int listCount = pi.getListCount();
+	int currentPage = pi.getCurrentPage();
+	int maxPage = pi.getMaxPage();
+	int startPage = pi.getStartPage();
+	int endPage = pi.getEndPage();
 %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Zip Pop 목록</title>
-
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <style type="text/css">
 
    section {
@@ -89,7 +95,7 @@
       cursor:pointer;
    }    
          
-   button {
+   .button {
       width: 100px;
       height: 50px;
       background-color: black;
@@ -184,25 +190,47 @@
          <% } %>
          <br /><br />
       </div>
-         
-      <!--  이후 작업 필요 -->   
-                  
-               
-
-         <br><br>
-         
-   </section>
-   <br />
-   <br />
-   <br />
-
-	<% if(m != null) { %>
+    <% if(m != null) { %>
 		
 		<div align="center" style="margin: 50px;">	
-		<button style="color: white;" onclick="zippopWriter()">작성하기</button>		
+		<button class="button" onclick="zippopWriter()">작성하기</button>		
 		</div>		
 		
 	<% } %>	
+	
+      <!--  이후 작업 필요 -->   
+		<div style="text-align : center;">
+			<button class="w3-bar-item w3-button w3-hover-black"
+	       			onclick="location.href='<%= request.getContextPath() %>/zippop.zp?currentPage=1'"><<</button>
+			<% if(currentPage <= 1){ %>
+				<button class="w3-bar-item w3-button" disabled><</button>
+			<% } else { %>
+			<button class="w3-bar-item w3-button w3-hover-black"
+					onclick="location.href='<%= request.getContextPath() %>/zippop.zp?currentPage=<%=currentPage - 1 %>'"><</button>
+			<% } %>
+			<% for(int p = startPage; p <= endPage; p++){
+					if(p == currentPage){	
+			%>
+				<button class="w3-bar-item w3-button" disabled><%= p %></button>
+			<%      }else{ %>
+				<button class="w3-bar-item w3-button w3-hover-black"
+						onclick="location.href='<%= request.getContextPath() %>/zippop.zp?currentPage=<%= p %>'"><%= p %></button>
+			<%      } %>
+			<% } %>
+	         
+	        <%  if(currentPage >= maxPage){  %>
+			<button class="w3-bar-item w3-button" disabled>></button>
+			<%  }else{ %>
+			<button class="w3-bar-item w3-button w3-hover-black" 
+					onclick="location.href='<%= request.getContextPath() %>/zippop.zp?currentPage=<%=currentPage + 1 %>'">></button>
+			<%  } %>
+			<button class="w3-bar-item w3-button w3-hover-black"
+					onclick="location.href='<%= request.getContextPath() %>/zippop.zp?currentPage=<%= maxPage %>'">>></button>
+		</div>
+         <br><br>
+
+	
+   </section>
 
    <%@ include file="/views/common/footer.jsp"%>
    <script>

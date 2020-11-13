@@ -41,18 +41,33 @@ public class ZippopDAO {
 	}
 	
 	
-	public ArrayList<Thumbnail> selectList(Connection con) {
+	public ArrayList<Thumbnail> selectList(Connection con, int currentPage, int limit) {
 		
 		ArrayList<Thumbnail> list = new ArrayList<>();
+		
 		PreparedStatement pstmt = null;
+		
 		ResultSet rset = null;
+		
 		String sql = prop.getProperty("selectList");
+		
+		System.out.println(sql);
 		
 		try {
 			pstmt = con.prepareStatement(sql);
+			
+			// 1. 마지막 행의 번호
+			// 2. 첫 행의 번호
+			int startRow = (currentPage - 1) * limit + 1;
+			int endRow = startRow + limit - 1;
+
+			pstmt.setInt(1, endRow);
+			pstmt.setInt(2, startRow);
+			
 			rset = pstmt.executeQuery();
+			
 			while (rset.next()) {
-				//System.out.println("...");
+				
 				Thumbnail tn = new Thumbnail();
 				
 				tn.setUserId(rset.getString("mid"));
@@ -263,6 +278,38 @@ public class ZippopDAO {
 		
 		}
 				
+		return result;
+	}
+
+
+	public int getListCount(Connection con) {
+		
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("listCount");
+		
+		System.out.println(sql);
+		
+		try {
+			pstmt = con.prepareStatement(sql);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				
+				result = rset.getInt(1);
+			}			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
 		return result;
 	}
 	

@@ -24,10 +24,12 @@ public class ZippopService {
 	private Connection con;
 	private ZippopDAO zDAO = new ZippopDAO();
 	
-	public ArrayList<Thumbnail> selectList() {
+	public ArrayList<Thumbnail> selectList(int currentPage, int limit) {
 		
 		con = getConnection();
-		ArrayList<Thumbnail> list = zDAO.selectList(con);
+		
+		ArrayList<Thumbnail> list = zDAO.selectList(con, currentPage, limit);
+		
 		close(con);
 		
 		return list;
@@ -120,6 +122,17 @@ public class ZippopService {
 		} else {
 			rollback(con);
 		}
+		
+		close(con);
+		
+		return result;
+	}
+
+	public int getListCount() {
+		
+		con = getConnection();
+		
+		int result = zDAO.getListCount(con);
 		
 		close(con);
 		

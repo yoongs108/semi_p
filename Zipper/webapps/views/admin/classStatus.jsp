@@ -16,7 +16,6 @@
 	}
 	section table {
 		text-align: center;
-		width : 90%;
 	}
 </style>
 </head>
@@ -28,8 +27,7 @@
 	<section class="templateWidth templateHeight">
 		<div>
 			<h2>CLASS 관리</h2>
-		</div>
-		<table align="center" border="1px" width="1200px">
+			<table align="center" border="1px" width="1200px">
 				<tr>
 					<th>클래스 번호</th>
 					<th>비디오 번호</th>
@@ -51,6 +49,7 @@
 				</tr> --%>
 				 <%-- <% } %> --%>
 			</table>
+		</div>
 	</section>
 	
 	<% } else { // 관리자 외 접근 차단 

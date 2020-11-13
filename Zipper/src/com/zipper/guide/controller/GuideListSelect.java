@@ -52,6 +52,9 @@ public class GuideListSelect extends HttpServlet {
 		
 		// 한 페이지 당 보여줄 게시글 수 
 		int limit = 8;
+
+		// 페이징 최대 갯수
+		int limitP = 10;
 		
 		// 만약 사용자가 처음 목록을 조회했다면 
 		// 페이지는 1페이지가 되어야 함 
@@ -82,9 +85,9 @@ public class GuideListSelect extends HttpServlet {
 		// 시작 : 1 / 끝 : 10
 		// 11 ~ 20
 		// 시작 : 11 / 끝 : 20
-		startPage = (int)(((double)currentPage/limit + 0.9) -1) * limit + 1;
+		startPage = (int)(((double)currentPage/limitP + 0.9) -1) * limitP + 1;
 		
-		endPage = startPage + limit - 1;
+		endPage = startPage + limitP - 1;
 		
 		// 만약 마지막 페이지가 끝페이지 보다 적다면 
 		if(endPage > maxPage) {
@@ -97,7 +100,7 @@ public class GuideListSelect extends HttpServlet {
 		
 		String page ="";
 		
-		if( list != null && list.size() > 0) {
+		if( list != null ) {
 
 			PageInfo pi = new PageInfo(currentPage, listCount, limit, 
 									   maxPage, startPage, endPage); // create method 만듦 
