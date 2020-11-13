@@ -25,8 +25,8 @@ public class Thumbnail extends Board implements Serializable{
 	}
 
 	public Thumbnail(int bno, int btype, int mno, String btitle, String bcontent, int bview, Date bdate, String bstatus,
-			int cno, int faqtype, String profile, String userId, String bwriter, String boardfile) {
-		super(bno, btype, mno, btitle, bcontent, bview, bdate, bstatus, cno, faqtype, profile, userId, bwriter, boardfile);
+			int cno, int faqtype, int gtype, String profile, String userId, String bwriter, String boardfile) {
+		super(bno, btype, mno, btitle, bcontent, bview, bdate, bstatus, cno, faqtype, gtype, profile, userId, bwriter, boardfile);
 		// TODO Auto-generated constructor stub
 	}
 
@@ -37,7 +37,7 @@ public class Thumbnail extends Board implements Serializable{
 				+ ", getBcontent()=" + getBcontent() + ", getBview()=" + getBview() + ", getBdate()=" + getBdate()
 				+ ", getBstatus()=" + getBstatus() + ", getUserId()=" + getUserId() + ", getBwriter()=" + getBwriter()
 				+ ", getBoardfile()=" + getBoardfile() + ", getClass()=" + getClass() + ", getFaqType()=" + getFaqtype()
-				+ ", hashCode()=" + hashCode() + "]";
+				+ ", getGtype()=" + getGtype() + ", hashCode()=" + hashCode() + "]";
 	}
 
 	public ArrayList<Attachment> getAttachment() {

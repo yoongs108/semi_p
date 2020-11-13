@@ -4,6 +4,7 @@
 	ArrayList<Thumbnail> mplist = (ArrayList<Thumbnail>)request.getAttribute("mpZipList");
 	Iterator iter = mplist.iterator();
 	int count = mplist.size();
+	String profile = mplist.get(0).getProfile();
 %>
 <!DOCTYPE html>
 <html>
@@ -54,23 +55,26 @@
 		height: 300px;
 	}
 	
+	
 	#profileArea {
 		height:100%;
 		width:40%;
-		/*background: yellow;*/	
 		position: relative;
 		left: 0%;
-		/*border: 1px solid red;*/
 	}
 	
 	#profileImg {
-		width : 120px;
-		height: 140px;
+		right: 120px;
+        border : 1px solid black;
+        border-radius: 50%;
+        margin-right : 10px;
+		width : 200px;
+		height: 200px;
 		position: relative;
-		left: 15%;
-		top: 10%;
+		left: 110px;
+		top: 70px;
 	}
-	
+	/*
 	#profileArea > div {
 		width : 180px;
 		height: 180px;
@@ -80,7 +84,7 @@
 		left: 30%;
 		top: 25%;
 	}
-	
+	*/
 	#userCommentArea {
 		height:100%;
 		width:60%;
@@ -217,7 +221,7 @@
 		<div id="basicInfo">
 			<div id="profileArea">
 				<div>
-					<img id="profileImg" src="<%= request.getContextPath() %>/resources/images/common/profile.png" alt="프로필 사진없음" />
+					<img id="profileImg" src="<%= request.getContextPath() %>/resources/images/profile/<%= profile %>" alt="프로필 사진없음" />
 				</div>
 			</div>
 			<!-- 내 소개  들어오는 자리  -->

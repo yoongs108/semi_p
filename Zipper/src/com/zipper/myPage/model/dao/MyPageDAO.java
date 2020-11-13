@@ -55,6 +55,7 @@ public class MyPageDAO {
 				tn.setBoardfile(rset.getString("file_origin_name"));
 				tn.setProfile(rset.getString("profile"));
 				tn.setMno(rset.getInt("mno"));
+				tn.setUserId(rset.getString("mnick"));
 				
 				list.add(tn);
 			}
