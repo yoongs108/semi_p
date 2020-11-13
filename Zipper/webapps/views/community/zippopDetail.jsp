@@ -148,14 +148,18 @@
 		
 		
 			<div class="right_page">
-		
-				<h3><%= b.getBwriter() %></h3> <br /><br /> &nbsp;&nbsp;&nbsp;
+			<div>
+				<h4><%= b.getBwriter() %></h4> <br /><br /> 
 					
 					<% if(m != null && m.getMno() == b.getMno()){ %>
-					<button>수정하기</button>
-					<button onclick="location.href='<%= request.getContextPath() %>/delete.tn?bno='+<%=b.getBno()%>">삭제하기</button>
 					
-					<% } %> 
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<button style="color : white; width: 80px;" onclick="location.href='<%= request.getContextPath() %>/delete.tn?bno='+<%=b.getBno()%>">삭제하기</button>
+					
+					
+					<% } %>
+					</div> 
 				<div class="cmtWrap">
 					<!-- 댓글(cmt) -->
 				<% if (clist != null) { %>
@@ -165,9 +169,11 @@
 						<span class="thum"><img src="<%= request.getContextPath() %>/resources/images/profile/<%= bco.getProfile() %>" alt="" width="650px" height="500px"/></span>
 						<span class="nick"><%= bco.getMnick() %></span>
 						<span class="content"><%= bco.getComContent() %></span>
-						<span class="ico"><img src="<%= request.getContextPath() %>/resources/images/fileUpload/" alt="" width="650px" height="500px"/></span>
+						<!-- <span class="ico"><img src="<%= request.getContextPath() %>/resources/images/profile/" alt="" width="650px" height="500px"/></span> -->
 						<% if( m.getMno() == bco.getMno() ) { %>
-						<button type="button" onclick="location.href='<%= request.getContextPath() %>/deleteComment.co?bno=<%=b.getBno()%>&comNo=<%=bco.getComNo()%>'">댓글삭제</button>
+						<button style="color : white; width: 80px;" type="button" onclick="location.href='<%= request.getContextPath() %>/deleteComment.co?bno=<%=b.getBno()%>&comNo=<%=bco.getComNo()%>'">댓글삭제</button>
+
+
 						<% } else { %>
 						<button type="button" disabled>댓글삭제</button>
 						<% } %>
@@ -199,7 +205,7 @@
 					<form action="<%= request.getContextPath() %>/insertComment.co" method="post">
 					<input type="text" name="comContent" class="cmtForm">
 					<input type="hidden" name="bno" value="<%=b.getBno() %>" />				
-					<button type="submit">댓글등록</button>
+					<button style="color : white; width: 80px;" type="submit">댓글등록</button>
 					
 					</form>
 						

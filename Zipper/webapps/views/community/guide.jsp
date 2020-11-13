@@ -172,6 +172,15 @@ section {
 		cursor: pointer;
 		transform: scale(1.2);
 	}
+	
+	button {
+      width: 80px;
+      height: 40px;
+      background-color: black;
+      border: none;
+      color: white;
+      cursor: pointer;
+   }
   	
 </style>
 
@@ -215,11 +224,7 @@ section {
 			
 		</li>
 	</ul>
-	<% if(m != null && m.getMgrd().equals("A")) { %>   <!-- 회원등급이 'A'(관리자) 일 때, -->       
-				
-				<button onclick="location.href='<%= request.getContextPath() %>/views/writer/guideWriter.jsp'">작성하기</button>
-				
-			<% } %>
+	
 	</div>
 	
 	<!-- 게시글 시작 -->
@@ -240,7 +245,15 @@ section {
 	   <% } %>
 
   </div>
+  				
+  				<div align="center" style="margin: 10px;">					
+  				<% if(m != null && m.getMgrd().equals("A")) { %>   <!-- 회원등급이 'A'(관리자) 일 때, -->       				
+				<button style="color: white;" onclick="location.href='<%= request.getContextPath() %>/views/writer/guideWriter.jsp'">작성하기</button>				
+				<% } %>				
+				</div>
   
+  
+
       <!-- Pagination -->
 	<div style="text-align : center;">
 		<button class="w3-bar-item w3-button w3-hover-black"

@@ -23,23 +23,41 @@
   padding: 10px;
 }
 
-.title{
-		height : 30px;
+	#title {
+		margin-top: 100px;
+		text-align: center;
+	}
+	
+	.top {
+		height :170px;
+		position: fixed; 
+		width: 1024px;
+		top: 30px;
 	}
 
-#back{
+#back {
 		position : absolute;
-		top : 100px;
 		left : 950px;
 		height : 80px;
 		width: 80px;
 		position:relative;
-		top:-210%;
+		top: -70px;		
 	}
 	
 	#back:hover{
 		cursor: pointer;
 		transform: scale(1.2);
+	}
+	
+	button {
+		position: relative;
+		margin-top: 600px;
+		width: 100px;
+		height: 50px;
+		background-color: black;
+		border: none;
+		color: white;
+		cursor: pointer;
 	}
 	
 	section {
@@ -48,6 +66,8 @@
       margin-left:auto;
       margin-right:auto;
    }
+   
+   
 </style>
 
 <script>
@@ -61,20 +81,20 @@
 
 </head>
 <body>
-<section>
 <%@ include file="/views/common/header.jsp" %>
+<section>
 
-<div style="border-bottom: 1px solid black;">
-	
-		<div class="title">
-		<h2 id="title">GUIDE 상세페이지</h2>
-		
-		<!-- 뒤로가기 -->
-		<img src="<%= request.getContextPath() %>/resources/images/common/backButton.png" 
-			alt="class1" id="back" onclick="goGuideMain()"> 
 
-		</div>
-		</div>
+			<div style="border-bottom: 1px solid black;">		
+			<div class="top" style=" top: 100; background-color: white; border-bottom: 1px solid black;">
+			<h2 id="title">GUIDE 상세페이지</h2>
+			<!-- 뒤로가기 -->
+			<img src="<%= request.getContextPath() %>/resources/images/common/backButton.png" 
+			alt="class1" id="back" onclick="goGuideMain()">
+			</div>
+			</div>
+			
+			
 		
 		
 		<div class="content">
