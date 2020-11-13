@@ -15,7 +15,7 @@
 		height : 100%
 	}
 	section table {
-		text-align: center;
+		text-align: center; 
 	}
 </style>
 </head>
