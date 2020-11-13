@@ -3,8 +3,12 @@
 <%
 	ArrayList<Thumbnail> mplist = (ArrayList<Thumbnail>)request.getAttribute("mpZipList");
 	Iterator iter = mplist.iterator();
-	int count = mplist.size();
-	String profile = mplist.get(0).getProfile();
+	int count = 0;
+	if (iter.hasNext()) {
+		count = mplist.size();
+	} else {
+		count = 0;
+	}
 %>
 <!DOCTYPE html>
 <html>
@@ -221,7 +225,7 @@
 		<div id="basicInfo">
 			<div id="profileArea">
 				<div>
-					<img id="profileImg" src="<%= request.getContextPath() %>/resources/images/profile/<%= profile %>" alt="프로필 사진없음" />
+					<img id="profileImg" src="<%= request.getContextPath() %>/resources/images/profile/<%= m.getProfile() %>" alt="프로필 사진없음" />
 				</div>
 			</div>
 			<!-- 내 소개  들어오는 자리  -->
@@ -264,14 +268,12 @@
 					<div>
 						<input type="hidden" name="bno" value="<%= t.getBno() %>"/>
 						<img src="<%= request.getContextPath() %>/resources/images/zippopUploadFiles/<%= t.getBoardfile() %>" 
-							width="200px" height="150px"/>
+							width="250px" height="250px"/>
 					</div>
-					
-					<p>
+					<br />
+					<p style="overflow: hidden; height: 100px;">
 						<%= t.getUserId()%>
-                 		<div>                  
-                  		</div>
-                  		<br />
+                  		<br /><br />
                  		<%= t.getBcontent() %>
 					</p>					
 				</div>
