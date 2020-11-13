@@ -34,8 +34,8 @@ public class VideoSelectList extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		int cno = Integer.parseInt(request.getParameter("cno"));
-		
+//		int cno = Integer.parseInt(request.getParameter("cno"));
+		int cno = 1;
 		// 공지사항 여러 개 조회를 위한 배열(ArrayList)
 		ArrayList<Video> list = new ArrayList<>();
 		

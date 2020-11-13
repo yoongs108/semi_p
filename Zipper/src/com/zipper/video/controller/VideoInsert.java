@@ -92,7 +92,7 @@ public class VideoInsert extends HttpServlet {
 		int result = vs.insertVideo(v);
 		
 		if( result > 0 ) { 
-			response.sendRedirect("videoList.vi"); // 리스트 아직 안만들었음
+			response.sendRedirect("selectList.vi"); // 리스트 아직 안만들었음--> 관리자페이지?
 		} else {
 			request.setAttribute("exception", new Exception("비디오 추가 에러!"));
 			request.setAttribute("error-msg", "비디오 추가에 실패하였습니다. 관리자에게 문의하세요.");

@@ -5,6 +5,7 @@ import static com.zipper.common.JDBCTemplate.*;
 import java.sql.Connection;
 import java.util.ArrayList;
 
+import com.zipper.classMain.model.vo.ClassList;
 import com.zipper.common.exception.VideoException;
 import com.zipper.video.model.dao.VideoDAO;
 import com.zipper.video.model.vo.Video;
@@ -62,6 +63,17 @@ public class VideoService {
 		close(con);
 		
 		return result;
+	}
+
+	public ArrayList<ClassList> selectVList() {
+		
+		con = getConnection();
+	      
+	    ArrayList<ClassList> list = vDAO.selectVList(con);
+	      
+	    close(con);
+	      
+	    return list;
 	}
 
 }

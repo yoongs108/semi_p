@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8" import="com.zipper.classMain.model.vo.*, java.util.*"%>
+<%
+	ArrayList<ClassList> list = (ArrayList<ClassList>)request.getAttribute("list");
+%>
 <!DOCTYPE html>
 <html>
 <head> 
@@ -95,12 +98,14 @@
 						placeholder="  제목을 입력해 주세요.">
 					</td>
 					
-					<td class="title">클래스 선택</td>
+					<%-- <td class="title">클래스 선택</td>
 					<td>
 						<select id="subject">
-	    				<option value="" selected="selected">Select CNO</option>
+						<% for (ClassList c : list) {%> 
+	    				<option value="<%=c.getCno()%>" selected="selected"><%=c.getCno()%> : <%=c.getCname()%></option>
+	    				<%} %>
 	  					</select>
-					</td>
+					</td> --%>
 				</tr>
 				<!-- 내용 -->
 				<tr>

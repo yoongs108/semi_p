@@ -12,6 +12,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Properties;
 
+import com.zipper.classMain.model.vo.ClassList;
 import com.zipper.common.exception.VideoException;
 import com.zipper.video.model.vo.Video;
 
@@ -177,6 +178,41 @@ public class VideoDAO {
 			close(pstmt);
 		}
 		return result;
+	}
+
+	public ArrayList<ClassList> selectVList(Connection con) {
+		
+		ArrayList<ClassList> list = new ArrayList<>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+
+		String sql = prop.getProperty("selectVList");
+
+		System.out.println(sql);
+
+		try {
+			pstmt = con.prepareStatement(sql);
+			rset = pstmt.executeQuery();
+
+			while (rset.next()) {
+				ClassList cl = new ClassList();
+
+				cl.setCno(rset.getInt("cno"));
+				cl.setCname(rset.getString("cname"));
+				cl.setPrice(rset.getInt("price"));
+
+				list.add(cl);
+			}
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return list;
+	
 	}
 
 }

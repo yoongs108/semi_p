@@ -160,7 +160,7 @@
 	
 		<!-- 페이지 버튼 -->
 		<script>
-		function goVideodetail(vno) { // 정보 수정
+		function goVideodetail(vno) { 
 			location.href = '<%= request.getContextPath() %>/selectOne.vi?vno='+vno; 
 		}
 		</script>
