@@ -52,7 +52,7 @@ public class MyPageDAO {
 				tn.setBtitle(rset.getString("btitle"));
 				tn.setBcontent(rset.getString("bcontent"));
 				tn.setBview(rset.getInt("bview"));
-				tn.setBoardfile(rset.getString("file_origin_name"));
+				tn.setBoardfile(rset.getString("file_new_name"));
 				tn.setProfile(rset.getString("profile"));
 				tn.setMno(rset.getInt("mno"));
 				tn.setUserId(rset.getString("mnick"));

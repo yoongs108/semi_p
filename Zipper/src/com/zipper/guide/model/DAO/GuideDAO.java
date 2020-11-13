@@ -14,8 +14,6 @@ import java.util.Properties;
 
 import com.zipper.board.model.vo.Attachment;
 import com.zipper.board.model.vo.Board;
-import com.zipper.common.exception.GuideException;
-import com.zipper.common.exception.QuestionException;
 
 public class GuideDAO {
 	

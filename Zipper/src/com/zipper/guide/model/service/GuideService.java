@@ -7,8 +7,6 @@ import java.util.ArrayList;
 
 import com.zipper.board.model.vo.Attachment;
 import com.zipper.board.model.vo.Board;
-import com.zipper.common.exception.BoardException;
-import com.zipper.common.exception.GuideException;
 import com.zipper.guide.model.DAO.GuideDAO;
 
 public class GuideService {
@@ -54,7 +52,7 @@ public class GuideService {
 	}
 
 	// 가이드 글 작성
-	public int insertGuide(Board b, Attachment at) throws GuideException {
+	public int insertGuide(Board b, Attachment at) {
 		con = getConnection();
 		
 		int result = 0;
